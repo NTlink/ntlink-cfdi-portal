@@ -1,0 +1,74 @@
+﻿/* Login
+----------------------------------------------------------*/
+
+body   
+{
+	font-size: 0.9em;
+     font: 15px Avenir;
+    margin: 0em;
+    padding: 0px;
+   height:auto rem;
+    width: 100%;
+    background-color: #020300;
+   background-image:url(../images/fondo2.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    
+  }
+.login 
+{
+    background-color: #fff;
+    background-image:url(../images/A79.gif);
+    background-repeat:repeat-y;
+    text-align: center;
+    margin:200em 300 0 -200em;
+    top: 100%;
+    left: 100%;
+    position: inherit;
+    width: 100%;
+    * height:auto rem;
+    *margin: -225em 0 0 -200em;
+     border-radius:  30px 30px 30px 30px ;
+  box-shadow:3px 4px 2px rgba(0, 0, 0, 0.9);
+      }
+
+.logo {
+    text-align: center;
+     padding:1em;
+    height:122px;
+    width:37%;
+    box-shadow: 5px 5px 5px 0px rgba(12,0,8,0.35);
+}
+
+h1
+{
+    font-size: 1.5em;
+    color: #A8CF38;
+    text-shadow: 2px 2px 3px 0px hsl(100, 40%, 30%);
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    background-position:center;
+}
+
+
+.footer
+{
+	color: #FFFFFF;
+	padding: 8px 0px 0px 0px;
+	margin: 0px auto;
+	text-align: center;
+	line-height: normal;
+}
+
+/*----------------------------------------------- fin login----------------------------------------------------------*/
+
+
+
+
+
+
+
+

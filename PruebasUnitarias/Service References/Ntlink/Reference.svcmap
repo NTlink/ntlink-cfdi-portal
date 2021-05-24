@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6311b8bf-bc16-48ab-9208-b59f42b2f469" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://ntlink.com.mx/ntfacturacionws/serviciotimbrado.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServicioTimbrado.xsd" MetadataType="Schema" ID="75e09023-a435-4835-8126-7d2bdc2df995" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServicioTimbrado1.xsd" MetadataType="Schema" ID="84a4b61f-276d-4306-82b7-60e844bd145f" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServicioTimbrado2.xsd" MetadataType="Schema" ID="92f32b06-4065-47a0-b15b-7d808e0f0226" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServicioTimbrado3.xsd" MetadataType="Schema" ID="2b2092e4-7d61-483a-b014-7965bcff6f71" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServicioTimbrado.disco" MetadataType="Disco" ID="2abfc3fa-e2fb-415b-8a66-f1ad3132ac73" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?disco" />
+    <MetadataFile FileName="ServicioTimbrado.wsdl" MetadataType="Wsdl" ID="435c8aa3-24aa-40ce-9f1f-ce7109cfaf47" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?wsdl" />
+    <MetadataFile FileName="ServicioTimbrado1.wsdl" MetadataType="Wsdl" ID="1155a678-6722-49f9-aeca-3ebd90eb4014" SourceId="1" SourceUrl="http://ntlink.com.mx/ntfacturacionws/ServicioTimbrado.svc?wsdl=wsdl0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

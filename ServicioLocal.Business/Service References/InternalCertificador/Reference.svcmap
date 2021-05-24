@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="460fc407-8fad-45b3-b82d-6afcb2a0646b" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>true</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://pruebas.ntlink.com.mx/CertificadorApps33/CertificadorApps.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="CertificadorApps1.wsdl" MetadataType="Wsdl" ID="b30e5ce1-9466-44b2-a9cd-ac5fca3cd2e7" SourceId="1" SourceUrl="http://pruebas.ntlink.com.mx/CertificadorApps33/CertificadorApps.svc?wsdl" />
+    <MetadataFile FileName="CertificadorApps2.xsd" MetadataType="Schema" ID="05c123de-de59-4696-ae38-783c5391e60c" SourceId="1" SourceUrl="http://pruebas.ntlink.com.mx/CertificadorApps33/CertificadorApps.svc?xsd=xsd0" />
+    <MetadataFile FileName="CertificadorApps1.disco" MetadataType="Disco" ID="436b08da-07ee-4747-b904-dc0409b3071b" SourceId="1" SourceUrl="http://pruebas.ntlink.com.mx/CertificadorApps33/CertificadorApps.svc?disco" />
+    <MetadataFile FileName="CertificadorApps21.xsd" MetadataType="Schema" ID="82092fc9-8c7a-41d0-9289-8b2b81b3c37f" SourceId="1" SourceUrl="http://pruebas.ntlink.com.mx/CertificadorApps33/CertificadorApps.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

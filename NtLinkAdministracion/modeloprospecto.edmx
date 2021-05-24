@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NTProspecto_BD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="Promotores">
+          <Key>
+            <PropertyRef Name="IdPromotor" />
+          </Key>
+          <Property Name="IdPromotor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdSistema" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prospecto">
+          <Key>
+            <PropertyRef Name="id_prospecto" />
+          </Key>
+          <Property Name="id_prospecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="Razonsocial" Type="nvarchar(max)" />
+          <Property Name="Emailcontacto" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Telefonos" Type="nvarchar" MaxLength="50" />
+          <Property Name="idVendedor" Type="int" />
+          <Property Name="Fechacontacto" Type="datetime" />
+          <Property Name="Tipocliente" Type="int" />
+        </EntityType>
+        <EntityContainer Name="NTProspecto_BDStoreContainer">
+          <EntitySet Name="Promotores" EntityType="Self.Promotores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="prospecto" EntityType="Self.prospecto" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NTProspecto_BD" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="prospectovic" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Promotores" EntityType="NTProspecto_BD.Promotore" />
+          <EntitySet Name="Prospectillo" EntityType="NTProspecto_BD.prospecto" />
+        </EntityContainer>
+        <EntityType Name="Promotore">
+          <Key>
+            <PropertyRef Name="IdPromotor" />
+          </Key>
+          <Property Name="IdPromotor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdSistema" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="prospecto">
+          <Key>
+            <PropertyRef Name="id_prospecto" />
+          </Key>
+          <Property Name="id_prospecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RFC" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Razonsocial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Emailcontacto" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Telefonos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idVendedor" Type="Int32" />
+          <Property Name="Fechacontacto" Type="DateTime" Precision="3" />
+          <Property Name="Tipocliente" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NTProspecto_BDStoreContainer" CdmEntityContainer="prospectovic">
+          <EntitySetMapping Name="Promotores">
+            <EntityTypeMapping TypeName="NTProspecto_BD.Promotore">
+              <MappingFragment StoreEntitySet="Promotores">
+                <ScalarProperty Name="IdSistema" ColumnName="IdSistema" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdPromotor" ColumnName="IdPromotor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="prospectoes">
+            <EntityTypeMapping TypeName="NTProspecto_BD.prospecto">
+              <MappingFragment StoreEntitySet="prospecto">
+                <ScalarProperty Name="Tipocliente" ColumnName="Tipocliente" />
+                <ScalarProperty Name="Fechacontacto" ColumnName="Fechacontacto" />
+                <ScalarProperty Name="idVendedor" ColumnName="idVendedor" />
+                <ScalarProperty Name="Telefonos" ColumnName="Telefonos" />
+                <ScalarProperty Name="Emailcontacto" ColumnName="Emailcontacto" />
+                <ScalarProperty Name="Razonsocial" ColumnName="Razonsocial" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="id_prospecto" ColumnName="id_prospecto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

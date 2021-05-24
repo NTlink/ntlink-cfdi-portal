@@ -1,0 +1,76 @@
+﻿
+
+.ButtonClass {
+    cursor: pointer;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background-color: #a8cf38;
+    color: black;
+   
+}
+    .nav ul li {
+        font-family: 'Roboto', sans-serif;
+        border-bottom: none;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px;
+        display: inline-block;
+        float: left;
+        margin: 0 auto;
+        background-color: #a8cf38;
+       
+    }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: black;
+            background-color: #a8cf38;
+            display: block;
+            transition: .3s background-color;
+            padding: 0 24px;
+           
+           
+        }
+
+            .nav ul li a:hover {
+                background-color: #a8cf38;
+                color: #FFFFFF;
+            }
+
+.nav a {
+    border-bottom: none;
+    background-color: #a8cf38;
+}
+
+/*esto es de los submenus*/
+.nav li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+    text-align: left;
+    background-color: #a8cf38;
+}
+
+.nav li:hover ul {
+    display: block;
+    background-color: #a8cf38;
+}
+
+.nav ul li ul li {
+    display: block;
+    float: none !important; /* newly added */
+    height: auto; /* newly added */
+    line-height: 34px; /* newly added */
+    background-color: #a8cf38;
+}
+
+

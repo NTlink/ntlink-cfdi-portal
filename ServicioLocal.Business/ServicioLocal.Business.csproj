@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0E778F49-1E4B-4441-8E14-8836058889CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServicioLocal.Business</RootNamespace>
+    <AssemblyName>ServicioLocal.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\Lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Gma.QrCodeNet.Encoding">
+      <HintPath>..\Lib\Gma.QrCodeNet.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\ServivioLocalContract\bin\Debug\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.QRCode">
+      <HintPath>..\Lib\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcuseCancelacion.cs" />
+    <Compile Include="Addenda1888.cs" />
+    <Compile Include="AddendaPemex.cs" />
+    <Compile Include="Addenda_BF_v20.cs" />
+    <Compile Include="ado.cs" />
+    <Compile Include="AmazonAddenda.cs" />
+    <Compile Include="ASONIOSCOC.cs" />
+    <Compile Include="catCDFI.cs" />
+    <Compile Include="DatosTraslados.cs" />
+    <Compile Include="Comprobante.cs" />
+    <Compile Include="Comprobante2.cs" />
+    <Compile Include="CorreoActual.cs" />
+    <Compile Include="Deloitte_XSD.cs" />
+    <Compile Include="Donat11.cs" />
+    <Compile Include="DSCrgRemProvNotaEntrada.cs" />
+    <Compile Include="GeneradorCadenas.cs" />
+    <Compile Include="GeneradorCadenasCfdi.cs" />
+    <Compile Include="GeneradorCadenasTimbre.cs" />
+    <Compile Include="GeneradorCadenasTimbreRetencion.cs" />
+    <Compile Include="GeneradorCfdi.cs" />
+    <Compile Include="GPC.cs" />
+    <Compile Include="iedu.cs" />
+    <Compile Include="implocal.cs" />
+    <Compile Include="INE11.cs" />
+    <Compile Include="IPCliente.cs" />
+    <Compile Include="KeyUtils.cs" />
+    <Compile Include="LcoLogic.cs" />
+    <Compile Include="Mailer.cs" />
+    <Compile Include="nomina11.cs" />
+    <Compile Include="NtLinkBusiness.cs" />
+    <Compile Include="NtLinkCartaPorte.cs" />
+    <Compile Include="NtLinkClientes.cs" />
+    <Compile Include="NtLinkComisionistas.cs" />
+    <Compile Include="NtLinkDistribuidor.cs" />
+    <Compile Include="NtLinkEmpresa.cs" />
+    <Compile Include="NtLinkFactura.cs" />
+    <Compile Include="NtLinkLogin.cs" />
+    <Compile Include="NtLinkPagos.cs" />
+    <Compile Include="NtLinkProducto.cs" />
+    <Compile Include="NtLinkReporte.cs" />
+    <Compile Include="NtLinkSistema.cs" />
+    <Compile Include="NtLinkSucursales.cs" />
+    <Compile Include="NtLinkTimbrado.cs" />
+    <Compile Include="NtLinkTipoCambio.cs" />
+    <Compile Include="NtLinkUsuarios.cs" />
+    <Compile Include="NtLinkUsuariosAdmin.cs" />
+    <Compile Include="NtLinkVentas.cs" />
+    <Compile Include="Pagos10.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RandomPassword.cs" />
+    <Compile Include="Retenciones\arrendamientoenfideicomiso.cs" />
+    <Compile Include="Retenciones\dividendos.cs" />
+    <Compile Include="Retenciones\enajenaciondeacciones.cs" />
+    <Compile Include="Retenciones\fideicomisonoempresarial.cs" />
+    <Compile Include="Retenciones\GeneradorCadenasRetenciones.cs" />
+    <Compile Include="Retenciones\intereses.cs" />
+    <Compile Include="Retenciones\intereseshipotecarios.cs" />
+    <Compile Include="Retenciones\NtLinkRetenciones.cs" />
+    <Compile Include="Retenciones\operacionesconderivados.cs" />
+    <Compile Include="Retenciones\pagosaextranjeros.cs" />
+    <Compile Include="Retenciones\planesderetiro.cs" />
+    <Compile Include="Retenciones\premios.cs" />
+    <Compile Include="Retenciones\Retenciones.cs" />
+    <Compile Include="Retenciones\retencionpagov1_catRetenciones_TimbreFiscalDigital.cs" />
+    <Compile Include="Retenciones\sectorfinanciero.cs" />
+    <Compile Include="Service References\InternalCertificador\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="servicioparcialconstruccion.cs" />
+    <Compile Include="TimbreFiscalDigital.cs" />
+    <Compile Include="TypeUtils.cs" />
+    <Compile Include="UserProfile.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="ValidadorCertificado.cs" />
+    <Compile Include="ValidadorCfdi.cs" />
+    <Compile Include="ValidadorDatos32.cs" />
+    <Compile Include="ValidadorEstructura.cs" />
+    <Compile Include="ValidadorInput.cs" />
+    <Compile Include="ValidarActivador.cs" />
+    <Compile Include="vehiculousado.cs" />
+    <Compile Include="Web References\ReportExecution\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ReportService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="ZipUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CatalogosSAT\CatalogosSAT.csproj">
+      <Project>{383B6985-0E07-4C91-8B07-E4B928962FE0}</Project>
+      <Name>CatalogosSAT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClienteNtLink\ClienteNtLink.csproj">
+      <Project>{3E83B260-1E10-45E1-91C5-E0254D2A89FB}</Project>
+      <Name>ClienteNtLink</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\I_RFC_SAT\I_RFC_SAT.csproj">
+      <Project>{61673925-556E-4663-8687-17CABF3BA656}</Project>
+      <Name>I_RFC_SAT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServivioLocalContract\ServicioLocalContract.csproj">
+      <Project>{EE39AD87-B692-418E-BE59-856F640404DF}</Project>
+      <Name>ServicioLocalContract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\InternalCertificador\CertificadorApps1.wsdl" />
+    <None Include="Service References\InternalCertificador\CertificadorApps2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\InternalCertificador\CertificadorApps21.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\ReportExecution\DocumentMapNode.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\ExecutionInfo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\ExecutionInfo2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\Extension.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportExecution\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ReportExecution\ReportExecution2005.wsdl" />
+    <None Include="Web References\ReportExecution\Warning.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ActiveState.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\CatalogItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataRetrievalPlan.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSetDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSource.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSourceDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\DataSourcePrompt.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Event.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExecutionSettingEnum.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExpirationDefinition.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Extension.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExtensionParameter.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ExtensionSettings.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ItemTypeEnum.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Job.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ModelCatalogItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ModelDrillthroughReport.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ModelItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ParameterValue.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ParameterValueOrFieldReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Policy.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Property.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ReportService\ReportHistorySnapshot.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ReportParameter.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ReportService2005.wsdl" />
+    <None Include="Web References\ReportService\Role.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Schedule.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\ScheduleDefinitionOrReference.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Subscription.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Task.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ReportService\Warning.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://fucktardpc:8080/ReportServer/ReportExecution2005.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ReportExecution\</RelPath>
+      <UpdateFromURL>http://fucktardpc:8080/ReportServer/ReportExecution2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ServicioLocal_Business_ReportExecution_ReportExecutionService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://fucktardpc:8080/ReportServer/ReportService2005.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ReportService\</RelPath>
+      <UpdateFromURL>http://fucktardpc:8080/ReportServer/ReportService2005.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ServicioLocal_Business_ReportService_ReportingService2005</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\InternalCertificador\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\InternalCertificador\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\InternalCertificador\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\InternalCertificador\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\InternalCertificador\CertificadorApps1.disco" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

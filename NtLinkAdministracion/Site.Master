@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="NtLinkAdministracion.SiteMaster" %>
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+	<title></title>
+	<link href="~/Styles/SiteLogin.css" rel="stylesheet" type="text/css" />
+
+         	<asp:ContentPlaceHolder ID="HeadContent" runat="server">
+	</asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style2
+        {
+            color: #FFFFFF;
+        }
+        .style3
+        {
+            color: #666666;
+            text-transform: uppercase;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+	<table>
+	<tr>
+        <td >
+            <img alt="NTLink" src="images/login.png"  />
+        </td>  
+   </tr>
+   </table>
+   </div>
+	<form id="Form1" runat="server">
+	<asp:ToolkitScriptManager  runat="server" ID="smGlobal" />
+	<div class="page">
+		<div class="header">
+			<div class="title">
+				<h1>
+					&nbsp;</h1>
+                <h1>
+					&nbsp;<span class="style2"></span>
+				</h1>
+			</div>
+			<div class="clear hideSkiplink">
+				
+			</div>
+		</div>
+		<div class="main">
+			<asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+		</div>
+		<div class="clear">
+		</div>
+	</div>
+	<div class="footer">
+		<span class="style3"><strong>NTLink Comunicaciones.</strong></span>
+	</div>
+	</form>
+	
+<br />
+
+</body>
+
+
+</html>

@@ -1,0 +1,1008 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D98D4757-1959-4F91-9F9D-35E65993A061}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GafLookPaid</RootNamespace>
+    <AssemblyName>GafLookPaid</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.5.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\NtLinkSitiosWeb_3.3Cancela\GafLookPaid\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\NtLinkSitiosWeb_3.3\GafLookPaid\bin\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="jose-jwt, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\NtLinkSitiosWeb_3.3\GafLookPaid\bin\jose-jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\pruebas\webpruebas\NtLinkSitiosWeb\GafLookPaid\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="WebControls.FilteredDropDownList">
+      <HintPath>..\..\OperacionesCancela\GAFWEB\bin\WebControls.FilteredDropDownList.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="App_Themes\NtLink\NtLInk.css" />
+    <Content Include="ASONIOSCOC32.aspx" />
+    <Content Include="controles\arrendamientoenfideicomiso.ascx" />
+    <Content Include="controles\Beneficiario.ascx" />
+    <Content Include="controles\ServicioParcialConstrucciones.ascx" />
+    <Content Include="controles\Impuestos.ascx" />
+    <Content Include="controles\InformacionAduanera.ascx" />
+    <Content Include="controles\ImpuestosLocales.ascx" />
+    <Content Include="controles\Dividendos.ascx" />
+    <Content Include="controles\EnajenaciondeAcciones.ascx" />
+    <Content Include="controles\FideicomisoNoEmpresarial.ascx" />
+    <Content Include="controles\Intereses.ascx" />
+    <Content Include="controles\Intereseshipotecarios.ascx" />
+    <Content Include="controles\NoBeneficiario.ascx" />
+    <Content Include="controles\Operacionesconderivados.ascx" />
+    <Content Include="controles\Pagoaextranjeros.ascx" />
+    <Content Include="controles\Planesderetiro.ascx" />
+    <Content Include="controles\Premios.ascx" />
+    <Content Include="controles\SectorFinanciero.ascx" />
+    <Content Include="Amazon.aspx" />
+    <Content Include="ASONIOSCOC.aspx" />
+    <Content Include="wfrFacturaVehiculoUsado.aspx" />
+    <Content Include="wfrComplementoServicioParcialConstruccion.aspx" />
+    <Content Include="images\banner1.jpg" />
+    <Content Include="registroClientes.aspx" />
+    <Content Include="wfrActualizaciones.aspx" />
+    <Content Include="wfrCartaPorte.aspx" />
+    <Content Include="wfrEmpresaCompra.aspx" />
+    <Content Include="wfrFactura1888.aspx" />
+    <Content Include="wfrFacturaCompPagos.aspx" />
+    <Content Include="wfrFacturaCPago.aspx" />
+    <Content Include="wfrFacturaFirmas.aspx" />
+    <Content Include="wfrFacturaIEDU.aspx" />
+    <Content Include="wfrFacturaPilgrims.aspx" />
+    <Content Include="wfrFacturaAdo.aspx" />
+    <Content Include="wfrINE.aspx" />
+    <Content Include="wfrLiverpool.aspx" />
+    <Content Include="wfrLiverpool32.aspx" />
+    <Content Include="wfrFacturaComplementos.aspx" />
+    <Content Include="wfrFacturaAduanal.aspx" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="wfrConfirmacionesConsulta.aspx" />
+    <Content Include="images\bienvenido.png" />
+    <Content Include="images\bub.png" />
+    <Content Include="images\fondo_web.jpg" />
+    <Content Include="images\fondo_web1.jpg" />
+    <Content Include="images\franja.png" />
+    <Content Include="images\franja_nomina.png" />
+    <Content Include="images\login.png" />
+    <Content Include="images\Sat.png" />
+    <Content Include="Styles\SiteLogin.css" />
+    <Content Include="Styles\StyleBoton.css" />
+    <Content Include="wfrFacturaComisionistas.aspx" />
+    <Content Include="wfrFacturaComplementos32.aspx" />
+    <Content Include="wfrFacturaINE.aspx" />
+    <Content Include="wfrFacturaPagos.aspx" />
+    <Content Include="wfrMabe.aspx" />
+    <Content Include="wfrRetencionesConsulta.aspx" />
+    <Content Include="Honda.aspx" />
+    <Content Include="Scripts\jquery.numeric.js" />
+    <Content Include="Token.aspx" />
+    <Content Include="wfrAnticiposFirmasCustom.aspx" />
+    <Content Include="wfrColaboradores.aspx" />
+    <Content Include="WfrColaboradoresConsulta.aspx" />
+    <Content Include="wfrConsultaNomina.aspx" />
+    <Content Include="wfrCorporativoAduanal.aspx" />
+    <Content Include="wfrDeloitted.aspx" />
+    <Content Include="wfrDistribuidorCliente.aspx" />
+    <Content Include="wfrDistribuidores.aspx" />
+    <Content Include="wfrFacturaAdo32.aspx" />
+    <Content Include="wfrFacturaAduanalCartaPorte.aspx" />
+    <Content Include="wfrFacturaAmc71.aspx" />
+    <Content Include="wfrFacturaArrendamiento.aspx" />
+    <Content Include="wfrFacturaConstructor.aspx" />
+    <Content Include="wfrFacturaConstructorFirmas.aspx" />
+    <Content Include="WfrFacturaCoppelMuebles.aspx" />
+    <Content Include="wfrFacturaHonorarios.aspx" />
+    <Content Include="wfrFacturaAduanal32.aspx" />
+    <Content Include="wfrFacturaPemex.aspx" />
+    <Content Include="wfrFacturaPersonalizada.aspx" />
+    <Content Include="wfrFacturaPilgrims32.aspx" />
+    <Content Include="wfrFacturaTransporte.aspx" />
+    <Content Include="images\ajax-loader.gif" />
+    <Content Include="LogOut.aspx" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="wfrClientes.aspx" />
+    <Content Include="wfrClientesConsulta.aspx" />
+    <Content Include="wfrComisionistas.aspx" />
+    <Content Include="wfrComisionistasConsulta.aspx" />
+    <Content Include="wfrConceptos.aspx" />
+    <Content Include="wfrEmpresa.aspx" />
+    <Content Include="wfrEmpresasConsulta.aspx" />
+    <Content Include="wfrFactura.aspx" />
+    <Content Include="wfrFacturasConsulta.aspx" />
+    <Content Include="WfrHomeDepot.aspx" />
+    <Content Include="wfrLogin.aspx" />
+    <Content Include="wfrLucent.aspx" />
+    <Content Include="WfrNomina.aspx" />
+    <Content Include="wfrReporteTimbra.aspx" />
+    <Content Include="wfrRetenciones.aspx" />
+    <Content Include="wfrSorianaCEDIS.aspx" />
+    <Content Include="wfrSorianaTienda.aspx" />
+    <Content Include="wfrSucursales.aspx" />
+    <Content Include="wfrSucursalesConsulta.aspx" />
+    <Content Include="wfrUsuarios.aspx" />
+    <Content Include="wfrUsuariosConsulta.aspx" />
+    <Content Include="wfrValidacion.aspx" />
+    <Content Include="wrfTimbrado.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\CPPagar.cs" />
+    <Compile Include="ASONIOSCOC32.aspx.cs">
+      <DependentUpon>ASONIOSCOC32.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASONIOSCOC32.aspx.designer.cs">
+      <DependentUpon>ASONIOSCOC32.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\arrendamientoenfideicomiso.ascx.cs">
+      <DependentUpon>arrendamientoenfideicomiso.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\arrendamientoenfideicomiso.ascx.designer.cs">
+      <DependentUpon>arrendamientoenfideicomiso.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Beneficiario.ascx.cs">
+      <DependentUpon>Beneficiario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Beneficiario.ascx.designer.cs">
+      <DependentUpon>Beneficiario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\ServicioParcialConstrucciones.ascx.cs">
+      <DependentUpon>ServicioParcialConstrucciones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\ServicioParcialConstrucciones.ascx.designer.cs">
+      <DependentUpon>ServicioParcialConstrucciones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Impuestos.ascx.cs">
+      <DependentUpon>Impuestos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Impuestos.ascx.designer.cs">
+      <DependentUpon>Impuestos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\InformacionAduanera.ascx.cs">
+      <DependentUpon>InformacionAduanera.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\InformacionAduanera.ascx.designer.cs">
+      <DependentUpon>InformacionAduanera.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\ImpuestosLocales.ascx.cs">
+      <DependentUpon>ImpuestosLocales.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\ImpuestosLocales.ascx.designer.cs">
+      <DependentUpon>ImpuestosLocales.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Dividendos.ascx.cs">
+      <DependentUpon>Dividendos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Dividendos.ascx.designer.cs">
+      <DependentUpon>Dividendos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\EnajenaciondeAcciones.ascx.cs">
+      <DependentUpon>EnajenaciondeAcciones.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\EnajenaciondeAcciones.ascx.designer.cs">
+      <DependentUpon>EnajenaciondeAcciones.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\FideicomisoNoEmpresarial.ascx.cs">
+      <DependentUpon>FideicomisoNoEmpresarial.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\FideicomisoNoEmpresarial.ascx.designer.cs">
+      <DependentUpon>FideicomisoNoEmpresarial.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Intereses.ascx.cs">
+      <DependentUpon>Intereses.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Intereses.ascx.designer.cs">
+      <DependentUpon>Intereses.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Intereseshipotecarios.ascx.cs">
+      <DependentUpon>Intereseshipotecarios.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Intereseshipotecarios.ascx.designer.cs">
+      <DependentUpon>Intereseshipotecarios.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\NoBeneficiario.ascx.cs">
+      <DependentUpon>NoBeneficiario.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\NoBeneficiario.ascx.designer.cs">
+      <DependentUpon>NoBeneficiario.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Operacionesconderivados.ascx.cs">
+      <DependentUpon>Operacionesconderivados.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Operacionesconderivados.ascx.designer.cs">
+      <DependentUpon>Operacionesconderivados.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Pagoaextranjeros.ascx.cs">
+      <DependentUpon>Pagoaextranjeros.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Pagoaextranjeros.ascx.designer.cs">
+      <DependentUpon>Pagoaextranjeros.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Planesderetiro.ascx.cs">
+      <DependentUpon>Planesderetiro.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Planesderetiro.ascx.designer.cs">
+      <DependentUpon>Planesderetiro.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\Premios.ascx.cs">
+      <DependentUpon>Premios.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\Premios.ascx.designer.cs">
+      <DependentUpon>Premios.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="controles\SectorFinanciero.ascx.cs">
+      <DependentUpon>SectorFinanciero.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="controles\SectorFinanciero.ascx.designer.cs">
+      <DependentUpon>SectorFinanciero.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Amazon.aspx.cs">
+      <DependentUpon>Amazon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Amazon.aspx.designer.cs">
+      <DependentUpon>Amazon.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ASONIOSCOC.aspx.cs">
+      <DependentUpon>ASONIOSCOC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ASONIOSCOC.aspx.designer.cs">
+      <DependentUpon>ASONIOSCOC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaVehiculoUsado.aspx.cs">
+      <DependentUpon>wfrFacturaVehiculoUsado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaVehiculoUsado.aspx.designer.cs">
+      <DependentUpon>wfrFacturaVehiculoUsado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrComplementoServicioParcialConstruccion.aspx.cs">
+      <DependentUpon>wfrComplementoServicioParcialConstruccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrComplementoServicioParcialConstruccion.aspx.designer.cs">
+      <DependentUpon>wfrComplementoServicioParcialConstruccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="registroClientes.aspx.cs">
+      <DependentUpon>registroClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="registroClientes.aspx.designer.cs">
+      <DependentUpon>registroClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrActualizaciones.aspx.cs">
+      <DependentUpon>wfrActualizaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrActualizaciones.aspx.designer.cs">
+      <DependentUpon>wfrActualizaciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrCartaPorte.aspx.cs">
+      <DependentUpon>wfrCartaPorte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrCartaPorte.aspx.designer.cs">
+      <DependentUpon>wfrCartaPorte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrEmpresaCompra.aspx.cs">
+      <DependentUpon>wfrEmpresaCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrEmpresaCompra.aspx.designer.cs">
+      <DependentUpon>wfrEmpresaCompra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFactura1888.aspx.cs">
+      <DependentUpon>wfrFactura1888.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFactura1888.aspx.designer.cs">
+      <DependentUpon>wfrFactura1888.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaCompPagos.aspx.cs">
+      <DependentUpon>wfrFacturaCompPagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaCompPagos.aspx.designer.cs">
+      <DependentUpon>wfrFacturaCompPagos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaCPago.aspx.cs">
+      <DependentUpon>wfrFacturaCPago.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaCPago.aspx.designer.cs">
+      <DependentUpon>wfrFacturaCPago.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaFirmas.aspx.cs">
+      <DependentUpon>wfrFacturaFirmas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaFirmas.aspx.designer.cs">
+      <DependentUpon>wfrFacturaFirmas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaIEDU.aspx.cs">
+      <DependentUpon>wfrFacturaIEDU.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaIEDU.aspx.designer.cs">
+      <DependentUpon>wfrFacturaIEDU.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaPilgrims.aspx.cs">
+      <DependentUpon>wfrFacturaPilgrims.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaPilgrims.aspx.designer.cs">
+      <DependentUpon>wfrFacturaPilgrims.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAdo.aspx.cs">
+      <DependentUpon>wfrFacturaAdo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAdo.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAdo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrINE.aspx.cs">
+      <DependentUpon>wfrINE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrINE.aspx.designer.cs">
+      <DependentUpon>wfrINE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrLiverpool.aspx.cs">
+      <DependentUpon>wfrLiverpool.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrLiverpool.aspx.designer.cs">
+      <DependentUpon>wfrLiverpool.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrLiverpool32.aspx.cs">
+      <DependentUpon>wfrLiverpool32.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrLiverpool32.aspx.designer.cs">
+      <DependentUpon>wfrLiverpool32.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaComplementos.aspx.cs">
+      <DependentUpon>wfrFacturaComplementos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaComplementos.aspx.designer.cs">
+      <DependentUpon>wfrFacturaComplementos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAduanal.aspx.cs">
+      <DependentUpon>wfrFacturaAduanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAduanal.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAduanal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrConfirmacionesConsulta.aspx.cs">
+      <DependentUpon>wfrConfirmacionesConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrConfirmacionesConsulta.aspx.designer.cs">
+      <DependentUpon>wfrConfirmacionesConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaComisionistas.aspx.cs">
+      <DependentUpon>wfrFacturaComisionistas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaComisionistas.aspx.designer.cs">
+      <DependentUpon>wfrFacturaComisionistas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaComplementos32.aspx.cs">
+      <DependentUpon>wfrFacturaComplementos32.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaComplementos32.aspx.designer.cs">
+      <DependentUpon>wfrFacturaComplementos32.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaINE.aspx.cs">
+      <DependentUpon>wfrFacturaINE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaINE.aspx.designer.cs">
+      <DependentUpon>wfrFacturaINE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaPagos.aspx.cs">
+      <DependentUpon>wfrFacturaPagos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaPagos.aspx.designer.cs">
+      <DependentUpon>wfrFacturaPagos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrMabe.aspx.cs">
+      <DependentUpon>wfrMabe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrMabe.aspx.designer.cs">
+      <DependentUpon>wfrMabe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrRetencionesConsulta.aspx.cs">
+      <DependentUpon>wfrRetencionesConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrRetencionesConsulta.aspx.designer.cs">
+      <DependentUpon>wfrRetencionesConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Honda.aspx.cs">
+      <DependentUpon>Honda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Honda.aspx.designer.cs">
+      <DependentUpon>Honda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Token.aspx.cs">
+      <DependentUpon>Token.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Token.aspx.designer.cs">
+      <DependentUpon>Token.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Code\TokenClass.cs" />
+    <Compile Include="wfrAnticiposFirmasCustom.aspx.cs">
+      <DependentUpon>wfrAnticiposFirmasCustom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrAnticiposFirmasCustom.aspx.designer.cs">
+      <DependentUpon>wfrAnticiposFirmasCustom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrColaboradores.aspx.cs">
+      <DependentUpon>wfrColaboradores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrColaboradores.aspx.designer.cs">
+      <DependentUpon>wfrColaboradores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WfrColaboradoresConsulta.aspx.cs">
+      <DependentUpon>WfrColaboradoresConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WfrColaboradoresConsulta.aspx.designer.cs">
+      <DependentUpon>WfrColaboradoresConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrConsultaNomina.aspx.cs">
+      <DependentUpon>wfrConsultaNomina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrConsultaNomina.aspx.designer.cs">
+      <DependentUpon>wfrConsultaNomina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrCorporativoAduanal.aspx.cs">
+      <DependentUpon>wfrCorporativoAduanal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrCorporativoAduanal.aspx.designer.cs">
+      <DependentUpon>wfrCorporativoAduanal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrDeloitted.aspx.cs">
+      <DependentUpon>wfrDeloitted.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrDeloitted.aspx.designer.cs">
+      <DependentUpon>wfrDeloitted.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrDistribuidorCliente.aspx.cs">
+      <DependentUpon>wfrDistribuidorCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrDistribuidorCliente.aspx.designer.cs">
+      <DependentUpon>wfrDistribuidorCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrDistribuidores.aspx.cs">
+      <DependentUpon>wfrDistribuidores.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrDistribuidores.aspx.designer.cs">
+      <DependentUpon>wfrDistribuidores.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAdo32.aspx.cs">
+      <DependentUpon>wfrFacturaAdo32.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAdo32.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAdo32.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAduanalCartaPorte.aspx.cs">
+      <DependentUpon>wfrFacturaAduanalCartaPorte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAduanalCartaPorte.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAduanalCartaPorte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAmc71.aspx.cs">
+      <DependentUpon>wfrFacturaAmc71.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAmc71.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAmc71.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaArrendamiento.aspx.cs">
+      <DependentUpon>wfrFacturaArrendamiento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaArrendamiento.aspx.designer.cs">
+      <DependentUpon>wfrFacturaArrendamiento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaConstructor.aspx.cs">
+      <DependentUpon>wfrFacturaConstructor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaConstructor.aspx.designer.cs">
+      <DependentUpon>wfrFacturaConstructor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaConstructorFirmas.aspx.cs">
+      <DependentUpon>wfrFacturaConstructorFirmas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaConstructorFirmas.aspx.designer.cs">
+      <DependentUpon>wfrFacturaConstructorFirmas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WfrFacturaCoppelMuebles.aspx.cs">
+      <DependentUpon>WfrFacturaCoppelMuebles.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WfrFacturaCoppelMuebles.aspx.designer.cs">
+      <DependentUpon>WfrFacturaCoppelMuebles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaHonorarios.aspx.cs">
+      <DependentUpon>wfrFacturaHonorarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaHonorarios.aspx.designer.cs">
+      <DependentUpon>wfrFacturaHonorarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAduanal32.aspx.cs">
+      <DependentUpon>wfrFacturaAduanal32.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAduanal32.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAduanal32.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaPemex.aspx.cs">
+      <DependentUpon>wfrFacturaPemex.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaPemex.aspx.designer.cs">
+      <DependentUpon>wfrFacturaPemex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaPersonalizada.aspx.cs">
+      <DependentUpon>wfrFacturaPersonalizada.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaPersonalizada.aspx.designer.cs">
+      <DependentUpon>wfrFacturaPersonalizada.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaPilgrims32.aspx.cs">
+      <DependentUpon>wfrFacturaPilgrims32.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaPilgrims32.aspx.designer.cs">
+      <DependentUpon>wfrFacturaPilgrims32.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaTransporte.aspx.cs">
+      <DependentUpon>wfrFacturaTransporte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaTransporte.aspx.designer.cs">
+      <DependentUpon>wfrFacturaTransporte.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.Master.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.Master.designer.cs">
+      <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="LogOut.aspx.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogOut.aspx.designer.cs">
+      <DependentUpon>LogOut.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="wfrClientes.aspx.cs">
+      <DependentUpon>wfrClientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrClientes.aspx.designer.cs">
+      <DependentUpon>wfrClientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrClientesConsulta.aspx.cs">
+      <DependentUpon>wfrClientesConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrClientesConsulta.aspx.designer.cs">
+      <DependentUpon>wfrClientesConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrComisionistas.aspx.cs">
+      <DependentUpon>wfrComisionistas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrComisionistas.aspx.designer.cs">
+      <DependentUpon>wfrComisionistas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrComisionistasConsulta.aspx.cs">
+      <DependentUpon>wfrComisionistasConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrComisionistasConsulta.aspx.designer.cs">
+      <DependentUpon>wfrComisionistasConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrConceptos.aspx.cs">
+      <DependentUpon>wfrConceptos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrConceptos.aspx.designer.cs">
+      <DependentUpon>wfrConceptos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrEmpresa.aspx.cs">
+      <DependentUpon>wfrEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrEmpresa.aspx.designer.cs">
+      <DependentUpon>wfrEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrEmpresasConsulta.aspx.cs">
+      <DependentUpon>wfrEmpresasConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrEmpresasConsulta.aspx.designer.cs">
+      <DependentUpon>wfrEmpresasConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFactura.aspx.cs">
+      <DependentUpon>wfrFactura.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFactura.aspx.designer.cs">
+      <DependentUpon>wfrFactura.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturasConsulta.aspx.cs">
+      <DependentUpon>wfrFacturasConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturasConsulta.aspx.designer.cs">
+      <DependentUpon>wfrFacturasConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WfrHomeDepot.aspx.cs">
+      <DependentUpon>WfrHomeDepot.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WfrHomeDepot.aspx.designer.cs">
+      <DependentUpon>WfrHomeDepot.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrLogin.aspx.cs">
+      <DependentUpon>wfrLogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrLogin.aspx.designer.cs">
+      <DependentUpon>wfrLogin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrLucent.aspx.cs">
+      <DependentUpon>wfrLucent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrLucent.aspx.designer.cs">
+      <DependentUpon>wfrLucent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WfrNomina.aspx.cs">
+      <DependentUpon>WfrNomina.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WfrNomina.aspx.designer.cs">
+      <DependentUpon>WfrNomina.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrReporteTimbra.aspx.cs">
+      <DependentUpon>wfrReporteTimbra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrReporteTimbra.aspx.designer.cs">
+      <DependentUpon>wfrReporteTimbra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrRetenciones.aspx.cs">
+      <DependentUpon>wfrRetenciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrRetenciones.aspx.designer.cs">
+      <DependentUpon>wfrRetenciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrSorianaCEDIS.aspx.cs">
+      <DependentUpon>wfrSorianaCEDIS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrSorianaCEDIS.aspx.designer.cs">
+      <DependentUpon>wfrSorianaCEDIS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrSorianaTienda.aspx.cs">
+      <DependentUpon>wfrSorianaTienda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrSorianaTienda.aspx.designer.cs">
+      <DependentUpon>wfrSorianaTienda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrSucursales.aspx.cs">
+      <DependentUpon>wfrSucursales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrSucursales.aspx.designer.cs">
+      <DependentUpon>wfrSucursales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrSucursalesConsulta.aspx.cs">
+      <DependentUpon>wfrSucursalesConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrSucursalesConsulta.aspx.designer.cs">
+      <DependentUpon>wfrSucursalesConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrUsuarios.aspx.cs">
+      <DependentUpon>wfrUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrUsuarios.aspx.designer.cs">
+      <DependentUpon>wfrUsuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrUsuariosConsulta.aspx.cs">
+      <DependentUpon>wfrUsuariosConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrUsuariosConsulta.aspx.designer.cs">
+      <DependentUpon>wfrUsuariosConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrValidacion.aspx.cs">
+      <DependentUpon>wfrValidacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrValidacion.aspx.designer.cs">
+      <DependentUpon>wfrValidacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wrfTimbrado.aspx.cs">
+      <DependentUpon>wrfTimbrado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wrfTimbrado.aspx.designer.cs">
+      <DependentUpon>wrfTimbrado.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CatalogosSAT\CatalogosSAT.csproj">
+      <Project>{383B6985-0E07-4C91-8B07-E4B928962FE0}</Project>
+      <Name>CatalogosSAT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DropDownChosen\DropDownChosen.csproj">
+      <Project>{61034352-74E2-409D-8F9B-FDC5B4030524}</Project>
+      <Name>DropDownChosen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLocal.Business\ServicioLocal.Business.csproj">
+      <Project>{0E778F49-1E4B-4441-8E14-8836058889CB}</Project>
+      <Name>ServicioLocal.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServicioLocal\ServicioLocal.csproj">
+      <Project>{092BFD88-90F8-47E5-856A-3D02C702042D}</Project>
+      <Name>ServicioLocal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServivioLocalContract\ServicioLocalContract.csproj">
+      <Project>{EE39AD87-B692-418E-BE59-856F640404DF}</Project>
+      <Name>ServicioLocalContract</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Login.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\NtLink\NtLink.skin" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\NtlinkWeb.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3892</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

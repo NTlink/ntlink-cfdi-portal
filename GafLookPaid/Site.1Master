@@ -1,0 +1,219 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="GafLookPaid.SiteMaster" %>
+
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+      <script type="text/javascript">
+
+          function reloj() {
+              // var tiempoServer = new Date(document.getElementById("hfTiempo").value);
+
+              var tiempoServer = new Date();
+              var cad1 = tiempoServer.getHours() + ":" + tiempoServer.getMinutes() + ":" + tiempoServer.getSeconds();
+              document.getElementById("tiempoCliente").innerHTML = cad1;
+               setInterval(function () {
+                  tiempoServer.setSeconds(tiempoServer.getSeconds() + 2);
+                  var cad = tiempoServer.getHours() + ":" + tiempoServer.getMinutes() + ":" + tiempoServer.getSeconds(); 
+                  document.getElementById("tiempoCliente").innerHTML = cad;
+              }, 1000);
+          }
+
+          window.onload = reloj;
+
+   </script>
+     <style type="text/css">
+        .style2
+        {
+            text-align: justify;
+        }
+         .style3
+         {
+             font-weight: normal;
+         }
+        </style>
+
+</head>
+<body>
+    <!-- <div align="center">
+    
+        <img alt="NTLink" src="images/franja_nomina.png" 
+            style="height:20% rem; width:90%; margin-bottom: 0px"    />
+    </div>-->
+    <form runat="server" enctype="multipart/form-data">
+    <asp:ToolkitScriptManager AsyncPostBackTimeout="120" runat="server" ID="smGlobal"
+        EnablePartialRendering="True" />
+         </br>
+    <div class="page">
+        <div align="right">
+            <asp:UpdatePanel runat="server" ID="updateSaldos" UpdateMode="Conditional">
+                <ContentTemplate>
+                
+                          </ContentTemplate>
+            </asp:UpdatePanel>
+        
+           <div style="height: 26px rem;  background-image: url('images/top_franja.png'); background-size: 95%; width: 100%; background-position:center;">
+                <td>
+                    <table style="height: 90% rem;  text-align: right; width: 100%; margin-left: 3px;" 
+                    class="page5"  >
+                    <tr>
+                      <td>
+                                        <div ID="tiempoCliente"  class="Reloj">
+                                            
+                                        </div>
+                                        <asp:HiddenField ID="hfTiempo" runat="server" ClientIDMode="Static" />
+                                    </td>
+                          <td>
+                              <span class="style3"><strong>Folios Contratados:</strong></span>
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblContratos" Font-Bold="True"></asp:Label>
+                                    </td>
+                                    <td>&nbsp;&nbsp;
+                                        Folios restantes de Emision:
+                                    </td>
+                                    <td>
+                                        <asp:Label runat="server" ID="lblEmision" Font-Bold="True"></asp:Label>
+                                    </td>
+                                        <td>&nbsp;&nbsp;
+                                            Folios restantes de Timbrado:
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lblTimbrado" Font-Bold="True"></asp:Label>
+                                        </td>
+                                       <td>
+                                Usuario:
+                                <asp:Label runat="server" ID="lblNombreUsuario" Font-Size="10pt" />
+                                &nbsp;&nbsp;
+                                <br />
+                                Empresa:
+                                <asp:Label runat="server" ID="lblEmpresa" Font-Size="10pt" />
+                                &nbsp;&nbsp;
+                            </td>
+                                        <td><%--  CssClass="guardar" --%>
+                                            <asp:Button ID="Button1"  
+                                                  runat="server" Text="Actualizar" OnClick="btnActualizarSaldos_OnClick" 
+                                                Visible="False" />
+                                        </td>
+                                      
+                                </tr>
+                                           </table>
+            </div>
+
+                    <div class="navbar navbar-default">
+             <div class="container-fluid">
+       <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
+                        class="icon-bar"></span><span class="icon-bar"></span>
+                </button><br />
+                
+            </div>
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"
+                    IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick" StaticMenuStyle-CssClass="nav navbar-nav" DynamicMenuStyle-CssClass="dropdown-menu">
+                    <Items>
+                        <%--  <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Inicio" />--%>
+                        <asp:MenuItem Text="Empresas" NavigateUrl="~/wfrEmpresasConsulta.aspx" />
+                        <asp:MenuItem NavigateUrl="~/wfrClientesConsulta.aspx" Text="Clientes" />
+                        <asp:MenuItem Text="Facturacion">
+                            <asp:MenuItem NavigateUrl="~/wfrFactura.aspx" Text="Generar CFDI"/>
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaFirmas.aspx" Text="Generar CFDI con Firmas" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaTransporte.aspx" Text="Generar CFDI C/Retenciones" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaAduanal.aspx" Text="Generar CFDI Aduanal" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaPersonalizada.aspx" Text="Generar CFDI Personalizado" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaHonorarios.aspx" Text="Generar CFDI Recibo Honorarios" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaConstructor.aspx" Text="Generar CFDI con Anticipos" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaArrendamiento.aspx" Text="Generar Recibo de Arrendamiento" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaConstructorFirmas.aspx" Text="Generar CFDI con Anticipos y Firmas" />
+                            <asp:MenuItem NavigateUrl="~/wfrAnticiposFirmasCustom.aspx" Text="Generar CFDI Customizado con Anticipos y Firmas" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaLiverpool.aspx" Text="Liverpool" />
+                            <asp:MenuItem NavigateUrl="~/wfrMabe.aspx" Text="FacturaMabe" />
+                            <asp:MenuItem NavigateUrl="~/wfrDeloitted.aspx" Text="FacturaDeloitte" />
+                            <asp:MenuItem NavigateUrl="~/wfrSorianaCEDIS.aspx" Text="FacturaSorianaCEDIS" />
+                            <asp:MenuItem NavigateUrl="~/wfrSorianaTienda.aspx" Text="FacturaSorianaTienda" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaAdo.aspx" Text="FacturaAdo" />
+                            <asp:MenuItem NavigateUrl="~/wfrCorporativoAduanal.aspx" Text="CorporativoAduanal" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaPemex.aspx" Text="Factura Addenda Pemex" />
+                            <asp:MenuItem NavigateUrl="~/wfrLucent.aspx" Text="Factura Lucent" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaAmc71.aspx" Text="Addenda AMECE 7.1" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaAduanalCartaPorte.aspx" Text="Carta Porte" />
+                            <asp:MenuItem NavigateUrl="~/WfrFacturaCoppelMuebles.aspx" Text="Coppel" />
+                            <asp:MenuItem NavigateUrl="~/WfrHomeDepot.aspx" Text="Factura Home Depot" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaPilgrims.aspx" Text="Factura Pilgrims" />
+                            <asp:MenuItem NavigateUrl="~/wfrLiverpool.aspx" Text="Factura Liverpool Detallista" />
+                            <asp:MenuItem NavigateUrl="~/wfrRetenciones.aspx" Text="Constancia de Retenciones" />
+                            <asp:MenuItem NavigateUrl="~/Honda.aspx" Text="Honda" />
+                            <asp:MenuItem NavigateUrl="~/Amazon.aspx" Text="Amazon" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaComplementos.aspx" Text="CFDI Complementos" />
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaComisionistas.aspx" Text="Comisionistas" />
+                            <asp:MenuItem NavigateUrl="~/ASONIOSCOC.aspx" Text="Asonioscoc" />
+                            
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/wfrFacturasConsulta.aspx" Text="Reportes" >
+                        <asp:MenuItem NavigateUrl="~/wfrFacturasConsulta.aspx" Text="Reportes CFDI" />
+                        <asp:MenuItem NavigateUrl="~/wfrRetencionesConsulta.aspx" Text="Reportes Retenciones" />
+                        <asp:MenuItem NavigateUrl="~/wfrConfirmacionesConsulta.aspx" Text="Confirmaciones" />
+                        
+                        </asp:MenuItem>
+
+                        <asp:MenuItem NavigateUrl="~/wfrUsuariosConsulta.aspx" Text="Usuarios" />
+                        <asp:MenuItem Text="RepTimbrado">
+                            <asp:MenuItem NavigateUrl="~/wfrReporteTimbra.aspx" Text="Reporte de Timbrado" />
+                         <%--   <asp:MenuItem NavigateUrl="~/wrfTimbrado.aspx" Text="Reporte de Folios Fiscales" />
+                        --%></asp:MenuItem>
+                        <asp:MenuItem Text="Reportes para Distribuidores">
+                            <asp:MenuItem NavigateUrl="~/wfrDistribuidores.aspx" Text="Reporte de Distribuidores" />
+                            <asp:MenuItem NavigateUrl="~/wfrDistribuidorCliente.aspx" Text="Reporte de Clientes" />
+                        </asp:MenuItem>
+                        <asp:MenuItem Value="Validar Comprobantes" NavigateUrl="wfrValidacion.aspx" />
+                       
+                        <%--<asp:MenuItem runat="server" Text="Recibos de Nómina">
+                            <asp:MenuItem runat="server" Value="Catálogo de Empleados" NavigateUrl="WfrColaboradoresConsulta.aspx"></asp:MenuItem>
+                            <asp:MenuItem runat="server" Value="Crear Nuevo Recibo" NavigateUrl="WfrNomina.aspx"></asp:MenuItem>
+                            <asp:MenuItem runat="server" Value="Consultar Recibos" NavigateUrl="wfrConsultaNomina.aspx"></asp:MenuItem>
+                            
+                        </asp:MenuItem>--%>
+                        <%-- <asp:MenuItem  Text="Servicios"   >
+                                     <asp:MenuItem Value="CuentasPorPagar" Target="_parent" />
+                          </asp:MenuItem>--%>
+
+                        <asp:MenuItem Text="Cerrar Sesion" NavigateUrl="~/LogOut.aspx" />
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="clear main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div align="center">
+    </div>
+      <div class="footer"> 
+          <div class="fusion-copyright-content" 
+              style="box-sizing: border-box; display: table; width: 1170px; color: rgb(102, 102, 102); font-family: &quot;Open Sans&quot;, Arial, Helvetica, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 30px; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 1; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+              <div class="fusion-copyright-notice" 
+                  style="box-sizing: border-box; display: table-cell; vertical-align: middle; margin: 0px; padding: 0px; color: rgb(153, 153, 153); font-size: 12px;">
+                  <div class="style2" style="box-sizing: border-box;">
+                      </div>
+              </div>
+          </div>
+        
+    </div>
+    </form>
+    <br />
+  </body>
+ <script src="Scripts/jquery.js" type="text/javascript"></script>
+<script src="Scripts/bootstrap.js" type="text/javascript"></script>
+</html>

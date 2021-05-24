@@ -1,0 +1,67 @@
+﻿body {
+}
+
+.nav ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background-color: #9be236;
+}
+
+    .nav ul li {
+        font-family: 'Roboto', sans-serif;
+        border-bottom: none;
+        height: 86px;
+        line-height: 86px;
+        font-size: 14px;
+        display: inline-block;
+        float: left;
+        margin: 0 auto;
+        background-color: #9be236;
+    }
+
+        .nav ul li a {
+            text-decoration: none;
+            color: #000000;
+            background-color: #9be236;
+            display: block;
+            transition: .3s background-color;
+            padding: 0 24px;
+        }
+
+            .nav ul li a:hover {
+                background-color: #9be236;
+                color: #FFFFFF;
+            }
+
+.nav a {
+    border-bottom: none;
+    background-color: #5c89c7;
+}
+
+.nav li ul {
+    position: absolute;
+    display: none;
+    width: inherit;
+    text-align: left;
+    background-color: #5c89c7;
+}
+
+.nav li:hover ul {
+    display: block;
+    background-color: #5c89c7;
+}
+
+.nav ul li ul li {
+    display: block;
+    float: none !important; /* newly added */
+    height: auto; /* newly added */
+    line-height: 34px; /* newly added */
+    background-color: #5c89c7;
+}
+
+
+.ButtonClass {
+    cursor: pointer;
+}

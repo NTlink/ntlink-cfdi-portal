@@ -1,0 +1,418 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+TEXTAREA, INPUT[type="text"]
+	{
+		/* font size, line height, face */
+		font-family: Avenir, Helvetica, sans-serif;
+    margin-left: 0px;
+    }
+
+body 
+
+{  
+font-size: 0.8em;
+     font: 15px Avenir;
+    margin: 0em;
+    padding: 0px;
+   height:322px;
+    width: 100%;
+     background-color: #fff;
+       background-image:url(../images/fondo_web1.jpg);
+    background-repeat:repeat-y;
+    background-position: 50% top;
+    background-attachment: inherit;
+     }
+
+
+a:link, a:visited
+{
+	color: #006bb8;
+    text-align: justify;
+}
+
+a:hover
+{
+	color: #666666;
+	text-decoration: none;
+}
+
+a:active
+{
+	color: #006bb8;
+}
+
+p
+{
+	margin-bottom: 10px;
+	line-height: 1.6em;
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+	font-size: 0.5em;
+	color: #666666;
+	font-variant: small-caps;
+	text-transform: none;
+	font-weight: 700;
+	margin-bottom: 0px;
+	height:100% rem;
+	width: 100%;
+}
+
+h1
+{
+	font-size: 1.2em;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+    text-align:center;
+    margin-left: 0px;
+    height:100% rem;
+	width: 100%;
+}
+
+h2
+{
+	font-size: 3.5em;
+	font-weight: 600;
+	height:100% rem;
+	width: 100%;
+}
+
+h3
+{
+	font-size: 1.2em;
+	font-weight: 600;
+	height:100% rem;
+	width: 100%;
+}
+
+h4
+{
+	font-size: 1.1em;
+}
+
+h5, h6
+{
+	font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+	margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+	border-style: none;
+	background-position:left;
+    border-color: inherit;
+    border-width: medium;
+     
+background-color: #fff;
+	margin: 3px auto 0px auto;
+	}
+.page1
+{
+     background: -webkit-gradient(linear, center top, center bottom, from(#fff), to(#E0E0E3));
+    background-color: #E6E6E6;    /* caja de fondo interna-*/
+    border: 1px solid #A6A6A6;
+    border-radius:0 0 10px 10px;
+   box-shadow:2px 2px 4px rgba(0, 0, 0, 0.9);   
+    text-align: left;
+    
+}
+
+.page3
+{
+     background-color: #E6E6E6; 
+        margin: 0px auto 0px auto;         /* caja de fondo interna-*/
+    border:4px solid #A8CF38;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.35);
+    width:90%;
+    height= auto;
+     
+}
+.page4
+{
+	border-style: none;
+	background-position:left;
+    border-color: inherit;
+    border-width: medium;
+
+	background-color: #fff;
+	margin: 3px auto 0px auto;
+	
+}
+
+.page5
+{
+   background-color: #fff;
+    border: 1px solid #A6A6A6;
+    background: -webkit-gradient(linear, center top, center bottom, from(#A8CF38), to(#fff));
+	background-image: linear-gradient(#A8CF38, #fff);
+	border-radius:0 0 10px 10px;
+	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
+     margin: 3px auto 0px auto; 
+    text-align: left;
+    }
+  .page6
+{
+    background-color: #E6E6E6;   
+   border: 1px solid #A6A6A6;
+    border-radius: 10px 10px 0 0;
+     
+     margin: 3px auto 0px auto;
+    text-align: left;
+}
+ 
+
+.floor
+{
+	background-image: url('../images/top_franja.jpg');
+	background-size: 90%;
+	background-repeat: no-repeat;
+	border-radius: 15px;
+}
+
+.header
+{
+   background-position: left;
+		margin: 0em auto;
+	padding: 0px;
+width:96%;
+	height:5% rem;
+	background-color: transparent;
+
+}
+
+.header h1
+{
+position: inherit;
+	width: 100%;
+	height:90% rem;
+  color: #A8CF;
+border-radius: 15px;
+    top: 2px;
+    left: -36px;
+    margin-left: 0px;
+}
+
+.main
+{
+	padding: 0px 12px;
+	margin: 12px 8px 8px 8px;
+	min-height: 420px;
+}
+
+.leftCol
+{
+	padding: 6px 0px;
+	margin: 12px 8px 8px 8px;
+	width: 200px;
+	min-height: 200px;
+}
+
+.footer
+{
+	color: #666666;
+	padding: 8px 0px 0px 0px;
+	margin: 0px auto;
+	text-align: center;
+	line-height: normal;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+
+div.hideSkiplink
+{
+	
+	background-color:#A8CF38;
+	width:92%;
+ height:auto rem;
+	border-radius: 15px;
+	font-size: 0.9em;
+	position: fixed;
+	
+}
+
+div.menu
+{
+	float: inherit;
+	position: relative;
+}
+
+div.menu ul
+{
+	 background-color: transparent;
+	 border:0px #DADADD solid;
+	float:none;
+	position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+div.menu ul li a, div.menu ul li a:visited /*vista 1 menu*/
+{
+	background: -webkit-gradient(linear, center top, center bottom, from(#fff), to(#A8CF38));
+	background-color:#fff;   /*color fondo caja menu*/
+	border-radius:0 0 10px 10px;
+	color:#000;        /*letra de menu*/
+	background-position: left center;
+border:1px #A2A2A3 solid;
+display:block;
+padding: 10px 5px 8px 35px;
+text-decoration:none;
+transition:all 0.2s ease-in-out;
+}
+
+div.menu ul li a:hover  /*vista 2 menu pasar mouse*/
+{
+ 
+background: -webkit-gradient(linear, center top, center bottom, from(#ccc), to(#A8CF38));
+	background-image: linear-gradient(#ccc, #F4F4F4);
+	border-radius:15px;
+	box-shadow:2px 2px 4px rgba(0, 0, 0, 0.9);
+	color: #010FF7;
+	padding:7px;
+}
+
+
+section {
+	padding:20px;
+}
+ 
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+	margin: 1em 0px;
+	padding: 1em;
+	border: 1px solid #99CC00;
+}
+
+fieldset p 
+{
+	margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+	display: block;
+}
+
+fieldset label.inline 
+{
+	display: inline;
+}
+
+legend 
+{
+	font-size: 1.1em;
+	font-weight: 600;
+	padding: 2px 4px 8px 4px;
+}
+
+input.textEntry 
+{
+	width: 320px;
+	border: 1px solid #ccc;
+}
+
+input.passwordEntry 
+{
+	width: 320px;
+	border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+	width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+	clear: both;
+}
+
+.title
+{
+	display: block;
+	float: left;
+	text-align: left;
+	width: auto;
+}
+
+.loginDisplay
+{
+	font-size: 1.1em;
+	display: inherit;
+	text-align: right;
+	padding: 10px;
+	color:# A6A5A6;
+	
+}
+
+.loginDisplay a:link
+{
+	color: # A6A5A6;
+}
+
+.loginDisplay a:visited
+{
+	color: # A6A5A6;
+}
+
+.loginDisplay a:hover
+{
+	color: # A6A5A6;
+}
+
+.failureNotification
+{
+	font-size: 1.2em;
+	color: Red;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+.submitButton
+{
+	text-align: right;
+	padding-right: 10px;
+}
+
+.guardar
+{
+    background-image: url('../images/b_aceptar.png')no-repeat 0 0; 
+    
+}
+.guardar:hover{
+	display: inline-block;
+	background:url(../images/b_aceptar.png) no-repeat 0 0;
+	width:100px;
+	height:30px;
+	font-size:0px;
+	border-style:none;
+}

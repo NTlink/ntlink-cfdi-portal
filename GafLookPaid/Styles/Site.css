@@ -1,0 +1,457 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+TEXTAREA, INPUT[type="text"]
+	{
+		/* font size, line height, face */
+		font-family: Avenir, Helvetica, sans-serif;
+    margin-left: 0px;
+    text-align: left;
+}
+
+body 
+
+{  
+font-size: 0.8em;
+     font: 12px Avenir;
+    margin: 0em;
+    padding: 0px;
+   height:50%;
+    width: 50%;
+     background-color: #fff;
+    background-image:url(../images/fondo_web1.jpg);
+    background-repeat:repeat-y;
+    background-position: top;
+    background-attachment: inherit;
+    
+ }
+ .box {
+	background: gray; /* standard */
+	background: pink9; /* IE 8 y anteriores */
+	*background: green; /* IE 7 y anteriores */
+	_background: blue; /* IE 6 */
+}
+
+/*----------------------------------------------- fin login----------------------------------------------------------*/
+a:link, a:visited
+{
+	color: #A8CF38;
+    text-align: inherit;
+}
+
+a:hover
+{
+	color: #666666;
+	text-decoration: none;
+}
+
+a:active
+{
+	color: #A8CF38;
+}
+
+p
+{
+	margin-bottom: 10px;
+	line-height: 1.6em;
+height:7px;
+	width: 100%;
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+	font-size: 0.5em;
+	color: #A8CF38;
+	font-variant: small-caps;
+	text-transform: none;
+	font-weight: 700;
+	margin-bottom: 0px;
+	height:100% rem;
+	width: 100%;
+}
+
+h1
+{
+	font-size: 1.2em;
+	color: #A8CF38;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
+    margin-left: 0px;
+    height:100% rem;
+	width: 100%;
+}
+
+h2
+{
+	font-size: 3.5em;
+	font-weight: 600;
+	height:100% rem;
+	width: 100%;
+}
+
+h3
+{
+	font-size: 1.2em;
+	font-weight: 600;
+	height:100% rem;
+	width: 100%;
+}
+
+h4
+{
+	font-size: 1.1em;
+}
+
+h5, h6
+{
+	font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+	margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+
+
+
+
+.floor
+{
+	
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-color: rgba(0,0,255,0.5);
+}
+
+.header
+{
+    background-position: left;
+		margin: 0em auto;
+	padding: 0px;
+width: auto inherit;
+	height: auto rem;
+	background-color: #99CC00;
+}
+.header1
+{
+	position: inherit;
+	width: 100%;
+	height:90% rem;
+  color: #A8CF38;
+box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.35);
+border-radius: 15px;
+    top: 2px;
+    left: -36px;
+    margin-left: 0px;
+}
+.header2
+{
+	position: inherit;
+	width: 333px;
+	height: 28px;
+  color: #3D3B3B;
+  text-align: left;
+box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.35);
+border-radius: 15px;
+	
+}
+
+.header h1
+{
+	font-weight: 700;
+	margin: 0em;
+	padding: 0px 0px 0px 20px;
+	color: #f9f9f9;
+	border: none;
+	line-height: 2em;
+	font-size: 2em;
+	position: relative;
+}
+
+.main
+{
+	padding: 0px 12px;
+	margin: 12px 8px 8px 25px;
+	min-height: 320px;
+}
+
+.leftCol
+{
+	padding: 6px 0px;
+	margin: 12px 8px 8px 8px;
+	width: 200px;
+	min-height: 200px;
+}
+
+.footer
+{
+	color: #666666;
+	padding: 8px 0px 0px 0px;
+	margin: 0em auto;
+	text-align: right;
+	line-height: normal;
+	 height: auto rem;
+    width:auto;
+	 background-position: bottom;
+    background-attachment: scroll;
+   
+
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+.menu
+{
+	width:92%;
+ height:auto rem;
+	border-radius: 15px;
+	font-size: 0.9em;
+	position: fixed;
+	 text-align:left;
+	}
+
+
+div.menu
+{
+    
+     background-color: transparent;
+	float: inherit;
+	position: absolute;
+    top: 0px;
+    left: 0px;
+    height:30%;
+}
+
+div.menu ul
+{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+}
+
+div.menu ul li a, div.menu ul li a:visited
+{
+  
+  
+    background-image:url("../images/bub.png");
+     padding-right:25%;
+      background-position: right center;
+    background-repeat:no-repeat;
+    overflow:visible;
+    display: inherit;
+	font-size: 16px;
+	line-height: 15px;
+	padding: 6em 2em;
+	margin: 6px 6px;
+	vertical-align: inherit;
+	text-decoration:inherit;
+	box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.35);
+}
+
+div.menu ul li a:hover
+{
+     
+background: -webkit-gradient(linear, center top, center bottom, from(#ccc), to(#ededed));
+	background-image: linear-gradient(#ccc, #ededed);
+	border-radius:0 0 10px 10px;
+	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
+	color: #010FF7;
+}
+
+div.menu ul li a:active
+{
+background: none;
+	border-radius:0 0 10px 10px;
+	box-shadow:2px 2px 4px rgba(0, 0, 0, 0.9);
+}
+div.menu ul li {
+	float: none;
+}
+
+div.menu ul a {
+	white-space: nowrap;
+}
+
+/* FORM ELEMENTS   
+M ELEMENTS   RM ELEMENTS   
+---------------------------------------------------------
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+	margin: 1em 0px;
+	padding: 1em;
+	border: 1px solid #12121;
+}
+
+fieldset p 
+{
+	margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+	display: block;
+}
+
+fieldset label.inline 
+{
+	display: inline;
+}
+
+legend 
+{
+	font-size: 1.1em;
+	font-weight: 600;
+	padding: 2px 4px 8px 4px;
+}
+
+input.textEntry 
+{
+	width: 320px;
+	border: 1px solid #ccc;
+}
+
+input.passwordEntry 
+{
+	width: 320px;
+	border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+	width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+	clear: both;
+    text-align: left;
+    color:# 585857;
+}
+
+.title
+{
+	display: block;
+	float: left;
+	text-align: left;
+	width: auto;
+}
+
+.loginDisplay
+{
+	font-size: 1.1em;
+	display: block;
+	text-align: right;
+	padding: 10px;
+	color: White;
+}
+
+.loginDisplay a:link
+{
+	color: white;
+}
+
+.loginDisplay a:visited
+{
+	color: white;
+}
+
+.loginDisplay a:hover
+{
+	color: white;
+}
+
+.failureNotification
+{
+	font-size: 1.2em;
+	color: Red;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+.submitButton
+{
+	text-align: right;
+	padding-right: 10px;
+}
+
+div.img {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.img:hover {
+    border: 1px solid #777;
+}
+
+div.img img {
+    width: 100%;
+    height: auto rem;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+.Reloj{
+    display: block;
+   left: 32px;
+  width:120px;
+  height: 38px;
+ background: -webkit-gradient(linear, center top, center bottom, from(#696969), to(#A7A7A7));
+	background-image: linear-gradient(#696969, #fff);
+	border-radius:0 0 10px 10px;
+	box-shadow: inset 0px 0px 1px 1px rgba(0,0,0,0.1);
+	color: #990000;
+  font-family: 'Russo One', sans-serif;
+  font-size: 30px;
+   text-align: center;
+  overflow: hidden;
+  
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  -webkit-box-shadow: 0px 0px 5px 0px #fff;
+  box-shadow: 0px 0px 5px 0px #A6A6A6;
+}
+.segundero:before {
+  content: ":";
+  -webkit-animation-name: blink;
+  -moz-animation-name: blink;
+  -o-animation-name: blink;
+  animation-name: blink;
+  -webktit-animation-timing-function: linear;
+  -moz-animation-timing-function: linear;
+  -o-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  animation-duration: 2s;
+}

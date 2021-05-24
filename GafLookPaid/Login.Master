@@ -1,0 +1,253 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Login.master.cs" Inherits="GafLookPaid.Login" %>
+<%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+<head id="Head1" runat="server">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge;IE=8;IE=7" />
+	<title></title>
+  		<link href="~/Styles/SiteLogin.css" rel="stylesheet" type="text/css" />
+        <link href="Styles/bootstrap.min.css" rel="stylesheet" type="text/css" />
+   	<asp:ContentPlaceHolder ID="HeadContent" runat="server">
+	</asp:ContentPlaceHolder>
+
+	    
+	<!--SCRIPTS VENTA EMERGENTE
+<div id='ventana-flotante'>
+
+   <a class='cerrar' href='javascript:void(0);' onclick='document.getElementById(&apos;ventana-flotante&apos;).className = &apos;oculto&apos;'>x</a>
+
+   <div id='contenedor'>
+
+       <div class='contenido'>
+
+           <div class="style31" 
+               style="font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; widows: 2; -webkit-text-stroke-width: 0px;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¡Bienvenidos al Nuevo CFDI V-3.3!</div>
+           <p class="MsoNormal" style="margin: 0cm 0cm 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;  font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">           
+Para poder usar el nuevo portal deberá contactar a su asesor de ventas o comunicarse  a los teléfonos de ntlink para habilitar el saldo de su&nbsp; cuenta 
+               en el portal de CFDI 3.3
+ 
+               <strong>Agradecemos su comprensi</strong><span class="auto-style20" style="font-size: medium; font-family: Avenir, serif;"><strong>ón.</strong>
+</span>&nbsp;</p>
+
+       </div>
+
+   </div>
+
+</div>
+
+<style>
+#ventana-flotante {
+width: 850px;  /* Ancho de la ventana */
+height: 170px;  /* Alto de la ventana */
+background: -webkit-gradient(linear, center top, center bottom, from(#B2CA35), to(#fff));;  /* Color de fondo */
+position:absolute;
+border-radius: 30px 20px 30px;
+top: 17%;
+left: 29%;
+margin-left: -180px;
+border: 2px solid #C5C5C5;  /* Borde de la ventana */
+box-shadow: 0 5px 25px rgba(0,0,0,.1);  /* Sombra */
+z-index:999;
+}
+#ventana-flotante #contenedor {
+padding: 25px 10px 10px 10px;
+}
+#ventana-flotante .cerrar {
+float: right;
+border-bottom: 1px solid #bbb;
+border-left: 1px solid #bbb;
+background: -webkit-gradient(linear, center top, center bottom, from(#B2CA35), to(#fff));;  /* Color de fondo */
+background: red;
+line-height: 17px;
+text-decoration: none;
+padding: 0px 14px;
+font-family: Avenir;
+border-radius: 0 0 0 5px;
+box-shadow: -1px 1px white;
+font-size: 18px;
+-webkit-transition: .3s;
+-moz-transition: .3s;
+-o-transition: .3s;
+-ms-transition: .3s;
+}
+#ventana-flotante .cerrar:hover {
+background: #ff6868;
+color: white;
+text-decoration: none;
+text-shadow: -1px -1px red;
+border-bottom: 1px solid red;
+border-left: 1px solid red;
+}
+#ventana-flotante #contenedor .contenido {
+padding: 13px;
+box-shadow: inset 1px 1px white;
+background: #FFFFFF;  /* Fondo del mensaje */
+border: 1px solid #A6A6A6;  /* Borde del mensaje */
+font-size: 25px;  /* Tamaño del texto del mensaje */
+color: #555;  /* Color del texto del mensaje */
+text-shadow: 1px 1px white;
+margin: 0 auto;
+border-radius: 4px;
+}
+.oculto {-webkit-transition:1s;-moz-transition:1s;-o-transition:1s;-ms-transition:1s;opacity:0;-ms-opacity:0;-moz-opacity:0;visibility:hidden;}
+    .auto-style2 {
+        text-align: center;
+    }
+    .auto-style12 {
+        text-align: center;
+    }
+    .auto-style13 {
+        font-size: large;
+    }
+    .auto-style14 {
+        color: #555555;
+        text-decoration: none;
+        font-size: large;
+    }
+    .auto-style15 {
+        color: #555555;
+        text-decoration: none;
+    }
+    .auto-style16 {
+        font-style: normal;
+        font-size: large;
+    }
+    .auto-style17 {
+        font-size: large;
+        color: #555555;
+    }
+    .auto-style18 {
+        font-style: normal;
+        font-size: large;
+        color: #555555;
+    }
+    .auto-style20 {
+        font-family: Calibri;
+        font-size: large;
+    }
+    .style31
+    {
+        text-align: left;
+        width: 404px;
+        font-family: Avenir;
+        font-size: 25px;
+        font-style: normal;
+        font-weight: normal;
+        letter-spacing: normal;
+        text-indent: 0px;
+        text-transform: none;
+        white-space: normal;
+        word-spacing: 0px;
+        display: inline;
+        float: none;
+        color: rgb(255, 0, 0);
+    }
+</style>
+	<!-- SLIDER SETTINGS-->
+
+    <style type="text/css">
+        .style125
+        {
+            color: #000066;
+        }
+        .style126
+        {
+            color: #990000;
+        }
+        .style127
+        {
+            color: #000000;
+        }
+        .style128
+        {
+            color: #990000;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+	<form id="Form1" runat="server">
+
+<div>
+	<table class="logo">
+	<tr>
+   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <asp:HyperLink ID="HyperLink1" runat="server"   
+                    ImageUrl="images/login.png" CssClass="img-rounded"
+                    NavigateUrl="https://ntlink.com.mx/" style="text-align: center">HyperLink</asp:HyperLink>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+      <asp:HyperLink ID="HyperLink6" runat="server" 
+                    ImageUrl="images/Sat.png"  
+                    NavigateUrl="" style="text-align: right">HyperLink</asp:HyperLink></td>
+                                       
+                          
+      </tr>
+        </table>
+   </div>
+   <table class="table">
+		<tr>	
+         
+ <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; <asp:HyperLink NavigateUrl="http://ntlink2.com.mx/#price"  ID="HyperLink4" runat="server" >Consulta nuestros horarios de servicio</asp:HyperLink>
+      &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
+    <asp:HyperLink  ID="HyperLink7" runat="server">Bienvenidos al Portal de Factura 3.3  </asp:HyperLink>
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:HyperLink NavigateUrl="http://ntlink2.com.mx/#contact" ID="HyperLink5" 
+         runat="server"  
+          >    ¿Tienes dudas? Déjanos un Mensaje  </asp:HyperLink>
+     </td>
+         		</tr>
+                </table>
+    <br/><br/>
+	<asp:ToolkitScriptManager  runat="server" ID="smGlobal" />
+	<div class="main">
+			<asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+		</div>
+			
+             
+	<div align="center">
+	
+             <h1 class="style125">
+                 &nbsp;<h1 class="style125">
+                 <span class="style128"><strong style="text-align: center">Teléfonos de&nbsp; 
+                Atención a clientes y Soporte:</strong></span>
+                 <h3 class="style125">
+                     <span class="style127"><strong>(55)47-80-02-00 * (55)62-72-55-49&nbsp; * (55)62-72-55-50 * (55)82-50-76-56&nbsp;&nbsp; *&nbsp;&nbsp; 01800-46-72574&nbsp; *&nbsp; 
+                     (044) 55 48 01 79 21&nbsp; *&nbsp;01 800 467 2574&nbsp; (044) 55 11 26 42 49</strong></span> 
+                    
+     
+             <p class="style125">
+                     &nbsp;</p>
+                    
+     
+        <div>
+		    <span class="style126">©2012-2019 NT LINK COMUNICACIONES S.A. DE C.V. Todos los 
+            derechos Reservados.</span><span class="style125">|</span><asp:HyperLink 
+                NavigateUrl="http://ntlink2.com.mx/politica_privacidad.html" 
+                target="_blank" ID="HyperLink2" 
+         runat="server" style="font-size: medium; " CssClass="style125" 
+                 >Politica de Privacidad</asp:HyperLink> 
+                <asp:HyperLink 
+                NavigateUrl="http://ntlink2.com.mx/politica_privacidad.html" 
+                target="_blank" ID="HyperLink3" 
+         runat="server" style="font-size: medium; " CssClass="style125" 
+                 >|Acuerdo de Niveles de Servicio </asp:HyperLink>
+            <span class="style125" >|</span><span class="style126" >Compatible con Edge, 
+            Chrome, Safari, Firefox 
+            </span></br> </div>
+ </div>
+	    </div>
+	</form>
+  
+<br />
+
+</body>
+
+<script src="Scripts/jquery.js" type="text/javascript"></script>
+<script src="Scripts/bootstrap.js" type="text/javascript"></script>
+</html>
