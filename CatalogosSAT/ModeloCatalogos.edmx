@@ -8,9 +8,12 @@
         <EntityContainer Name="CatalogosModelStoreContainer">
           <EntitySet Name="Bancos" EntityType="CatalogosModel.Store.Bancos" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_ClaveProdServ" EntityType="CatalogosModel.Store.c_ClaveProdServ" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="c_ClaveProdServCP" EntityType="CatalogosModel.Store.c_ClaveProdServCP" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_ClaveUnidad" EntityType="CatalogosModel.Store.c_ClaveUnidad" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="c_ClaveUnidadPeso" EntityType="CatalogosModel.Store.c_ClaveUnidadPeso" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_Colonia" EntityType="CatalogosModel.Store.c_Colonia" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_CP" EntityType="CatalogosModel.Store.c_CP" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="c_Estaciones" EntityType="CatalogosModel.Store.c_Estaciones" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_Estado" EntityType="CatalogosModel.Store.c_Estado" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_FormaPago" EntityType="CatalogosModel.Store.c_FormaPago" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="c_FraccionArancelaria" EntityType="CatalogosModel.Store.c_FraccionArancelaria" store:Type="Tables" Schema="dbo" />
@@ -42,11 +45,22 @@
           </Key>
           <Property Name="c_ClaveProdServ" Type="int" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="200" />
-          <Property Name="FechaInicioVigencia" Type="datetime" />
-          <Property Name="FechaFinVigencia" Type="datetime" />
           <Property Name="IncluirIVAtrasladado" Type="nvarchar" MaxLength="10" />
           <Property Name="IncluirIEPStrasladado" Type="nvarchar" MaxLength="10" />
           <Property Name="Complemento" Type="nvarchar" MaxLength="55" />
+          <Property Name="FechaInicioVigencia" Type="datetime" />
+          <Property Name="FechaFinVigencia" Type="datetime" />
+          <Property Name="EstimuloFranjaFronteriza" Type="int" />
+        </EntityType>
+        <EntityType Name="c_ClaveProdServCP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ClaveProdructo" Type="nvarchar" MaxLength="55" />
+          <Property Name="Descripción" Type="nvarchar" MaxLength="255" />
+          <Property Name="PalabrasSimilares" Type="nvarchar" MaxLength="255" />
+          <Property Name="MaterialPeligroso" Type="nvarchar" MaxLength="10" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="c_ClaveUnidad">
           <Key>
@@ -60,6 +74,20 @@
           <Property Name="Fecha de fin de vigencia" Type="datetime" />
           <Property Name="Símbolo" Type="nvarchar" MaxLength="25" />
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="c_ClaveUnidadPeso">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Claveunidad" Type="nvarchar" MaxLength="5" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Nota" Type="nvarchar" MaxLength="255" />
+          <Property Name="FechaInicioVigencia" Type="datetime" />
+          <Property Name="FechaFinVigencia" Type="datetime" />
+          <Property Name="Símbolo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Bandera" Type="nvarchar" MaxLength="25" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="c_Colonia">
           <Key>
@@ -78,6 +106,32 @@
           <Property Name="c_Estado" Type="nvarchar" MaxLength="255" />
           <Property Name="c_Municipio" Type="nvarchar" MaxLength="255" />
           <Property Name="c_Localidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="EstímuloFranjaFronteriza" Type="int" />
+          <Property Name="Fechainiciodevigencia" Type="datetime" />
+          <Property Name="Fechafindevigencia" Type="datetime" />
+          <Property Name="DescripcióndelHusoHorario" Type="nvarchar" MaxLength="255" />
+          <Property Name="Mes_Inicio_Horario_Verano" Type="nvarchar" MaxLength="255" />
+          <Property Name="Día_Inicio_Horario_Verano" Type="nvarchar" MaxLength="255" />
+          <Property Name="Hora_Inicio_Horario_Verano" Type="nvarchar" MaxLength="255" />
+          <Property Name="Diferencia_Horaria_Verano" Type="float" />
+          <Property Name="Mes_Inicio_Horario_Invierno" Type="nvarchar" MaxLength="255" />
+          <Property Name="Día_Inicio_Horario_Invierno" Type="nvarchar" MaxLength="255" />
+          <Property Name="Hora_Inicio_Horario_Invierno" Type="nvarchar" MaxLength="255" />
+          <Property Name="Diferencia_Horaria_Invierno" Type="float" />
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="c_Estaciones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Clavetransporte" Type="nvarchar" MaxLength="5" />
+          <Property Name="Claveidentificacion" Type="nvarchar" MaxLength="10" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Nacionalidad" Type="nvarchar" MaxLength="100" />
+          <Property Name="DesignadorIATA" Type="nvarchar" MaxLength="50" />
+          <Property Name="Líneaferrea" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaInicioVigencia" Type="datetime" />
+          <Property Name="FechaFinVigencia" Type="datetime" />
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="c_Estado">
@@ -112,9 +166,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="c_FraccionArancelaria" Type="nvarchar" MaxLength="255" />
-          <Property Name="Descripción" Type="nvarchar" MaxLength="255" />
+          <Property Name="Descripción" Type="nvarchar(max)" />
           <Property Name="Fecha de inicio de vigencia" Type="datetime" />
           <Property Name="Fecha de fin de vigencia" Type="datetime" />
+          <Property Name="UMT" Type="nvarchar" MaxLength="255" />
           <Property Name="Criterio" Type="nvarchar" MaxLength="255" />
           <Property Name="Unidad de Medida" Type="int" />
           <Property Name="IMP" Type="float" />
@@ -272,6 +327,9 @@
           <EntitySet Name="Divisas" EntityType="CatalogosModel.Divisas" />
           <EntitySet Name="c_NumPedimentoAduana" EntityType="CatalogosModel.c_NumPedimentoAduana" />
           <EntitySet Name="c_Moneda" EntityType="CatalogosModel.c_Moneda" />
+          <EntitySet Name="c_ClaveProdServCP" EntityType="CatalogosModel.c_ClaveProdServCP" />
+          <EntitySet Name="c_ClaveUnidadPeso" EntityType="CatalogosModel.c_ClaveUnidadPeso" />
+          <EntitySet Name="c_Estaciones" EntityType="CatalogosModel.c_Estaciones" />
         </EntityContainer>
         <EntityType Name="c_Colonia">
           <Key>
@@ -291,6 +349,18 @@
           <Property Name="c_Municipio" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="c_Localidad" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="EstímuloFranjaFronteriza" />
+          <Property Type="DateTime" Name="Fechainiciodevigencia" />
+          <Property Type="DateTime" Name="Fechafindevigencia" />
+          <Property Type="String" Name="DescripcióndelHusoHorario" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Mes_Inicio_Horario_Verano" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Día_Inicio_Horario_Verano" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Hora_Inicio_Horario_Verano" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="Diferencia_Horaria_Verano" />
+          <Property Type="String" Name="Mes_Inicio_Horario_Invierno" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Día_Inicio_Horario_Invierno" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Hora_Inicio_Horario_Invierno" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="Diferencia_Horaria_Invierno" />
         </EntityType>
         <EntityType Name="c_Estado">
           <Key>
@@ -314,6 +384,7 @@
           <Property Name="IMP" Type="Double" />
           <Property Name="EXP" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="UMT" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="c_INCOTERM">
           <Key>
@@ -392,6 +463,7 @@
           <Property Type="String" Name="IncluirIVAtrasladado" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="IncluirIEPStrasladado" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Complemento" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="EstimuloFranjaFronteriza" />
         </EntityType>
         <EntityType Name="c_ClaveUnidad">
           <Key>
@@ -493,6 +565,44 @@
           <Property Type="String" Name="Variacion" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <EntityType Name="c_ClaveProdServCP">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="ClaveProdructo" MaxLength="55" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripción" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PalabrasSimilares" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MaterialPeligroso" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="c_ClaveUnidadPeso">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="Claveunidad" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nombre" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nota" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaInicioVigencia" />
+          <Property Type="DateTime" Name="FechaFinVigencia" />
+          <Property Type="String" Name="Símbolo" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Bandera" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="c_Estaciones">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="String" Name="Clavetransporte" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Claveidentificacion" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Descripcion" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nacionalidad" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DesignadorIATA" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Líneaferrea" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="FechaInicioVigencia" />
+          <Property Type="DateTime" Name="FechaFinVigencia" />
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -512,6 +622,18 @@
           <EntitySetMapping Name="c_CP">
             <EntityTypeMapping TypeName="CatalogosModel.c_CP">
               <MappingFragment StoreEntitySet="c_CP">
+                <ScalarProperty Name="Diferencia_Horaria_Invierno" ColumnName="Diferencia_Horaria_Invierno" />
+                <ScalarProperty Name="Hora_Inicio_Horario_Invierno" ColumnName="Hora_Inicio_Horario_Invierno" />
+                <ScalarProperty Name="Día_Inicio_Horario_Invierno" ColumnName="Día_Inicio_Horario_Invierno" />
+                <ScalarProperty Name="Mes_Inicio_Horario_Invierno" ColumnName="Mes_Inicio_Horario_Invierno" />
+                <ScalarProperty Name="Diferencia_Horaria_Verano" ColumnName="Diferencia_Horaria_Verano" />
+                <ScalarProperty Name="Hora_Inicio_Horario_Verano" ColumnName="Hora_Inicio_Horario_Verano" />
+                <ScalarProperty Name="Día_Inicio_Horario_Verano" ColumnName="Día_Inicio_Horario_Verano" />
+                <ScalarProperty Name="Mes_Inicio_Horario_Verano" ColumnName="Mes_Inicio_Horario_Verano" />
+                <ScalarProperty Name="DescripcióndelHusoHorario" ColumnName="DescripcióndelHusoHorario" />
+                <ScalarProperty Name="Fechafindevigencia" ColumnName="Fechafindevigencia" />
+                <ScalarProperty Name="Fechainiciodevigencia" ColumnName="Fechainiciodevigencia" />
+                <ScalarProperty Name="EstímuloFranjaFronteriza" ColumnName="EstímuloFranjaFronteriza" />
                 <ScalarProperty Name="c_CP1" ColumnName="c_CP" />
                 <ScalarProperty Name="c_Estado" ColumnName="c_Estado" />
                 <ScalarProperty Name="c_Municipio" ColumnName="c_Municipio" />
@@ -533,6 +655,7 @@
           <EntitySetMapping Name="c_FraccionArancelaria">
             <EntityTypeMapping TypeName="CatalogosModel.c_FraccionArancelaria">
               <MappingFragment StoreEntitySet="c_FraccionArancelaria">
+                <ScalarProperty Name="UMT" ColumnName="UMT" />
                 <ScalarProperty Name="c_FraccionArancelaria1" ColumnName="c_FraccionArancelaria" />
                 <ScalarProperty Name="Descripción" ColumnName="Descripción" />
                 <ScalarProperty Name="Fecha_de_inicio_de_vigencia" ColumnName="Fecha de inicio de vigencia" />
@@ -621,6 +744,7 @@
           <EntitySetMapping Name="c_ClaveProdServ">
             <EntityTypeMapping TypeName="CatalogosModel.c_ClaveProdServ">
               <MappingFragment StoreEntitySet="c_ClaveProdServ">
+                <ScalarProperty Name="EstimuloFranjaFronteriza" ColumnName="EstimuloFranjaFronteriza" />
                 <ScalarProperty Name="Complemento" ColumnName="Complemento" />
                 <ScalarProperty Name="IncluirIEPStrasladado" ColumnName="IncluirIEPStrasladado" />
                 <ScalarProperty Name="IncluirIVAtrasladado" ColumnName="IncluirIVAtrasladado" />
@@ -739,6 +863,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="c_ClaveProdServCP">
+            <EntityTypeMapping TypeName="CatalogosModel.c_ClaveProdServCP">
+              <MappingFragment StoreEntitySet="c_ClaveProdServCP">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MaterialPeligroso" ColumnName="MaterialPeligroso" />
+                <ScalarProperty Name="PalabrasSimilares" ColumnName="PalabrasSimilares" />
+                <ScalarProperty Name="Descripción" ColumnName="Descripción" />
+                <ScalarProperty Name="ClaveProdructo" ColumnName="ClaveProdructo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="c_ClaveUnidadPeso">
+            <EntityTypeMapping TypeName="CatalogosModel.c_ClaveUnidadPeso">
+              <MappingFragment StoreEntitySet="c_ClaveUnidadPeso">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Bandera" ColumnName="Bandera" />
+                <ScalarProperty Name="Símbolo" ColumnName="Símbolo" />
+                <ScalarProperty Name="FechaFinVigencia" ColumnName="FechaFinVigencia" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="Nota" ColumnName="Nota" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Claveunidad" ColumnName="Claveunidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="c_Estaciones">
+            <EntityTypeMapping TypeName="CatalogosModel.c_Estaciones">
+              <MappingFragment StoreEntitySet="c_Estaciones">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FechaFinVigencia" ColumnName="FechaFinVigencia" />
+                <ScalarProperty Name="FechaInicioVigencia" ColumnName="FechaInicioVigencia" />
+                <ScalarProperty Name="Líneaferrea" ColumnName="Líneaferrea" />
+                <ScalarProperty Name="DesignadorIATA" ColumnName="DesignadorIATA" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Claveidentificacion" ColumnName="Claveidentificacion" />
+                <ScalarProperty Name="Clavetransporte" ColumnName="Clavetransporte" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -780,6 +945,9 @@
         <EntityTypeShape EntityType="CatalogosModel.Divisas" Width="1.5" PointX="11.75" PointY="6.75" Height="1.7566536458333246" />
         <EntityTypeShape EntityType="CatalogosModel.c_NumPedimentoAduana" Width="1.5" PointX="8.375" PointY="10.75" Height="2.0853483072916674" />
         <EntityTypeShape EntityType="CatalogosModel.c_Moneda" Width="1.5" PointX="10.375" PointY="10.75" Height="1.7566536458333388" />
+        <EntityTypeShape EntityType="CatalogosModel.c_ClaveProdServCP" Width="1.5" PointX="12.75" PointY="9.75" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="CatalogosModel.c_ClaveUnidadPeso" Width="1.5" PointX="12.75" PointY="12.75" Height="2.7494921875000067" />
+        <EntityTypeShape EntityType="CatalogosModel.c_Estaciones" Width="1.5" PointX="0.75" PointY="13.75" Height="2.7494921875000102" />
       </Diagram>
     </Diagrams>
   </Designer>

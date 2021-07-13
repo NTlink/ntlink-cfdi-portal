@@ -73,6 +73,7 @@
     <Compile Include="ElementoReporte.cs" />
     <Compile Include="ElementoDist.cs" />
     <Compile Include="EmailAttachment.cs" />
+    <Compile Include="Entities\DatosCartaPorte.cs" />
     <Compile Include="Entities\VUInformacionAduanera.cs" />
     <Compile Include="Entities\DatosPilgrims.cs" />
     <Compile Include="Entities\facturaComplementos.cs" />

@@ -1653,6 +1653,8 @@ namespace GafLookPaid
                  {
                      if (dt.ConceptoClaveProdServ == x.Partida.ToString())
                      {
+                         if (dt.TipoFactor == "Exento")
+                             dt.Importe = null;
                          if (dt.TipoImpuesto == "Traslados")
                          {
                              x.ConceptoTraslados.RemoveAll(p => p.Base == dt.Base && p.Importe == dt.Importe
@@ -2157,6 +2159,11 @@ namespace GafLookPaid
                     DRT.TipoFactor = TipoFactor;
                     DRT.TipoImpuesto = TipoImpuesto;
                     DRT.ConceptoClaveProdServ = Partida;
+                    //if (TipoFactor == "Exento")
+                    //{
+                    //    DRT.Importe = Decimal.Round(Convert.ToDecimal("0.00"), 6);
+                    //    DRT.TasaOCuota = "Exento";
+                    //}
                     if (TipoImpuesto == "Retenciones")
                     {
                         if (x.ConceptoRetenciones == null)
@@ -2203,6 +2210,11 @@ namespace GafLookPaid
 
                         traslados.Impuesto = Impuesto;
                         traslados.TipoFactor = TipoFactor;
+                        //if (TipoFactor == "Exento")
+                        //{
+                        //    traslados.Importe = Decimal.Round(Convert.ToDecimal("0.00"), 6);
+                        //    traslados.TasaOCuota = "Exento";
+                        //}
                         x.ConceptoTraslados.Add(traslados);
                     }
                     detallesImpuestos.Add(DRT);

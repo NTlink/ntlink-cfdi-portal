@@ -73,6 +73,11 @@ namespace ServicioLocalContract
         [OperationContract]
         List<c_Moneda> Consultar_MonedaAll();
         [OperationContract]
+        List<c_Pais> Consultar_PaisAll();
+        [OperationContract]
+        List<c_ClaveUnidadPeso> Consultar_ClaveUnidadPeso_ALL();
+      
+        [OperationContract]
         c_Moneda Consultar_Moneda(string moneda);
         [OperationContract]
          byte[] GetFacturaAcuse(string uuid, string RFC, string fecha);

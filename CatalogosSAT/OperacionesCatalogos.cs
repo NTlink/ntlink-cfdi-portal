@@ -288,9 +288,43 @@ namespace CatalogosSAT
             }
 
         }
-       
-       
 
+        public List<c_Pais> Consultar_Pais_ALL()
+        {
+            try
+            {
+                List<c_Pais> Pais = null;
+                using (var db = new CatalogosSAT.CatalogosEntities1())
+                {
+                   Pais = db.c_Pais.ToList();
+
+                    return Pais;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+        }
+        public List<c_ClaveUnidadPeso> Consultar_ClaveUnidadPeso_ALL()
+        {
+            try
+            {
+                List<c_ClaveUnidadPeso> Clave = null;
+                using (var db = new CatalogosSAT.CatalogosEntities1())
+                {
+                    Clave = db.c_ClaveUnidadPeso.ToList();
+
+                    return Clave;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+        }
         public c_Pais Consultar_Pais( string pais1)
         {
             try

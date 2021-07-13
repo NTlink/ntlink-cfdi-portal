@@ -87,6 +87,9 @@
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="TimePicker">
+      <HintPath>..\..\..\..\proyectosPruebas\dll\TimePicker.dll</HintPath>
+    </Reference>
     <Reference Include="WebControls.FilteredDropDownList">
       <HintPath>..\..\OperacionesCancela\GAFWEB\bin\WebControls.FilteredDropDownList.dll</HintPath>
     </Reference>
@@ -117,6 +120,8 @@
     <Content Include="controles\SectorFinanciero.ascx" />
     <Content Include="Amazon.aspx" />
     <Content Include="ASONIOSCOC.aspx" />
+    <Content Include="wfrFacturaInnova.aspx" />
+    <Content Include="wfrFacturaCartaPorte.aspx" />
     <Content Include="wfrFacturaVehiculoUsado.aspx" />
     <Content Include="wfrComplementoServicioParcialConstruccion.aspx" />
     <Content Include="images\banner1.jpg" />
@@ -391,6 +396,20 @@
     </Compile>
     <Compile Include="ASONIOSCOC.aspx.designer.cs">
       <DependentUpon>ASONIOSCOC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaInnova.aspx.cs">
+      <DependentUpon>wfrFacturaInnova.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaInnova.aspx.designer.cs">
+      <DependentUpon>wfrFacturaInnova.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaCartaPorte.aspx.cs">
+      <DependentUpon>wfrFacturaCartaPorte.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaCartaPorte.aspx.designer.cs">
+      <DependentUpon>wfrFacturaCartaPorte.aspx</DependentUpon>
     </Compile>
     <Compile Include="wfrFacturaVehiculoUsado.aspx.cs">
       <DependentUpon>wfrFacturaVehiculoUsado.aspx</DependentUpon>

@@ -47,18 +47,19 @@ namespace NtLinkAdministracion
                 usuarios res = cliente.AdminLogin(this.logMain.UserName, this.logMain.Password,ip);
                 //usuarios res = cliente.AdminLogin("Admin","AABBCc22++");
                 if (res != null)
-                {
-                    
+                {                    
                     // Obtener las pantallas del usuario
                     var pantallas = cliente.GetAdminPantallas(res.idusuario);
                     Session["pantallas"] = pantallas;
                     Session["userId"] = res.idusuario;
                     Session["usuario"] = res;
                     e.Authenticated = true;
+
                 }
                 else
                 {
                     e.Authenticated = false;
+
                 }
             }
         }
