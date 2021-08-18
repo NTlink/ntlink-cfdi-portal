@@ -14,14 +14,16 @@ namespace ServicioLocal.Business
 {
     public class Mailer : NtLinkBusiness
     {
-        readonly string _host;
-        readonly string _port;
+         string _host;
+         string _port;
          string _username;
-        readonly string _password;
+         string _password;
+
         string CorreoAct;//nuevo 
         public string Bcc { get; set; }
         bool ssl { get; set; }
-      
+        bool tipoServidor { get; set; }
+
 
         public Mailer()
         {
@@ -39,6 +41,8 @@ namespace ServicioLocal.Business
             //_username = ConfigurationManager.AppSettings["UserName"];
             CorreoAct = c.correoA;//nuevo
            _password = ConfigurationManager.AppSettings["Password"];
+
+           tipoServidor = true;
         }
          
         public void Send(List<string> recipients, List<EmailAttachment> attachments, string message, string subject, string fromEmail, string fromDescription)
@@ -114,8 +118,18 @@ namespace ServicioLocal.Business
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
-                throw new FaultException("Ocurrio un error al enviar el correo");
+                if (tipoServidor)
+                {
+                    tipoServidor = false;
+                    ConfigurarServidorSecundario();
+                    Send(recipients, attachments, message, subject, fromEmail, fromDescription);
+
+                }
+                else
+                {
+                    Logger.Error(ex);
+                    throw new FaultException("Ocurrio un error al enviar el correo");
+                }
             }
 
         }
@@ -173,10 +187,38 @@ namespace ServicioLocal.Business
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
-                throw new FaultException("Ocurrio un error al enviar el correo");
+                if (tipoServidor)
+                {
+                    tipoServidor = false;
+                    ConfigurarServidorSecundario();
+                    Send(recipients, attachments, message, subject, fromEmail, fromDescription);
+
+                }
+                else
+                {
+                    Logger.Error(ex);
+                    throw new FaultException("Ocurrio un error al enviar el correo");
+                }
             }
             
+        }
+
+        private void ConfigurarServidorSecundario()
+        {
+
+          var sslbool = ConfigurationManager.AppSettings["enableSslS2"];
+            if (sslbool != null)
+                ssl = Boolean.Parse(sslbool);
+            else
+                ssl = false;  
+
+            _host = ConfigurationManager.AppSettings["HostS2"];
+            _port = ConfigurationManager.AppSettings["PortS2"];
+
+           _username = ConfigurationManager.AppSettings["UserNameS2"];
+           _password = ConfigurationManager.AppSettings["PasswordS2"];
+        
+        
         }
        
         //------------------------------------------------------------------

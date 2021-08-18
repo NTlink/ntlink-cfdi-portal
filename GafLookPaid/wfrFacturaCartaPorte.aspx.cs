@@ -220,7 +220,28 @@ namespace GafLookPaid
              ViewState["Propietario"] =new List<Propietario>();
              ViewState["Arrendatario"] =new List<Arrendatario>();
              ViewState["Notificado"]=new List<Notificado>();
-        
+
+             ddlEstado.Visible = false;
+             ddlMunicipio.Visible = false;
+             ddlLocalidad.Visible = false;
+
+             dllLocalidadOperador.Visible = false;
+             ddlMunicipioOperador.Visible = false;
+             dllEstadoOperador.Visible = false;
+
+
+             dllLocalidadPropietario.Visible = false;
+             ddlMunicipioPropietario.Visible = false;
+             dllEstadoPropietario.Visible = false;
+
+             dllLocalidadArrendatario.Visible = false;
+             ddlMunicipioArrendatario.Visible = false;
+             dllEstadoArrendatario.Visible = false;
+
+             dllLocalidadNotificado.Visible = false;
+             ddlMunicipioNotificado.Visible = false;
+             dllEstadoNotificado.Visible = false;
+
         }
         //protected void chkIva_CheckedChanged(object sender, EventArgs e)
         //{
@@ -1308,6 +1329,9 @@ namespace GafLookPaid
 
         private void ClearAll()
         {
+
+
+            inicarDatos();
             this.Clear();
             cbImpuestos.Visible = false;
             this.txtProyecto.Text = this.txtFolioOriginal.Text = this.txtFechaOriginal.Text = this.txtMontoOriginal.Text =this.txtFolioSat.Text=
@@ -2537,18 +2561,7 @@ namespace GafLookPaid
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+                
 
         //----------------------------------------------------------------------------------
         protected void ACuota()
@@ -3269,7 +3282,7 @@ namespace GafLookPaid
                        u.numRegIdTribDestino = txtNumRegIdTribDestino.Text;
                    if (ddlResidenciaFiscalDestino.SelectedValue != "00")
                        u.residenciaFiscalDestino = ddlResidenciaFiscalDestino.SelectedValue;
-                   if (!string.IsNullOrEmpty(txtRFCRemitente.Text))
+                   if (!string.IsNullOrEmpty(txtNumEstacionDestino.Text))
                        u.numEstacionDestino = txtNumEstacionDestino.Text;
                    if (!string.IsNullOrEmpty(txtNombreEstacionDestino.Text))
                        u.nombreEstacionDestino = txtNombreEstacionDestino.Text;
@@ -3288,15 +3301,39 @@ namespace GafLookPaid
                      u.numeroExterior = txtNumeroExterior.Text;
                  if (!string.IsNullOrEmpty(txtNumeroInterior.Text))
                      u.numeroInterior = txtNumeroInterior.Text;
+
                  if (!string.IsNullOrEmpty(txtColonia.Text))
                      u.colonia = txtColonia.Text;
-                 if (!string.IsNullOrEmpty(txtLocalidad.Text))
-                     u.localidad = txtLocalidad.Text;
+                 if (txtLocalidad.Visible == true)
+                 {
+                     if (!string.IsNullOrEmpty(txtLocalidad.Text))
+                         u.localidad = txtLocalidad.Text;
+                 }
+                 else
+                 {
+                     if (ddlLocalidad.SelectedValue != "Seleccionar")
+                         u.localidad = ddlLocalidad.SelectedValue;
+                 
+                 }
                  if (!string.IsNullOrEmpty(txtReferencia.Text))
                      u.referencia = txtReferencia.Text;
-                 if (!string.IsNullOrEmpty(txtMunicipio.Text))
-                     u.municipio = txtMunicipio.Text;
-                 u.estado = txtEstado.Text;
+                 if (txtMunicipio.Visible == true)
+                 {
+                     if (!string.IsNullOrEmpty(txtMunicipio.Text))
+                         u.municipio = txtMunicipio.Text;
+                 }
+                 else
+                 {
+                     if (ddlMunicipio.SelectedValue != "Seleccionar")
+                         u.municipio = ddlMunicipio.SelectedValue;
+                                  
+                 }
+
+                 if (txtEstado.Visible == true)
+                     u.estado = txtEstado.Text;
+                 else
+                     u.estado = ddlEstado.SelectedValue;
+
                  u.pais = ddlPais.SelectedValue;
                  u.codigoPostal = txtCodigoPostal.Text;
              }
@@ -3972,13 +4009,35 @@ namespace GafLookPaid
                         n.numeroInterior = txtNumeroInteriorNotificado.Text;
                     if (!string.IsNullOrEmpty(txtColoniaNotificado.Text))
                         n.colonia = txtColoniaNotificado.Text;
-                    if (!string.IsNullOrEmpty(txtLocalidadNotificado.Text))
-                        n.localidad = txtLocalidadNotificado.Text;
+                    if (txtLocalidadNotificado.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadNotificado.Text))
+                            n.localidad = txtLocalidadNotificado.Text;
+                    }
+                    else
+                    {
+                        if (dllLocalidadNotificado.SelectedValue != "Seleccionar")
+                            n.localidad = dllLocalidadNotificado.SelectedValue;
+                     
+                    }
                     if (!string.IsNullOrEmpty(txtReferenciaNotificado.Text))
                         n.referencia = txtReferenciaNotificado.Text;
-                    if (!string.IsNullOrEmpty(txtMunicipioNotificado.Text))
-                        n.municipio = txtMunicipioNotificado.Text;
+                    if (txtMunicipioNotificado.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioNotificado.Text))
+                            n.municipio = txtMunicipioNotificado.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioNotificado.SelectedValue != "Seleccionar")
+                            n.municipio = ddlMunicipioNotificado.SelectedValue;
+                    
+                    }
+                    if (txtEstadoNotificado.Visible==true)
                     n.estado = txtEstadoNotificado.Text;
+                    else
+                        n.estado = dllEstadoNotificado.SelectedValue;
+                   
                     n.pais = ddlPaisNotificado.SelectedValue;
                     n.codigoPostal = txtCodigoPostalNotificado.Text;
                 }
@@ -4033,13 +4092,35 @@ namespace GafLookPaid
                         a.numeroInterior = txtNumeroInteriorArrendatario.Text;
                     if (!string.IsNullOrEmpty(txtColoniaArrendatario.Text))
                         a.colonia = txtColoniaArrendatario.Text;
-                    if (!string.IsNullOrEmpty(txtLocalidadArrendatario.Text))
-                        a.localidad = txtLocalidadArrendatario.Text;
+                    if (txtLocalidadArrendatario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadArrendatario.Text))
+                            a.localidad = txtLocalidadArrendatario.Text;
+                    }
+                    else
+                    {
+                        if (dllLocalidadArrendatario.SelectedValue != "Seleccionar")
+                            a.localidad = dllLocalidadArrendatario.SelectedValue;
+                    
+                    }
                     if (!string.IsNullOrEmpty(txtReferenciaArrendatario.Text))
                         a.referencia = txtReferenciaArrendatario.Text;
-                    if (!string.IsNullOrEmpty(txtMunicipioArrendatario.Text))
-                        a.municipio = txtMunicipioArrendatario .Text;
+                    if (txtMunicipioArrendatario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioArrendatario.Text))
+                            a.municipio = txtMunicipioArrendatario.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioArrendatario.SelectedValue != "Seleccionar")
+                            a.municipio = ddlMunicipioArrendatario.SelectedValue;
+                                 
+                    }
+                    if (txtEstadoArrendatario.Visible==true)
                     a.estado = txtEstadoArrendatario.Text;
+                    else
+                        a.estado = dllEstadoArrendatario.SelectedValue;
+
                     a.pais = ddlPaisArrendatario.SelectedValue;
                     a.codigoPostal = txtCodigoPostalArrendatario.Text;
                 }
@@ -4094,13 +4175,35 @@ namespace GafLookPaid
                         p.numeroInterior = txtNumeroInteriorPropietario.Text;
                     if (!string.IsNullOrEmpty(txtColoniaPropietario.Text))
                         p.colonia = txtColoniaPropietario.Text;
-                    if (!string.IsNullOrEmpty(txtLocalidadPropietario.Text))
-                        p.localidad = txtLocalidadPropietario.Text;
+                    if (txtLocalidadPropietario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadPropietario.Text))
+                            p.localidad = txtLocalidadPropietario.Text;
+                    }
+                    else
+                    {
+                        if (dllLocalidadPropietario.SelectedValue != "Seleccionar")
+                            p.localidad = dllLocalidadPropietario.SelectedValue;
+                    
+                    }
                     if (!string.IsNullOrEmpty(txtReferenciaPropietario.Text))
                         p.referencia = txtReferenciaPropietario.Text;
-                    if (!string.IsNullOrEmpty(txtMunicipioPropietario.Text))
-                        p.municipio = txtMunicipioPropietario.Text;
+                    if (txtMunicipioPropietario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioPropietario.Text))
+                            p.municipio = txtMunicipioPropietario.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioPropietario.SelectedValue != "Seleccionar")
+                            p.municipio = ddlMunicipioPropietario.SelectedValue;
+                    
+                    }
+                    if (txtEstadoPropietario.Visible==true)
                     p.estado = txtEstadoPropietario.Text;
+                    else
+                        p.estado = dllEstadoPropietario.SelectedValue;
+                   
                     p.pais = ddlPaisPropietario.SelectedValue;
                     p.codigoPostal = txtCodigoPostalPropietario.Text;
                 }
@@ -4139,13 +4242,37 @@ namespace GafLookPaid
                         o.numeroInterior = txtNumeroInteriorOperador.Text;
                     if (!string.IsNullOrEmpty(txtColoniaOperador.Text))
                         o.colonia = txtColoniaOperador.Text;
-                    if (!string.IsNullOrEmpty(txtLocalidadOperador.Text))
-                        o.localidad = txtLocalidadOperador.Text;
+                    if (txtLocalidadOperador.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadOperador.Text))
+                            o.localidad = txtLocalidadOperador.Text;
+                    }
+                    else
+                    { 
+                       if(dllLocalidadOperador.SelectedValue!="Seleccionar")
+                           o.localidad = dllLocalidadOperador.SelectedValue;
+                                       
+                    }
                     if (!string.IsNullOrEmpty(txtReferenciaOperador.Text))
                         o.referencia = txtReferenciaOperador.Text;
-                    if (!string.IsNullOrEmpty(txtMunicipioOperador.Text))
-                        o.municipio = txtMunicipioOperador.Text;
-                    o.estado = txtEstadoOperador.Text;
+                    if (txtMunicipioOperador.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioOperador.Text))
+                            o.municipio = txtMunicipioOperador.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioOperador.SelectedValue != "Seleccionar")
+                            o.municipio = ddlMunicipioOperador.SelectedValue;
+                    
+                    }
+                    if (txtEstadoOperador.Visible == true)
+                    {
+                        o.estado = txtEstadoOperador.Text;
+                    }
+                    else
+                        o.estado = dllEstadoOperador.SelectedValue;
+              
                     o.pais = ddlPaisOperador.SelectedValue;
                     o.codigoPostal = txtCodigoPostalOperador.Text;
                 }
@@ -4267,6 +4394,542 @@ namespace GafLookPaid
             txtPesoNetoMercancia.Text = "";
         }
 
+        protected void ddlPais_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+             var cliente = NtLinkClientFactory.Cliente();
+             using (cliente as IDisposable)
+             {
+                 if (ddlPais.SelectedValue != "" && (ddlPais.SelectedValue == "MEX" || ddlPais.SelectedValue == "USA" || ddlPais.SelectedValue == "CAN"))
+                 {
+                     ddlEstado.DataSource = cliente.Consultar_EstadosPais(ddlPais.SelectedValue);
+                     ddlEstado.DataTextField = "NombredelEstado";
+                     ddlEstado.DataValueField = "c_Estado1";
+                     ddlEstado.DataBind();
+                     ddlEstado.Visible = true;
+                     txtEstado.Visible = false;
+                     RequiredFieldValidator11.Enabled = false;
+                     //---------------
+                     if (ddlEstado.SelectedValue != "" && (ddlPais.SelectedValue == "MEX"))
+                     {
+                         ddlMunicipio.DataSource = cliente.Consultar_MunicipioALL(ddlEstado.SelectedValue);
+                         ddlMunicipio.DataTextField = "Descripción";
+                         ddlMunicipio.DataValueField = "c_Municipio1";
+                         ddlMunicipio.DataBind();
+                         ddlMunicipio.Items.Insert(0, "Seleccionar");
+                         ddlMunicipio.Visible = true;
+                         txtMunicipio.Visible = false;
+                     }
+                     else
+                     {
+
+                         ddlMunicipio.Visible = false;
+                         txtMunicipio.Visible = true;
+                     }
+                     if (ddlEstado.SelectedValue != "" && ddlEstado.SelectedValue != "DIF" && (ddlPais.SelectedValue == "MEX"))
+                     {
+                         ddlLocalidad.DataSource = cliente.Consultar_LocalidadALL(ddlEstado.SelectedValue);
+                         ddlLocalidad.DataTextField = "Descripción";
+                         ddlLocalidad.DataValueField = "c_Localidad1";
+                         ddlLocalidad.DataBind();
+                         ddlLocalidad.Items.Insert(0, "Seleccionar");
+                         ddlLocalidad.Visible = true;
+                         txtLocalidad.Visible = false;
+                     }
+                     else
+                     {
+
+                         ddlLocalidad.Visible = false;
+                         txtLocalidad.Visible = true;
+                     }
+
+
+
+                 }
+                 else
+                 {
+                     txtEstado.Visible = true;
+                     ddlEstado.Visible = false;
+                     RequiredFieldValidator11.Enabled = true;
+
+                     ddlMunicipio.Visible = false;
+                     txtMunicipio.Visible = true;
+
+                     ddlLocalidad.Visible = false;
+                     txtLocalidad.Visible = true;
+                 }
+             }
+        }
+
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlEstado.SelectedValue != "" && (ddlPais.SelectedValue == "MEX"))
+                {
+                    ddlMunicipio.DataSource = cliente.Consultar_MunicipioALL(ddlEstado.SelectedValue);
+                    ddlMunicipio.DataTextField = "Descripción";
+                    ddlMunicipio.DataValueField = "c_Municipio1";
+                    ddlMunicipio.DataBind();
+                    ddlMunicipio.Items.Insert(0, "Seleccionar");
+                           
+                    ddlMunicipio.Visible = true;
+                    txtMunicipio.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipio.Visible = false;
+                    txtMunicipio.Visible = true;
+                }
+                if (ddlEstado.SelectedValue != "" && ddlEstado.SelectedValue != "DIF" && (ddlPais.SelectedValue == "MEX"))
+                {
+                    ddlLocalidad.DataSource = cliente.Consultar_LocalidadALL(ddlEstado.SelectedValue);
+                    ddlLocalidad.DataTextField = "Descripción";
+                    ddlLocalidad.DataValueField = "c_Localidad1";
+                    ddlLocalidad.DataBind();
+                    ddlLocalidad.Items.Insert(0, "Seleccionar");
+                    ddlLocalidad.Visible = true;
+                    txtLocalidad.Visible = false;
+                }
+                else
+                {
+
+                    ddlLocalidad.Visible = false;
+                    txtLocalidad.Visible = true;
+                }
+            }
+        }
+
+        protected void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlLocalidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        protected void ddlPaisOperador_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlPaisOperador.SelectedValue != "" && (ddlPaisOperador.SelectedValue == "MEX" || ddlPaisOperador.SelectedValue == "USA" || ddlPaisOperador.SelectedValue == "CAN"))
+                {
+                    dllEstadoOperador.DataSource = cliente.Consultar_EstadosPais(ddlPaisOperador.SelectedValue);
+                    dllEstadoOperador.DataTextField = "NombredelEstado";
+                    dllEstadoOperador.DataValueField = "c_Estado1";
+                    dllEstadoOperador.DataBind();
+                    dllEstadoOperador.Visible = true;
+                    txtEstadoOperador.Visible = false;
+                    RequiredFieldValidator42.Enabled = false;
+                    //---------------
+                    if (dllEstadoOperador.SelectedValue != "" && (ddlPaisOperador.SelectedValue == "MEX"))
+                    {
+                        ddlMunicipioOperador.DataSource = cliente.Consultar_MunicipioALL(dllEstadoOperador.SelectedValue);
+                        ddlMunicipioOperador.DataTextField = "Descripción";
+                        ddlMunicipioOperador.DataValueField = "c_Municipio1";
+                        ddlMunicipioOperador.DataBind();
+                        ddlMunicipioOperador.Items.Insert(0, "Seleccionar");
+                        ddlMunicipioOperador.Visible = true;
+                        txtMunicipioOperador.Visible = false;
+                    }
+                    else
+                    {
+
+                        ddlMunicipioOperador.Visible = false;
+                        txtMunicipioOperador.Visible = true;
+                    }
+                    if (dllEstadoOperador.SelectedValue != "" && dllEstadoOperador.SelectedValue != "DIF" && (ddlPaisOperador.SelectedValue == "MEX"))
+                    {
+                        dllLocalidadOperador.DataSource = cliente.Consultar_LocalidadALL(dllEstadoOperador.SelectedValue);
+                        dllLocalidadOperador.DataTextField = "Descripción";
+                        dllLocalidadOperador.DataValueField = "c_Localidad1";
+                        dllLocalidadOperador.DataBind();
+                        dllLocalidadOperador.Items.Insert(0, "Seleccionar");
+                        dllLocalidadOperador.Visible = true;
+                        txtLocalidadOperador.Visible = false;
+                    }
+                    else
+                    {
+
+                        dllLocalidadOperador.Visible = false;
+                        txtLocalidadOperador.Visible = true;
+                    }
+
+
+
+                }
+                else
+                {
+                    txtEstadoOperador.Visible = true;
+                    dllEstadoOperador.Visible = false;
+                    RequiredFieldValidator42.Enabled = true;
+
+                    ddlMunicipioOperador.Visible = false;
+                    txtMunicipioOperador.Visible = true;
+
+                    dllLocalidadOperador.Visible = false;
+                    txtLocalidadOperador.Visible = true;
+                }
+            }
+        }
+
+        protected void dllEstadoOperador_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (dllEstadoOperador.SelectedValue != "" && (ddlPaisOperador.SelectedValue == "MEX"))
+                {
+                    ddlMunicipioOperador.DataSource = cliente.Consultar_MunicipioALL(dllEstadoOperador.SelectedValue);
+                    ddlMunicipioOperador.DataTextField = "Descripción";
+                    ddlMunicipioOperador.DataValueField = "c_Municipio1";
+                    ddlMunicipioOperador.DataBind();
+                    ddlMunicipioOperador.Items.Insert(0, "Seleccionar");
+
+                    ddlMunicipioOperador.Visible = true;
+                    txtMunicipioOperador.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipioOperador.Visible = false;
+                    txtMunicipioOperador.Visible = true;
+                }
+                if (dllEstadoOperador.SelectedValue != "" && dllEstadoOperador.SelectedValue != "DIF" && (ddlPaisOperador.SelectedValue == "MEX"))
+                {
+                    dllLocalidadOperador.DataSource = cliente.Consultar_LocalidadALL(dllEstadoOperador.SelectedValue);
+                    dllLocalidadOperador.DataTextField = "Descripción";
+                    dllLocalidadOperador.DataValueField = "c_Localidad1";
+                    dllLocalidadOperador.DataBind();
+                    dllLocalidadOperador.Items.Insert(0, "Seleccionar");
+                    dllLocalidadOperador.Visible = true;
+                    txtLocalidadOperador.Visible = false;
+                }
+                else
+                {
+
+                    dllLocalidadOperador.Visible = false;
+                    txtLocalidadOperador.Visible = true;
+                }
+            }
+        }
+
+        protected void ddlPaisPropietario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlPaisPropietario.SelectedValue != "" && (ddlPaisPropietario.SelectedValue == "MEX" || ddlPaisPropietario.SelectedValue == "USA" || ddlPaisPropietario.SelectedValue == "CAN"))
+                {
+                    dllEstadoPropietario.DataSource = cliente.Consultar_EstadosPais(ddlPaisPropietario.SelectedValue);
+                    dllEstadoPropietario.DataTextField = "NombredelEstado";
+                    dllEstadoPropietario.DataValueField = "c_Estado1";
+                    dllEstadoPropietario.DataBind();
+                    dllEstadoPropietario.Visible = true;
+                    txtEstadoPropietario.Visible = false;
+                    RequiredFieldValidator45.Enabled = false;
+                    //---------------
+                    if (dllEstadoPropietario.SelectedValue != "" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                    {
+                        ddlMunicipioPropietario.DataSource = cliente.Consultar_MunicipioALL(dllEstadoPropietario.SelectedValue);
+                        ddlMunicipioPropietario.DataTextField = "Descripción";
+                        ddlMunicipioPropietario.DataValueField = "c_Municipio1";
+                        ddlMunicipioPropietario.DataBind();
+                        ddlMunicipioPropietario.Items.Insert(0, "Seleccionar");
+                        ddlMunicipioPropietario.Visible = true;
+                        txtMunicipioPropietario.Visible = false;
+                    }
+                    else
+                    {
+
+                        ddlMunicipioPropietario.Visible = false;
+                        txtMunicipioPropietario.Visible = true;
+                    }
+                    if (dllEstadoPropietario.SelectedValue != "" && dllEstadoPropietario.SelectedValue != "DIF" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                    {
+                        dllLocalidadPropietario.DataSource = cliente.Consultar_LocalidadALL(dllEstadoPropietario.SelectedValue);
+                        dllLocalidadPropietario.DataTextField = "Descripción";
+                        dllLocalidadPropietario.DataValueField = "c_Localidad1";
+                        dllLocalidadPropietario.DataBind();
+                        dllLocalidadPropietario.Items.Insert(0, "Seleccionar");
+                        dllLocalidadPropietario.Visible = true;
+                        txtLocalidadPropietario.Visible = false;
+                    }
+                    else
+                    {
+
+                        dllLocalidadPropietario.Visible = false;
+                        txtLocalidadPropietario.Visible = true;
+                    }
+
+
+
+                }
+                else
+                {
+                    txtEstadoPropietario.Visible = true;
+                    dllEstadoPropietario.Visible = false;
+                    RequiredFieldValidator45.Enabled = true;
+
+                    ddlMunicipioPropietario.Visible = false;
+                    txtMunicipioPropietario.Visible = true;
+
+                    dllLocalidadPropietario.Visible = false;
+                    txtLocalidadPropietario.Visible = true;
+                }
+            }
+
+        }
+        protected void dllEstadoPropietario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (dllEstadoPropietario.SelectedValue != "" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                {
+                    ddlMunicipioPropietario.DataSource = cliente.Consultar_MunicipioALL(dllEstadoPropietario.SelectedValue);
+                    ddlMunicipioPropietario.DataTextField = "Descripción";
+                    ddlMunicipioPropietario.DataValueField = "c_Municipio1";
+                    ddlMunicipioPropietario.DataBind();
+                    ddlMunicipioPropietario.Items.Insert(0, "Seleccionar");
+
+                    ddlMunicipioPropietario.Visible = true;
+                    txtMunicipioPropietario.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipioPropietario.Visible = false;
+                    txtMunicipioPropietario.Visible = true;
+                }
+                if (dllEstadoPropietario.SelectedValue != "" && dllEstadoPropietario.SelectedValue != "DIF" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                {
+                    dllLocalidadPropietario.DataSource = cliente.Consultar_LocalidadALL(dllEstadoPropietario.SelectedValue);
+                    dllLocalidadPropietario.DataTextField = "Descripción";
+                    dllLocalidadPropietario.DataValueField = "c_Localidad1";
+                    dllLocalidadPropietario.DataBind();
+                    dllLocalidadPropietario.Items.Insert(0, "Seleccionar");
+                    dllLocalidadPropietario.Visible = true;
+                    txtLocalidadPropietario.Visible = false;
+                }
+                else
+                {
+
+                    dllLocalidadPropietario.Visible = false;
+                    txtLocalidadPropietario.Visible = true;
+                }
+            }
+        }
+        protected void ddlPaisArrendatario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlPaisArrendatario.SelectedValue != "" && (ddlPaisArrendatario.SelectedValue == "MEX" || ddlPaisArrendatario.SelectedValue == "USA" || ddlPaisArrendatario.SelectedValue == "CAN"))
+                {
+                    dllEstadoArrendatario.DataSource = cliente.Consultar_EstadosPais(ddlPaisArrendatario.SelectedValue);
+                    dllEstadoArrendatario.DataTextField = "NombredelEstado";
+                    dllEstadoArrendatario.DataValueField = "c_Estado1";
+                    dllEstadoArrendatario.DataBind();
+                    dllEstadoArrendatario.Visible = true;
+                    txtEstadoArrendatario.Visible = false;
+                    RequiredFieldValidator48.Enabled = false;
+                    //---------------
+                    if (dllEstadoArrendatario.SelectedValue != "" && (ddlPaisArrendatario.SelectedValue == "MEX"))
+                    {
+                        ddlMunicipioArrendatario.DataSource = cliente.Consultar_MunicipioALL(dllEstadoArrendatario.SelectedValue);
+                        ddlMunicipioArrendatario.DataTextField = "Descripción";
+                        ddlMunicipioArrendatario.DataValueField = "c_Municipio1";
+                        ddlMunicipioArrendatario.DataBind();
+                        ddlMunicipioArrendatario.Items.Insert(0, "Seleccionar");
+                        ddlMunicipioArrendatario.Visible = true;
+                        txtMunicipioArrendatario.Visible = false;
+                    }
+                    else
+                    {
+
+                        ddlMunicipioArrendatario.Visible = false;
+                        txtMunicipioArrendatario.Visible = true;
+                    }
+                    if (dllEstadoArrendatario.SelectedValue != "" && dllEstadoArrendatario.SelectedValue != "DIF" && (ddlPaisArrendatario.SelectedValue == "MEX"))
+                    {
+                        dllLocalidadArrendatario.DataSource = cliente.Consultar_LocalidadALL(dllEstadoArrendatario.SelectedValue);
+                        dllLocalidadArrendatario.DataTextField = "Descripción";
+                        dllLocalidadArrendatario.DataValueField = "c_Localidad1";
+                        dllLocalidadArrendatario.DataBind();
+                        dllLocalidadArrendatario.Items.Insert(0, "Seleccionar");
+                        dllLocalidadArrendatario.Visible = true;
+                        txtLocalidadArrendatario.Visible = false;
+                    }
+                    else
+                    {
+
+                        dllLocalidadArrendatario.Visible = false;
+                        txtLocalidadArrendatario.Visible = true;
+                    }
+
+
+
+                }
+                else
+                {
+                    txtEstadoArrendatario.Visible = true;
+                    dllEstadoArrendatario.Visible = false;
+                    RequiredFieldValidator48.Enabled = true;
+
+                    ddlMunicipioArrendatario.Visible = false;
+                    txtMunicipioArrendatario.Visible = true;
+
+                    dllLocalidadArrendatario.Visible = false;
+                    txtLocalidadArrendatario.Visible = true;
+                }
+            }
+        }
+        protected void dllEstadoArrendatario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (dllEstadoArrendatario.SelectedValue != "" && (ddlPaisArrendatario.SelectedValue == "MEX"))
+                {
+                    ddlMunicipioArrendatario.DataSource = cliente.Consultar_MunicipioALL(dllEstadoArrendatario.SelectedValue);
+                    ddlMunicipioArrendatario.DataTextField = "Descripción";
+                    ddlMunicipioArrendatario.DataValueField = "c_Municipio1";
+                    ddlMunicipioArrendatario.DataBind();
+                    ddlMunicipioArrendatario.Items.Insert(0, "Seleccionar");
+
+                    ddlMunicipioArrendatario.Visible = true;
+                    txtMunicipioArrendatario.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipioArrendatario.Visible = false;
+                    txtMunicipioArrendatario.Visible = true;
+                }
+                if (dllEstadoArrendatario.SelectedValue != "" && dllEstadoArrendatario.SelectedValue != "DIF" && (ddlPaisArrendatario.SelectedValue == "MEX"))
+                {
+                    dllLocalidadArrendatario.DataSource = cliente.Consultar_LocalidadALL(dllEstadoArrendatario.SelectedValue);
+                    dllLocalidadArrendatario.DataTextField = "Descripción";
+                    dllLocalidadArrendatario.DataValueField = "c_Localidad1";
+                    dllLocalidadArrendatario.DataBind();
+                    dllLocalidadArrendatario.Items.Insert(0, "Seleccionar");
+                    dllLocalidadArrendatario.Visible = true;
+                    txtLocalidadArrendatario.Visible = false;
+                }
+                else
+                {
+
+                    dllLocalidadArrendatario.Visible = false;
+                    txtLocalidadArrendatario.Visible = true;
+                }
+            }
+     
+        }
+        protected void ddlPaisNotificado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlPaisNotificado.SelectedValue != "" && (ddlPaisNotificado.SelectedValue == "MEX" || ddlPaisNotificado.SelectedValue == "USA" || ddlPaisNotificado.SelectedValue == "CAN"))
+                {
+                    dllEstadoNotificado.DataSource = cliente.Consultar_EstadosPais(ddlPaisNotificado.SelectedValue);
+                    dllEstadoNotificado.DataTextField = "NombredelEstado";
+                    dllEstadoNotificado.DataValueField = "c_Estado1";
+                    dllEstadoNotificado.DataBind();
+                    dllEstadoNotificado.Visible = true;
+                    txtEstadoNotificado.Visible = false;
+                    RequiredFieldValidator51.Enabled = false;
+                    //---------------
+                    if (dllEstadoNotificado.SelectedValue != "" && (ddlPaisNotificado.SelectedValue == "MEX"))
+                    {
+                        ddlMunicipioNotificado.DataSource = cliente.Consultar_MunicipioALL(dllEstadoNotificado.SelectedValue);
+                        ddlMunicipioNotificado.DataTextField = "Descripción";
+                        ddlMunicipioNotificado.DataValueField = "c_Municipio1";
+                        ddlMunicipioNotificado.DataBind();
+                        ddlMunicipioNotificado.Items.Insert(0, "Seleccionar");
+                        ddlMunicipioNotificado.Visible = true;
+                        txtMunicipioNotificado.Visible = false;
+                    }
+                    else
+                    {
+
+                        ddlMunicipioNotificado.Visible = false;
+                        txtMunicipioNotificado.Visible = true;
+                    }
+                    if (dllEstadoNotificado.SelectedValue != "" && dllEstadoNotificado.SelectedValue != "DIF" && (ddlPaisNotificado.SelectedValue == "MEX"))
+                    {
+                        dllLocalidadNotificado.DataSource = cliente.Consultar_LocalidadALL(dllEstadoNotificado.SelectedValue);
+                        dllLocalidadNotificado.DataTextField = "Descripción";
+                        dllLocalidadNotificado.DataValueField = "c_Localidad1";
+                        dllLocalidadNotificado.DataBind();
+                        dllLocalidadNotificado.Items.Insert(0, "Seleccionar");
+                        dllLocalidadNotificado.Visible = true;
+                        txtLocalidadNotificado.Visible = false;
+                    }
+                    else
+                    {
+
+                        dllLocalidadNotificado.Visible = false;
+                        txtLocalidadNotificado.Visible = true;
+                    }
+
+
+
+                }
+                else
+                {
+                    txtEstadoNotificado.Visible = true;
+                    dllEstadoNotificado.Visible = false;
+                    RequiredFieldValidator51.Enabled = true;
+
+                    ddlMunicipioNotificado.Visible = false;
+                    txtMunicipioNotificado.Visible = true;
+
+                    dllLocalidadNotificado.Visible = false;
+                    txtLocalidadNotificado.Visible = true;
+                }
+            }
+        }
+        protected void dllEstadoNotificado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (dllEstadoNotificado.SelectedValue != "" && (ddlPaisNotificado.SelectedValue == "MEX"))
+                {
+                    ddlMunicipioNotificado.DataSource = cliente.Consultar_MunicipioALL(dllEstadoNotificado.SelectedValue);
+                    ddlMunicipioNotificado.DataTextField = "Descripción";
+                    ddlMunicipioNotificado.DataValueField = "c_Municipio1";
+                    ddlMunicipioNotificado.DataBind();
+                    ddlMunicipioNotificado.Items.Insert(0, "Seleccionar");
+
+                    ddlMunicipioNotificado.Visible = true;
+                    txtMunicipioNotificado.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipioNotificado.Visible = false;
+                    txtMunicipioNotificado.Visible = true;
+                }
+                if (dllEstadoNotificado.SelectedValue != "" && dllEstadoNotificado.SelectedValue != "DIF" && (ddlPaisNotificado.SelectedValue == "MEX"))
+                {
+                    dllLocalidadNotificado.DataSource = cliente.Consultar_LocalidadALL(dllEstadoNotificado.SelectedValue);
+                    dllLocalidadNotificado.DataTextField = "Descripción";
+                    dllLocalidadNotificado.DataValueField = "c_Localidad1";
+                    dllLocalidadNotificado.DataBind();
+                    dllLocalidadNotificado.Items.Insert(0, "Seleccionar");
+                    dllLocalidadNotificado.Visible = true;
+                    txtLocalidadNotificado.Visible = false;
+                }
+                else
+                {
+
+                    dllLocalidadNotificado.Visible = false;
+                    txtLocalidadNotificado.Visible = true;
+                }
+            }
+        }
         //protected void Button2_Click1(object sender, EventArgs e)
         //{
         //    mpeerror.Hide();
