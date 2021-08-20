@@ -71,6 +71,13 @@ namespace ServicioLocalWeb
             OperacionesCatalogos Op = new OperacionesCatalogos();
             return Op.Consultar_ClaveProdServAll();
         }
+        public List<c_ClaveUnidadPeso> Consultar_ClaveUnidadPeso_ALL()
+        {
+            OperacionesCatalogos Op = new OperacionesCatalogos();
+            return Op.Consultar_ClaveUnidadPeso_ALL();
+        }
+      
+
         public List<CatalogosSAT.c_ClaveUnidad> ConsultarClaveUnidadAll()
         {
             OperacionesCatalogos Op = new OperacionesCatalogos();
@@ -693,7 +700,13 @@ namespace ServicioLocalWeb
             OperacionesCatalogos OP = new OperacionesCatalogos();
             return OP.Consultar_CPALL( estado,  municipio);
         }
-
+        public List<CatalogosSAT.c_Pais> Consultar_PaisAll()
+        {
+            OperacionesCatalogos OP = new OperacionesCatalogos();
+            return OP.Consultar_Pais_ALL();
+    
+         
+        }
         public RetornoServicio GuardarFactura33(facturas fact, List<facturasdetalle> detalles,List<facturasdetalle33> detalles33,
             bool enviar, facturaComplementos complementosF, List<facturasdetalle> conceptosAduana)
         {

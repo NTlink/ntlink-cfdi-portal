@@ -1295,6 +1295,8 @@ namespace GafLookPaid
                 // detalles.RemoveAll(p => p. == x);
                 foreach (var x in detalles)
                 {
+                    if (dt.TipoFactor == "Exento")
+                        dt.Importe = null;
                     if (dt.TipoImpuesto == "Traslados")
                     {
                         x.ConceptoTraslados.RemoveAll(p => p.Base == dt.Base && p.Importe == dt.Importe

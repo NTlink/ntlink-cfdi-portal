@@ -1550,6 +1550,8 @@ namespace GafLookPaid
                 {
                     if (dt.ConceptoClaveProdServ == x.Partida.ToString())
                     {
+                        if (dt.TipoFactor == "Exento")
+                            dt.Importe = null;
                         if (dt.TipoImpuesto == "Traslados")
                         {
                             x.ConceptoTraslados.RemoveAll(p => p.Base == dt.Base && p.Importe == dt.Importe

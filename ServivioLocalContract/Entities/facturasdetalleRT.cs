@@ -19,7 +19,7 @@ namespace ServicioLocalContract.Entities
         [DataMemberAttribute]
         public string TasaOCuota { get; set; }
         [DataMemberAttribute]
-        public decimal Importe { get; set; }
+        public decimal? Importe { get; set; }
         [DataMemberAttribute]
         public string TipoImpuesto { get; set; }
         [DataMemberAttribute]

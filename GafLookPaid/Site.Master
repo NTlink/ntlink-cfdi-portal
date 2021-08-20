@@ -136,11 +136,10 @@
                             <asp:MenuItem NavigateUrl="~/wfrFacturaAdo.aspx"  Text="FacturaAdo" />
                             <asp:MenuItem NavigateUrl="~/wfrFacturaIEDU.aspx" Text="Generar Complemento IEDU" />
                             <asp:MenuItem NavigateUrl="~/wfrINE.aspx" Text="Generar Complemento INE"/>
-                          <asp:MenuItem NavigateUrl="~/wfrFacturaCompPagos.aspx" Text="Generar Complemento Pagos"/>
+                            <asp:MenuItem NavigateUrl="~/wfrFacturaCompPagos.aspx" Text="Generar Complemento Pagos"/>
+                          
                            <%--   <asp:MenuItem NavigateUrl="~/wfrFacturaCPago.aspx" Text="CFDI de Ingreso para Pago" />
-                            
-
-                            
+                                                       
                          <asp:MenuItem NavigateUrl="~/wfrFacturaPagos.aspx" Text="Generar Complemento Pagos"/>
                              <asp:MenuItem NavigateUrl="~/wfrFacturaINE.aspx" Text="Generar Complemento INE"/>
                             
@@ -164,6 +163,7 @@
                             <asp:MenuItem NavigateUrl="~/wfrFacturaAduanalCartaPorte.aspx" Text="Carta Porte" />
                             <asp:MenuItem NavigateUrl="~/WfrFacturaCoppelMuebles.aspx" Text="Coppel" />
                             <asp:MenuItem NavigateUrl="~/WfrHomeDepot.aspx" Text="Factura Home Depot" />--%>
+
                             <asp:MenuItem NavigateUrl="~/wfrFacturaPilgrims.aspx" Text="Factura Pilgrims" />
                             <asp:MenuItem NavigateUrl="~/wfrLiverpool.aspx" Text="Factura Liverpool Detallista" /> 
                             <asp:MenuItem NavigateUrl="~/wfrRetenciones.aspx" Text="Constancia de Retenciones" />
@@ -173,9 +173,12 @@
                           <%--   <asp:MenuItem NavigateUrl="~/wfrFacturaComisionistas.aspx" Text="Comisionistas" />--%>
                             <asp:MenuItem NavigateUrl="~/ASONIOSCOC.aspx" Text="Asonioscoc" />
                               <asp:MenuItem NavigateUrl="~/wfrFactura1888.aspx" Text="Addenda1888" />
-                            <asp:MenuItem NavigateUrl="~/wfrCartaPorte.aspx" Text="Carta Porte" />
-                               <asp:MenuItem NavigateUrl="~/wfrMabe.aspx" Text="FacturaMabe" />
+                           <%-- <asp:MenuItem NavigateUrl="~/wfrCartaPorte.aspx" Text="Carta Porte" />--%>
+                             <asp:MenuItem NavigateUrl="~/wfrFacturaCartaPorte.aspx" Text="Carta Porte"/>
+                             <asp:MenuItem NavigateUrl="~/wfrMabe.aspx" Text="FacturaMabe" />
                               <asp:MenuItem NavigateUrl="~/wfrComplementoServicioParcialConstruccion.aspx" Text="Servicio Parcial Construccion" />
+                             <asp:MenuItem NavigateUrl="~/wfrFacturaInnova.aspx" Text="FacturaInnova" />
+               
                         </asp:MenuItem>
                         
                         

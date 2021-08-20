@@ -81,6 +81,7 @@
     <Compile Include="ado.cs" />
     <Compile Include="AmazonAddenda.cs" />
     <Compile Include="ASONIOSCOC.cs" />
+    <Compile Include="CartaPorte.cs" />
     <Compile Include="catCDFI.cs" />
     <Compile Include="DatosTraslados.cs" />
     <Compile Include="Comprobante.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="Retenciones\enajenaciondeacciones.cs" />
     <Compile Include="Retenciones\fideicomisonoempresarial.cs" />
     <Compile Include="Retenciones\GeneradorCadenasRetenciones.cs" />
+    <Compile Include="Innova.cs" />
     <Compile Include="Retenciones\intereses.cs" />
     <Compile Include="Retenciones\intereseshipotecarios.cs" />
     <Compile Include="Retenciones\NtLinkRetenciones.cs" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using ServicioLocalContract.Entities;
+using ServicioLocalContract.Entities.Carta;
 
 namespace ServicioLocalContract
 {
@@ -30,7 +31,7 @@ namespace ServicioLocalContract
         CorporativoAduanal,
         FacturaPemex, 
         FacturaLucent, Nomina, Amc71,CartaPorte, Coppel, HomeDepot, Pilgrims,VehiculoUsado,
-        Retenciones, Honda,Amazon,Complementos,ASONIOSCOC,Addenda1888
+        Retenciones, Honda,Amazon,Complementos,ASONIOSCOC,Addenda1888,Innova
     }
 
     public partial class facturas
@@ -126,6 +127,10 @@ namespace ServicioLocalContract
 
         [DataMemberAttribute()]
         public DatosFacturaAduanera DatosAduanera { get; set; }
+
+        [DataMemberAttribute()]
+        public DatosCartaPorte DatosCartaPorte { get; set; }
+
 
         public List<facturasdetalle> ConceptosAduanera { get; set; }
 

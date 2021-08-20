@@ -15,6 +15,7 @@ using ServicioLocalContract.Entities;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Linq;
+using ServicioLocal.Business.Carta;
 
 namespace ServicioLocal.Business
 {
@@ -107,7 +108,7 @@ namespace ServicioLocal.Business
                     }
                     else
                     {
-                        Logger.Error("No se encontró la factura: " + uuid);
+                        Logger. Error("No se encontró la factura: " + Path.Combine(ruta, uuid + ".xml"));
                         var gen = new GeneradorCfdi();
                         var tipoDoc = (TipoDocumento)Enum.Parse(typeof (TipoDocumento), venta.TipoDocumentoStr, true);
                         if (venta.IdPdf.HasValue)
@@ -161,7 +162,8 @@ namespace ServicioLocal.Business
                 Logger.Debug("Ruta Llave " + rutaLlave);
                 var comprobante = GetComprobante(factura, cliente, emp,complementos);
                 Complemento.Pagos pago = new Complemento.Pagos();
-                if (complementos != null)
+               // if (complementos != null)
+                  if (comprobante.Complemento != null && comprobante.Complemento.Pag!=null)
                 {
                     pago = comprobante.Complemento.Pag;
                 }
@@ -773,6 +775,15 @@ namespace ServicioLocal.Business
                 comprobante.Proveedor = factura.Factura.DatosAduanera.Proveedor;
                 comprobante.Valor = factura.Factura.DatosAduanera.Valor;
 
+            }
+            if (factura.Factura.TipoDocumentoSAT == TipoDocumento.Innova)
+            {
+                comprobante.TipoAddenda = TipoAddenda.Innova;
+                comprobante.AddendaInnova = new AddendaOrderIdentification();
+                comprobante.AddendaInnova.referenceIdentification = new AddendaOrderIdentificationReferenceIdentification();
+                comprobante.AddendaInnova.referenceIdentification.type = factura.Factura.DatosAduanera.Proveedor;
+                comprobante.AddendaInnova.referenceIdentification.Value =factura.Factura.DatosAduanera.Valor;
+               
             }
             //Addenda PEMEX -- SZ
             if (factura.Factura.TipoDocumento == TipoDocumento.FacturaPemex)
@@ -1801,158 +1812,161 @@ namespace ServicioLocal.Business
 
         public static Comprobante LLenaComplemento(Comprobante comprobante, facturaComplementos complementos)
         {
+            //try
+            //{
 
-            if (complementos.vehiculoUsado != null)
-            {
-                if (comprobante.Complemento == null)
-                    comprobante.Complemento = new ComprobanteComplemento();
-                comprobante.Complemento.VehiculoUsado = new VehiculoUsado();
-                comprobante.Complemento.VehiculoUsado.claveVehicular=complementos.vehiculoUsado.claveVehicular;
-                comprobante.Complemento.VehiculoUsado.marca = complementos.vehiculoUsado.marca;
-                comprobante.Complemento.VehiculoUsado.modelo = complementos.vehiculoUsado.modelo;
-                comprobante.Complemento.VehiculoUsado.montoAdquisicion = complementos.vehiculoUsado.montoAdquisicion;
-                comprobante.Complemento.VehiculoUsado.montoEnajenacion = complementos.vehiculoUsado.montoEnajenacion;
-                if (!string.IsNullOrEmpty(complementos.vehiculoUsado.NIV))
-                comprobante.Complemento.VehiculoUsado.NIV = complementos.vehiculoUsado.NIV;
-                if (!string.IsNullOrEmpty(complementos.vehiculoUsado.numeroMotor))
-             comprobante.Complemento.VehiculoUsado.numeroMotor = complementos.vehiculoUsado.numeroMotor;
-                if (!string.IsNullOrEmpty(complementos.vehiculoUsado.numeroSerie))
-                comprobante.Complemento.VehiculoUsado.numeroSerie = complementos.vehiculoUsado.numeroSerie;
-                comprobante.Complemento.VehiculoUsado.tipo = complementos.vehiculoUsado.tipo;
-                comprobante.Complemento.VehiculoUsado.valor = complementos.vehiculoUsado.valor;
-                comprobante.Complemento.VehiculoUsado.Version = complementos.vehiculoUsado.Version;
-                if(complementos.vehiculoUsado.InformacionAduanera!=null)
+                if (complementos.vehiculoUsado != null)
                 {
-                 List<t_InformacionAduanera>  IVU=new List<t_InformacionAduanera>();
-                foreach (var d in complementos.vehiculoUsado.InformacionAduanera)
-                {
-                    t_InformacionAduanera i = new t_InformacionAduanera();
-                    if(!string.IsNullOrEmpty( d.aduana))
-                    i.aduana = d.aduana;
-                    i.fecha = d.fecha;
-                    i.numero = d.numero;
-                    IVU.Add(i);
-                }
-                comprobante.Complemento.VehiculoUsado.InformacionAduanera = IVU.ToArray();
-                }
-            }
-
-            if (complementos.pagos != null)
-            {
-               
-            
-                if (comprobante.Complemento == null)
-                    comprobante.Complemento = new ComprobanteComplemento();
-                comprobante.Complemento.Pag = new Complemento.Pagos();
-                comprobante.Complemento.Pag.Version = "1.0";
-                comprobante.Complemento.Pag.Pago = new List<Complemento.PagosPago>();
-                List<Complemento.PagosPago> PA = new List<Complemento.PagosPago>();
-                foreach (var p in complementos.pagos)
-                { Complemento.PagosPago pa = new Complemento.PagosPago();
-                   CatalogosSAT.OperacionesCatalogos o13 = new CatalogosSAT.OperacionesCatalogos();
-                   CatalogosSAT.c_Moneda mone = o13.Consultar_Moneda(p.monedaP);
-
-                   if (!string.IsNullOrEmpty(p.cadPago))
-                    pa.CadPago = p.cadPago;
-                   if (!string.IsNullOrEmpty(p.certPago))
-                        pa.CertPago = p.certPago;
-                   if (!string.IsNullOrEmpty(p.ctaBeneficiario))
-                    pa.CtaBeneficiario=p.ctaBeneficiario;
-                   if (!string.IsNullOrEmpty(p.ctaOrdenante))
-                    pa.CtaOrdenante=p.ctaOrdenante;
-                    DateTime D = Convert.ToDateTime(p.fechaPago);
-                   // DateTime D22 = D.AddHours(12);
-                   // pa.FechaPago = D22.ToString("s");
-                    pa.FechaPago = D.ToString("s");
-                    if (!string.IsNullOrEmpty(p.formaDePagoP))
-                        pa.FormaDePagoP = p.formaDePagoP;
-                    //pa.Impuestos
-                    pa.MonedaP = p.monedaP;
-                    pa.Monto =  numerodecimales(Convert.ToDecimal(p.monto), (int)mone.Decimales);//--
-                    if (!string.IsNullOrEmpty(p.nomBancoOrdExt))
-                       pa.NomBancoOrdExt = p.nomBancoOrdExt;
-                    if (!string.IsNullOrEmpty(p.numOperacion))
-                      pa.NumOperacion = p.numOperacion;
-                    if (!string.IsNullOrEmpty(p.rfcEmisorCtaBen))
-                       pa.RfcEmisorCtaBen = p.rfcEmisorCtaBen;
-                    if (!string.IsNullOrEmpty(p.rfcEmisorCtaOrd))
-                       pa.RfcEmisorCtaOrd = p.rfcEmisorCtaOrd;
-                    if (!string.IsNullOrEmpty(p.selloPago))
-                        pa.SelloPago = p.selloPago;
-
-                    if (!string.IsNullOrEmpty(p.tipoCadPago))
+                    if (comprobante.Complemento == null)
+                        comprobante.Complemento = new ComprobanteComplemento();
+                    comprobante.Complemento.VehiculoUsado = new VehiculoUsado();
+                    comprobante.Complemento.VehiculoUsado.claveVehicular = complementos.vehiculoUsado.claveVehicular;
+                    comprobante.Complemento.VehiculoUsado.marca = complementos.vehiculoUsado.marca;
+                    comprobante.Complemento.VehiculoUsado.modelo = complementos.vehiculoUsado.modelo;
+                    comprobante.Complemento.VehiculoUsado.montoAdquisicion = complementos.vehiculoUsado.montoAdquisicion;
+                    comprobante.Complemento.VehiculoUsado.montoEnajenacion = complementos.vehiculoUsado.montoEnajenacion;
+                    if (!string.IsNullOrEmpty(complementos.vehiculoUsado.NIV))
+                        comprobante.Complemento.VehiculoUsado.NIV = complementos.vehiculoUsado.NIV;
+                    if (!string.IsNullOrEmpty(complementos.vehiculoUsado.numeroMotor))
+                        comprobante.Complemento.VehiculoUsado.numeroMotor = complementos.vehiculoUsado.numeroMotor;
+                    if (!string.IsNullOrEmpty(complementos.vehiculoUsado.numeroSerie))
+                        comprobante.Complemento.VehiculoUsado.numeroSerie = complementos.vehiculoUsado.numeroSerie;
+                    comprobante.Complemento.VehiculoUsado.tipo = complementos.vehiculoUsado.tipo;
+                    comprobante.Complemento.VehiculoUsado.valor = complementos.vehiculoUsado.valor;
+                    comprobante.Complemento.VehiculoUsado.Version = complementos.vehiculoUsado.Version;
+                    if (complementos.vehiculoUsado.InformacionAduanera != null)
                     {
-                        pa.TipoCadPago = p.tipoCadPago;
-                        pa.TipoCadPagoSpecified = true;
-                    }
-                    else
-                        pa.TipoCadPagoSpecified = false;
-                    if (!string.IsNullOrEmpty(p.tipoCambioP))
-                    {
-                        pa.TipoCambioP =Convert.ToDecimal( p.tipoCambioP);
-                        pa.TipoCambioPSpecified = true;
-                    }
-                    else
-                        pa.TipoCambioPSpecified = false;
-
-                    List<Complemento.PagosPagoDoctoRelacionado> Doc = new List<Complemento.PagosPagoDoctoRelacionado>();
-                    if (p.DoctoRelacionado != null)
-                    {
-                        foreach (var d in p.DoctoRelacionado)
+                        List<t_InformacionAduanera> IVU = new List<t_InformacionAduanera>();
+                        foreach (var d in complementos.vehiculoUsado.InformacionAduanera)
                         {
-                            Complemento.PagosPagoDoctoRelacionado doc = new Complemento.PagosPagoDoctoRelacionado();
-                            doc.Folio = d.Folio;
-                            doc.IdDocumento = d.IdDocumento;
-                            if (!string.IsNullOrEmpty(d.ImpPagado))
-                            {
-                                doc.ImpPagado = Convert.ToDecimal(d.ImpPagado);
-                                doc.ImpPagadoSpecified = true;
-
-                            }
-                            else
-                                doc.ImpPagadoSpecified = false;
-                            if (!string.IsNullOrEmpty(d.ImpSaldoAnt))
-                            {
-                                doc.ImpSaldoAnt = Convert.ToDecimal(d.ImpSaldoAnt);
-                                doc.ImpSaldoAntSpecified = true;
-                            }
-                            else
-                                doc.ImpSaldoAntSpecified = false;
-                            if (!string.IsNullOrEmpty(d.ImpSaldoInsoluto))
-                            {
-                                doc.ImpSaldoInsoluto = Convert.ToDecimal(d.ImpSaldoInsoluto);
-                                doc.ImpSaldoInsolutoSpecified = true;
-                            }
-                            else
-                                doc.ImpSaldoInsolutoSpecified = false;
-                            if (!string.IsNullOrEmpty(d.MetodoDePagoDR))
-                                doc.MetodoDePagoDR = d.MetodoDePagoDR;
-                            doc.MonedaDR = d.MonedaDR;
-                            if (!string.IsNullOrEmpty(d.NumParcialidad))
-                                doc.NumParcialidad = d.NumParcialidad;
-                            if (!string.IsNullOrEmpty(d.Serie))
-                                doc.Serie = d.Serie;
-                            if (!string.IsNullOrEmpty(d.TipoCambioDR))
-                            {
-                                doc.TipoCambioDR = Convert.ToDecimal(d.TipoCambioDR);
-                                doc.TipoCambioDRSpecified = true;
-                            }
-                            else
-                                doc.TipoCambioDRSpecified = false;
-                            Doc.Add(doc);
+                            t_InformacionAduanera i = new t_InformacionAduanera();
+                            if (!string.IsNullOrEmpty(d.aduana))
+                                i.aduana = d.aduana;
+                            i.fecha = d.fecha;
+                            i.numero = d.numero;
+                            IVU.Add(i);
                         }
-
-                        pa.DoctoRelacionado = Doc.ToArray();
+                        comprobante.Complemento.VehiculoUsado.InformacionAduanera = IVU.ToArray();
                     }
-                    PA.Add(pa);
                 }
-                comprobante.Complemento.Pag.Pago = PA;
-            }
-            //-------------------------------
-             if (complementos.ine != null)
-            {
-                if (comprobante.Complemento == null)
-                    comprobante.Complemento = new ComprobanteComplemento();
+
+                if (complementos.pagos != null)
+                {
+
+
+                    if (comprobante.Complemento == null)
+                        comprobante.Complemento = new ComprobanteComplemento();
+                    comprobante.Complemento.Pag = new Complemento.Pagos();
+                    comprobante.Complemento.Pag.Version = "1.0";
+                    comprobante.Complemento.Pag.Pago = new List<Complemento.PagosPago>();
+                    List<Complemento.PagosPago> PA = new List<Complemento.PagosPago>();
+                    foreach (var p in complementos.pagos)
+                    {
+                        Complemento.PagosPago pa = new Complemento.PagosPago();
+                        CatalogosSAT.OperacionesCatalogos o13 = new CatalogosSAT.OperacionesCatalogos();
+                        CatalogosSAT.c_Moneda mone = o13.Consultar_Moneda(p.monedaP);
+
+                        if (!string.IsNullOrEmpty(p.cadPago))
+                            pa.CadPago = p.cadPago;
+                        if (!string.IsNullOrEmpty(p.certPago))
+                            pa.CertPago = p.certPago;
+                        if (!string.IsNullOrEmpty(p.ctaBeneficiario))
+                            pa.CtaBeneficiario = p.ctaBeneficiario;
+                        if (!string.IsNullOrEmpty(p.ctaOrdenante))
+                            pa.CtaOrdenante = p.ctaOrdenante;
+                        DateTime D = Convert.ToDateTime(p.fechaPago);
+                        // DateTime D22 = D.AddHours(12);
+                        // pa.FechaPago = D22.ToString("s");
+                        pa.FechaPago = D.ToString("s");
+                        if (!string.IsNullOrEmpty(p.formaDePagoP))
+                            pa.FormaDePagoP = p.formaDePagoP;
+                        //pa.Impuestos
+                        pa.MonedaP = p.monedaP;
+                        pa.Monto = numerodecimales(Convert.ToDecimal(p.monto), (int)mone.Decimales);//--
+                        if (!string.IsNullOrEmpty(p.nomBancoOrdExt))
+                            pa.NomBancoOrdExt = p.nomBancoOrdExt;
+                        if (!string.IsNullOrEmpty(p.numOperacion))
+                            pa.NumOperacion = p.numOperacion;
+                        if (!string.IsNullOrEmpty(p.rfcEmisorCtaBen))
+                            pa.RfcEmisorCtaBen = p.rfcEmisorCtaBen;
+                        if (!string.IsNullOrEmpty(p.rfcEmisorCtaOrd))
+                            pa.RfcEmisorCtaOrd = p.rfcEmisorCtaOrd;
+                        if (!string.IsNullOrEmpty(p.selloPago))
+                            pa.SelloPago = p.selloPago;
+
+                        if (!string.IsNullOrEmpty(p.tipoCadPago))
+                        {
+                            pa.TipoCadPago = p.tipoCadPago;
+                            pa.TipoCadPagoSpecified = true;
+                        }
+                        else
+                            pa.TipoCadPagoSpecified = false;
+                        if (!string.IsNullOrEmpty(p.tipoCambioP))
+                        {
+                            pa.TipoCambioP = Convert.ToDecimal(p.tipoCambioP);
+                            pa.TipoCambioPSpecified = true;
+                        }
+                        else
+                            pa.TipoCambioPSpecified = false;
+
+                        List<Complemento.PagosPagoDoctoRelacionado> Doc = new List<Complemento.PagosPagoDoctoRelacionado>();
+                        if (p.DoctoRelacionado != null)
+                        {
+                            foreach (var d in p.DoctoRelacionado)
+                            {
+                                Complemento.PagosPagoDoctoRelacionado doc = new Complemento.PagosPagoDoctoRelacionado();
+                                doc.Folio = d.Folio;
+                                doc.IdDocumento = d.IdDocumento;
+                                if (!string.IsNullOrEmpty(d.ImpPagado))
+                                {
+                                    doc.ImpPagado = Convert.ToDecimal(d.ImpPagado);
+                                    doc.ImpPagadoSpecified = true;
+
+                                }
+                                else
+                                    doc.ImpPagadoSpecified = false;
+                                if (!string.IsNullOrEmpty(d.ImpSaldoAnt))
+                                {
+                                    doc.ImpSaldoAnt = Convert.ToDecimal(d.ImpSaldoAnt);
+                                    doc.ImpSaldoAntSpecified = true;
+                                }
+                                else
+                                    doc.ImpSaldoAntSpecified = false;
+                                if (!string.IsNullOrEmpty(d.ImpSaldoInsoluto))
+                                {
+                                    doc.ImpSaldoInsoluto = Convert.ToDecimal(d.ImpSaldoInsoluto);
+                                    doc.ImpSaldoInsolutoSpecified = true;
+                                }
+                                else
+                                    doc.ImpSaldoInsolutoSpecified = false;
+                                if (!string.IsNullOrEmpty(d.MetodoDePagoDR))
+                                    doc.MetodoDePagoDR = d.MetodoDePagoDR;
+                                doc.MonedaDR = d.MonedaDR;
+                                if (!string.IsNullOrEmpty(d.NumParcialidad))
+                                    doc.NumParcialidad = d.NumParcialidad;
+                                if (!string.IsNullOrEmpty(d.Serie))
+                                    doc.Serie = d.Serie;
+                                if (!string.IsNullOrEmpty(d.TipoCambioDR))
+                                {
+                                    doc.TipoCambioDR = Convert.ToDecimal(d.TipoCambioDR);
+                                    doc.TipoCambioDRSpecified = true;
+                                }
+                                else
+                                    doc.TipoCambioDRSpecified = false;
+                                Doc.Add(doc);
+                            }
+
+                            pa.DoctoRelacionado = Doc.ToArray();
+                        }
+                        PA.Add(pa);
+                    }
+                    comprobante.Complemento.Pag.Pago = PA;
+                }
+                //-------------------------------
+                if (complementos.ine != null)
+                {
+                    if (comprobante.Complemento == null)
+                        comprobante.Complemento = new ComprobanteComplemento();
                     comprobante.Complemento.ine = new Complemento.INE();
                     if (!string.IsNullOrEmpty(complementos.ine.IdContabilidad))
                     {
@@ -1960,19 +1974,19 @@ namespace ServicioLocal.Business
                         comprobante.Complemento.ine.IdContabilidad = complementos.ine.IdContabilidad;
                     }
                     else
-                    comprobante.Complemento.ine.IdContabilidadSpecified = false;
+                        comprobante.Complemento.ine.IdContabilidadSpecified = false;
                     if (!string.IsNullOrEmpty(complementos.ine.TipoComite))
                     {
                         comprobante.Complemento.ine.TipoComiteSpecified = true;
                         comprobante.Complemento.ine.TipoComite = complementos.ine.TipoComite;
                     }
                     else
-                 
-                        comprobante.Complemento.ine.TipoComiteSpecified = false;
-                      comprobante.Complemento.ine.TipoProceso = complementos.ine.TipoProceso;
 
-                      List<Complemento.INEEntidad>  Entidad = new List<Complemento.INEEntidad>();
-                      foreach (var i in complementos.ine.Entidad)
+                        comprobante.Complemento.ine.TipoComiteSpecified = false;
+                    comprobante.Complemento.ine.TipoProceso = complementos.ine.TipoProceso;
+
+                    List<Complemento.INEEntidad> Entidad = new List<Complemento.INEEntidad>();
+                    foreach (var i in complementos.ine.Entidad)
                     {
                         Complemento.INEEntidad E = new Complemento.INEEntidad();
                         if (!string.IsNullOrEmpty(i.Ambito))
@@ -1983,24 +1997,783 @@ namespace ServicioLocal.Business
                         else
                             E.AmbitoSpecified = false;
                         E.ClaveEntidad = i.ClaveEntidad;
-                          if(i.IdContabilidad!=null)
-                              if(i.IdContabilidad.Count()>0)
-                          {
-                          List<Complemento.INEEntidadContabilidad> Contabilidad=new List<Complemento.INEEntidadContabilidad>();
-                          foreach (var s in i.IdContabilidad)
-                         { Complemento.INEEntidadContabilidad c=new Complemento.INEEntidadContabilidad();
-                            c.IdContabilidad = Convert.ToInt64(s);
-                           Contabilidad.Add(c);
-                          }
-                          E.Contabilidad = Contabilidad.ToArray();
-                          }
-                          Entidad.Add(E);
-                     }
-                      if (Entidad != null)
-                          comprobante.Complemento.ine.Entidad = Entidad.ToArray();
+                        if (i.IdContabilidad != null)
+                            if (i.IdContabilidad.Count() > 0)
+                            {
+                                List<Complemento.INEEntidadContabilidad> Contabilidad = new List<Complemento.INEEntidadContabilidad>();
+                                foreach (var s in i.IdContabilidad)
+                                {
+                                    Complemento.INEEntidadContabilidad c = new Complemento.INEEntidadContabilidad();
+                                    c.IdContabilidad = Convert.ToInt64(s);
+                                    Contabilidad.Add(c);
+                                }
+                                E.Contabilidad = Contabilidad.ToArray();
+                            }
+                        Entidad.Add(E);
+                    }
+                    if (Entidad != null)
+                        comprobante.Complemento.ine.Entidad = Entidad.ToArray();
 
-             }
-            return comprobante;
+                }
+                if (complementos.datosCartaPorte != null)
+                {
+                    CartaPorte c = new CartaPorte();
+                    c.Version = "1.0";
+                    c.TranspInternac = complementos.datosCartaPorte.transpInternac;
+                    //c.EntradaSalidaMerc = complementos.datosCartaPorte.entradaSalidaMerc;
+
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.entradaSalidaMerc))
+                    {
+                        c.EntradaSalidaMerc = complementos.datosCartaPorte.entradaSalidaMerc;
+                        c.EntradaSalidaMercSpecified = true;
+                    }
+                    else
+                        c.EntradaSalidaMercSpecified = false;
+
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.viaEntradaSalida))
+                    {
+                        c.ViaEntradaSalida = complementos.datosCartaPorte.viaEntradaSalida;
+                        c.ViaEntradaSalidaSpecified = true;
+                    }
+                    else
+                        c.ViaEntradaSalidaSpecified = false;
+
+                    if (complementos.datosCartaPorte.totalDistRec != null)
+                    {
+                        c.TotalDistRec = (decimal)complementos.datosCartaPorte.totalDistRec;
+                        c.TotalDistRecSpecified = true;
+                    }
+                    else
+                        c.TotalDistRecSpecified = false;
+                    //------------
+                    if (complementos.datosCartaPorte.ubicacion != null)
+                    {
+                        List<CartaPorteUbicacion> LU = new List<CartaPorteUbicacion>();
+                        foreach (var u in complementos.datosCartaPorte.ubicacion)
+                        {
+                            CartaPorteUbicacion C = new CartaPorteUbicacion();
+                            if (!string.IsNullOrEmpty(u.distanciaRecorrida))
+                            {
+                                C.DistanciaRecorrida = Convert.ToDecimal(u.distanciaRecorrida);
+                                C.DistanciaRecorridaSpecified = true;
+                            }
+                            else
+                                C.DistanciaRecorridaSpecified = false;
+                            if (!string.IsNullOrEmpty(u.tipoEstacion))
+                            {
+                                C.TipoEstacionSpecified = true;
+                                C.TipoEstacion = u.tipoEstacion;
+                            }
+                            else
+                                C.TipoEstacionSpecified = false;
+
+                            if (u.fechaHoraSalida != null)
+                            {
+                                C.Origen = new CartaPorteUbicacionOrigen();
+                                if (!string.IsNullOrEmpty(u.iDOrigen))
+                                    C.Origen.IDOrigen = u.iDOrigen;
+                                C.Origen.FechaHoraSalida = Convert.ToDateTime(u.fechaHoraSalida).ToString("s");
+                                if (!string.IsNullOrEmpty(u.navegacionTraficoOrigen))
+                                {
+                                    C.Origen.NavegacionTrafico = u.navegacionTraficoOrigen;
+                                    C.Origen.NavegacionTraficoSpecified = true;
+                                }
+                                else
+                                    C.Origen.NavegacionTraficoSpecified = false;
+                                if (!string.IsNullOrEmpty(u.nombreEstacionOrigen))
+                                    C.Origen.NombreEstacion = u.nombreEstacionOrigen;
+                                if (!string.IsNullOrEmpty(u.nombreRemitente))
+                                    C.Origen.NombreRemitente = u.nombreRemitente;
+                                if (!string.IsNullOrEmpty(u.numEstacionOrigen))
+                                {
+                                    C.Origen.NumEstacion = u.numEstacionOrigen;
+                                    C.Origen.NumEstacionSpecified = true;
+                                }
+                                else
+                                    C.Origen.NumEstacionSpecified = false;
+                                if (!string.IsNullOrEmpty(u.numRegIdTribOrigen))
+                                    C.Origen.NumRegIdTrib = u.numRegIdTribOrigen;
+                                if (!string.IsNullOrEmpty(u.residenciaFiscalOrigen))
+                                {
+                                    C.Origen.ResidenciaFiscal = u.residenciaFiscalOrigen;
+                                    C.Origen.ResidenciaFiscalSpecified = true;
+                                }
+                                else
+                                    C.Origen.ResidenciaFiscalSpecified = false;
+                                if (!string.IsNullOrEmpty(u.rFCRemitente))
+                                    C.Origen.RFCRemitente = u.rFCRemitente;
+                            }
+                            if (u.fechaHoraProgLlegada != null)
+                            {
+                                C.Destino = new CartaPorteUbicacionDestino();
+                                if (!string.IsNullOrEmpty(u.iDDestino))
+                                    C.Destino.IDDestino = u.iDDestino;
+                                C.Destino.FechaHoraProgLlegada = Convert.ToDateTime(u.fechaHoraProgLlegada).ToString("s"); ;
+                                if (!string.IsNullOrEmpty(u.navegacionTraficodestino))
+                                {
+                                    C.Destino.NavegacionTrafico = u.navegacionTraficodestino;
+                                    C.Destino.NavegacionTraficoSpecified = true;
+                                }
+                                else
+                                    C.Destino.NavegacionTraficoSpecified = false;
+                                if (!string.IsNullOrEmpty(u.nombreEstacionDestino))
+                                    C.Destino.NombreEstacion = u.nombreEstacionDestino;
+                                if (!string.IsNullOrEmpty(u.nombreDestinatario))
+                                    C.Destino.NombreDestinatario = u.nombreDestinatario;
+                                if (!string.IsNullOrEmpty(u.numEstacionDestino))
+                                {
+                                    C.Destino.NumEstacion = u.numEstacionDestino;
+                                    C.Destino.NumEstacionSpecified = true;
+                                }
+                                else
+                                    C.Destino.NumEstacionSpecified = false;
+                                if (!string.IsNullOrEmpty(u.numRegIdTribDestino))
+                                    C.Destino.NumRegIdTrib = u.numRegIdTribDestino;
+                                if (!string.IsNullOrEmpty(u.residenciaFiscalDestino))
+                                {
+                                    C.Destino.ResidenciaFiscal = u.residenciaFiscalDestino;
+                                    C.Destino.ResidenciaFiscalSpecified = true;
+                                }
+                                else
+                                    C.Destino.ResidenciaFiscalSpecified = false;
+                                if (!string.IsNullOrEmpty(u.rFCDestinatario))
+                                    C.Destino.RFCDestinatario = u.rFCDestinatario;
+                            }
+                            if (u.calle != null)
+                            {
+                                C.Domicilio = new CartaPorteUbicacionDomicilio();
+                                C.Domicilio.Calle = u.calle;
+                                C.Domicilio.CodigoPostal = u.codigoPostal;
+                                if (!string.IsNullOrEmpty(u.colonia))
+                                    C.Domicilio.Colonia = u.colonia;
+                                C.Domicilio.Estado = u.estado;
+                                if (!string.IsNullOrEmpty(u.localidad))
+                                    C.Domicilio.Localidad = u.localidad;
+                                if (!string.IsNullOrEmpty(u.municipio))
+                                    C.Domicilio.Municipio = u.municipio;
+                                if (!string.IsNullOrEmpty(u.numeroExterior))
+                                    C.Domicilio.NumeroExterior = u.numeroExterior;
+                                if (!string.IsNullOrEmpty(u.numeroInterior))
+                                    C.Domicilio.NumeroInterior = u.numeroInterior;
+                                C.Domicilio.Pais = u.pais;
+                                if (!string.IsNullOrEmpty(u.referencia))
+                                    C.Domicilio.Referencia = u.referencia;
+
+
+                            }
+                            LU.Add(C);
+                        }
+
+                        c.Ubicaciones = LU.ToArray();
+                    }
+                    ///--------------
+                    if (complementos.datosCartaPorte.mercancia != null)
+                    {
+                        c.Mercancias = new CartaPorteMercancias();
+                        if (complementos.datosCartaPorte.cargoPorTasacion != null)
+                        {
+                            c.Mercancias.CargoPorTasacion = (decimal)complementos.datosCartaPorte.cargoPorTasacion;
+                            c.Mercancias.CargoPorTasacionSpecified = true;
+                        }
+                        else
+                            c.Mercancias.CargoPorTasacionSpecified = false;
+                        c.Mercancias.NumTotalMercancias = complementos.datosCartaPorte.numTotalMercancias;
+                        if (complementos.datosCartaPorte.pesoBrutoTotal != null)
+                        {
+                            c.Mercancias.PesoBrutoTotal = (decimal)complementos.datosCartaPorte.pesoBrutoTotal;
+                            c.Mercancias.PesoBrutoTotalSpecified = true;
+                        }
+                        else
+                            c.Mercancias.PesoBrutoTotalSpecified = false;
+                        if (complementos.datosCartaPorte.pesoNetoTotal != null)
+                        {
+                            c.Mercancias.PesoNetoTotal = (decimal)complementos.datosCartaPorte.pesoNetoTotal;
+                            c.Mercancias.PesoNetoTotalSpecified = true;
+                        }
+                        else
+                            c.Mercancias.PesoNetoTotalSpecified = false;
+                        if (complementos.datosCartaPorte.pesoBrutoTotal != null)
+                        {
+                            c.Mercancias.UnidadPeso = complementos.datosCartaPorte.unidadPeso;
+                            c.Mercancias.UnidadPesoSpecified = true;
+                        }
+                        else
+                            c.Mercancias.UnidadPesoSpecified = false;
+
+
+                        List<CartaPorteMercanciasMercancia> LM = new List<CartaPorteMercanciasMercancia>();
+                        foreach (var m in complementos.datosCartaPorte.mercancia)
+                        {
+                            CartaPorteMercanciasMercancia M = new CartaPorteMercanciasMercancia();
+                            if (!string.IsNullOrEmpty(m.bienesTransp))
+                            {
+                                M.BienesTransp = m.bienesTransp;
+                                M.BienesTranspSpecified = true;
+                            }
+                            else
+                            {
+                                M.BienesTranspSpecified = false;
+                            }
+                            if (!string.IsNullOrEmpty(m.cantidad))
+                                M.Cantidad = m.cantidad;
+
+                            if (!string.IsNullOrEmpty(m.claveSTCC))
+                            {
+                                M.ClaveSTCC = m.claveSTCC;
+                                M.ClaveSTCCSpecified = true;
+                            }
+                            else
+                                M.ClaveSTCCSpecified = false;
+                            if (!string.IsNullOrEmpty(m.claveUnidad))
+                                M.ClaveUnidad = m.claveUnidad;
+                            if (!string.IsNullOrEmpty(m.cveMaterialPeligroso))
+                            {
+                                M.CveMaterialPeligroso = m.cveMaterialPeligroso;
+                                M.CveMaterialPeligrosoSpecified = true;
+                            }
+                            else
+                                M.CveMaterialPeligrosoSpecified = false;
+                            if (!string.IsNullOrEmpty(m.descripcion))
+                                M.Descripcion = m.descripcion;
+                            if (!string.IsNullOrEmpty(m.descripEmbalaje))
+                                M.DescripEmbalaje = m.descripEmbalaje;
+                            if (!string.IsNullOrEmpty(m.dimensiones))
+                                M.Dimensiones = m.dimensiones;
+                            if (!string.IsNullOrEmpty(m.embalaje))
+                            {
+                                M.Embalaje = m.embalaje;
+                                M.EmbalajeSpecified = true;
+                            }
+                            else
+                                M.EmbalajeSpecified = false;
+                            if (!string.IsNullOrEmpty(m.fraccionArancelaria))
+                            {
+                                M.FraccionArancelaria = m.fraccionArancelaria;
+                                M.FraccionArancelariaSpecified = true;
+                            }
+                            else
+                                M.FraccionArancelariaSpecified = false;
+                            if (!string.IsNullOrEmpty(m.materialPeligroso))
+                            {
+                                M.MaterialPeligroso = m.materialPeligroso;
+                                M.MaterialPeligrosoSpecified = true;
+                            }
+                            else
+                                M.MaterialPeligrosoSpecified = false;
+                            if (!string.IsNullOrEmpty(m.moneda))
+                            {
+                                M.Moneda = m.moneda;
+                                M.MonedaSpecified = true;
+                            }
+                            else
+                                M.MonedaSpecified = false;
+                            M.PesoEnKg = m.pesoEnKg;
+                            if (!string.IsNullOrEmpty(m.unidad))
+                                M.Unidad = m.unidad;
+                            if (!string.IsNullOrEmpty(m.uUIDComercioExt))
+                                M.UUIDComercioExt = m.uUIDComercioExt;
+                            if (m.valorMercancia != null)
+                            {
+                                M.ValorMercancia = (decimal)m.valorMercancia;
+                                M.ValorMercanciaSpecified = true;
+                            }
+                            else
+                                M.ValorMercanciaSpecified = false;
+                            if (!string.IsNullOrEmpty(m.unidadPesoDetalle))
+                            {
+                                M.DetalleMercancia = new CartaPorteMercanciasMercanciaDetalleMercancia();
+                                if (m.numPiezas != null)
+                                {
+                                    M.DetalleMercancia.NumPiezas = (Int32)m.numPiezas;
+                                    M.DetalleMercancia.NumPiezasSpecified = true;
+                                }
+                                else
+                                    M.DetalleMercancia.NumPiezasSpecified = false;
+
+                                M.DetalleMercancia.PesoBruto = m.pesoBruto;
+                                M.DetalleMercancia.PesoNeto = m.pesoNeto;
+                                M.DetalleMercancia.PesoTara = m.pesoTara;
+                                M.DetalleMercancia.UnidadPeso = m.unidadPesoDetalle;
+                            }
+                            if (complementos.datosCartaPorte.cantidadTransporta != null && complementos.datosCartaPorte.cantidadTransporta.Count > 0)
+                            {
+                                List<CartaPorteMercanciasMercanciaCantidadTransporta> CANT = new List<CartaPorteMercanciasMercanciaCantidadTransporta>();
+                                foreach (var cant in complementos.datosCartaPorte.cantidadTransporta)
+                                {
+                                    if (cant.id == m.id)
+                                    {
+                                        CartaPorteMercanciasMercanciaCantidadTransporta ct = new CartaPorteMercanciasMercanciaCantidadTransporta();
+                                        ct.Cantidad = cant.cantidad;
+                                        if (!string.IsNullOrEmpty(cant.cvesTransporte))
+                                        {
+                                            ct.CvesTransporte = cant.cvesTransporte;
+                                            ct.CvesTransporteSpecified = true;
+                                        }
+                                        else
+                                            ct.CvesTransporteSpecified = false;
+                                        ct.IDDestino = cant.iDDestino;
+                                        ct.IDOrigen = cant.iDOrigen;
+                                        CANT.Add(ct);
+                                    }
+                                }
+                                M.CantidadTransporta = CANT.ToArray();
+                            }
+
+                            LM.Add(M);
+                        }
+                        c.Mercancias.Mercancia = LM.ToArray();
+
+                    }
+                    //--------------------------------
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.placaVM))
+                    {
+                        c.Mercancias.AutotransporteFederal = new CartaPorteMercanciasAutotransporteFederal();
+                        c.Mercancias.AutotransporteFederal.IdentificacionVehicular = new CartaPorteMercanciasAutotransporteFederalIdentificacionVehicular();
+                        c.Mercancias.AutotransporteFederal.IdentificacionVehicular.AnioModeloVM = complementos.datosCartaPorte.anioModeloVM;
+                        c.Mercancias.AutotransporteFederal.IdentificacionVehicular.ConfigVehicular = complementos.datosCartaPorte.configVehicular;
+                        c.Mercancias.AutotransporteFederal.IdentificacionVehicular.PlacaVM = complementos.datosCartaPorte.placaVM;
+                    }
+
+
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.subTipoRem1) || !string.IsNullOrEmpty(complementos.datosCartaPorte.subTipoRem2))
+                    {
+                        List<CartaPorteMercanciasAutotransporteFederalRemolque> LR = new List<CartaPorteMercanciasAutotransporteFederalRemolque>();
+                        
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.subTipoRem1))
+                        {
+                            CartaPorteMercanciasAutotransporteFederalRemolque r = new CartaPorteMercanciasAutotransporteFederalRemolque();
+                            r.Placa = complementos.datosCartaPorte.placa1;
+                            r.SubTipoRem = complementos.datosCartaPorte.subTipoRem1;
+                            LR.Add(r);
+                        }
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.subTipoRem2))
+                        {
+                            CartaPorteMercanciasAutotransporteFederalRemolque r = new CartaPorteMercanciasAutotransporteFederalRemolque();
+                            r.Placa = complementos.datosCartaPorte.placa2;
+                            r.SubTipoRem = complementos.datosCartaPorte.subTipoRem2;
+                            LR.Add(r);
+                        }
+                       c.Mercancias.AutotransporteFederal.Remolques = LR.ToArray();
+             
+                    }
+
+
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreAsegAutotransporteFederal))
+                    {
+                        c.Mercancias.AutotransporteFederal.NombreAseg = complementos.datosCartaPorte.nombreAsegAutotransporteFederal;
+                        c.Mercancias.AutotransporteFederal.NumPermisoSCT = complementos.datosCartaPorte.numPermisoSCTAutotransporteFederal;
+                        c.Mercancias.AutotransporteFederal.NumPolizaSeguro = complementos.datosCartaPorte.numPolizaSeguroAutotransporteFederal;
+                        c.Mercancias.AutotransporteFederal.PermSCT = complementos.datosCartaPorte.permSCTAutotransporteFederal;
+                    }
+                    //----------------------
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreAgenteNaviero))
+                    {
+                        c.Mercancias.TransporteMaritimo = new CartaPorteMercanciasTransporteMaritimo();
+                        if (complementos.datosCartaPorte.anioEmbarcacion != null)
+                        {
+                            c.Mercancias.TransporteMaritimo.AnioEmbarcacion = (Int32)complementos.datosCartaPorte.anioEmbarcacion;
+                            c.Mercancias.TransporteMaritimo.AnioEmbarcacionSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteMaritimo.AnioEmbarcacionSpecified = false;
+                        if (complementos.datosCartaPorte.calado != null)
+                        {
+                            c.Mercancias.TransporteMaritimo.Calado = (decimal)complementos.datosCartaPorte.calado;
+                            c.Mercancias.TransporteMaritimo.CaladoSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteMaritimo.CaladoSpecified = false;
+                        if (complementos.datosCartaPorte.eslora != null)
+                        {
+                            c.Mercancias.TransporteMaritimo.Eslora = (decimal)complementos.datosCartaPorte.eslora;
+                            c.Mercancias.TransporteMaritimo.EsloraSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteMaritimo.EsloraSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.lineaNaviera))
+                            c.Mercancias.TransporteMaritimo.LineaNaviera = complementos.datosCartaPorte.lineaNaviera;
+                        if (complementos.datosCartaPorte.manga != null)
+                        {
+                            c.Mercancias.TransporteMaritimo.Manga = (decimal)complementos.datosCartaPorte.manga;
+                            c.Mercancias.TransporteMaritimo.MangaSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteMaritimo.MangaSpecified = false;
+
+                        c.Mercancias.TransporteMaritimo.Matricula = complementos.datosCartaPorte.matricula;
+                        c.Mercancias.TransporteMaritimo.NacionalidadEmbarc = complementos.datosCartaPorte.nacionalidadEmbarc;
+                        c.Mercancias.TransporteMaritimo.NombreAgenteNaviero = complementos.datosCartaPorte.nombreAgenteNaviero;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreAsegTransporteMaritimo))
+                            c.Mercancias.TransporteMaritimo.NombreAseg = complementos.datosCartaPorte.nombreAsegTransporteMaritimo;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreEmbarc))
+                            c.Mercancias.TransporteMaritimo.NombreEmbarc = complementos.datosCartaPorte.nombreEmbarc;
+                        c.Mercancias.TransporteMaritimo.NumAutorizacionNaviero = complementos.datosCartaPorte.numAutorizacionNaviero;
+                        c.Mercancias.TransporteMaritimo.NumCertITC = complementos.datosCartaPorte.numCertITC;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numConocEmbarc))
+                            c.Mercancias.TransporteMaritimo.NumConocEmbarc = complementos.datosCartaPorte.numConocEmbarc;
+                        c.Mercancias.TransporteMaritimo.NumeroOMI = complementos.datosCartaPorte.numeroOMI;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numPermisoSCTTransporteMaritimo))
+                            c.Mercancias.TransporteMaritimo.NumPermisoSCT = complementos.datosCartaPorte.numPermisoSCTTransporteMaritimo;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numPolizaSeguroTransporteMaritimo))
+                            c.Mercancias.TransporteMaritimo.NumPolizaSeguro = complementos.datosCartaPorte.numPolizaSeguroTransporteMaritimo;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numViaje))
+                            c.Mercancias.TransporteMaritimo.NumViaje = complementos.datosCartaPorte.numViaje;
+                        if (complementos.datosCartaPorte.permSCTTransporteMaritimo != null)
+                        {
+                            c.Mercancias.TransporteMaritimo.PermSCT = complementos.datosCartaPorte.permSCTTransporteMaritimo;
+                            c.Mercancias.TransporteMaritimo.PermSCTSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteMaritimo.PermSCTSpecified = false;
+                        c.Mercancias.TransporteMaritimo.TipoCarga = complementos.datosCartaPorte.tipoCarga;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.tipoEmbarcacion))
+                            c.Mercancias.TransporteMaritimo.TipoEmbarcacion = complementos.datosCartaPorte.tipoEmbarcacion;
+                        c.Mercancias.TransporteMaritimo.UnidadesDeArqBruto = complementos.datosCartaPorte.unidadesDeArqBruto;
+
+                        if (complementos.datosCartaPorte.contenedor != null && complementos.datosCartaPorte.contenedor.Count > 0)
+                        {
+                            List<CartaPorteMercanciasTransporteMaritimoContenedor> CON = new List<CartaPorteMercanciasTransporteMaritimoContenedor>();
+                            foreach (var con in complementos.datosCartaPorte.contenedor)
+                            {
+                                CartaPorteMercanciasTransporteMaritimoContenedor conte = new CartaPorteMercanciasTransporteMaritimoContenedor();
+                                conte.MatriculaContenedor = con.matriculaContenedor;
+                                if (!string.IsNullOrEmpty(con.numPrecinto))
+                                    conte.NumPrecinto = con.numPrecinto;
+                                conte.TipoContenedor = con.tipoContenedor;
+                                CON.Add(conte);
+                            }
+
+                            c.Mercancias.TransporteMaritimo.Contenedor = CON.ToArray();
+                        }
+
+
+
+                    }
+                    //-----------------------------------
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.matriculaAeronave))
+                    {
+                        c.Mercancias.TransporteAereo = new CartaPorteMercanciasTransporteAereo();
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.codigoTransportista))
+                        {
+                            c.Mercancias.TransporteAereo.CodigoTransportista = complementos.datosCartaPorte.codigoTransportista;
+                            c.Mercancias.TransporteAereo.CodigoTransportistaSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteAereo.CodigoTransportistaSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.lugarContrato))
+                            c.Mercancias.TransporteAereo.LugarContrato = complementos.datosCartaPorte.lugarContrato;
+                        c.Mercancias.TransporteAereo.MatriculaAeronave = complementos.datosCartaPorte.matriculaAeronave;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreAsegTransporteAereo))
+                            c.Mercancias.TransporteAereo.NombreAseg = complementos.datosCartaPorte.nombreAsegTransporteAereo;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreEmbarcador))
+                            c.Mercancias.TransporteAereo.NombreEmbarcador = complementos.datosCartaPorte.nombreEmbarcador;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreTransportista))
+                            c.Mercancias.TransporteAereo.NombreTransportista = complementos.datosCartaPorte.nombreTransportista;
+                        c.Mercancias.TransporteAereo.NumeroGuia = complementos.datosCartaPorte.numeroGuia;
+                        c.Mercancias.TransporteAereo.NumPermisoSCT = complementos.datosCartaPorte.numPermisoSCT;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numPolizaSeguroTransporteAereo))
+                            c.Mercancias.TransporteAereo.NumPolizaSeguro = complementos.datosCartaPorte.numPolizaSeguroTransporteAereo;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numRegIdTribEmbarc))
+                            c.Mercancias.TransporteAereo.NumRegIdTribEmbarc = complementos.datosCartaPorte.numRegIdTribEmbarc;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numRegIdTribTranspor))
+                            c.Mercancias.TransporteAereo.NumRegIdTribTranspor = complementos.datosCartaPorte.numRegIdTribTranspor;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.permSCT))
+                        {
+                            c.Mercancias.TransporteAereo.PermSCT = complementos.datosCartaPorte.permSCT;
+                            c.Mercancias.TransporteAereo.PermSCTSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteAereo.PermSCTSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.residenciaFiscalEmbarc))
+                        {
+                            c.Mercancias.TransporteAereo.ResidenciaFiscalEmbarc = complementos.datosCartaPorte.residenciaFiscalEmbarc;
+                            c.Mercancias.TransporteAereo.ResidenciaFiscalEmbarcSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteAereo.ResidenciaFiscalEmbarcSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.residenciaFiscalTranspor))
+                        {
+                            c.Mercancias.TransporteAereo.ResidenciaFiscalTranspor = complementos.datosCartaPorte.residenciaFiscalTranspor;
+                            c.Mercancias.TransporteAereo.ResidenciaFiscalTransporSpecified = true;
+                        }
+                        else
+                            c.Mercancias.TransporteAereo.ResidenciaFiscalTransporSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.rFCEmbarcador))
+                            c.Mercancias.TransporteAereo.RFCEmbarcador = complementos.datosCartaPorte.rFCEmbarcador;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.rFCTransportista))
+                            c.Mercancias.TransporteAereo.RFCTransportista = complementos.datosCartaPorte.rFCTransportista;
+
+
+                    }
+                    //---------------------------------
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.tipoDeServicio))
+                    {
+                        c.Mercancias.TransporteFerroviario = new CartaPorteMercanciasTransporteFerroviario();
+                        c.Mercancias.TransporteFerroviario.TipoDeServicio = complementos.datosCartaPorte.tipoDeServicio;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.concesionario))
+                            c.Mercancias.TransporteFerroviario.Concesionario = complementos.datosCartaPorte.concesionario;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.nombreAseg))
+                            c.Mercancias.TransporteFerroviario.NombreAseg = complementos.datosCartaPorte.nombreAseg;
+                        if (!string.IsNullOrEmpty(complementos.datosCartaPorte.numPolizaSeguro))
+                            c.Mercancias.TransporteFerroviario.NumPolizaSeguro = complementos.datosCartaPorte.numPolizaSeguro;
+
+                        if (complementos.datosCartaPorte.derechosDePaso != null && complementos.datosCartaPorte.derechosDePaso.Count > 0)
+                        {
+                            List<CartaPorteMercanciasTransporteFerroviarioDerechosDePaso> D = new List<CartaPorteMercanciasTransporteFerroviarioDerechosDePaso>();
+                            foreach (var des in complementos.datosCartaPorte.derechosDePaso)
+                            {
+                                CartaPorteMercanciasTransporteFerroviarioDerechosDePaso d = new CartaPorteMercanciasTransporteFerroviarioDerechosDePaso();
+                                d.KilometrajePagado = des.kilometrajePagado;
+                                d.TipoDerechoDePaso = des.tipoDerechoDePaso;
+                                D.Add(d);
+                            }
+                            c.Mercancias.TransporteFerroviario.DerechosDePaso = D.ToArray();
+                        }
+
+                        if (complementos.datosCartaPorte.carro != null && complementos.datosCartaPorte.carro.Count > 0)
+                        {
+                            List<CartaPorteMercanciasTransporteFerroviarioCarro> CA = new List<CartaPorteMercanciasTransporteFerroviarioCarro>();
+                            foreach (var ca in complementos.datosCartaPorte.carro)
+                            {
+                                CartaPorteMercanciasTransporteFerroviarioCarro cr = new CartaPorteMercanciasTransporteFerroviarioCarro();
+                                cr.GuiaCarro = ca.guiaCarro;
+                                cr.MatriculaCarro = ca.matriculaCarro;
+                                cr.TipoCarro = ca.tipoCarro;
+                                cr.ToneladasNetasCarro = ca.toneladasNetasCarro;
+                                if (complementos.datosCartaPorte.carroContenedor != null && complementos.datosCartaPorte.carroContenedor.Count > 0)
+                                {
+                                    List<CartaPorteMercanciasTransporteFerroviarioCarroContenedor> CAC = new List<CartaPorteMercanciasTransporteFerroviarioCarroContenedor>();
+                                    foreach (var cc in complementos.datosCartaPorte.carroContenedor)
+                                    {
+                                        if (ca.id == cc.id)
+                                        {
+                                            CartaPorteMercanciasTransporteFerroviarioCarroContenedor cac = new CartaPorteMercanciasTransporteFerroviarioCarroContenedor();
+                                            cac.PesoContenedorVacio = cc.pesoContenedorVacio;
+                                            cac.PesoNetoMercancia = cc.pesoNetoMercancia;
+                                            cac.TipoContenedor = cc.tipoContenedor;
+                                            CAC.Add(cac);
+                                        }
+                                    }
+                                    cr.Contenedor = CAC.ToArray();
+                                }
+                                CA.Add(cr);
+                            }
+                            c.Mercancias.TransporteFerroviario.Carro = CA.ToArray();
+                        }
+
+                    }
+                    //-----------------------------
+                    if (!string.IsNullOrEmpty(complementos.datosCartaPorte.cveTransporte))
+                    {
+                        c.FiguraTransporte = new CartaPorteFiguraTransporte();
+                        c.FiguraTransporte.CveTransporte = complementos.datosCartaPorte.cveTransporte;
+
+                        if (complementos.datosCartaPorte.operador != null && complementos.datosCartaPorte.operador.Count > 0)
+                        {
+                            List<CartaPorteFiguraTransporteOperadores> OO = new List<CartaPorteFiguraTransporteOperadores>();
+                            CartaPorteFiguraTransporteOperadores O1 = new CartaPorteFiguraTransporteOperadores();
+                            List<CartaPorteFiguraTransporteOperadoresOperador> O = new List<CartaPorteFiguraTransporteOperadoresOperador>();
+                            foreach (var op in complementos.datosCartaPorte.operador)
+                            {
+                                CartaPorteFiguraTransporteOperadoresOperador o = new CartaPorteFiguraTransporteOperadoresOperador();
+                                if (!string.IsNullOrEmpty(op.nombreOperador))
+                                    o.NombreOperador = op.nombreOperador;
+                                if (!string.IsNullOrEmpty(op.numLicencia))
+                                    o.NumLicencia = op.numLicencia;
+                                if (!string.IsNullOrEmpty(op.numRegIdTribOperador))
+                                    o.NumRegIdTribOperador = op.numRegIdTribOperador;
+                                if (!string.IsNullOrEmpty(op.residenciaFiscalOperador))
+                                {
+                                    o.ResidenciaFiscalOperador = op.residenciaFiscalOperador;
+                                    o.ResidenciaFiscalOperadorSpecified = true;
+                                }
+                                else
+                                    o.ResidenciaFiscalOperadorSpecified = false;
+                                if (!string.IsNullOrEmpty(op.rFCOperador))
+                                    o.RFCOperador = op.rFCOperador;
+
+                                if (!string.IsNullOrEmpty(op.calle))
+                                {
+                                    o.Domicilio = new CartaPorteFiguraTransporteOperadoresOperadorDomicilio();
+                                    o.Domicilio.Calle = op.calle;
+                                    o.Domicilio.CodigoPostal = op.codigoPostal;
+                                    if (!string.IsNullOrEmpty(op.colonia))
+                                        o.Domicilio.Colonia = op.colonia;
+                                    o.Domicilio.Estado = op.estado;
+                                    if (!string.IsNullOrEmpty(op.localidad))
+                                        o.Domicilio.Localidad = op.localidad;
+                                    if (!string.IsNullOrEmpty(op.municipio))
+                                        o.Domicilio.Municipio = op.municipio;
+                                    if (!string.IsNullOrEmpty(op.numeroExterior))
+                                        o.Domicilio.NumeroExterior = op.numeroExterior;
+                                    if (!string.IsNullOrEmpty(op.numeroInterior))
+                                        o.Domicilio.NumeroInterior = op.numeroInterior;
+                                    o.Domicilio.Pais = op.pais;
+                                    if (!string.IsNullOrEmpty(op.referencia))
+                                        o.Domicilio.Referencia = op.referencia;
+
+                                }
+                                O.Add(o);
+                            }
+                            O1.Operador = O.ToArray();
+                            OO.Add(O1);
+                            c.FiguraTransporte.Operadores = OO.ToArray();
+                        }
+                        //---------------------------------------------
+                        if (complementos.datosCartaPorte.propietario != null && complementos.datosCartaPorte.propietario.Count > 0)
+                        {
+                            List<CartaPorteFiguraTransportePropietario> O = new List<CartaPorteFiguraTransportePropietario>();
+                            foreach (var op in complementos.datosCartaPorte.propietario)
+                            {
+                                CartaPorteFiguraTransportePropietario o = new CartaPorteFiguraTransportePropietario();
+                                if (!string.IsNullOrEmpty(op.nombrePropietario))
+                                    o.NombrePropietario = op.nombrePropietario;
+                                if (!string.IsNullOrEmpty(op.numRegIdTribPropietario))
+                                    o.NumRegIdTribPropietario = op.numRegIdTribPropietario;
+                                if (!string.IsNullOrEmpty(op.residenciaFiscalPropietario))
+                                {
+                                    o.ResidenciaFiscalPropietario = op.residenciaFiscalPropietario;
+                                    o.ResidenciaFiscalPropietarioSpecified = true;
+                                }
+                                else
+                                    o.ResidenciaFiscalPropietarioSpecified = false;
+                                if (!string.IsNullOrEmpty(op.rFCPropietario))
+                                    o.RFCPropietario = op.rFCPropietario;
+
+                                if (!string.IsNullOrEmpty(op.calle))
+                                {
+                                    o.Domicilio = new CartaPorteFiguraTransportePropietarioDomicilio();
+                                    o.Domicilio.Calle = op.calle;
+                                    o.Domicilio.CodigoPostal = op.codigoPostal;
+                                    if (!string.IsNullOrEmpty(op.colonia))
+                                        o.Domicilio.Colonia = op.colonia;
+                                    o.Domicilio.Estado = op.estado;
+                                    if (!string.IsNullOrEmpty(op.localidad))
+                                        o.Domicilio.Localidad = op.localidad;
+                                    if (!string.IsNullOrEmpty(op.municipio))
+                                        o.Domicilio.Municipio = op.municipio;
+                                    if (!string.IsNullOrEmpty(op.numeroExterior))
+                                        o.Domicilio.NumeroExterior = op.numeroExterior;
+                                    if (!string.IsNullOrEmpty(op.numeroInterior))
+                                        o.Domicilio.NumeroInterior = op.numeroInterior;
+                                    o.Domicilio.Pais = op.pais;
+                                    if (!string.IsNullOrEmpty(op.referencia))
+                                        o.Domicilio.Referencia = op.referencia;
+
+                                }
+                                O.Add(o);
+                            }
+                            c.FiguraTransporte.Propietario = O.ToArray();
+                        }
+                        //---------------------------------------------
+                        if (complementos.datosCartaPorte.arrendatario != null && complementos.datosCartaPorte.arrendatario.Count > 0)
+                        {
+                            List<CartaPorteFiguraTransporteArrendatario> O = new List<CartaPorteFiguraTransporteArrendatario>();
+                            foreach (var op in complementos.datosCartaPorte.arrendatario)
+                            {
+                                CartaPorteFiguraTransporteArrendatario o = new CartaPorteFiguraTransporteArrendatario();
+                                if (!string.IsNullOrEmpty(op.nombreArrendatario))
+                                    o.NombreArrendatario = op.nombreArrendatario;
+                                if (!string.IsNullOrEmpty(op.numRegIdTribArrendatario))
+                                    o.NumRegIdTribArrendatario = op.numRegIdTribArrendatario;
+                                if (!string.IsNullOrEmpty(op.residenciaFiscalArrendatario))
+                                {
+                                    o.ResidenciaFiscalArrendatario = op.residenciaFiscalArrendatario;
+                                    o.ResidenciaFiscalArrendatarioSpecified = true;
+                                }
+                                else
+                                    o.ResidenciaFiscalArrendatarioSpecified = false;
+                                if (!string.IsNullOrEmpty(op.rFCArrendatario))
+                                    o.RFCArrendatario = op.rFCArrendatario;
+
+                                if (!string.IsNullOrEmpty(op.calle))
+                                {
+                                    o.Domicilio = new CartaPorteFiguraTransporteArrendatarioDomicilio();
+                                    o.Domicilio.Calle = op.calle;
+                                    o.Domicilio.CodigoPostal = op.codigoPostal;
+                                    if (!string.IsNullOrEmpty(op.colonia))
+                                        o.Domicilio.Colonia = op.colonia;
+                                    o.Domicilio.Estado = op.estado;
+                                    if (!string.IsNullOrEmpty(op.localidad))
+                                        o.Domicilio.Localidad = op.localidad;
+                                    if (!string.IsNullOrEmpty(op.municipio))
+                                        o.Domicilio.Municipio = op.municipio;
+                                    if (!string.IsNullOrEmpty(op.numeroExterior))
+                                        o.Domicilio.NumeroExterior = op.numeroExterior;
+                                    if (!string.IsNullOrEmpty(op.numeroInterior))
+                                        o.Domicilio.NumeroInterior = op.numeroInterior;
+                                    o.Domicilio.Pais = op.pais;
+                                    if (!string.IsNullOrEmpty(op.referencia))
+                                        o.Domicilio.Referencia = op.referencia;
+
+                                }
+                                O.Add(o);
+                            }
+                            c.FiguraTransporte.Arrendatario = O.ToArray();
+                        }
+                        //---------------------------------------------
+                        if (complementos.datosCartaPorte.notificado != null && complementos.datosCartaPorte.notificado.Count > 0)
+                        {
+                            List<CartaPorteFiguraTransporteNotificado> O = new List<CartaPorteFiguraTransporteNotificado>();
+                            foreach (var op in complementos.datosCartaPorte.notificado)
+                            {
+                                CartaPorteFiguraTransporteNotificado o = new CartaPorteFiguraTransporteNotificado();
+                                if (!string.IsNullOrEmpty(op.nombreNotificado))
+                                    o.NombreNotificado = op.nombreNotificado;
+                                if (!string.IsNullOrEmpty(op.numRegIdTribNotificado))
+                                    o.NumRegIdTribNotificado = op.numRegIdTribNotificado;
+                                if (!string.IsNullOrEmpty(op.residenciaFiscalNotificado))
+                                {
+                                    o.ResidenciaFiscalNotificado = op.residenciaFiscalNotificado;
+                                    o.ResidenciaFiscalNotificadoSpecified = true;
+                                }
+                                else
+                                    o.ResidenciaFiscalNotificadoSpecified = false;
+                                if (!string.IsNullOrEmpty(op.rFCNotificado))
+                                    o.RFCNotificado = op.rFCNotificado;
+
+                                if (!string.IsNullOrEmpty(op.calle))
+                                {
+                                    o.Domicilio = new CartaPorteFiguraTransporteNotificadoDomicilio();
+                                    o.Domicilio.Calle = op.calle;
+                                    o.Domicilio.CodigoPostal = op.codigoPostal;
+                                    if (!string.IsNullOrEmpty(op.colonia))
+                                        o.Domicilio.Colonia = op.colonia;
+                                    o.Domicilio.Estado = op.estado;
+                                    if (!string.IsNullOrEmpty(op.localidad))
+                                        o.Domicilio.Localidad = op.localidad;
+                                    if (!string.IsNullOrEmpty(op.municipio))
+                                        o.Domicilio.Municipio = op.municipio;
+                                    if (!string.IsNullOrEmpty(op.numeroExterior))
+                                        o.Domicilio.NumeroExterior = op.numeroExterior;
+                                    if (!string.IsNullOrEmpty(op.numeroInterior))
+                                        o.Domicilio.NumeroInterior = op.numeroInterior;
+                                    o.Domicilio.Pais = op.pais;
+                                    if (!string.IsNullOrEmpty(op.referencia))
+                                        o.Domicilio.Referencia = op.referencia;
+
+                                }
+                                O.Add(o);
+                            }
+                            c.FiguraTransporte.Notificado = O.ToArray();
+                        }
+                        //---------------------------------------------
+                    }
+                    //-----------------------------------
+                    if (comprobante.Complemento == null)
+                        comprobante.Complemento = new ComprobanteComplemento();
+                    comprobante.Complemento.cartaPorte = new CartaPorte();
+                    comprobante.Complemento.cartaPorte = c;
+
+                }
+
+                return comprobante;
+            //}
+            //catch (Exception ee)
+            //{
+            //    Logger.Error("Error en llenado del complemento en Aplicativo:"+ ee.Message);
+            //    return comprobante;
+            //}
         }
         //***********************************************************************************
 

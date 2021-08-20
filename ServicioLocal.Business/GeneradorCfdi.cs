@@ -31,6 +31,7 @@ using ParameterValue = ServicioLocal.Business.ReportExecution.ParameterValue;
 using Warning = ServicioLocal.Business.ReportExecution.Warning;
 using ServicioLocal.Business.Complemento;
 using System.Threading;
+using ServicioLocal.Business.Carta;
 
 
 namespace ServicioLocal.Business
@@ -1412,6 +1413,38 @@ namespace ServicioLocal.Business
         }
 
 
+        public string GetXmlCartaPorte(CartaPorte impuestos)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(CartaPorte));
+            try
+            {
+                using (MemoryStream memStream = new MemoryStream())
+                {
+                    var sw = new StreamWriter(memStream, Encoding.UTF8);
+                    using (
+                        XmlWriter xmlWriter = XmlWriter.Create(sw,
+                                                               new XmlWriterSettings() { Indent = false, Encoding = Encoding.UTF8 }))
+                    {
+                        XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+                        namespaces.Add("cartaporte", "http://www.sat.gob.mx/CartaPorte");
+                        ser.Serialize(xmlWriter, impuestos, namespaces);
+                        string xml = Encoding.UTF8.GetString(memStream.GetBuffer());
+                        xml = xml.Substring(xml.IndexOf(Convert.ToChar(60)));
+                        xml = xml.Substring(0, (xml.LastIndexOf(Convert.ToChar(62)) + 1));
+
+                        return xml;
+                    }
+                }
+            }
+            catch (Exception ee)
+            {
+
+                Logger.Error(ee);
+                return null;
+            }
+
+        }
+
         public string GetXmlVehiculoUsado(VehiculoUsado impuestos)
         {
             XmlSerializer ser = new XmlSerializer(typeof(VehiculoUsado));
@@ -1877,6 +1910,17 @@ namespace ServicioLocal.Business
                     requestForPayment addendaAmece = comp.AddendaAmece;
                     addendaXml = GetXmlAddenda(addendaAmece, typeof(requestForPayment), null, null);
                 }
+                if (comp.AddendaInnova != null)
+                {
+
+                    AddendaOrderIdentification addendaInnova = comp.AddendaInnova;
+                    addendaXml = GetXmlAddenda(addendaInnova, typeof(AddendaOrderIdentification), null, null);
+                    addendaXml = addendaXml.Replace("<AddendaOrderIdentification xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">", "<orderIdentification>");
+                    addendaXml = addendaXml.Replace("<AddendaOrderIdentification xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">", "<orderIdentification>");
+                    addendaXml = addendaXml.Replace("</AddendaOrderIdentification>", "</orderIdentification>");
+                  //  addendaXml = addendaXml.Replace("<cfdi:Addenda>", "<cfdi:Addenda xmlns:xsi=\"http://www.eternec.com/secfd/Schemas/Receptor/Innovasport http://www.eternec.com/secfd/Schemas/Receptor/AddendaInnova.xsd\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\">");
+                   
+                }
                 if (comp.AddendaHomeDepot != null)
                 {
 
@@ -1914,7 +1958,13 @@ namespace ServicioLocal.Business
                     xmlFinal = xmlFinal.Replace("xmlns:cfdi=\"http://www.ntlink.com.mx/RGV\"", "");
                
                 }
-        
+                if (comp.AddendaInnova != null)
+                {
+
+                    xmlFinal = xmlFinal.Replace("<cfdi:Addenda>", "<cfdi:Addenda xmlns:xsi=\"http://www.eternec.com/secfd/Schemas/Receptor/Innovasport http://www.eternec.com/secfd/Schemas/Receptor/AddendaInnova.xsd\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\">");
+
+
+                }
             
                 comp.XmlString = xmlFinal;
                   
@@ -2177,6 +2227,14 @@ namespace ServicioLocal.Business
                     //comprobante.XmlNomina = complemento;
                     
                 }
+                if (comprobante.Complemento != null && comprobante.Complemento.cartaPorte != null)
+                {
+                    comprobante.xsiSchemaLocation = comprobante.xsiSchemaLocation + " http://www.sat.gob.mx/CartaPorte http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte.xsd";
+                    complemento = GetXmlCartaPorte(comprobante.Complemento.cartaPorte);
+                    
+                }
+                
+
                 if (comprobante.Complemento != null && comprobante.Complemento.Pag != null)
                 {
                     comprobante.xsiSchemaLocation = comprobante.xsiSchemaLocation + " http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
@@ -2244,7 +2302,11 @@ namespace ServicioLocal.Business
                     comp = comp.Replace("<vehiculousado:VehiculoUsado xmlns:vehiculousado=\"http://www.sat.gob.mx/vehiculousado\"", "<vehiculousado:VehiculoUsado");
                     comp = comp.Replace("xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\"", "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" xmlns:vehiculousado=\"http://www.sat.gob.mx/vehiculousado\"");
                 }
-                
+                if (comprobante.Complemento != null && comprobante.Complemento.cartaPorte != null)
+                {
+                    comp = comp.Replace("xmlns:cartaporte=\"http://www.sat.gob.mx/CartaPorte\"", "");
+                    comp = comp.Replace("xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\"", "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" xmlns:cartaporte=\"http://www.sat.gob.mx/CartaPorte\"");
+                }
                 if (comprobante.Complemento != null && comprobante.Complemento.Pag != null)
                 {
                     comp = comp.Replace("<pago10:Pagos Version=\"1.0\" xmlns:pago10=\"http://www.sat.gob.mx/Pagos\">", "<pago10:Pagos Version=\"1.0\">");

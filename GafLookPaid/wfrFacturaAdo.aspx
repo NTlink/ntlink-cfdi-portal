@@ -526,8 +526,12 @@
                 </caption></table></div><div style="width: 900px"></div>
                 </ContentTemplate>
                 </asp:TabPanel>
-                <asp:TabPanel ID="tabGeneral" runat="server" CssClass="page3" HeaderText="Datos Generales"><HeaderTemplate>Conceptos</HeaderTemplate><ContentTemplate><h1 class="style155" style="text-align: center"><strong>Conceptos</strong></h1><table  class="table-hover" ><tr>
-                    <td style="text-align: right; "><span class="style160" style="color: #FF0000">*</span>ClaveUnidad</td><td style="text-align: left;"><div>
+                <asp:TabPanel ID="tabGeneral" runat="server" CssClass="page3" HeaderText="Datos Generales">
+                <HeaderTemplate>Conceptos</HeaderTemplate>
+                <ContentTemplate><h1 class="style155" style="text-align: center"><strong>Conceptos</strong></h1><table  class="table-hover" ><tr>
+                    <td style="text-align: right; ">
+                    <span class="style160" style="color: #FF0000">*</span>ClaveUnidad</td>
+                    <td style="text-align: left;"><div>
                     <cc1:DropDownListChosen 
                     ID="ddlClaveUnidad" runat="server" 
             NoResultsText="No hay resultados coincidentes." width="120px" Height="16px"          
