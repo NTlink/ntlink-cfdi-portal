@@ -785,6 +785,13 @@ namespace ServicioLocal.Business
                 comprobante.AddendaInnova.referenceIdentification.Value =factura.Factura.DatosAduanera.Valor;
                
             }
+            if (factura.Factura.TipoDocumentoSAT == TipoDocumento.AddendaConcep)
+            {
+                comprobante.TipoAddenda = TipoAddenda.AddendaConcep;
+                comprobante.addendaConcepto = new AddendaConcepto.Conceptos();
+                comprobante.addendaConcepto.Concepto = factura.Factura.addendaConcepto.Concepto.ToArray();
+             
+            }
             //Addenda PEMEX -- SZ
             if (factura.Factura.TipoDocumento == TipoDocumento.FacturaPemex)
             {

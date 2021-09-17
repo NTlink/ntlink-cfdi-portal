@@ -376,11 +376,17 @@ namespace ServicioLocal.Business
                 clt.Credentials = new NetworkCredential(userName, password);
                 clt.Url = url;
                 CatalogItem[] cats = clt.ListChildren("/", true);
+                              
                 var rep = GetRutaPdf(tipo);
                 var reporte = cats.FirstOrDefault(p => p.Name == comprobante.Emisor.Rfc + "_" + rep);
                 if (reporte == null)
-                    reporte = cats.FirstOrDefault(p => p.Name == rep);
-
+                {
+                    if (comprobante.TipoAddenda != TipoAddenda.SinAddenda)//
+                        reporte = cats.FirstOrDefault(p => p.Name == "Addenda33");//
+                    else//
+                     reporte = cats.FirstOrDefault(p => p.Name == rep);
+                    
+                }
                 if (reporte == null)
                 {
                     throw new FaultException("No esta configurada la plantilla para este comprobante");
@@ -977,6 +983,7 @@ namespace ServicioLocal.Business
                 /* else*/
                 if (tipo == TipoDocumento.FacturaGeneralFirmas)
                     ruta = "Pdf33_Firmas";
+
             /*else if (tipo == TipoDocumento.Referencia)
                 ruta = "PdfReferencia";
             else if (tipo == TipoDocumento.ReciboHonorarios || tipo == TipoDocumento.Arrendamiento)
@@ -1088,11 +1095,11 @@ namespace ServicioLocal.Business
             Logger.Info(cadenaOriginal);
             byte[] hash = cryp.ComputeHash(Encoding.UTF8.GetBytes(cadenaOriginal));
             Logger.Info(BitConverter.ToString(hash).Replace("-", ""));
-            Logger.Info(Convert.ToBase64String(b));
+           // Logger.Info(Convert.ToBase64String(b));
             return Convert.ToBase64String(b);
-              /*
-            
-            byte[] llave = File.ReadAllBytes(rutaLlave);
+          
+            /*
+             byte[] llave = File.ReadAllBytes(rutaLlave);
             if (File.Exists(rutaLlave + ".pem"))
             {
                 rutaLlave = rutaLlave + ".pem";
@@ -1130,6 +1137,7 @@ namespace ServicioLocal.Business
             return Convert.ToBase64String(b);
              */
 
+            
             byte[] llave = File.ReadAllBytes(rutaLlave);
             if (File.Exists(rutaLlave + ".pem"))
             {
@@ -1144,7 +1152,7 @@ namespace ServicioLocal.Business
             string sello256 = Convert.ToBase64String(signature);
 
             return sello256;
-
+            
         
         }
 
@@ -1920,6 +1928,12 @@ namespace ServicioLocal.Business
                     addendaXml = addendaXml.Replace("</AddendaOrderIdentification>", "</orderIdentification>");
                   //  addendaXml = addendaXml.Replace("<cfdi:Addenda>", "<cfdi:Addenda xmlns:xsi=\"http://www.eternec.com/secfd/Schemas/Receptor/Innovasport http://www.eternec.com/secfd/Schemas/Receptor/AddendaInnova.xsd\" xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\">");
                    
+                }
+                if (comp.addendaConcepto != null)
+                {
+                    addendaXml = GetXmlAddenda(comp.addendaConcepto, typeof(AddendaConcepto.Conceptos), null, null);
+                   addendaXml = addendaXml.Replace("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"","");
+                   addendaXml = addendaXml.Replace("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"","");
                 }
                 if (comp.AddendaHomeDepot != null)
                 {
