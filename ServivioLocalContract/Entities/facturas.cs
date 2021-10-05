@@ -31,7 +31,7 @@ namespace ServicioLocalContract
         CorporativoAduanal,
         FacturaPemex, 
         FacturaLucent, Nomina, Amc71,CartaPorte, Coppel, HomeDepot, Pilgrims,VehiculoUsado,
-        Retenciones, Honda,Amazon,Complementos,ASONIOSCOC,Addenda1888,Innova
+        Retenciones, Honda,Amazon,Complementos,ASONIOSCOC,Addenda1888,Innova,AddendaConcep
     }
 
     public partial class facturas
@@ -130,6 +130,9 @@ namespace ServicioLocalContract
 
         [DataMemberAttribute()]
         public DatosCartaPorte DatosCartaPorte { get; set; }
+
+        [DataMemberAttribute()]
+        public AddendaConcepto addendaConcepto { get; set; }
 
 
         public List<facturasdetalle> ConceptosAduanera { get; set; }
