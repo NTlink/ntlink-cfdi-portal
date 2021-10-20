@@ -76,13 +76,16 @@
   <ItemGroup>
     <Compile Include="AcuseCancelacion.cs" />
     <Compile Include="Addenda1888.cs" />
+    <Compile Include="AddendaConcepto.cs" />
     <Compile Include="AddendaPemex.cs" />
+    <Compile Include="addendaPlanetaV1.cs" />
     <Compile Include="Addenda_BF_v20.cs" />
     <Compile Include="ado.cs" />
     <Compile Include="AmazonAddenda.cs" />
     <Compile Include="ASONIOSCOC.cs" />
     <Compile Include="CartaPorte.cs" />
     <Compile Include="catCDFI.cs" />
+    <Compile Include="ComercioExterior11.cs" />
     <Compile Include="DatosTraslados.cs" />
     <Compile Include="Comprobante.cs" />
     <Compile Include="Comprobante2.cs" />

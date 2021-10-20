@@ -32,6 +32,7 @@ using Warning = ServicioLocal.Business.ReportExecution.Warning;
 using ServicioLocal.Business.Complemento;
 using System.Threading;
 using ServicioLocal.Business.Carta;
+using EspacioComercioExterior11;
 
 
 namespace ServicioLocal.Business
@@ -1452,6 +1453,37 @@ namespace ServicioLocal.Business
             }
 
         }
+        public string GetXmlComercioExterior(ComercioExterior impuestos)
+        {
+            XmlSerializer ser = new XmlSerializer(typeof(ComercioExterior));
+            try
+            {
+                using (MemoryStream memStream = new MemoryStream())
+                {
+                    var sw = new StreamWriter(memStream, Encoding.UTF8);
+                    using (
+                        XmlWriter xmlWriter = XmlWriter.Create(sw,
+                                                               new XmlWriterSettings() { Indent = false, Encoding = Encoding.UTF8 }))
+                    {
+                        XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+                        namespaces.Add("cce11", "http://www.sat.gob.mx/ComercioExterior11");
+                        ser.Serialize(xmlWriter, impuestos, namespaces);
+                        string xml = Encoding.UTF8.GetString(memStream.GetBuffer());
+                        xml = xml.Substring(xml.IndexOf(Convert.ToChar(60)));
+                        xml = xml.Substring(0, (xml.LastIndexOf(Convert.ToChar(62)) + 1));
+
+                        return xml;
+                    }
+                }
+            }
+            catch (Exception ee)
+            {
+
+                Logger.Error(ee);
+                return null;
+            }
+
+        }
 
         public string GetXmlVehiculoUsado(VehiculoUsado impuestos)
         {
@@ -1935,6 +1967,13 @@ namespace ServicioLocal.Business
                    addendaXml = addendaXml.Replace("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"","");
                    addendaXml = addendaXml.Replace("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"","");
                 }
+                if (comp.addendaPlaneta != null)
+                {
+                    addendaXml = GetXmlAddenda(comp.addendaPlaneta, typeof(ServicioLocal.Business.AddendaPlaneta.OrdenesCompra), null, null);
+                    addendaXml = addendaXml.Replace("xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", "");
+                
+                }
+
                 if (comp.AddendaHomeDepot != null)
                 {
 
@@ -2103,6 +2142,14 @@ namespace ServicioLocal.Business
                     complementoIL=GetXmlVehiculoUsado(comp.Complemento.VehiculoUsado);
                  
                 }
+                if (comp.Complemento != null && comp.Complemento.comercioExterior != null)
+                {
+                    complementoIL = GetXmlComercioExterior(comp.Complemento.comercioExterior);
+                }
+                if (comp.Complemento != null && comp.Complemento.cartaPorte != null)
+                {
+                    complementoIL = GetXmlCartaPorte(comp.Complemento.cartaPorte);
+                }
                 //para los pagos
                 if (comp.Complemento != null && comp.Complemento.Pag != null)
                 {
@@ -2201,7 +2248,7 @@ namespace ServicioLocal.Business
 
                 string comp = GetXml(comprobante, null);
                 comprobante.XmlString = comp;
-                comprobante.CadenaOriginal = gen.CadenaOriginal(comp);
+                comprobante.CadenaOriginal = gen.CadenaOriginal(comprobante.XmlString);
                 comprobante.Sello = "Vista Previa";///Firmar(comprobante.CadenaOriginal, rutaLlave, passLlave);
                 TimbrarComprobantePreview(comprobante);
             }
@@ -2246,6 +2293,12 @@ namespace ServicioLocal.Business
                     comprobante.xsiSchemaLocation = comprobante.xsiSchemaLocation + " http://www.sat.gob.mx/CartaPorte http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte.xsd";
                     complemento = GetXmlCartaPorte(comprobante.Complemento.cartaPorte);
                     
+                }
+                if (comprobante.Complemento != null && comprobante.Complemento.comercioExterior != null)
+                {
+                    comprobante.xsiSchemaLocation = comprobante.xsiSchemaLocation + "  http://www.sat.gob.mx/ComercioExterior11 http://www.sat.gob.mx/sitio_internet/cfd/ComercioExterior11/ComercioExterior11.xsd";
+                    complemento = GetXmlComercioExterior(comprobante.Complemento.comercioExterior);
+
                 }
                 
 

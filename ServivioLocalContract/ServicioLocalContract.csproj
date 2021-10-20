@@ -73,6 +73,9 @@
     <Compile Include="ElementoReporte.cs" />
     <Compile Include="ElementoDist.cs" />
     <Compile Include="EmailAttachment.cs" />
+    <Compile Include="Entities\AddendaConcepto.cs" />
+    <Compile Include="Entities\AddendaPlanetaV1.cs" />
+    <Compile Include="Entities\DatosComercioExterior.cs" />
     <Compile Include="Entities\DatosCartaPorte.cs" />
     <Compile Include="Entities\VUInformacionAduanera.cs" />
     <Compile Include="Entities\DatosPilgrims.cs" />

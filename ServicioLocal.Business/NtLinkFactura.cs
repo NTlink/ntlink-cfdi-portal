@@ -16,6 +16,8 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Xml.Linq;
 using ServicioLocal.Business.Carta;
+using ServicioLocal.Business.AddendaPlaneta;
+using EspacioComercioExterior11;
 
 namespace ServicioLocal.Business
 {
@@ -453,6 +455,12 @@ namespace ServicioLocal.Business
                 comprobante.Titulo = "Carta Porte";
                 comprobante.TipoDeComprobante = "T";//cambio obligado
             }
+            if (factura.Factura.TipoDocumento == TipoDocumento.Traslado)
+            {
+                comprobante.Titulo = "Traslado";
+                comprobante.TipoDeComprobante = "T";//cambio obligado
+            }
+           
             if (factura.Factura.TipoDocumento == TipoDocumento.Donativo)
             {
                 //comprobante.tipoDeComprobante = ComprobanteTipoDeComprobante.ingreso;
@@ -477,6 +485,20 @@ namespace ServicioLocal.Business
             comprobante.Receptor.Nombre = cliente.RazonSocial;
             comprobante.Receptor.Rfc = cliente.RFC;
             comprobante.Receptor.UsoCFDI = factura.Factura.UsoCFDI;
+           if(complementos!=null)
+            if (complementos.datosComercioExterior != null)   //--------solo para el complemento comercio exterior
+            {
+                if (!string.IsNullOrEmpty(cliente.Pais))
+                {
+                    comprobante.Receptor.ResidenciaFiscal = cliente.Pais;
+                    comprobante.Receptor.ResidenciaFiscalSpecified = true;
+                }
+                else
+                    comprobante.Receptor.ResidenciaFiscalSpecified = false;
+                if (!string.IsNullOrEmpty(cliente.NumRegIdTrib))
+                    comprobante.Receptor.NumRegIdTrib = cliente.NumRegIdTrib;
+            }
+            
             /*
             comprobante.Receptor.Domicilio = new t_Ubicacion();
             comprobante.Receptor.Domicilio.pais = cliente.Pais;
@@ -791,6 +813,46 @@ namespace ServicioLocal.Business
                 comprobante.addendaConcepto = new AddendaConcepto.Conceptos();
                 comprobante.addendaConcepto.Concepto = factura.Factura.addendaConcepto.Concepto.ToArray();
              
+            }
+            if (factura._factura.TipoDocumentoSAT == TipoDocumento.AddendaPlaneta)
+            {
+                comprobante.TipoAddenda = TipoAddenda.AddendaPlaneta;
+                comprobante.addendaPlaneta = new AddendaPlaneta.OrdenesCompra();
+                comprobante.addendaPlaneta.version = 1.0M;
+                //comprobante.addendaPlaneta.AddendaOC = new List<AddendaOC>();
+                AddendaOC AOC = new AddendaOC();
+                AOC.Empresa = factura._factura.addendaPlaneta.Empresa;
+                AOC.FechaADDOC = Convert.ToDateTime(factura._factura.addendaPlaneta.FechaADDOC).ToString("yyyy-MM-dd");
+                AOC.Folio = factura._factura.addendaPlaneta.Folio;
+                AOC.Requisicion = factura._factura.addendaPlaneta.Requisicion;
+         
+                    List<Partida> LP = new List<Partida>();
+                foreach (var atri in factura._factura.addendaPlaneta.detalleADDOC)
+                {
+                    Partida P = new Partida();
+                    P.Cantidad =Convert.ToDecimal(atri.Cantidad);
+                    P.Codigo = atri.Codigo;
+                    P.Descripcion=atri.Descripcion;
+                    P.HojaTrabajo=atri.HojaTrabajo;
+                    P.ImporteTotal=Convert.ToDecimal(atri.ImporteTotal);
+                    P.Linea=atri.Linea;
+                    P.PrecioUnitario =Convert.ToDecimal( atri.PrecioUnitario);
+                    P.ProcesoProd = atri.ProcesoProd;
+                    P.TipoTrabajo = atri.TipoTrabajo;
+                    LP.Add(P);
+                }
+                
+                AddendaPlaneta.DetalleADDOC DAC = new AddendaPlaneta.DetalleADDOC();
+                DAC.Partida = LP.ToArray();
+                List<AddendaPlaneta.DetalleADDOC> DACL = new List<AddendaPlaneta.DetalleADDOC>();
+                // Partida[][] result = new Partida[LP.Count()][];
+                //result[0]=LP.ToArray();
+                DACL.Add(DAC);
+
+                AOC.DetalleADDOC = DACL.ToArray();
+               List<AddendaOC> AOCL = new List< AddendaOC>();
+               AOCL.Add(AOC);  
+              comprobante.addendaPlaneta.AddendaOC = AOCL.ToArray();
             }
             //Addenda PEMEX -- SZ
             if (factura.Factura.TipoDocumento == TipoDocumento.FacturaPemex)
@@ -1175,6 +1237,7 @@ namespace ServicioLocal.Business
                 impuestos.Traslados = listaTraslados.ToArray();
                 impuestos.TotalImpuestosTrasladadosSpecified = true;
                 impuestos.TotalImpuestosTrasladados = numerodecimales(totalTraslado, (int)mone.Decimales);
+                factura._factura.IVA=Convert.ToDecimal(impuestos.TotalImpuestosTrasladados);
                // impuestos.TotalImpuestosTrasladados = numerodecimales(totalTraslado, mon);
            
             }
@@ -2771,6 +2834,227 @@ namespace ServicioLocal.Business
                         comprobante.Complemento = new ComprobanteComplemento();
                     comprobante.Complemento.cartaPorte = new CartaPorte();
                     comprobante.Complemento.cartaPorte = c;
+
+                }
+
+             //-------------------------------------------------------------------------------------------
+                if (complementos.datosComercioExterior != null)
+                {
+                    if (comprobante.Complemento == null)
+                        comprobante.Complemento = new ComprobanteComplemento();
+                        comprobante.Complemento.comercioExterior = new  ComercioExterior();
+
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.ClaveDePedimento))
+                        {
+                            comprobante.Complemento.comercioExterior.ClaveDePedimento = complementos.datosComercioExterior.ClaveDePedimento;
+                            comprobante.Complemento.comercioExterior.ClaveDePedimentoSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.ClaveDePedimentoSpecified = false;
+                    
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.Incoterm))
+                        {
+                            comprobante.Complemento.comercioExterior.Incoterm = complementos.datosComercioExterior.Incoterm;
+                            comprobante.Complemento.comercioExterior.IncotermSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.IncotermSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.MotivoTraslado))
+                        {
+                            comprobante.Complemento.comercioExterior.MotivoTraslado = complementos.datosComercioExterior.MotivoTraslado;
+                            comprobante.Complemento.comercioExterior.MotivoTrasladoSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.MotivoTrasladoSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.CertificadoOrigen))
+                        {
+                            comprobante.Complemento.comercioExterior.CertificadoOrigen =Convert.ToInt32(complementos.datosComercioExterior.CertificadoOrigen);
+                            comprobante.Complemento.comercioExterior.CertificadoOrigenSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.CertificadoOrigenSpecified = false;
+                       
+                        comprobante.Complemento.comercioExterior.NumCertificadoOrigen = complementos.datosComercioExterior.NumCertificadoOrigen;
+                        comprobante.Complemento.comercioExterior.NumeroExportadorConfiable = complementos.datosComercioExterior.NumeroExportadorConfiable;
+                        comprobante.Complemento.comercioExterior.Observaciones = complementos.datosComercioExterior.Observaciones;
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.Subdivision))
+                        {
+                            comprobante.Complemento.comercioExterior.Subdivision = Convert.ToInt16(complementos.datosComercioExterior.Subdivision);
+                            comprobante.Complemento.comercioExterior.SubdivisionSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.SubdivisionSpecified = false;
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.TipoCambioUSD))
+                        {
+                            comprobante.Complemento.comercioExterior.TipoCambioUSD = Convert.ToDecimal(complementos.datosComercioExterior.TipoCambioUSD);
+                            comprobante.Complemento.comercioExterior.TipoCambioUSDSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.TipoCambioUSDSpecified = false;
+
+                        comprobante.Complemento.comercioExterior.TipoOperacion = complementos.datosComercioExterior.TipoOperacion;
+                        if (!string.IsNullOrEmpty(complementos.datosComercioExterior.TotalUSD))
+                        {
+                            comprobante.Complemento.comercioExterior.TotalUSD = Convert.ToDecimal( complementos.datosComercioExterior.TotalUSD);
+                            comprobante.Complemento.comercioExterior.TotalUSDSpecified = true;
+                        }
+                        else
+                            comprobante.Complemento.comercioExterior.TotalUSDSpecified = false;
+                       comprobante.Complemento.comercioExterior.Version = "1.1";
+                      //------------
+                       if (!string.IsNullOrEmpty(complementos.datosComercioExterior.emisor.Curp) || !string.IsNullOrEmpty(complementos.datosComercioExterior.emisor.pais))
+                       {
+                           comprobante.Complemento.comercioExterior.Emisor = new ComercioExteriorEmisor();
+                           comprobante.Complemento.comercioExterior.Emisor.Curp = complementos.datosComercioExterior.emisor.Curp;
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio = new ComercioExteriorEmisorDomicilio();
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.Calle = complementos.datosComercioExterior.emisor.calle;
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.CodigoPostal = complementos.datosComercioExterior.emisor.codigoPostal;
+                           if (!string.IsNullOrEmpty(complementos.datosComercioExterior.emisor.colonia))
+                           {
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.Colonia = complementos.datosComercioExterior.emisor.colonia;
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.ColoniaSpecified = true;
+                           }
+                           else
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.ColoniaSpecified = false;
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.Estado = complementos.datosComercioExterior.emisor.estado;
+                           if (!string.IsNullOrEmpty(complementos.datosComercioExterior.emisor.localidad))
+                           {
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.Localidad = complementos.datosComercioExterior.emisor.localidad;
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.LocalidadSpecified = true;
+                           }
+                           else
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.LocalidadSpecified = false;
+                           if (!string.IsNullOrEmpty(complementos.datosComercioExterior.emisor.municipio))
+                           {
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.Municipio = complementos.datosComercioExterior.emisor.municipio;
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.MunicipioSpecified = true;
+                           }
+                           else
+                               comprobante.Complemento.comercioExterior.Emisor.Domicilio.MunicipioSpecified = false;
+                          
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.NumeroExterior = complementos.datosComercioExterior.emisor.numeroExterior;
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.NumeroInterior = complementos.datosComercioExterior.emisor.numeroInterior;
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.Pais = complementos.datosComercioExterior.emisor.pais;
+                           comprobante.Complemento.comercioExterior.Emisor.Domicilio.Referencia = complementos.datosComercioExterior.emisor.referencia;
+                       } 
+                   //------------------------------------
+                       if (complementos.datosComercioExterior.propietario.Count > 0)
+                       {
+                           List<ComercioExteriorPropietario> PL = new List<ComercioExteriorPropietario>();
+                           foreach (var p in complementos.datosComercioExterior.propietario)
+                           {
+                               ComercioExteriorPropietario prop = new ComercioExteriorPropietario();
+                               prop.NumRegIdTrib = p.NumRegIdTrib;
+                               prop.ResidenciaFiscal = p.ResidenciaFiscal;
+                               PL.Add(prop);
+                           }
+                           comprobante.Complemento.comercioExterior.Propietario = PL.ToArray();
+
+                       }
+                    //------------------------------------------
+                       if (!string.IsNullOrEmpty(complementos.datosComercioExterior.receptor.NumRegIdTrib) || !string.IsNullOrEmpty(complementos.datosComercioExterior.receptor.pais))
+                       {
+                           comprobante.Complemento.comercioExterior.Receptor = new ComercioExteriorReceptor();
+                           comprobante.Complemento.comercioExterior.Receptor.NumRegIdTrib = complementos.datosComercioExterior.receptor.NumRegIdTrib;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio = new ComercioExteriorReceptorDomicilio();
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Calle = complementos.datosComercioExterior.receptor.calle;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.CodigoPostal = complementos.datosComercioExterior.receptor.codigoPostal;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Colonia = complementos.datosComercioExterior.receptor.colonia;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Estado = complementos.datosComercioExterior.receptor.estado;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Localidad = complementos.datosComercioExterior.receptor.localidad;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Municipio = complementos.datosComercioExterior.receptor.municipio;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.NumeroExterior = complementos.datosComercioExterior.receptor.numeroExterior;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.NumeroInterior = complementos.datosComercioExterior.receptor.numeroInterior;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Pais = complementos.datosComercioExterior.receptor.pais;
+                           comprobante.Complemento.comercioExterior.Receptor.Domicilio.Referencia = complementos.datosComercioExterior.receptor.referencia;
+                    
+                       } 
+                    //-------------------------------------------------------------
+                      if (complementos.datosComercioExterior.destinatario.Count > 0)
+                       {
+                           List<ComercioExteriorDestinatario> PL = new List<ComercioExteriorDestinatario>();
+                           foreach (var p in complementos.datosComercioExterior.destinatario)
+                           {
+                               ComercioExteriorDestinatario prop = new ComercioExteriorDestinatario();
+                               prop.NumRegIdTrib = p.NumRegIdTrib;
+                               prop.Nombre = p.Nombre;
+                               if(p.domicilio.Count>0)
+                               {
+                                 List<ComercioExteriorDestinatarioDomicilio> DL = new List<ComercioExteriorDestinatarioDomicilio>();
+                                 foreach (var d in p.domicilio)
+                                 {   ComercioExteriorDestinatarioDomicilio dom=new ComercioExteriorDestinatarioDomicilio();  
+                                    dom.Calle=d.calle;
+                                    dom.CodigoPostal=d.codigoPostal;
+                                    dom.Colonia=d.colonia;
+                                    dom.Estado=d.estado;
+                                    dom.Localidad=d.localidad;
+                                    dom.Municipio=d.municipio;
+                                    dom.NumeroExterior=d.numeroExterior;
+                                    dom.NumeroInterior=d.numeroInterior;
+                                    dom.Pais=d.pais;
+                                    dom.Referencia=d.referencia;
+                                    DL.Add(dom);
+                                 }
+                                 prop.Domicilio=DL;
+                               }
+                               PL.Add(prop);
+                           }
+                           comprobante.Complemento.comercioExterior.Destinatario = PL;
+
+                       }
+                    //-----------------------------------------------------
+                      if (complementos.datosComercioExterior.mercancia.Count > 0)
+                      {
+                          List<ComercioExteriorMercancia> PL = new List<ComercioExteriorMercancia>();
+                          foreach (var m in complementos.datosComercioExterior.mercancia)
+                          {
+                              ComercioExteriorMercancia prop = new ComercioExteriorMercancia();
+                              if (!string.IsNullOrEmpty(m.CantidadAduana))
+                              {   prop.CantidadAduana =Convert.ToDecimal( m.CantidadAduana);
+                                  prop.CantidadAduanaSpecified = true;
+                              }
+                              else
+                                  prop.CantidadAduanaSpecified = false;
+                              if (!string.IsNullOrEmpty(m.FraccionArancelaria))
+                              {
+                                  prop.FraccionArancelaria = m.FraccionArancelaria;
+                                  prop.FraccionArancelariaSpecified = true;
+                              }
+                              else
+                              prop.FraccionArancelariaSpecified = false;
+                              prop.NoIdentificacion = m.NoIdentificacion;
+                              if (!string.IsNullOrEmpty(m.UnidadAduana))
+                              {
+                                  prop.UnidadAduana = m.UnidadAduana;
+                                  prop.UnidadAduanaSpecified = true;
+                              }
+                              else
+                                  prop.UnidadAduanaSpecified = false;
+                             
+                              prop.ValorDolares =Convert.ToDecimal( m.ValorDolares);
+                              prop.ValorUnitarioAduana =Convert.ToDecimal(m.ValorUnitarioAduana);
+                              prop.ValorUnitarioAduanaSpecified = true;
+
+                              if (m.descripcionesEspecificas.Count > 0)
+                              {
+                                  List<ComercioExteriorMercanciaDescripcionesEspecificas> DL = new List<ComercioExteriorMercanciaDescripcionesEspecificas>();
+                                  foreach (var d in m.descripcionesEspecificas)
+                                  {
+                                      ComercioExteriorMercanciaDescripcionesEspecificas dom = new ComercioExteriorMercanciaDescripcionesEspecificas();
+                                      dom.Marca = d.Marca;
+                                      dom.Modelo = d.Modelo;
+                                      dom.NumeroSerie = d.NumeroSerie;
+                                      dom.SubModelo = d.SubModelo;
+                                      DL.Add(dom);
+                                  }
+                                  prop.DescripcionesEspecificas = DL;
+                              }
+                              PL.Add(prop);
+                          }
+                          comprobante.Complemento.comercioExterior.Mercancias = PL;
+
+                      }
+                  
 
                 }
 

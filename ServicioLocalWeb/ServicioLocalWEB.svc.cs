@@ -88,6 +88,12 @@ namespace ServicioLocalWeb
             OperacionesCatalogos Op = new OperacionesCatalogos();
             return Op.Consultar_MonedaAll();
         }
+        public List<c_Estado> Consultar_EstadosPais(string pais)
+        {
+
+            OperacionesCatalogos Op = new OperacionesCatalogos();
+            return Op.Consultar_EstadosPais(pais);
+        }
 
         public CatalogosSAT.Divisas Consultar_TipoDivisa(string pais)
         {
@@ -695,6 +701,12 @@ namespace ServicioLocalWeb
             OperacionesCatalogos OP = new OperacionesCatalogos();
             return OP.Consultar_MunicipioALL(estado);
         }
+        public List<c_Localidad> Consultar_LocalidadALL(string E)
+        {
+            OperacionesCatalogos OP = new OperacionesCatalogos();
+            return OP.Consultar_LocalidadALL(E);
+        
+        }
         public List<c_CP> Consultar_CPALL(string estado, string municipio)
         {
             OperacionesCatalogos OP = new OperacionesCatalogos();
@@ -729,6 +741,7 @@ namespace ServicioLocalWeb
             fac.Detalles = detalles;
             fac.Factura = fact;
             fact.ConceptosAduanera = conceptosAduana;
+            
             
             foreach (var d33 in detalles33)
             {

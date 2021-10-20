@@ -257,7 +257,8 @@
                             <asp:ListItem Text="Recibo de Donativo" Value="Donativo" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Arrendamiento" Value="Arrendamiento" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Honorarios" Value="Honorarios" ></asp:ListItem>
-                            
+                            <asp:ListItem Text="Traslado" Value="T" ></asp:ListItem>
+                       
                         </asp:DropDownList>
                           
                     </td>
@@ -789,8 +790,7 @@
                               CssClass="form-control0" Enabled="false" 
                               onselectedindexchanged="ddlRIVA_SelectedIndexChanged">
                          <asp:ListItem runat="server" Value="0.106666" Text="0.106666" Selected="True">  </asp:ListItem>
-                                   <asp:ListItem runat="server" Value="0.060000" Text="0.060000"></asp:ListItem>
-                                     <asp:ListItem runat="server" Text="0.040000" Value="0.040000"></asp:ListItem>
+                                 <asp:ListItem runat="server" Text="0.040000" Value="0.040000"></asp:ListItem>
                         </asp:DropDownList></td>
                         <td style="text-align: right; font-weight: 700;">CuentaPredial</td>
                             <td>

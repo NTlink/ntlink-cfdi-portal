@@ -120,6 +120,9 @@
     <Content Include="controles\SectorFinanciero.ascx" />
     <Content Include="Amazon.aspx" />
     <Content Include="ASONIOSCOC.aspx" />
+    <Content Include="wfrFacturaAddendaPlaneta.aspx" />
+    <Content Include="wfrFacturaAddenda.aspx" />
+    <Content Include="wfrFacturaComercioExterior.aspx" />
     <Content Include="wfrFacturaInnova.aspx" />
     <Content Include="wfrFacturaCartaPorte.aspx" />
     <Content Include="wfrFacturaVehiculoUsado.aspx" />
@@ -396,6 +399,27 @@
     </Compile>
     <Compile Include="ASONIOSCOC.aspx.designer.cs">
       <DependentUpon>ASONIOSCOC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAddendaPlaneta.aspx.cs">
+      <DependentUpon>wfrFacturaAddendaPlaneta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAddendaPlaneta.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAddendaPlaneta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaAddenda.aspx.cs">
+      <DependentUpon>wfrFacturaAddenda.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaAddenda.aspx.designer.cs">
+      <DependentUpon>wfrFacturaAddenda.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="wfrFacturaComercioExterior.aspx.cs">
+      <DependentUpon>wfrFacturaComercioExterior.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wfrFacturaComercioExterior.aspx.designer.cs">
+      <DependentUpon>wfrFacturaComercioExterior.aspx</DependentUpon>
     </Compile>
     <Compile Include="wfrFacturaInnova.aspx.cs">
       <DependentUpon>wfrFacturaInnova.aspx</DependentUpon>

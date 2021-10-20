@@ -76,7 +76,10 @@ namespace ServicioLocalContract
         List<c_Pais> Consultar_PaisAll();
         [OperationContract]
         List<c_ClaveUnidadPeso> Consultar_ClaveUnidadPeso_ALL();
-      
+        [OperationContract]
+        List<c_Estado> Consultar_EstadosPais(string pais);
+        [OperationContract]
+        List<c_Localidad> Consultar_LocalidadALL(string E);
         [OperationContract]
         c_Moneda Consultar_Moneda(string moneda);
         [OperationContract]

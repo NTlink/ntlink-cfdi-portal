@@ -297,7 +297,8 @@ border-style:None;
                             <asp:ListItem Text="Recibo de Donativo" Value="Donativo" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Arrendamiento" Value="Arrendamiento" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Honorarios" Value="Honorarios" ></asp:ListItem>
-                            
+                           <%-- <asp:ListItem Text="Traslado" Value="T" ></asp:ListItem>--%>
+                        
                         </asp:DropDownList>
                           
                     </td>
@@ -829,8 +830,7 @@ border-style:None;
                               CssClass="form-control0" Enabled="false" 
                               onselectedindexchanged="ddlRIVA_SelectedIndexChanged">
                          <asp:ListItem runat="server" Value="0.106666" Text="0.106666" Selected="True">  </asp:ListItem>
-                                   <asp:ListItem runat="server" Value="0.060000" Text="0.060000"></asp:ListItem>
-                                     <asp:ListItem runat="server" Text="0.040000" Value="0.040000"></asp:ListItem>
+                                   <asp:ListItem runat="server" Text="0.040000" Value="0.040000"></asp:ListItem>
                         </asp:DropDownList></td>
                         <td style="text-align: right; font-weight: 700;">CuentaPredial</td>
                             <td>
@@ -3405,7 +3405,8 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
             runat="server" Display="Dynamic" CssClass="alert-danger"
     ControlToValidate="txtToneladasNetasCarro" ErrorMessage="Dato invalido" 
                          ValidationExpression="[0-9]*\.?[0-9]*" 
-                         ValidationGroup="AgregarCarro" style="font-size: medium"/><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                         ValidationGroup="AgregarCarro" style="font-size: medium"/><asp:RequiredFieldValidator runat="server"  
+                         CssClass="alert-error"
                            ID="RequiredFieldValidator38" ControlToValidate="txtToneladasNetasCarro"
                             Display="Dynamic" ErrorMessage="* Requerido" 
                            ValidationGroup="AgregarCarro" style="font-size: medium" /></td>

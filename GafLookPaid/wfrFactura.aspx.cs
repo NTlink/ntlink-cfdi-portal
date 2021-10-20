@@ -183,12 +183,14 @@ namespace GafLookPaid
                 this.lblError.Text = "* Error de validación en la partida";
                 return;
             }
+            /*
             if ((txtCodigo.Text == "80111701" && ddlRIVA.SelectedValue != "0.060000") || (txtCodigo.Text != "80111701" && ddlRIVA.SelectedValue == "0.060000"))
             {
                 this.lblError.Text = "* Error de validación en la partida, el codigo 80111701 equivale a 6%";
                 return;
             
             }
+             */ 
             this.lblError.Text = string.Empty;
 
             List<facturasdetalle> detalles = ViewState["detalles"] as List<facturasdetalle>;
@@ -256,6 +258,9 @@ namespace GafLookPaid
             this.txtIdProducto.Value = null;
             this.Clear();
             this.BindDetallesToGridView();
+             if (ddlTipoDocumento.SelectedValue != "T") //comprobante traslado
+            {
+              
             this.UpdateTotales();
 
             //  Impuestos.ClaveConcepto = this.txtCodigo.Text;
@@ -280,7 +285,7 @@ namespace GafLookPaid
                 AgregarImpuesto(detalle.Partida.ToString(), "Retenciones", "002", "Tasa", ddlRIVA.SelectedValue);
             }
             if (cbRISR.Checked == true)
-            {
+            { 
                 AgregarImpuesto(detalle.Partida.ToString(), "Retenciones", "001", "Tasa", "0.100000");
             }
             if (cbIVA.Checked == true || cbRISR.Checked == true || cbRIVA.Checked == true)
@@ -363,9 +368,9 @@ namespace GafLookPaid
                 this.descuento.Checked = false;
                 txtdsc.Enabled = false; 
 
-            }  
-            
+            }
 
+            }  //-----------fin comprobante traslado
         }
 
         protected void ddlEmpresa_SelectedIndexChanged(object sender, EventArgs e)
@@ -904,6 +909,8 @@ namespace GafLookPaid
                 fact.TipoDocumento = TipoDocumento.Honorarios;
             if (ddlTipoDocumento.SelectedValue == "Ingreso")
                 fact.TipoDocumento = TipoDocumento.Ingreso;
+            if (ddlTipoDocumento.SelectedValue == "T")
+                fact.TipoDocumento = TipoDocumento.Traslado;
 
             if (!string.IsNullOrEmpty(txtFolioOriginal.Text))
             {
@@ -1366,49 +1373,54 @@ namespace GafLookPaid
             }
 
             //ajuste de impuestos----------------------------------------------------
-
-            var detallesImpuestos = ViewState["detallesImpuestos"] as List<facturasdetalleRT>;
-            string partida = edicion.Partida.ToString();
-
-            foreach (var x in detallesImpuestos)
+            if (ddlTipoDocumento.SelectedValue != "T")
             {
-                string BaseConcepto = "";
-                if (edicion.ConceptoDescuento != null)
-                    BaseConcepto = (edicion.Total - edicion.ConceptoDescuento).ToString();
-                else
-                    BaseConcepto = edicion.Total.ToString();
-                if (x.ConceptoClaveProdServ.ToString() == partida)
+
+                var detallesImpuestos = ViewState["detallesImpuestos"] as List<facturasdetalleRT>;
+                string partida = edicion.Partida.ToString();
+
+                foreach (var x in detallesImpuestos)
                 {
-                    x.Base = Convert.ToDecimal(BaseConcepto);
-                    if (x.TipoFactor != "Exento" || x.TipoImpuesto != "Traslados") //no se llenan 
+                    string BaseConcepto = "";
+                    if (edicion.ConceptoDescuento != null)
+                        BaseConcepto = (edicion.Total - edicion.ConceptoDescuento).ToString();
+                    else
+                        BaseConcepto = edicion.Total.ToString();
+                    if (x.ConceptoClaveProdServ.ToString() == partida)
                     {
-                        x.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(x.TasaOCuota), mon);
-                    }
-                    foreach (var det in edicion.ConceptoTraslados)
-                    {
-                        det.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
-                        if (det.TipoFactor != "Exento")
+                        x.Base = Convert.ToDecimal(BaseConcepto);
+                        if (x.TipoFactor != "Exento" || x.TipoImpuesto != "Traslados") //no se llenan 
                         {
-                            det.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(det.TasaOCuota), mon);
+                            x.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(x.TasaOCuota), mon);
+                        }
+                        foreach (var det in edicion.ConceptoTraslados)
+                        {
+                            det.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
+                            if (det.TipoFactor != "Exento")
+                            {
+                                det.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(det.TasaOCuota), mon);
+                            }
+                        }
+
+                        foreach (var ret in edicion.ConceptoRetenciones)
+                        {
+                            ret.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
+                            ret.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(ret.TasaOCuota), mon);
                         }
                     }
-
-                    foreach (var ret in edicion.ConceptoRetenciones)
-                    {
-                        ret.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
-                        ret.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(ret.TasaOCuota), mon);
-                    }
                 }
+                ViewState["descuento"] = descuento1;
+              
+                ViewState["detallesImpuestos"] = detallesImpuestos;
+                BindDetallesImpuestosToGridView();
+                //-----------------------------------------------------------------------
+                this.UpdateTotales();
+                if (cbImpuestos.Checked == true)
+                    ActImpuestos();
             }
-            ViewState["descuento"] = descuento1;
             ViewState["detalles"] = detalles;
             this.BindDetallesToGridView();
-            ViewState["detallesImpuestos"] = detallesImpuestos;
-            BindDetallesImpuestosToGridView();
-            //-----------------------------------------------------------------------
-            this.UpdateTotales();
-            if (cbImpuestos.Checked == true)
-                ActImpuestos();
+
         }
 
 
@@ -1441,10 +1453,49 @@ namespace GafLookPaid
                 
 
             }
-
+            if (ddlTipoDocumento.SelectedValue == "T")
+            {
+                iniciarTraslado();
+            }
 
            
         }
+
+
+        private void iniciarTraslado()
+        {
+            decimal cero = 0M;
+            CultureInfo cul = CultureInfo.CreateSpecificCulture("es-MX");
+            this.lblDescuento.Text = cero.ToString("C", cul);
+            this.lblRetenciones.Text = cero.ToString("C", cul);
+            this.lblTraslados.Text = cero.ToString("C", cul);
+
+            this.lblTotal.Text = cero.ToString("C", cul);
+            this.lblSubtotal.Text = cero.ToString("C", cul);
+            //------------------------------------------
+            txtCondicionesPago.Text = "";
+            //-----------------------
+            ViewState["detallesImpuestos"] = new List<facturasdetalleRT>();//para impuestos
+            ViewState["iva"] = 0M;
+            ViewState["total"] = 0M;
+            ViewState["subtotal"] = 0M;
+            ViewState["descuento"] = 0M;
+            //---------------------------------------------------
+            DivComplementos.Visible = false;
+            ddlFormaPago.SelectedValue = "00";
+            ddlMetodoPago.SelectedValue = "00";
+            cbImpuestos.Enabled = false;
+            cbImpuestos.Checked = false;
+            var detalles = ViewState["detalles"] as List<facturasdetalle>;
+            foreach (var x in detalles)
+            {
+                x.ConceptoRetenciones = null;
+                x.ConceptoTraslados = null;
+            }
+            ViewState["detalles"] = detalles;
+
+        }
+       
         //---------------------------------------------------------------------------
         public void ActualizarSaldosMaster()
         {
