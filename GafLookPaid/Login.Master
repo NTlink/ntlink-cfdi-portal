@@ -14,7 +14,7 @@
 	</asp:ContentPlaceHolder>
 
 	    
-	<!--SCRIPTS VENTA EMERGENTE
+	<!--SCRIPTS VENTA EMERGENTE-->
 <div id='ventana-flotante'>
 
    <a class='cerrar' href='javascript:void(0);' onclick='document.getElementById(&apos;ventana-flotante&apos;).className = &apos;oculto&apos;'>x</a>
@@ -25,10 +25,15 @@
 
            <div class="style31" 
                style="font-variant-ligatures: normal; font-variant-caps: normal; orphans: 2; widows: 2; -webkit-text-stroke-width: 0px;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¡Bienvenidos al Nuevo CFDI V-3.3!</div>
-           <p class="MsoNormal" style="margin: 0cm 0cm 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;  font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">           
-Para poder usar el nuevo portal deberá contactar a su asesor de ventas o comunicarse  a los teléfonos de ntlink para habilitar el saldo de su&nbsp; cuenta 
-               en el portal de CFDI 3.3
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;¡Estimado Usuario!</div>
+           <p class="MsoNormal" style="margin: 0cm 0cm 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;  font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align:left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">           
+Se hace de su conocimiento que se tiene programada una ventana de tiempo al ambiente de certificación de Comprobante Fiscal Digital a través de Internet. Por lo que deberán contemplar y reprogramar las pruebas a realizar en dicho ambiente dentro del periodo que a continuación se señala:
+<br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha de inicio:     Martes 30 de noviembre a las 13:00 hrs.
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fecha fin:                 Martes 30 de noviembre a las 19:15 hrs.
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ventana Total:        6:15 hrs.
+<br />
  
                <strong>Agradecemos su comprensi</strong><span class="auto-style20" style="font-size: medium; font-family: Avenir, serif;"><strong>ón.</strong>
 </span>&nbsp;</p>
@@ -42,7 +47,7 @@ Para poder usar el nuevo portal deberá contactar a su asesor de ventas o comuni
 <style>
 #ventana-flotante {
 width: 850px;  /* Ancho de la ventana */
-height: 170px;  /* Alto de la ventana */
+height: 270px;  /* Alto de la ventana */
 background: -webkit-gradient(linear, center top, center bottom, from(#B2CA35), to(#fff));;  /* Color de fondo */
 position:absolute;
 border-radius: 30px 20px 30px;

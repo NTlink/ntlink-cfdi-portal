@@ -1,17 +1,15 @@
 ﻿
 using System.Xml.Serialization;
-using System.Collections.Generic;
 
 namespace ServicioLocal.Business.Carta
 {
-
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.sat.gob.mx/CartaPorte", IsNullable = false)]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.sat.gob.mx/CartaPorte20", IsNullable = false)]
     public partial class CartaPorte
     {
 
@@ -19,7 +17,7 @@ namespace ServicioLocal.Business.Carta
 
         private CartaPorteMercancias mercanciasField;
 
-        private CartaPorteFiguraTransporte figuraTransporteField;
+        private CartaPorteTiposFigura[] figuraTransporteField;
 
         private string versionField;
 
@@ -28,6 +26,10 @@ namespace ServicioLocal.Business.Carta
         private string entradaSalidaMercField;
 
         private bool entradaSalidaMercFieldSpecified;
+
+        private string paisOrigenDestinoField;
+
+        private bool paisOrigenDestinoFieldSpecified;
 
         private string viaEntradaSalidaField;
 
@@ -39,7 +41,7 @@ namespace ServicioLocal.Business.Carta
 
         public CartaPorte()
         {
-            this.versionField = "1.0";
+            this.versionField = "2.0";
         }
 
         /// <remarks/>
@@ -70,7 +72,8 @@ namespace ServicioLocal.Business.Carta
         }
 
         /// <remarks/>
-        public CartaPorteFiguraTransporte FiguraTransporte
+        [System.Xml.Serialization.XmlArrayItemAttribute("TiposFigura", IsNullable = false)]
+        public CartaPorteTiposFigura[] FiguraTransporte
         {
             get
             {
@@ -140,6 +143,34 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PaisOrigenDestino
+        {
+            get
+            {
+                return this.paisOrigenDestinoField;
+            }
+            set
+            {
+                this.paisOrigenDestinoField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PaisOrigenDestinoSpecified
+        {
+            get
+            {
+                return this.paisOrigenDestinoFieldSpecified;
+            }
+            set
+            {
+                this.paisOrigenDestinoFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ViaEntradaSalida
         {
             get
@@ -200,134 +231,19 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteUbicacion
     {
 
-        private CartaPorteUbicacionOrigen origenField;
-
-        private CartaPorteUbicacionDestino destinoField;
-
         private CartaPorteUbicacionDomicilio domicilioField;
 
-        private string tipoEstacionField;
+        private string tipoUbicacionField;
 
-        private bool tipoEstacionFieldSpecified;
+        private string iDUbicacionField;
 
-        private decimal distanciaRecorridaField;
+        private string rFCRemitenteDestinatarioField;
 
-        private bool distanciaRecorridaFieldSpecified;
-
-        /// <remarks/>
-        public CartaPorteUbicacionOrigen Origen
-        {
-            get
-            {
-                return this.origenField;
-            }
-            set
-            {
-                this.origenField = value;
-            }
-        }
-
-        /// <remarks/>
-        public CartaPorteUbicacionDestino Destino
-        {
-            get
-            {
-                return this.destinoField;
-            }
-            set
-            {
-                this.destinoField = value;
-            }
-        }
-
-        /// <remarks/>
-        public CartaPorteUbicacionDomicilio Domicilio
-        {
-            get
-            {
-                return this.domicilioField;
-            }
-            set
-            {
-                this.domicilioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TipoEstacion
-        {
-            get
-            {
-                return this.tipoEstacionField;
-            }
-            set
-            {
-                this.tipoEstacionField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TipoEstacionSpecified
-        {
-            get
-            {
-                return this.tipoEstacionFieldSpecified;
-            }
-            set
-            {
-                this.tipoEstacionFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public decimal DistanciaRecorrida
-        {
-            get
-            {
-                return this.distanciaRecorridaField;
-            }
-            set
-            {
-                this.distanciaRecorridaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool DistanciaRecorridaSpecified
-        {
-            get
-            {
-                return this.distanciaRecorridaFieldSpecified;
-            }
-            set
-            {
-                this.distanciaRecorridaFieldSpecified = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteUbicacionOrigen
-    {
-
-        private string iDOrigenField;
-
-        private string rFCRemitenteField;
-
-        private string nombreRemitenteField;
+        private string nombreRemitenteDestinatarioField;
 
         private string numRegIdTribField;
 
@@ -345,47 +261,83 @@ namespace ServicioLocal.Business.Carta
 
         private bool navegacionTraficoFieldSpecified;
 
-        private string fechaHoraSalidaField;
+        private string fechaHoraSalidaLlegadaField;
+
+       // private c_TipoEstacion tipoEstacionField;
+        private string tipoEstacionField;
+
+        private bool tipoEstacionFieldSpecified;
+
+        private decimal distanciaRecorridaField;
+
+        private bool distanciaRecorridaFieldSpecified;
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IDOrigen
+        public CartaPorteUbicacionDomicilio Domicilio
         {
             get
             {
-                return this.iDOrigenField;
+                return this.domicilioField;
             }
             set
             {
-                this.iDOrigenField = value;
+                this.domicilioField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCRemitente
+        public string TipoUbicacion
         {
             get
             {
-                return this.rFCRemitenteField;
+                return this.tipoUbicacionField;
             }
             set
             {
-                this.rFCRemitenteField = value;
+                this.tipoUbicacionField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreRemitente
+        public string IDUbicacion
         {
             get
             {
-                return this.nombreRemitenteField;
+                return this.iDUbicacionField;
             }
             set
             {
-                this.nombreRemitenteField = value;
+                this.iDUbicacionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string RFCRemitenteDestinatario
+        {
+            get
+            {
+                return this.rFCRemitenteDestinatarioField;
+            }
+            set
+            {
+                this.rFCRemitenteDestinatarioField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NombreRemitenteDestinatario
+        {
+            get
+            {
+                return this.nombreRemitenteDestinatarioField;
+            }
+            set
+            {
+                this.nombreRemitenteDestinatarioField = value;
             }
         }
 
@@ -503,15 +455,71 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string FechaHoraSalida
+        public string FechaHoraSalidaLlegada
         {
             get
             {
-                return this.fechaHoraSalidaField;
+                return this.fechaHoraSalidaLlegadaField;
             }
             set
             {
-                this.fechaHoraSalidaField = value;
+                this.fechaHoraSalidaLlegadaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TipoEstacion
+        {
+            get
+            {
+                return this.tipoEstacionField;
+            }
+            set
+            {
+                this.tipoEstacionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TipoEstacionSpecified
+        {
+            get
+            {
+                return this.tipoEstacionFieldSpecified;
+            }
+            set
+            {
+                this.tipoEstacionFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public decimal DistanciaRecorrida
+        {
+            get
+            {
+                return this.distanciaRecorridaField;
+            }
+            set
+            {
+                this.distanciaRecorridaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool DistanciaRecorridaSpecified
+        {
+            get
+            {
+                return this.distanciaRecorridaFieldSpecified;
+            }
+            set
+            {
+                this.distanciaRecorridaFieldSpecified = value;
             }
         }
     }
@@ -519,759 +527,186 @@ namespace ServicioLocal.Business.Carta
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.sat.gob.mx/sitio_internet/cfd/catalogos")]
-    public enum c_Pais
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteUbicacionDomicilio
+    {
+
+        private string calleField;
+
+        private string numeroExteriorField;
+
+        private string numeroInteriorField;
+
+        private string coloniaField;
+
+        private string localidadField;
+
+        private string referenciaField;
+
+        private string municipioField;
+
+        private string estadoField;
+
+        private string paisField;
+
+        private string codigoPostalField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Calle
+        {
+            get
+            {
+                return this.calleField;
+            }
+            set
+            {
+                this.calleField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NumeroExterior
+        {
+            get
+            {
+                return this.numeroExteriorField;
+            }
+            set
+            {
+                this.numeroExteriorField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NumeroInterior
+        {
+            get
+            {
+                return this.numeroInteriorField;
+            }
+            set
+            {
+                this.numeroInteriorField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Colonia
+        {
+            get
+            {
+                return this.coloniaField;
+            }
+            set
+            {
+                this.coloniaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Localidad
+        {
+            get
+            {
+                return this.localidadField;
+            }
+            set
+            {
+                this.localidadField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Referencia
+        {
+            get
+            {
+                return this.referenciaField;
+            }
+            set
+            {
+                this.referenciaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Municipio
+        {
+            get
+            {
+                return this.municipioField;
+            }
+            set
+            {
+                this.municipioField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Estado
+        {
+            get
+            {
+                return this.estadoField;
+            }
+            set
+            {
+                this.estadoField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Pais
+        {
+            get
+            {
+                return this.paisField;
+            }
+            set
+            {
+                this.paisField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string CodigoPostal
+        {
+            get
+            {
+                return this.codigoPostalField;
+            }
+            set
+            {
+                this.codigoPostalField = value;
+            }
+        }
+    }
+
+  
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public enum CartaPorteUbicacionTipoUbicacion
     {
 
         /// <remarks/>
-        AFG,
+        Origen,
 
         /// <remarks/>
-        ALA,
-
-        /// <remarks/>
-        ALB,
-
-        /// <remarks/>
-        DEU,
-
-        /// <remarks/>
-        AND,
-
-        /// <remarks/>
-        AGO,
-
-        /// <remarks/>
-        AIA,
-
-        /// <remarks/>
-        ATA,
-
-        /// <remarks/>
-        ATG,
-
-        /// <remarks/>
-        SAU,
-
-        /// <remarks/>
-        DZA,
-
-        /// <remarks/>
-        ARG,
-
-        /// <remarks/>
-        ARM,
-
-        /// <remarks/>
-        ABW,
-
-        /// <remarks/>
-        AUS,
-
-        /// <remarks/>
-        AUT,
-
-        /// <remarks/>
-        AZE,
-
-        /// <remarks/>
-        BHS,
-
-        /// <remarks/>
-        BGD,
-
-        /// <remarks/>
-        BRB,
-
-        /// <remarks/>
-        BHR,
-
-        /// <remarks/>
-        BEL,
-
-        /// <remarks/>
-        BLZ,
-
-        /// <remarks/>
-        BEN,
-
-        /// <remarks/>
-        BMU,
-
-        /// <remarks/>
-        BLR,
-
-        /// <remarks/>
-        MMR,
-
-        /// <remarks/>
-        BOL,
-
-        /// <remarks/>
-        BIH,
-
-        /// <remarks/>
-        BWA,
-
-        /// <remarks/>
-        BRA,
-
-        /// <remarks/>
-        BRN,
-
-        /// <remarks/>
-        BGR,
-
-        /// <remarks/>
-        BFA,
-
-        /// <remarks/>
-        BDI,
-
-        /// <remarks/>
-        BTN,
-
-        /// <remarks/>
-        CPV,
-
-        /// <remarks/>
-        KHM,
-
-        /// <remarks/>
-        CMR,
-
-        /// <remarks/>
-        CAN,
-
-        /// <remarks/>
-        QAT,
-
-        /// <remarks/>
-        BES,
-
-        /// <remarks/>
-        TCD,
-
-        /// <remarks/>
-        CHL,
-
-        /// <remarks/>
-        CHN,
-
-        /// <remarks/>
-        CYP,
-
-        /// <remarks/>
-        COL,
-
-        /// <remarks/>
-        COM,
-
-        /// <remarks/>
-        PRK,
-
-        /// <remarks/>
-        KOR,
-
-        /// <remarks/>
-        CIV,
-
-        /// <remarks/>
-        CRI,
-
-        /// <remarks/>
-        HRV,
-
-        /// <remarks/>
-        CUB,
-
-        /// <remarks/>
-        CUW,
-
-        /// <remarks/>
-        DNK,
-
-        /// <remarks/>
-        DMA,
-
-        /// <remarks/>
-        ECU,
-
-        /// <remarks/>
-        EGY,
-
-        /// <remarks/>
-        SLV,
-
-        /// <remarks/>
-        ARE,
-
-        /// <remarks/>
-        ERI,
-
-        /// <remarks/>
-        SVK,
-
-        /// <remarks/>
-        SVN,
-
-        /// <remarks/>
-        ESP,
-
-        /// <remarks/>
-        USA,
-
-        /// <remarks/>
-        EST,
-
-        /// <remarks/>
-        ETH,
-
-        /// <remarks/>
-        PHL,
-
-        /// <remarks/>
-        FIN,
-
-        /// <remarks/>
-        FJI,
-
-        /// <remarks/>
-        FRA,
-
-        /// <remarks/>
-        GAB,
-
-        /// <remarks/>
-        GMB,
-
-        /// <remarks/>
-        GEO,
-
-        /// <remarks/>
-        GHA,
-
-        /// <remarks/>
-        GIB,
-
-        /// <remarks/>
-        GRD,
-
-        /// <remarks/>
-        GRC,
-
-        /// <remarks/>
-        GRL,
-
-        /// <remarks/>
-        GLP,
-
-        /// <remarks/>
-        GUM,
-
-        /// <remarks/>
-        GTM,
-
-        /// <remarks/>
-        GUF,
-
-        /// <remarks/>
-        GGY,
-
-        /// <remarks/>
-        GIN,
-
-        /// <remarks/>
-        GNB,
-
-        /// <remarks/>
-        GNQ,
-
-        /// <remarks/>
-        GUY,
-
-        /// <remarks/>
-        HTI,
-
-        /// <remarks/>
-        HND,
-
-        /// <remarks/>
-        HKG,
-
-        /// <remarks/>
-        HUN,
-
-        /// <remarks/>
-        IND,
-
-        /// <remarks/>
-        IDN,
-
-        /// <remarks/>
-        IRQ,
-
-        /// <remarks/>
-        IRN,
-
-        /// <remarks/>
-        IRL,
-
-        /// <remarks/>
-        BVT,
-
-        /// <remarks/>
-        IMN,
-
-        /// <remarks/>
-        CXR,
-
-        /// <remarks/>
-        NFK,
-
-        /// <remarks/>
-        ISL,
-
-        /// <remarks/>
-        CYM,
-
-        /// <remarks/>
-        CCK,
-
-        /// <remarks/>
-        COK,
-
-        /// <remarks/>
-        FRO,
-
-        /// <remarks/>
-        SGS,
-
-        /// <remarks/>
-        HMD,
-
-        /// <remarks/>
-        FLK,
-
-        /// <remarks/>
-        MNP,
-
-        /// <remarks/>
-        MHL,
-
-        /// <remarks/>
-        PCN,
-
-        /// <remarks/>
-        SLB,
-
-        /// <remarks/>
-        TCA,
-
-        /// <remarks/>
-        UMI,
-
-        /// <remarks/>
-        VGB,
-
-        /// <remarks/>
-        VIR,
-
-        /// <remarks/>
-        ISR,
-
-        /// <remarks/>
-        ITA,
-
-        /// <remarks/>
-        JAM,
-
-        /// <remarks/>
-        JPN,
-
-        /// <remarks/>
-        JEY,
-
-        /// <remarks/>
-        JOR,
-
-        /// <remarks/>
-        KAZ,
-
-        /// <remarks/>
-        KEN,
-
-        /// <remarks/>
-        KGZ,
-
-        /// <remarks/>
-        KIR,
-
-        /// <remarks/>
-        KWT,
-
-        /// <remarks/>
-        LAO,
-
-        /// <remarks/>
-        LSO,
-
-        /// <remarks/>
-        LVA,
-
-        /// <remarks/>
-        LBN,
-
-        /// <remarks/>
-        LBR,
-
-        /// <remarks/>
-        LBY,
-
-        /// <remarks/>
-        LIE,
-
-        /// <remarks/>
-        LTU,
-
-        /// <remarks/>
-        LUX,
-
-        /// <remarks/>
-        MAC,
-
-        /// <remarks/>
-        MDG,
-
-        /// <remarks/>
-        MYS,
-
-        /// <remarks/>
-        MWI,
-
-        /// <remarks/>
-        MDV,
-
-        /// <remarks/>
-        MLI,
-
-        /// <remarks/>
-        MLT,
-
-        /// <remarks/>
-        MAR,
-
-        /// <remarks/>
-        MTQ,
-
-        /// <remarks/>
-        MUS,
-
-        /// <remarks/>
-        MRT,
-
-        /// <remarks/>
-        MYT,
-
-        /// <remarks/>
-        MEX,
-
-        /// <remarks/>
-        FSM,
-
-        /// <remarks/>
-        MDA,
-
-        /// <remarks/>
-        MCO,
-
-        /// <remarks/>
-        MNG,
-
-        /// <remarks/>
-        MNE,
-
-        /// <remarks/>
-        MSR,
-
-        /// <remarks/>
-        MOZ,
-
-        /// <remarks/>
-        NAM,
-
-        /// <remarks/>
-        NRU,
-
-        /// <remarks/>
-        NPL,
-
-        /// <remarks/>
-        NIC,
-
-        /// <remarks/>
-        NER,
-
-        /// <remarks/>
-        NGA,
-
-        /// <remarks/>
-        NIU,
-
-        /// <remarks/>
-        NOR,
-
-        /// <remarks/>
-        NCL,
-
-        /// <remarks/>
-        NZL,
-
-        /// <remarks/>
-        OMN,
-
-        /// <remarks/>
-        NLD,
-
-        /// <remarks/>
-        PAK,
-
-        /// <remarks/>
-        PLW,
-
-        /// <remarks/>
-        PSE,
-
-        /// <remarks/>
-        PAN,
-
-        /// <remarks/>
-        PNG,
-
-        /// <remarks/>
-        PRY,
-
-        /// <remarks/>
-        PER,
-
-        /// <remarks/>
-        PYF,
-
-        /// <remarks/>
-        POL,
-
-        /// <remarks/>
-        PRT,
-
-        /// <remarks/>
-        PRI,
-
-        /// <remarks/>
-        GBR,
-
-        /// <remarks/>
-        CAF,
-
-        /// <remarks/>
-        CZE,
-
-        /// <remarks/>
-        MKD,
-
-        /// <remarks/>
-        COG,
-
-        /// <remarks/>
-        COD,
-
-        /// <remarks/>
-        DOM,
-
-        /// <remarks/>
-        REU,
-
-        /// <remarks/>
-        RWA,
-
-        /// <remarks/>
-        ROU,
-
-        /// <remarks/>
-        RUS,
-
-        /// <remarks/>
-        ESH,
-
-        /// <remarks/>
-        WSM,
-
-        /// <remarks/>
-        ASM,
-
-        /// <remarks/>
-        BLM,
-
-        /// <remarks/>
-        KNA,
-
-        /// <remarks/>
-        SMR,
-
-        /// <remarks/>
-        MAF,
-
-        /// <remarks/>
-        SPM,
-
-        /// <remarks/>
-        VCT,
-
-        /// <remarks/>
-        SHN,
-
-        /// <remarks/>
-        LCA,
-
-        /// <remarks/>
-        STP,
-
-        /// <remarks/>
-        SEN,
-
-        /// <remarks/>
-        SRB,
-
-        /// <remarks/>
-        SYC,
-
-        /// <remarks/>
-        SLE,
-
-        /// <remarks/>
-        SGP,
-
-        /// <remarks/>
-        SXM,
-
-        /// <remarks/>
-        SYR,
-
-        /// <remarks/>
-        SOM,
-
-        /// <remarks/>
-        LKA,
-
-        /// <remarks/>
-        SWZ,
-
-        /// <remarks/>
-        ZAF,
-
-        /// <remarks/>
-        SDN,
-
-        /// <remarks/>
-        SSD,
-
-        /// <remarks/>
-        SWE,
-
-        /// <remarks/>
-        CHE,
-
-        /// <remarks/>
-        SUR,
-
-        /// <remarks/>
-        SJM,
-
-        /// <remarks/>
-        THA,
-
-        /// <remarks/>
-        TWN,
-
-        /// <remarks/>
-        TZA,
-
-        /// <remarks/>
-        TJK,
-
-        /// <remarks/>
-        IOT,
-
-        /// <remarks/>
-        ATF,
-
-        /// <remarks/>
-        TLS,
-
-        /// <remarks/>
-        TGO,
-
-        /// <remarks/>
-        TKL,
-
-        /// <remarks/>
-        TON,
-
-        /// <remarks/>
-        TTO,
-
-        /// <remarks/>
-        TUN,
-
-        /// <remarks/>
-        TKM,
-
-        /// <remarks/>
-        TUR,
-
-        /// <remarks/>
-        TUV,
-
-        /// <remarks/>
-        UKR,
-
-        /// <remarks/>
-        UGA,
-
-        /// <remarks/>
-        URY,
-
-        /// <remarks/>
-        UZB,
-
-        /// <remarks/>
-        VUT,
-
-        /// <remarks/>
-        VAT,
-
-        /// <remarks/>
-        VEN,
-
-        /// <remarks/>
-        VNM,
-
-        /// <remarks/>
-        WLF,
-
-        /// <remarks/>
-        YEM,
-
-        /// <remarks/>
-        DJI,
-
-        /// <remarks/>
-        ZMB,
-
-        /// <remarks/>
-        ZWE,
-
-        /// <remarks/>
-        ZZZ,
+        Destino,
     }
 
     /// <remarks/>
@@ -11149,8 +10584,8 @@ namespace ServicioLocal.Business.Carta
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public enum CartaPorteUbicacionOrigenNavegacionTrafico
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public enum CartaPorteUbicacionNavegacionTrafico
     {
 
         /// <remarks/>
@@ -11158,392 +10593,6 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         Cabotaje,
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteUbicacionDestino
-    {
-
-        private string iDDestinoField;
-
-        private string rFCDestinatarioField;
-
-        private string nombreDestinatarioField;
-
-        private string numRegIdTribField;
-
-        private string residenciaFiscalField;
-
-        private bool residenciaFiscalFieldSpecified;
-
-        private string numEstacionField;
-
-        private bool numEstacionFieldSpecified;
-
-        private string nombreEstacionField;
-
-        private string navegacionTraficoField;
-
-        private bool navegacionTraficoFieldSpecified;
-
-        private string fechaHoraProgLlegadaField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IDDestino
-        {
-            get
-            {
-                return this.iDDestinoField;
-            }
-            set
-            {
-                this.iDDestinoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCDestinatario
-        {
-            get
-            {
-                return this.rFCDestinatarioField;
-            }
-            set
-            {
-                this.rFCDestinatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreDestinatario
-        {
-            get
-            {
-                return this.nombreDestinatarioField;
-            }
-            set
-            {
-                this.nombreDestinatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumRegIdTrib
-        {
-            get
-            {
-                return this.numRegIdTribField;
-            }
-            set
-            {
-                this.numRegIdTribField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ResidenciaFiscal
-        {
-            get
-            {
-                return this.residenciaFiscalField;
-            }
-            set
-            {
-                this.residenciaFiscalField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResidenciaFiscalSpecified
-        {
-            get
-            {
-                return this.residenciaFiscalFieldSpecified;
-            }
-            set
-            {
-                this.residenciaFiscalFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumEstacion
-        {
-            get
-            {
-                return this.numEstacionField;
-            }
-            set
-            {
-                this.numEstacionField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NumEstacionSpecified
-        {
-            get
-            {
-                return this.numEstacionFieldSpecified;
-            }
-            set
-            {
-                this.numEstacionFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreEstacion
-        {
-            get
-            {
-                return this.nombreEstacionField;
-            }
-            set
-            {
-                this.nombreEstacionField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NavegacionTrafico
-        {
-            get
-            {
-                return this.navegacionTraficoField;
-            }
-            set
-            {
-                this.navegacionTraficoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool NavegacionTraficoSpecified
-        {
-            get
-            {
-                return this.navegacionTraficoFieldSpecified;
-            }
-            set
-            {
-                this.navegacionTraficoFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string FechaHoraProgLlegada
-        {
-            get
-            {
-                return this.fechaHoraProgLlegadaField;
-            }
-            set
-            {
-                this.fechaHoraProgLlegadaField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public enum CartaPorteUbicacionDestinoNavegacionTrafico
-    {
-
-        /// <remarks/>
-        Altura,
-
-        /// <remarks/>
-        Cabotaje,
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteUbicacionDomicilio
-    {
-
-        private string calleField;
-
-        private string numeroExteriorField;
-
-        private string numeroInteriorField;
-
-        private string coloniaField;
-
-        private string localidadField;
-
-        private string referenciaField;
-
-        private string municipioField;
-
-        private string estadoField;
-
-        private string paisField;
-
-        private string codigoPostalField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Calle
-        {
-            get
-            {
-                return this.calleField;
-            }
-            set
-            {
-                this.calleField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroExterior
-        {
-            get
-            {
-                return this.numeroExteriorField;
-            }
-            set
-            {
-                this.numeroExteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroInterior
-        {
-            get
-            {
-                return this.numeroInteriorField;
-            }
-            set
-            {
-                this.numeroInteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Colonia
-        {
-            get
-            {
-                return this.coloniaField;
-            }
-            set
-            {
-                this.coloniaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Localidad
-        {
-            get
-            {
-                return this.localidadField;
-            }
-            set
-            {
-                this.localidadField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Referencia
-        {
-            get
-            {
-                return this.referenciaField;
-            }
-            set
-            {
-                this.referenciaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Municipio
-        {
-            get
-            {
-                return this.municipioField;
-            }
-            set
-            {
-                this.municipioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Estado
-        {
-            get
-            {
-                return this.estadoField;
-            }
-            set
-            {
-                this.estadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Pais
-        {
-            get
-            {
-                return this.paisField;
-            }
-            set
-            {
-                this.paisField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodigoPostal
-        {
-            get
-            {
-                return this.codigoPostalField;
-            }
-            set
-            {
-                this.codigoPostalField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -11571,13 +10620,13 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercancias
     {
 
         private CartaPorteMercanciasMercancia[] mercanciaField;
 
-        private CartaPorteMercanciasAutotransporteFederal autotransporteFederalField;
+        private CartaPorteMercanciasAutotransporte autotransporteField;
 
         private CartaPorteMercanciasTransporteMaritimo transporteMaritimoField;
 
@@ -11587,11 +10636,7 @@ namespace ServicioLocal.Business.Carta
 
         private decimal pesoBrutoTotalField;
 
-        private bool pesoBrutoTotalFieldSpecified;
-
         private string unidadPesoField;
-
-        private bool unidadPesoFieldSpecified;
 
         private decimal pesoNetoTotalField;
 
@@ -11618,15 +10663,15 @@ namespace ServicioLocal.Business.Carta
         }
 
         /// <remarks/>
-        public CartaPorteMercanciasAutotransporteFederal AutotransporteFederal
+        public CartaPorteMercanciasAutotransporte Autotransporte
         {
             get
             {
-                return this.autotransporteFederalField;
+                return this.autotransporteField;
             }
             set
             {
-                this.autotransporteFederalField = value;
+                this.autotransporteField = value;
             }
         }
 
@@ -11684,20 +10729,6 @@ namespace ServicioLocal.Business.Carta
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PesoBrutoTotalSpecified
-        {
-            get
-            {
-                return this.pesoBrutoTotalFieldSpecified;
-            }
-            set
-            {
-                this.pesoBrutoTotalFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string UnidadPeso
         {
@@ -11708,20 +10739,6 @@ namespace ServicioLocal.Business.Carta
             set
             {
                 this.unidadPesoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool UnidadPesoSpecified
-        {
-            get
-            {
-                return this.unidadPesoFieldSpecified;
-            }
-            set
-            {
-                this.unidadPesoFieldSpecified = value;
             }
         }
 
@@ -11801,25 +10818,25 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasMercancia
     {
+
+        private CartaPorteMercanciasMercanciaPedimentos[] pedimentosField;
+
+        private CartaPorteMercanciasMercanciaGuiasIdentificacion[] guiasIdentificacionField;
 
         private CartaPorteMercanciasMercanciaCantidadTransporta[] cantidadTransportaField;
 
         private CartaPorteMercanciasMercanciaDetalleMercancia detalleMercanciaField;
 
-         private string bienesTranspField;
-
-        private bool bienesTranspFieldSpecified;
+        private string bienesTranspField;
 
         private string claveSTCCField;
 
-        private bool claveSTCCFieldSpecified;
-
         private string descripcionField;
 
-        private string cantidadField;
+        private decimal cantidadField;
 
         private string claveUnidadField;
 
@@ -11856,6 +10873,34 @@ namespace ServicioLocal.Business.Carta
         private bool fraccionArancelariaFieldSpecified;
 
         private string uUIDComercioExtField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Pedimentos")]
+        public CartaPorteMercanciasMercanciaPedimentos[] Pedimentos
+        {
+            get
+            {
+                return this.pedimentosField;
+            }
+            set
+            {
+                this.pedimentosField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("GuiasIdentificacion")]
+        public CartaPorteMercanciasMercanciaGuiasIdentificacion[] GuiasIdentificacion
+        {
+            get
+            {
+                return this.guiasIdentificacionField;
+            }
+            set
+            {
+                this.guiasIdentificacionField = value;
+            }
+        }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("CantidadTransporta")]
@@ -11899,20 +10944,6 @@ namespace ServicioLocal.Business.Carta
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool BienesTranspSpecified
-        {
-            get
-            {
-                return this.bienesTranspFieldSpecified;
-            }
-            set
-            {
-                this.bienesTranspFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ClaveSTCC
         {
@@ -11923,20 +10954,6 @@ namespace ServicioLocal.Business.Carta
             set
             {
                 this.claveSTCCField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ClaveSTCCSpecified
-        {
-            get
-            {
-                return this.claveSTCCFieldSpecified;
-            }
-            set
-            {
-                this.claveSTCCFieldSpecified = value;
             }
         }
 
@@ -11956,7 +10973,7 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Cantidad
+        public decimal Cantidad
         {
             get
             {
@@ -12226,7 +11243,91 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteMercanciasMercanciaPedimentos
+    {
+
+        private string pedimentoField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string Pedimento
+        {
+            get
+            {
+                return this.pedimentoField;
+            }
+            set
+            {
+                this.pedimentoField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteMercanciasMercanciaGuiasIdentificacion
+    {
+
+        private string numeroGuiaIdentificacionField;
+
+        private string descripGuiaIdentificacionField;
+
+        private decimal pesoGuiaIdentificacionField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string NumeroGuiaIdentificacion
+        {
+            get
+            {
+                return this.numeroGuiaIdentificacionField;
+            }
+            set
+            {
+                this.numeroGuiaIdentificacionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string DescripGuiaIdentificacion
+        {
+            get
+            {
+                return this.descripGuiaIdentificacionField;
+            }
+            set
+            {
+                this.descripGuiaIdentificacionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public decimal PesoGuiaIdentificacion
+        {
+            get
+            {
+                return this.pesoGuiaIdentificacionField;
+            }
+            set
+            {
+                this.pesoGuiaIdentificacionField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasMercanciaCantidadTransporta
     {
 
@@ -12344,11 +11445,11 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasMercanciaDetalleMercancia
     {
 
-        private string unidadPesoField;
+        private string unidadPesoMercField;
 
         private decimal pesoBrutoField;
 
@@ -12362,15 +11463,15 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string UnidadPeso
+        public string UnidadPesoMerc
         {
             get
             {
-                return this.unidadPesoField;
+                return this.unidadPesoMercField;
             }
             set
             {
-                this.unidadPesoField = value;
+                this.unidadPesoMercField = value;
             }
         }
 
@@ -13872,1876 +12973,7 @@ namespace ServicioLocal.Business.Carta
         SM3,
     }
 
-  
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.sat.gob.mx/sitio_internet/cfd/catalogos/CartaPorte")]
-    public enum c_ClaveProdSTCC
-    {
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01")]
-        Item01,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("011")]
-        Item011,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0112")]
-        Item0112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01131")]
-        Item01131,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01132")]
-        Item01132,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01133")]
-        Item01133,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01134")]
-        Item01134,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01135")]
-        Item01135,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01136")]
-        Item01136,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01137")]
-        Item01137,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01139")]
-        Item01139,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0114")]
-        Item0114,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01144")]
-        Item01144,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0115")]
-        Item0115,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0119")]
-        Item0119,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01193")]
-        Item01193,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01195")]
-        Item01195,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01197")]
-        Item01197,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("012")]
-        Item012,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0121")]
-        Item0121,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0122")]
-        Item0122,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01221")]
-        Item01221,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01224")]
-        Item01224,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01226")]
-        Item01226,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0123")]
-        Item0123,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01232")]
-        Item01232,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0129")]
-        Item0129,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01295")]
-        Item01295,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("013")]
-        Item013,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0131")]
-        Item0131,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01318")]
-        Item01318,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0133")]
-        Item0133,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01334")]
-        Item01334,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01335")]
-        Item01335,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0134")]
-        Item0134,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01341")]
-        Item01341,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01342")]
-        Item01342,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0139")]
-        Item0139,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01392")]
-        Item01392,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01394")]
-        Item01394,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01398")]
-        Item01398,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("014")]
-        Item014,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0141")]
-        Item0141,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01411")]
-        Item01411,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01413")]
-        Item01413,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01414")]
-        Item01414,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0142")]
-        Item0142,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0143")]
-        Item0143,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("01431")]
-        Item01431,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("015")]
-        Item015,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0151")]
-        Item0151,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0152")]
-        Item0152,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("019")]
-        Item019,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0191")]
-        Item0191,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0192")]
-        Item0192,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("08")]
-        Item08,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("084")]
-        Item084,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("08423")]
-        Item08423,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("086")]
-        Item086,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("09")]
-        Item09,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("091")]
-        Item091,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("0912")]
-        Item0912,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("09131")]
-        Item09131,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("098")]
-        Item098,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("10")]
-        Item10,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("101")]
-        Item101,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("10112")]
-        Item10112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("102")]
-        Item102,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("103")]
-        Item103,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("1031")]
-        Item1031,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("1032")]
-        Item1032,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("104")]
-        Item104,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("105")]
-        Item105,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("106")]
-        Item106,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("107")]
-        Item107,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("108")]
-        Item108,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("109")]
-        Item109,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("11")]
-        Item11,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("111")]
-        Item111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("11111")]
-        Item11111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("11112")]
-        Item11112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("112")]
-        Item112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("1121")]
-        Item1121,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("13")]
-        Item13,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("131")]
-        Item131,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("132")]
-        Item132,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14")]
-        Item14,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("141")]
-        Item141,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("142")]
-        Item142,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14211")]
-        Item14211,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14212")]
-        Item14212,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14219")]
-        Item14219,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("144")]
-        Item144,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14411")]
-        Item14411,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14412")]
-        Item14412,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14413")]
-        Item14413,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("145")]
-        Item145,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14511")]
-        Item14511,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14512")]
-        Item14512,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14514")]
-        Item14514,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("147")]
-        Item147,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14711")]
-        Item14711,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14713")]
-        Item14713,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14714")]
-        Item14714,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14715")]
-        Item14715,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14716")]
-        Item14716,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("149")]
-        Item149,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14911")]
-        Item14911,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14913")]
-        Item14913,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("14914")]
-        Item14914,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("19")]
-        Item19,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("191")]
-        Item191,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("192")]
-        Item192,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("193")]
-        Item193,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("194")]
-        Item194,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("195")]
-        Item195,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("196")]
-        Item196,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("199")]
-        Item199,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20")]
-        Item20,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("201")]
-        Item201,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2011")]
-        Item2011,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2012")]
-        Item2012,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2013")]
-        Item2013,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2014")]
-        Item2014,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20141")]
-        Item20141,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2015")]
-        Item2015,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2016")]
-        Item2016,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2017")]
-        Item2017,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("202")]
-        Item202,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2021")]
-        Item2021,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2023")]
-        Item2023,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2024")]
-        Item2024,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2025")]
-        Item2025,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2026")]
-        Item2026,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("203")]
-        Item203,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2031")]
-        Item2031,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2032")]
-        Item2032,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2033")]
-        Item2033,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2034")]
-        Item2034,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2035")]
-        Item2035,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2036")]
-        Item2036,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2037")]
-        Item2037,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2038")]
-        Item2038,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2039")]
-        Item2039,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("204")]
-        Item204,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2041")]
-        Item2041,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20411")]
-        Item20411,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20412")]
-        Item20412,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20421")]
-        Item20421,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20423")]
-        Item20423,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2043")]
-        Item2043,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2044")]
-        Item2044,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2045")]
-        Item2045,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2046")]
-        Item2046,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20461")]
-        Item20461,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20462")]
-        Item20462,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20463")]
-        Item20463,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20471")]
-        Item20471,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20472")]
-        Item20472,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("205")]
-        Item205,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("206")]
-        Item206,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2061")]
-        Item2061,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20611")]
-        Item20611,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20616")]
-        Item20616,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20617")]
-        Item20617,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2062")]
-        Item2062,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20625")]
-        Item20625,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20626")]
-        Item20626,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("207")]
-        Item207,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("208")]
-        Item208,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20821")]
-        Item20821,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20823")]
-        Item20823,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2083")]
-        Item2083,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2084")]
-        Item2084,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20851")]
-        Item20851,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20859")]
-        Item20859,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2086")]
-        Item2086,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2087")]
-        Item2087,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("209")]
-        Item209,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20911")]
-        Item20911,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20914")]
-        Item20914,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20921")]
-        Item20921,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("20923")]
-        Item20923,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2093")]
-        Item2093,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2094")]
-        Item2094,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2095")]
-        Item2095,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2096")]
-        Item2096,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2097")]
-        Item2097,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2098")]
-        Item2098,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("21")]
-        Item21,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("211")]
-        Item211,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("212")]
-        Item212,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("213")]
-        Item213,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("214")]
-        Item214,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("22")]
-        Item22,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("221")]
-        Item221,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("222")]
-        Item222,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("223")]
-        Item223,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("224")]
-        Item224,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("225")]
-        Item225,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("227")]
-        Item227,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("228")]
-        Item228,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("229")]
-        Item229,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2296")]
-        Item2296,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2297")]
-        Item2297,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2298")]
-        Item2298,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("23")]
-        Item23,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("231")]
-        Item231,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("233")]
-        Item233,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("235")]
-        Item235,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("237")]
-        Item237,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("238")]
-        Item238,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("239")]
-        Item239,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("24")]
-        Item24,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("241")]
-        Item241,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("24114")]
-        Item24114,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("24115")]
-        Item24115,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("24116")]
-        Item24116,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("242")]
-        Item242,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2421")]
-        Item2421,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("24212")]
-        Item24212,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2429")]
-        Item2429,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("243")]
-        Item243,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2431")]
-        Item2431,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2432")]
-        Item2432,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("244")]
-        Item244,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("249")]
-        Item249,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2491")]
-        Item2491,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("25")]
-        Item25,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("251")]
-        Item251,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("253")]
-        Item253,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("254")]
-        Item254,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("259")]
-        Item259,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26")]
-        Item26,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("261")]
-        Item261,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26111")]
-        Item26111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("262")]
-        Item262,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26211")]
-        Item26211,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26212")]
-        Item26212,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26213")]
-        Item26213,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26214")]
-        Item26214,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26217")]
-        Item26217,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26218")]
-        Item26218,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("263")]
-        Item263,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("264")]
-        Item264,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2643")]
-        Item2643,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26471")]
-        Item26471,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("265")]
-        Item265,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("266")]
-        Item266,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("26613")]
-        Item26613,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("27")]
-        Item27,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("271")]
-        Item271,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("272")]
-        Item272,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("273")]
-        Item273,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("274")]
-        Item274,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("276")]
-        Item276,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("277")]
-        Item277,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("278")]
-        Item278,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("279")]
-        Item279,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28")]
-        Item28,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("281")]
-        Item281,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2812")]
-        Item2812,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28123")]
-        Item28123,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2813")]
-        Item2813,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2814")]
-        Item2814,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2816")]
-        Item2816,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2818")]
-        Item2818,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28184")]
-        Item28184,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2819")]
-        Item2819,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28193")]
-        Item28193,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("282")]
-        Item282,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28212")]
-        Item28212,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28213")]
-        Item28213,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("283")]
-        Item283,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("284")]
-        Item284,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2841")]
-        Item2841,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("285")]
-        Item285,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("286")]
-        Item286,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("287")]
-        Item287,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2871")]
-        Item2871,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("289")]
-        Item289,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2892")]
-        Item2892,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("28991")]
-        Item28991,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29")]
-        Item29,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("291")]
-        Item291,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29111")]
-        Item29111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29112")]
-        Item29112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29113")]
-        Item29113,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29114")]
-        Item29114,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29115")]
-        Item29115,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29116")]
-        Item29116,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29117")]
-        Item29117,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29119")]
-        Item29119,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2912")]
-        Item2912,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("295")]
-        Item295,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2951")]
-        Item2951,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("2952")]
-        Item2952,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("299")]
-        Item299,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29911")]
-        Item29911,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29913")]
-        Item29913,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("29914")]
-        Item29914,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("30")]
-        Item30,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("301")]
-        Item301,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("302")]
-        Item302,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("303")]
-        Item303,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("304")]
-        Item304,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("306")]
-        Item306,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("307")]
-        Item307,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("31")]
-        Item31,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("311")]
-        Item311,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("312")]
-        Item312,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("313")]
-        Item313,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("314")]
-        Item314,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("315")]
-        Item315,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("316")]
-        Item316,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("319")]
-        Item319,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("32")]
-        Item32,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("321")]
-        Item321,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("322")]
-        Item322,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3221")]
-        Item3221,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("324")]
-        Item324,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("32411")]
-        Item32411,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("325")]
-        Item325,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3251")]
-        Item3251,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("32511")]
-        Item32511,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3253")]
-        Item3253,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3255")]
-        Item3255,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3259")]
-        Item3259,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("32594")]
-        Item32594,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("326")]
-        Item326,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("327")]
-        Item327,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3271")]
-        Item3271,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3274")]
-        Item3274,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3275")]
-        Item3275,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("328")]
-        Item328,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("329")]
-        Item329,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3291")]
-        Item3291,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3295")]
-        Item3295,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("33")]
-        Item33,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("331")]
-        Item331,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("33111")]
-        Item33111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("33112")]
-        Item33112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("33119")]
-        Item33119,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3312")]
-        Item3312,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("33121")]
-        Item33121,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3313")]
-        Item3313,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3315")]
-        Item3315,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("332")]
-        Item332,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("33211")]
-        Item33211,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("333")]
-        Item333,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3331")]
-        Item3331,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3332")]
-        Item3332,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3333")]
-        Item3333,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3334")]
-        Item3334,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("335")]
-        Item335,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3351")]
-        Item3351,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3352")]
-        Item3352,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3357")]
-        Item3357,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("336")]
-        Item336,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3361")]
-        Item3361,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3362")]
-        Item3362,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("339")]
-        Item339,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3391")]
-        Item3391,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3392")]
-        Item3392,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("34")]
-        Item34,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("341")]
-        Item341,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("342")]
-        Item342,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("343")]
-        Item343,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3433")]
-        Item3433,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("344")]
-        Item344,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3441")]
-        Item3441,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("34411")]
-        Item34411,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("345")]
-        Item345,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("346")]
-        Item346,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("348")]
-        Item348,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("349")]
-        Item349,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3491")]
-        Item3491,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3494")]
-        Item3494,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("35")]
-        Item35,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("351")]
-        Item351,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("352")]
-        Item352,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3524")]
-        Item3524,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("353")]
-        Item353,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3531")]
-        Item3531,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3532")]
-        Item3532,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3533")]
-        Item3533,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3537")]
-        Item3537,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("354")]
-        Item354,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("355")]
-        Item355,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("356")]
-        Item356,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("357")]
-        Item357,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("358")]
-        Item358,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("359")]
-        Item359,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("36")]
-        Item36,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("361")]
-        Item361,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("362")]
-        Item362,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("363")]
-        Item363,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3631")]
-        Item3631,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3632")]
-        Item3632,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3633")]
-        Item3633,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("364")]
-        Item364,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("365")]
-        Item365,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("366")]
-        Item366,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("367")]
-        Item367,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("369")]
-        Item369,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("37")]
-        Item37,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("371")]
-        Item371,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3711")]
-        Item3711,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("37111")]
-        Item37111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("37112")]
-        Item37112,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("37113")]
-        Item37113,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3712")]
-        Item3712,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3713")]
-        Item3713,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3714")]
-        Item3714,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("37147")]
-        Item37147,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3715")]
-        Item3715,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("372")]
-        Item372,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("373")]
-        Item373,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("374")]
-        Item374,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("37422")]
-        Item37422,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("375")]
-        Item375,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("376")]
-        Item376,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("379")]
-        Item379,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("38")]
-        Item38,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("381")]
-        Item381,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("382")]
-        Item382,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("383")]
-        Item383,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("384")]
-        Item384,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("385")]
-        Item385,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("386")]
-        Item386,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("387")]
-        Item387,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("39")]
-        Item39,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("391")]
-        Item391,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("393")]
-        Item393,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("394")]
-        Item394,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("3949")]
-        Item3949,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("395")]
-        Item395,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("396")]
-        Item396,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("399")]
-        Item399,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("40")]
-        Item40,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("401")]
-        Item401,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("402")]
-        Item402,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("4021")]
-        Item4021,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("40211")]
-        Item40211,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("4022")]
-        Item4022,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("4024")]
-        Item4024,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("4026")]
-        Item4026,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("41")]
-        Item41,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("411")]
-        Item411,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("41111")]
-        Item41111,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("41114")]
-        Item41114,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("41115")]
-        Item41115,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("412")]
-        Item412,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("42")]
-        Item42,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("421")]
-        Item421,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("422")]
-        Item422,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("423")]
-        Item423,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("44")]
-        Item44,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("441")]
-        Item441,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("45")]
-        Item45,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("451")]
-        Item451,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("46")]
-        Item46,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("461")]
-        Item461,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("462")]
-        Item462,
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlEnumAttribute("48")]
-        Item48,
-    }
-
+   
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
@@ -23148,7 +20380,7 @@ namespace ServicioLocal.Business.Carta
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public enum CartaPorteMercanciasMercanciaMaterialPeligroso
     {
 
@@ -30990,30 +28222,29 @@ namespace ServicioLocal.Business.Carta
         ZWL,
     }
 
-
+    /// <remarks/>
+   
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteMercanciasAutotransporteFederal
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteMercanciasAutotransporte
     {
 
-        private CartaPorteMercanciasAutotransporteFederalIdentificacionVehicular identificacionVehicularField;
+        private CartaPorteMercanciasAutotransporteIdentificacionVehicular identificacionVehicularField;
 
-        private CartaPorteMercanciasAutotransporteFederalRemolque[] remolquesField;
+        private CartaPorteMercanciasAutotransporteSeguros segurosField;
+
+        private CartaPorteMercanciasAutotransporteRemolque[] remolquesField;
 
         private string permSCTField;
 
         private string numPermisoSCTField;
 
-        private string nombreAsegField;
-
-        private string numPolizaSeguroField;
-
         /// <remarks/>
-        public CartaPorteMercanciasAutotransporteFederalIdentificacionVehicular IdentificacionVehicular
+        public CartaPorteMercanciasAutotransporteIdentificacionVehicular IdentificacionVehicular
         {
             get
             {
@@ -31026,8 +28257,21 @@ namespace ServicioLocal.Business.Carta
         }
 
         /// <remarks/>
+        public CartaPorteMercanciasAutotransporteSeguros Seguros
+        {
+            get
+            {
+                return this.segurosField;
+            }
+            set
+            {
+                this.segurosField = value;
+            }
+        }
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlArrayItemAttribute("Remolque", IsNullable = false)]
-        public CartaPorteMercanciasAutotransporteFederalRemolque[] Remolques
+        public CartaPorteMercanciasAutotransporteRemolque[] Remolques
         {
             get
             {
@@ -31066,34 +28310,6 @@ namespace ServicioLocal.Business.Carta
                 this.numPermisoSCTField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreAseg
-        {
-            get
-            {
-                return this.nombreAsegField;
-            }
-            set
-            {
-                this.nombreAsegField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumPolizaSeguro
-        {
-            get
-            {
-                return this.numPolizaSeguroField;
-            }
-            set
-            {
-                this.numPolizaSeguroField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -31101,8 +28317,8 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteMercanciasAutotransporteFederalIdentificacionVehicular
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteMercanciasAutotransporteIdentificacionVehicular
     {
 
         private string configVehicularField;
@@ -31245,8 +28461,146 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteMercanciasAutotransporteFederalRemolque
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteMercanciasAutotransporteSeguros
+    {
+
+        private string aseguraRespCivilField;
+
+        private string polizaRespCivilField;
+
+        private string aseguraMedAmbienteField;
+
+        private string polizaMedAmbienteField;
+
+        private string aseguraCargaField;
+
+        private string polizaCargaField;
+
+        private decimal primaSeguroField;
+
+        private bool primaSeguroFieldSpecified;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string AseguraRespCivil
+        {
+            get
+            {
+                return this.aseguraRespCivilField;
+            }
+            set
+            {
+                this.aseguraRespCivilField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PolizaRespCivil
+        {
+            get
+            {
+                return this.polizaRespCivilField;
+            }
+            set
+            {
+                this.polizaRespCivilField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string AseguraMedAmbiente
+        {
+            get
+            {
+                return this.aseguraMedAmbienteField;
+            }
+            set
+            {
+                this.aseguraMedAmbienteField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PolizaMedAmbiente
+        {
+            get
+            {
+                return this.polizaMedAmbienteField;
+            }
+            set
+            {
+                this.polizaMedAmbienteField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string AseguraCarga
+        {
+            get
+            {
+                return this.aseguraCargaField;
+            }
+            set
+            {
+                this.aseguraCargaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string PolizaCarga
+        {
+            get
+            {
+                return this.polizaCargaField;
+            }
+            set
+            {
+                this.polizaCargaField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public decimal PrimaSeguro
+        {
+            get
+            {
+                return this.primaSeguroField;
+            }
+            set
+            {
+                this.primaSeguroField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool PrimaSeguroSpecified
+        {
+            get
+            {
+                return this.primaSeguroFieldSpecified;
+            }
+            set
+            {
+                this.primaSeguroFieldSpecified = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteMercanciasAutotransporteRemolque
     {
 
         private string subTipoRemField;
@@ -31451,6 +28805,9 @@ namespace ServicioLocal.Business.Carta
         TPAF19,
 
         /// <remarks/>
+        TPAF20,
+
+        /// <remarks/>
         TPTM01,
 
         /// <remarks/>
@@ -31464,6 +28821,9 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         TPTA04,
+
+        /// <remarks/>
+        TPXX00,
     }
 
     /// <remarks/>
@@ -31471,7 +28831,7 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteMaritimo
     {
 
@@ -31913,7 +29273,7 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteMaritimoContenedor
     {
 
@@ -31996,6 +29356,9 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         CM008,
+
+        /// <remarks/>
+        CM009,
     }
 
     /// <remarks/>
@@ -32049,15 +29412,6 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         B15,
-
-        /// <remarks/>
-        B16,
-
-        /// <remarks/>
-        B17,
-
-        /// <remarks/>
-        B18,
     }
 
     /// <remarks/>
@@ -32080,16 +29434,438 @@ namespace ServicioLocal.Business.Carta
         GAG,
 
         /// <remarks/>
-        FLD,
+        OFL,
 
         /// <remarks/>
-        PRD,
+        PYD,
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.sat.gob.mx/sitio_internet/cfd/catalogos/CartaPorte")]
+    public enum c_NumAutorizacionNaviero
+    {
 
         /// <remarks/>
-        PPT,
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/020/2016")]
+        SCT4180202016,
 
         /// <remarks/>
-        GNL,
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/021/2016")]
+        SCT4180212016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/025/2016")]
+        SCT4180252016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/026/2016")]
+        SCT4180262016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/028/2016")]
+        SCT4180282016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/029/2016")]
+        SCT4180292016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/030/2016")]
+        SCT4180302016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/034/2016")]
+        SCT4180342016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/036/2016")]
+        SCT4180362016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/042/2016")]
+        SCT4180422016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/046/2016")]
+        SCT4180462016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/047/2016")]
+        SCT4180472016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/048/2016")]
+        SCT4180482016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/051/2016")]
+        SCT4180512016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/052/2016")]
+        SCT4180522016,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/010/2017")]
+        SCT4180102017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/014/2017")]
+        SCT4180142017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/017/2017")]
+        SCT4180172017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/021/2017")]
+        SCT4180212017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/022/2017")]
+        SCT4180222017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/023/2017")]
+        SCT4180232017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/024/2017")]
+        SCT4180242017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/030/2017")]
+        SCT4180302017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/031/2017")]
+        SCT4180312017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/034/2017")]
+        SCT4180342017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/035/2017")]
+        SCT4180352017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/038/2017")]
+        SCT4180382017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/044/2017")]
+        SCT4180442017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/045/2017")]
+        SCT4180452017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/047/2017")]
+        SCT4180472017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/053/2017")]
+        SCT4180532017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/054/2017")]
+        SCT4180542017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/056/2017")]
+        SCT4180562017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/057/2017")]
+        SCT4180572017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/060/2017")]
+        SCT4180602017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/061/2017")]
+        SCT4180612017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/064/2017")]
+        SCT4180642017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/065/2017")]
+        SCT4180652017,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/006/2018")]
+        SCT4180062018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/013/2018")]
+        SCT4180132018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/014/2018")]
+        SCT4180142018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/017/2018")]
+        SCT4180172018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/018/2018")]
+        SCT4180182018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/019/2018")]
+        SCT4180192018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/022/2018")]
+        SCT4180222018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/026/2018")]
+        SCT4180262018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/031/2018")]
+        SCT4180312018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/033/2018")]
+        SCT4180332018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/037/2018")]
+        SCT4180372018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/038/2018")]
+        SCT4180382018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/040/2018")]
+        SCT4180402018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/041/2018")]
+        SCT4180412018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/043/2018")]
+        SCT4180432018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/045/2018")]
+        SCT4180452018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/046/2018")]
+        SCT4180462018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/048/2018")]
+        SCT4180482018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/050/2018")]
+        SCT4180502018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/053/2018")]
+        SCT4180532018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/057/2018")]
+        SCT4180572018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/068/2018")]
+        SCT4180682018,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/003/2019")]
+        SCT4180032019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/005/2019")]
+        SCT4180052019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/013/2019")]
+        SCT4180132019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/015/2019")]
+        SCT4180152019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/020/2019")]
+        SCT4180202019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/025/2019")]
+        SCT4180252019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/026/2019")]
+        SCT4180262019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/027/2019")]
+        SCT4180272019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/029/2019")]
+        SCT4180292019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/036/2019")]
+        SCT4180362019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/037/2019")]
+        SCT4180372019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/038/2019")]
+        SCT4180382019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/041/2019")]
+        SCT4180412019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/045/2019")]
+        SCT4180452019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/046/2019")]
+        SCT4180462019,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/003/2020")]
+        SCT4180032020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/005/2020")]
+        SCT4180052020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/006/2020")]
+        SCT4180062020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/010/2020")]
+        SCT4180102020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/011/2020")]
+        SCT4180112020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/012/2020")]
+        SCT4180122020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/013/2020")]
+        SCT4180132020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/023/2020")]
+        SCT4180232020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/024/2020")]
+        SCT4180242020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/025/2020")]
+        SCT4180252020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/026/2020")]
+        SCT4180262020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/027/2020")]
+        SCT4180272020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/029/2020")]
+        SCT4180292020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/030/2020")]
+        SCT4180302020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/031/2020")]
+        SCT4180312020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/032/2020")]
+        SCT4180322020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/033/2020")]
+        SCT4180332020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/035/2020")]
+        SCT4180352020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/036/2020")]
+        SCT4180362020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/037/2020")]
+        SCT4180372020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/040/2020")]
+        SCT4180402020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/041/2020")]
+        SCT4180412020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/042/2020")]
+        SCT4180422020,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/001/2021")]
+        SCT4180012021,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/005/2021")]
+        SCT4180052021,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/006/2021")]
+        SCT4180062021,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/007/2021")]
+        SCT4180072021,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/013/2021")]
+        SCT4180132021,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/020/2021")]
+        SCT4180202021,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("SCT418/021/2021")]
+        SCT4180212021,
     }
 
     /// <remarks/>
@@ -32097,19 +29873,11 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteAereo
     {
 
-     //   private CartaPorteMercanciasTransporteAereoDetalleTransporte detalleTransporteField;
-
-    //    private CartaPorteMercanciasTransporteAereoServicioManiobras servicioManiobrasField;
-
-    //    private CartaPorteMercanciasTransporteAereoServicioEspecial servicioEspecialField;
-
         private string permSCTField;
-
-        private bool permSCTFieldSpecified;
 
         private string numPermisoSCTField;
 
@@ -32123,19 +29891,7 @@ namespace ServicioLocal.Business.Carta
 
         private string lugarContratoField;
 
-        private string rFCTransportistaField;
-
         private string codigoTransportistaField;
-
-        private bool codigoTransportistaFieldSpecified;
-
-        private string numRegIdTribTransporField;
-
-        private string residenciaFiscalTransporField;
-
-        private bool residenciaFiscalTransporFieldSpecified;
-
-        private string nombreTransportistaField;
 
         private string rFCEmbarcadorField;
 
@@ -32147,46 +29903,6 @@ namespace ServicioLocal.Business.Carta
 
         private string nombreEmbarcadorField;
 
-        /*
-        /// <remarks/>
-        public CartaPorteMercanciasTransporteAereoDetalleTransporte DetalleTransporte
-        {
-            get
-            {
-                return this.detalleTransporteField;
-            }
-            set
-            {
-                this.detalleTransporteField = value;
-            }
-        }
-
-        /// <remarks/>
-        public CartaPorteMercanciasTransporteAereoServicioManiobras ServicioManiobras
-        {
-            get
-            {
-                return this.servicioManiobrasField;
-            }
-            set
-            {
-                this.servicioManiobrasField = value;
-            }
-        }
-
-        /// <remarks/>
-        public CartaPorteMercanciasTransporteAereoServicioEspecial ServicioEspecial
-        {
-            get
-            {
-                return this.servicioEspecialField;
-            }
-            set
-            {
-                this.servicioEspecialField = value;
-            }
-        }
-        */
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string PermSCT
@@ -32198,20 +29914,6 @@ namespace ServicioLocal.Business.Carta
             set
             {
                 this.permSCTField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool PermSCTSpecified
-        {
-            get
-            {
-                return this.permSCTFieldSpecified;
-            }
-            set
-            {
-                this.permSCTFieldSpecified = value;
             }
         }
 
@@ -32229,6 +29931,7 @@ namespace ServicioLocal.Business.Carta
             }
         }
 
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string MatriculaAeronave
         {
@@ -32300,20 +30003,6 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCTransportista
-        {
-            get
-            {
-                return this.rFCTransportistaField;
-            }
-            set
-            {
-                this.rFCTransportistaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string CodigoTransportista
         {
             get
@@ -32323,76 +30012,6 @@ namespace ServicioLocal.Business.Carta
             set
             {
                 this.codigoTransportistaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool CodigoTransportistaSpecified
-        {
-            get
-            {
-                return this.codigoTransportistaFieldSpecified;
-            }
-            set
-            {
-                this.codigoTransportistaFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumRegIdTribTranspor
-        {
-            get
-            {
-                return this.numRegIdTribTransporField;
-            }
-            set
-            {
-                this.numRegIdTribTransporField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ResidenciaFiscalTranspor
-        {
-            get
-            {
-                return this.residenciaFiscalTransporField;
-            }
-            set
-            {
-                this.residenciaFiscalTransporField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResidenciaFiscalTransporSpecified
-        {
-            get
-            {
-                return this.residenciaFiscalTransporFieldSpecified;
-            }
-            set
-            {
-                this.residenciaFiscalTransporFieldSpecified = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreTransportista
-        {
-            get
-            {
-                return this.nombreTransportistaField;
-            }
-            set
-            {
-                this.nombreTransportistaField = value;
             }
         }
 
@@ -32463,132 +30082,6 @@ namespace ServicioLocal.Business.Carta
             set
             {
                 this.nombreEmbarcadorField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteMercanciasTransporteAereoDetalleTransporte
-    {
-
-        private string calificadorTransporteField;
-
-        private string nombreMedioTransporteField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CalificadorTransporte
-        {
-            get
-            {
-                return this.calificadorTransporteField;
-            }
-            set
-            {
-                this.calificadorTransporteField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreMedioTransporte
-        {
-            get
-            {
-                return this.nombreMedioTransporteField;
-            }
-            set
-            {
-                this.nombreMedioTransporteField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteMercanciasTransporteAereoServicioManiobras
-    {
-
-        private string descripServManiobrasField;
-
-        private string codServManiobrasField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DescripServManiobras
-        {
-            get
-            {
-                return this.descripServManiobrasField;
-            }
-            set
-            {
-                this.descripServManiobrasField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodServManiobras
-        {
-            get
-            {
-                return this.codServManiobrasField;
-            }
-            set
-            {
-                this.codServManiobrasField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteMercanciasTransporteAereoServicioEspecial
-    {
-
-        private string descripServEspecialField;
-
-        private string codServicioEspecialField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DescripServEspecial
-        {
-            get
-            {
-                return this.descripServEspecialField;
-            }
-            set
-            {
-                this.descripServEspecialField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodServicioEspecial
-        {
-            get
-            {
-                return this.codServicioEspecialField;
-            }
-            set
-            {
-                this.codServicioEspecialField = value;
             }
         }
     }
@@ -33074,7 +30567,7 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteFerroviario
     {
 
@@ -33084,11 +30577,11 @@ namespace ServicioLocal.Business.Carta
 
         private string tipoDeServicioField;
 
+        private string tipoDeTraficoField;
+
         private string nombreAsegField;
 
         private string numPolizaSeguroField;
-
-        private string concesionarioField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("DerechosDePaso")]
@@ -33134,6 +30627,20 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TipoDeTrafico
+        {
+            get
+            {
+                return this.tipoDeTraficoField;
+            }
+            set
+            {
+                this.tipoDeTraficoField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string NombreAseg
         {
             get
@@ -33159,20 +30666,6 @@ namespace ServicioLocal.Business.Carta
                 this.numPolizaSeguroField = value;
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Concesionario
-        {
-            get
-            {
-                return this.concesionarioField;
-            }
-            set
-            {
-                this.concesionarioField = value;
-            }
-        }
     }
 
     /// <remarks/>
@@ -33180,7 +30673,7 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteFerroviarioDerechosDePaso
     {
 
@@ -33587,7 +31080,7 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteFerroviarioCarro
     {
 
@@ -33677,7 +31170,7 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public partial class CartaPorteMercanciasTransporteFerroviarioCarroContenedor
     {
 
@@ -33801,148 +31294,56 @@ namespace ServicioLocal.Business.Carta
         /// <remarks/>
         TS04,
     }
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.sat.gob.mx/sitio_internet/cfd/catalogos/CartaPorte")]
+    public enum c_TipoDeTrafico
+    {
+
+        /// <remarks/>
+        TT01,
+
+        /// <remarks/>
+        TT02,
+
+        /// <remarks/>
+        TT03,
+
+        /// <remarks/>
+        TT04,
+    }
+
 
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporte
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteTiposFigura
     {
 
-        private CartaPorteFiguraTransporteOperadores[] operadoresField;
-     
-        private CartaPorteFiguraTransportePropietario[] propietarioField;
-
-        private CartaPorteFiguraTransporteArrendatario[] arrendatarioField;
-
-        private CartaPorteFiguraTransporteNotificado[] notificadoField;
-
-        private string cveTransporteField;
+        private CartaPorteTiposFiguraDomicilio domicilioField;
 
         /// <remarks/>
-          [XmlElement("Operadores")]
-       public CartaPorteFiguraTransporteOperadores[] Operadores 
-        {
-            get
-            {
-                return this.operadoresField;
-            }
-            set
-            {
-                this.operadoresField = value;
-            }
-        }
+      
+        private CartaPorteTiposFiguraPartesTransporte[] partesTransporteField;
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Propietario")]
-        public CartaPorteFiguraTransportePropietario[] Propietario
-        {
-            get
-            {
-                return this.propietarioField;
-            }
-            set
-            {
-                this.propietarioField = value;
-            }
-        }
+        private string tipoFiguraField;
 
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Arrendatario")]
-        public CartaPorteFiguraTransporteArrendatario[] Arrendatario
-        {
-            get
-            {
-                return this.arrendatarioField;
-            }
-            set
-            {
-                this.arrendatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Notificado")]
-        public CartaPorteFiguraTransporteNotificado[] Notificado
-        {
-            get
-            {
-                return this.notificadoField;
-            }
-            set
-            {
-                this.notificadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CveTransporte
-        {
-            get
-            {
-                return this.cveTransporteField;
-            }
-            set
-            {
-                this.cveTransporteField = value;
-            }
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteOperadores
-    {
-
-        private CartaPorteFiguraTransporteOperadoresOperador[] operadorField;
-  
-
-        /// <remarks/>
-          [XmlElement("Operador")]
-        public CartaPorteFiguraTransporteOperadoresOperador[] Operador
-        {
-            get
-            {
-                return this.operadorField;
-            }
-            set
-            {
-                this.operadorField = value;
-            }
-        }
-
-    }
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteOperadoresOperador
-    {
-
-        private CartaPorteFiguraTransporteOperadoresOperadorDomicilio domicilioField;
-
-        private string rFCOperadorField;
+        private string rFCFiguraField;
 
         private string numLicenciaField;
 
-        private string nombreOperadorField;
+        private string nombreFiguraField;
 
-        private string numRegIdTribOperadorField;
+        private string numRegIdTribFiguraField;
 
-        private string residenciaFiscalOperadorField;
+        private string residenciaFiscalFiguraField;
 
-        private bool residenciaFiscalOperadorFieldSpecified;
+        private bool residenciaFiscalFiguraFieldSpecified;
 
-        /// <remarks/>
-        public CartaPorteFiguraTransporteOperadoresOperadorDomicilio Domicilio
+        public CartaPorteTiposFiguraDomicilio Domicilio
         {
             get
             {
@@ -33953,18 +31354,45 @@ namespace ServicioLocal.Business.Carta
                 this.domicilioField = value;
             }
         }
-
         /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCOperador
+        [System.Xml.Serialization.XmlElementAttribute("PartesTransporte")]
+        public CartaPorteTiposFiguraPartesTransporte[] PartesTransporte
         {
             get
             {
-                return this.rFCOperadorField;
+                return this.partesTransporteField;
             }
             set
             {
-                this.rFCOperadorField = value;
+                this.partesTransporteField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string TipoFigura
+        {
+            get
+            {
+                return this.tipoFiguraField;
+            }
+            set
+            {
+                this.tipoFiguraField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string RFCFigura
+        {
+            get
+            {
+                return this.rFCFiguraField;
+            }
+            set
+            {
+                this.rFCFiguraField = value;
             }
         }
 
@@ -33984,57 +31412,57 @@ namespace ServicioLocal.Business.Carta
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreOperador
+        public string NombreFigura
         {
             get
             {
-                return this.nombreOperadorField;
+                return this.nombreFiguraField;
             }
             set
             {
-                this.nombreOperadorField = value;
+                this.nombreFiguraField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumRegIdTribOperador
+        public string NumRegIdTribFigura
         {
             get
             {
-                return this.numRegIdTribOperadorField;
+                return this.numRegIdTribFiguraField;
             }
             set
             {
-                this.numRegIdTribOperadorField = value;
+                this.numRegIdTribFiguraField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ResidenciaFiscalOperador
+        public string ResidenciaFiscalFigura
         {
             get
             {
-                return this.residenciaFiscalOperadorField;
+                return this.residenciaFiscalFiguraField;
             }
             set
             {
-                this.residenciaFiscalOperadorField = value;
+                this.residenciaFiscalFiguraField = value;
             }
         }
 
         /// <remarks/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResidenciaFiscalOperadorSpecified
+        public bool ResidenciaFiscalFiguraSpecified
         {
             get
             {
-                return this.residenciaFiscalOperadorFieldSpecified;
+                return this.residenciaFiscalFiguraFieldSpecified;
             }
             set
             {
-                this.residenciaFiscalOperadorFieldSpecified = value;
+                this.residenciaFiscalFiguraFieldSpecified = value;
             }
         }
     }
@@ -34044,8 +31472,35 @@ namespace ServicioLocal.Business.Carta
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteOperadoresOperadorDomicilio
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteTiposFiguraPartesTransporte
+    {
+
+
+        private string parteTransporteField;
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string ParteTransporte
+        {
+            get
+            {
+                return this.parteTransporteField;
+            }
+            set
+            {
+                this.parteTransporteField = value;
+            }
+        }
+    }
+
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
+    public partial class CartaPorteTiposFiguraDomicilio
     {
 
         private string calleField;
@@ -34212,832 +31667,7 @@ namespace ServicioLocal.Business.Carta
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransportePropietario
-    {
-
-        private CartaPorteFiguraTransportePropietarioDomicilio domicilioField;
-
-        private string rFCPropietarioField;
-
-        private string nombrePropietarioField;
-
-        private string numRegIdTribPropietarioField;
-
-        private string residenciaFiscalPropietarioField;
-
-        private bool residenciaFiscalPropietarioFieldSpecified;
-
-        /// <remarks/>
-        public CartaPorteFiguraTransportePropietarioDomicilio Domicilio
-        {
-            get
-            {
-                return this.domicilioField;
-            }
-            set
-            {
-                this.domicilioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCPropietario
-        {
-            get
-            {
-                return this.rFCPropietarioField;
-            }
-            set
-            {
-                this.rFCPropietarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombrePropietario
-        {
-            get
-            {
-                return this.nombrePropietarioField;
-            }
-            set
-            {
-                this.nombrePropietarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumRegIdTribPropietario
-        {
-            get
-            {
-                return this.numRegIdTribPropietarioField;
-            }
-            set
-            {
-                this.numRegIdTribPropietarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ResidenciaFiscalPropietario
-        {
-            get
-            {
-                return this.residenciaFiscalPropietarioField;
-            }
-            set
-            {
-                this.residenciaFiscalPropietarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResidenciaFiscalPropietarioSpecified
-        {
-            get
-            {
-                return this.residenciaFiscalPropietarioFieldSpecified;
-            }
-            set
-            {
-                this.residenciaFiscalPropietarioFieldSpecified = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransportePropietarioDomicilio
-    {
-
-        private string calleField;
-
-        private string numeroExteriorField;
-
-        private string numeroInteriorField;
-
-        private string coloniaField;
-
-        private string localidadField;
-
-        private string referenciaField;
-
-        private string municipioField;
-
-        private string estadoField;
-
-        private string paisField;
-
-        private string codigoPostalField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Calle
-        {
-            get
-            {
-                return this.calleField;
-            }
-            set
-            {
-                this.calleField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroExterior
-        {
-            get
-            {
-                return this.numeroExteriorField;
-            }
-            set
-            {
-                this.numeroExteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroInterior
-        {
-            get
-            {
-                return this.numeroInteriorField;
-            }
-            set
-            {
-                this.numeroInteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Colonia
-        {
-            get
-            {
-                return this.coloniaField;
-            }
-            set
-            {
-                this.coloniaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Localidad
-        {
-            get
-            {
-                return this.localidadField;
-            }
-            set
-            {
-                this.localidadField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Referencia
-        {
-            get
-            {
-                return this.referenciaField;
-            }
-            set
-            {
-                this.referenciaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Municipio
-        {
-            get
-            {
-                return this.municipioField;
-            }
-            set
-            {
-                this.municipioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Estado
-        {
-            get
-            {
-                return this.estadoField;
-            }
-            set
-            {
-                this.estadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Pais
-        {
-            get
-            {
-                return this.paisField;
-            }
-            set
-            {
-                this.paisField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodigoPostal
-        {
-            get
-            {
-                return this.codigoPostalField;
-            }
-            set
-            {
-                this.codigoPostalField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteArrendatario
-    {
-
-        private CartaPorteFiguraTransporteArrendatarioDomicilio domicilioField;
-
-        private string rFCArrendatarioField;
-
-        private string nombreArrendatarioField;
-
-        private string numRegIdTribArrendatarioField;
-
-        private string residenciaFiscalArrendatarioField;
-
-        private bool residenciaFiscalArrendatarioFieldSpecified;
-
-        /// <remarks/>
-        public CartaPorteFiguraTransporteArrendatarioDomicilio Domicilio
-        {
-            get
-            {
-                return this.domicilioField;
-            }
-            set
-            {
-                this.domicilioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCArrendatario
-        {
-            get
-            {
-                return this.rFCArrendatarioField;
-            }
-            set
-            {
-                this.rFCArrendatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreArrendatario
-        {
-            get
-            {
-                return this.nombreArrendatarioField;
-            }
-            set
-            {
-                this.nombreArrendatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumRegIdTribArrendatario
-        {
-            get
-            {
-                return this.numRegIdTribArrendatarioField;
-            }
-            set
-            {
-                this.numRegIdTribArrendatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ResidenciaFiscalArrendatario
-        {
-            get
-            {
-                return this.residenciaFiscalArrendatarioField;
-            }
-            set
-            {
-                this.residenciaFiscalArrendatarioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResidenciaFiscalArrendatarioSpecified
-        {
-            get
-            {
-                return this.residenciaFiscalArrendatarioFieldSpecified;
-            }
-            set
-            {
-                this.residenciaFiscalArrendatarioFieldSpecified = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteArrendatarioDomicilio
-    {
-
-        private string calleField;
-
-        private string numeroExteriorField;
-
-        private string numeroInteriorField;
-
-        private string coloniaField;
-
-        private string localidadField;
-
-        private string referenciaField;
-
-        private string municipioField;
-
-        private string estadoField;
-
-        private string paisField;
-
-        private string codigoPostalField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Calle
-        {
-            get
-            {
-                return this.calleField;
-            }
-            set
-            {
-                this.calleField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroExterior
-        {
-            get
-            {
-                return this.numeroExteriorField;
-            }
-            set
-            {
-                this.numeroExteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroInterior
-        {
-            get
-            {
-                return this.numeroInteriorField;
-            }
-            set
-            {
-                this.numeroInteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Colonia
-        {
-            get
-            {
-                return this.coloniaField;
-            }
-            set
-            {
-                this.coloniaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Localidad
-        {
-            get
-            {
-                return this.localidadField;
-            }
-            set
-            {
-                this.localidadField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Referencia
-        {
-            get
-            {
-                return this.referenciaField;
-            }
-            set
-            {
-                this.referenciaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Municipio
-        {
-            get
-            {
-                return this.municipioField;
-            }
-            set
-            {
-                this.municipioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Estado
-        {
-            get
-            {
-                return this.estadoField;
-            }
-            set
-            {
-                this.estadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Pais
-        {
-            get
-            {
-                return this.paisField;
-            }
-            set
-            {
-                this.paisField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodigoPostal
-        {
-            get
-            {
-                return this.codigoPostalField;
-            }
-            set
-            {
-                this.codigoPostalField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteNotificado
-    {
-
-        private CartaPorteFiguraTransporteNotificadoDomicilio domicilioField;
-
-        private string rFCNotificadoField;
-
-        private string nombreNotificadoField;
-
-        private string numRegIdTribNotificadoField;
-
-        private string residenciaFiscalNotificadoField;
-
-        private bool residenciaFiscalNotificadoFieldSpecified;
-
-        /// <remarks/>
-        public CartaPorteFiguraTransporteNotificadoDomicilio Domicilio
-        {
-            get
-            {
-                return this.domicilioField;
-            }
-            set
-            {
-                this.domicilioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RFCNotificado
-        {
-            get
-            {
-                return this.rFCNotificadoField;
-            }
-            set
-            {
-                this.rFCNotificadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NombreNotificado
-        {
-            get
-            {
-                return this.nombreNotificadoField;
-            }
-            set
-            {
-                this.nombreNotificadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumRegIdTribNotificado
-        {
-            get
-            {
-                return this.numRegIdTribNotificadoField;
-            }
-            set
-            {
-                this.numRegIdTribNotificadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ResidenciaFiscalNotificado
-        {
-            get
-            {
-                return this.residenciaFiscalNotificadoField;
-            }
-            set
-            {
-                this.residenciaFiscalNotificadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool ResidenciaFiscalNotificadoSpecified
-        {
-            get
-            {
-                return this.residenciaFiscalNotificadoFieldSpecified;
-            }
-            set
-            {
-                this.residenciaFiscalNotificadoFieldSpecified = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
-    public partial class CartaPorteFiguraTransporteNotificadoDomicilio
-    {
-
-        private string calleField;
-
-        private string numeroExteriorField;
-
-        private string numeroInteriorField;
-
-        private string coloniaField;
-
-        private string localidadField;
-
-        private string referenciaField;
-
-        private string municipioField;
-
-        private string estadoField;
-
-        private string paisField;
-
-        private string codigoPostalField;
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Calle
-        {
-            get
-            {
-                return this.calleField;
-            }
-            set
-            {
-                this.calleField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroExterior
-        {
-            get
-            {
-                return this.numeroExteriorField;
-            }
-            set
-            {
-                this.numeroExteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string NumeroInterior
-        {
-            get
-            {
-                return this.numeroInteriorField;
-            }
-            set
-            {
-                this.numeroInteriorField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Colonia
-        {
-            get
-            {
-                return this.coloniaField;
-            }
-            set
-            {
-                this.coloniaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Localidad
-        {
-            get
-            {
-                return this.localidadField;
-            }
-            set
-            {
-                this.localidadField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Referencia
-        {
-            get
-            {
-                return this.referenciaField;
-            }
-            set
-            {
-                this.referenciaField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Municipio
-        {
-            get
-            {
-                return this.municipioField;
-            }
-            set
-            {
-                this.municipioField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Estado
-        {
-            get
-            {
-                return this.estadoField;
-            }
-            set
-            {
-                this.estadoField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Pais
-        {
-            get
-            {
-                return this.paisField;
-            }
-            set
-            {
-                this.paisField = value;
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodigoPostal
-        {
-            get
-            {
-                return this.codigoPostalField;
-            }
-            set
-            {
-                this.codigoPostalField = value;
-            }
-        }
-    }
-
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public enum CartaPorteTranspInternac
     {
 
@@ -35051,7 +31681,7 @@ namespace ServicioLocal.Business.Carta
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.sat.gob.mx/CartaPorte20")]
     public enum CartaPorteEntradaSalidaMerc
     {
 
@@ -35061,4 +31691,74 @@ namespace ServicioLocal.Business.Carta
         /// <remarks/>
         Salida,
     }
+	
+	 /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.sat.gob.mx/sitio_internet/cfd/catalogos/CartaPorte")]
+  public enum c_FiguraTransporte
+    {
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("01")]
+        Item01,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("02")]
+        Item02,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("03")]
+        Item03,
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlEnumAttribute("04")]
+        Item04,
+
+        
+    }
+	[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.6.1055.0")]
+    [System.SerializableAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.sat.gob.mx/sitio_internet/cfd/catalogos/CartaPorte")]
+    public enum c_ParteTransporte
+    {
+
+        /// <remarks/>
+        PT01,
+
+        /// <remarks/>
+        PT02,
+
+        /// <remarks/>
+        PT03,
+
+        /// <remarks/>
+        PT04,
+		
+        /// <remarks/>
+        PT05,
+
+        /// <remarks/>
+        PT06,
+
+        /// <remarks/>
+        PT07,
+
+        /// <remarks/>
+        PT08,
+		
+        /// <remarks/>
+        PT09,
+
+        /// <remarks/>
+        PT10,
+
+        /// <remarks/>
+        PT11,
+
+        /// <remarks/>
+        PT12,
+    }
+	
+	
 }

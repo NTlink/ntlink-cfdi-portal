@@ -12,11 +12,11 @@ using ServicioLocalContract.Entities;
 using ServicioLocal.catCFDI;
 using CatalogosSAT;
 using System.Data;
-using ServicioLocalContract.Entities.ComercioExte;
+using ServicioLocalContract.Entities.Carta;
 
 namespace GafLookPaid
 {
-    public partial class wfrFacturaComercioExterior : Page
+    public partial class wfrFacturaCartaPorte2 : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,7 +53,15 @@ namespace GafLookPaid
                         
                         if (listaEmpresas.Count > 0)
                         {
-                                        
+                            //List<clientes> bind = new List<clientes>();
+                            //bind= cliente.ListaClientes(perfil, idEmpresa, string.Empty, false);
+                            //clientes añadir = new clientes();
+                            //añadir.idCliente = 0;
+                            //añadir.RazonSocial = "Seleccionar";
+                            //bind.Add(añadir);
+                            //this.ddlClientes.DataSource= bind;
+
+                           
                             
                                 
                                 this.ddlClientes.DataSource = cliente.ListaClientes(perfil, idEmpresa, string.Empty, false);
@@ -95,38 +103,81 @@ namespace GafLookPaid
                         ddlMoneda.DataBind();
                         ddlMoneda.SelectedValue = "MXN";
                         //-------------
+                        ddlMonedaMercancia.DataSource = ddlMoneda.DataSource;
+                        ddlMonedaMercancia.DataValueField = "c_Moneda1";
+                        ddlMonedaMercancia.DataTextField = "Descripción";
+                        ddlMonedaMercancia.DataBind();
+                        this.ddlMonedaMercancia.Items.Insert(0, "");
+
                         Filtro_Moneda();
 
-                        ddlPaisOperador.DataSource = cliente.Consultar_PaisAll().OrderBy(p => p.Descripción);
+                        ddlResidenciaFiscal.DataSource = cliente.Consultar_PaisAll().OrderBy(p => p.Descripción);
+                        ddlResidenciaFiscal.DataTextField = "Descripción";
+                        ddlResidenciaFiscal.DataValueField = "c_Pais1";
+                        ddlResidenciaFiscal.DataBind();
+                        ddlResidenciaFiscalDestino.DataSource = cliente.Consultar_PaisAll().OrderBy(p => p.Descripción);
+                        ddlResidenciaFiscalDestino.DataTextField = "Descripción";
+                        ddlResidenciaFiscalDestino.DataValueField = "c_Pais1";
+                        ddlResidenciaFiscalDestino.DataBind();
+                        ddlPais.DataSource = cliente.Consultar_PaisAll().OrderBy(p => p.Descripción);
+                        ddlPais.DataTextField = "Descripción";
+                        ddlPais.DataValueField = "c_Pais1";
+                        ddlPais.DataBind();
+                        ddlNacionalidadEmbarc.DataSource = ddlPais.DataSource;
+                        ddlNacionalidadEmbarc.DataTextField = "Descripción";
+                        ddlNacionalidadEmbarc.DataValueField = "c_Pais1";
+                        ddlNacionalidadEmbarc.DataBind();
+
+                        ddlResidenciaFiscalTranspor.DataSource = ddlPais.DataSource;
+                        ddlResidenciaFiscalTranspor.DataTextField = "Descripción";
+                        ddlResidenciaFiscalTranspor.DataValueField = "c_Pais1";
+                        ddlResidenciaFiscalTranspor.DataBind();
+
+                        ddlResidenciaFiscalEmbarc.DataSource = ddlPais.DataSource;
+                        ddlResidenciaFiscalEmbarc.DataTextField = "Descripción";
+                        ddlResidenciaFiscalEmbarc.DataValueField = "c_Pais1";
+                        ddlResidenciaFiscalEmbarc.DataBind();
+
+                        ddlResidenciaFiscalOperador.DataSource = ddlPais.DataSource;
+                        ddlResidenciaFiscalOperador.DataTextField = "Descripción";
+                        ddlResidenciaFiscalOperador.DataValueField = "c_Pais1";
+                        ddlResidenciaFiscalOperador.DataBind();
+
+
+                        ddlPaisOperador.DataSource = ddlPais.DataSource;
                         ddlPaisOperador.DataTextField = "Descripción";
                         ddlPaisOperador.DataValueField = "c_Pais1";
                         ddlPaisOperador.DataBind();
-                        ddlPaisOperador.SelectedValue = "MEX";
-                        ddlPaisOperador_SelectedIndexChanged(null, null);
 
-                        ddlResidenciaFiscalPropietario.DataSource = ddlPaisOperador.DataSource;
-                        ddlResidenciaFiscalPropietario.DataTextField = "Descripción";
-                        ddlResidenciaFiscalPropietario.DataValueField = "c_Pais1";
-                        ddlResidenciaFiscalPropietario.DataBind();
-                        ddlResidenciaFiscalPropietario.SelectedValue = "MEX";
-
-                        ddlPaisNotificado.DataSource = ddlPaisOperador.DataSource;
-                        ddlPaisNotificado.DataTextField = "Descripción";
-                        ddlPaisNotificado.DataValueField = "c_Pais1";
-                        ddlPaisNotificado.DataBind();
-                        ddlPaisNotificado.SelectedValue = "MEX";
-                        ddlPaisNotificado_SelectedIndexChanged(null, null);
-
-
-                        ddlPaisArrendatario.DataSource = ddlPaisOperador.DataSource;
+                        ddlPaisPropietario.DataSource = ddlPais.DataSource;
+                        ddlPaisPropietario.DataTextField = "Descripción";
+                        ddlPaisPropietario.DataValueField = "c_Pais1";
+                        ddlPaisPropietario.DataBind();
+                 
+                        ddlPaisArrendatario.DataSource = ddlPais.DataSource;
                         ddlPaisArrendatario.DataTextField = "Descripción";
                         ddlPaisArrendatario.DataValueField = "c_Pais1";
                         ddlPaisArrendatario.DataBind();
-                        ddlPaisArrendatario.SelectedValue = "MEX";
-                        ddlPaisArrendatario_SelectedIndexChanged(null, null);
-
                  
+                         ddlPaisNotificado.DataSource = ddlPais.DataSource;
+                        ddlPaisNotificado.DataTextField = "Descripción";
+                        ddlPaisNotificado.DataValueField = "c_Pais1";
+                        ddlPaisNotificado.DataBind();
+              
+                        // ddlResidenciaFiscal.SelectedValue = "MEX";
+                        ddlClaveUnidadPeso.DataSource = cliente.Consultar_ClaveUnidadPeso_ALL().OrderBy(p => p.Nombre);
+                        ddlClaveUnidadPeso.DataTextField = "Nombre";
+                        ddlClaveUnidadPeso.DataValueField = "Claveunidad";
+                        ddlClaveUnidadPeso.DataBind();
+                        ddlClaveUnidadPeso.Items.Insert(0, "");
 
+                        ddlUnidadPesoDM.DataSource = ddlClaveUnidadPeso.DataSource;
+                        ddlUnidadPesoDM.DataTextField = "Nombre";
+                        ddlUnidadPesoDM.DataValueField = "Claveunidad";
+                        ddlUnidadPesoDM.DataBind();
+                       
+                      
+                    
                         CatalogosSAT.c_Moneda mone = cliente.Consultar_Moneda(ddlMoneda.SelectedValue);
                         ViewState["DecimalMoneda"] = mone.Decimales;
                        
@@ -158,92 +209,51 @@ namespace GafLookPaid
 
         protected void inicarDatos()
         {
-
-
+             ViewState["ubicaciones"] =new List<Ubicacion>();
              ViewState["mercancias"] =new  List<Mercancia>();
-             ViewState["descripcionesEspecificas"] = new List<DescripcionesEspecificas>();
-            // ViewState["emisor"] = new List<Emisor>();
+             ViewState["CantidadTransporta"] =new List<CantidadTransporta>();
+             ViewState["Contenedor"] =new List<Contenedor>();
+             ViewState["DerechosDePaso"] =new List<DerechosDePaso>();
+             ViewState["Carro"]=new List<Carro>();
+             ViewState["CarroContenedor"] =new List<CarroContenedor>();
+             ViewState["Operador"] =new List<Operador>();
              ViewState["Propietario"] =new List<Propietario>();
-            // ViewState["receptor"] = new List<Receptor>();
-             ViewState["destinatario"] = new List<Destinatario>();
-             ViewState["destinatarioDom"] = new List<Domicilio>();
-            
-             //dllLocalidadOperador.Visible = false;
-             //ddlMunicipioOperador.Visible = false;
-             //dllEstadoOperador.Visible = false;
+             ViewState["Arrendatario"] =new List<Arrendatario>();
+             ViewState["Notificado"]=new List<Notificado>();
+
+             ddlEstado.Visible = false;
+             ddlMunicipio.Visible = false;
+             ddlLocalidad.Visible = false;
+
+             dllLocalidadOperador.Visible = false;
+             ddlMunicipioOperador.Visible = false;
+             dllEstadoOperador.Visible = false;
 
 
-          //   dllLocalidadPropietario.Visible = false;
-          //   ddlMunicipioPropietario.Visible = false;
-          //   dllEstadoPropietario.Visible = false;
+             dllLocalidadPropietario.Visible = false;
+             ddlMunicipioPropietario.Visible = false;
+             dllEstadoPropietario.Visible = false;
 
-             //dllLocalidadArrendatario.Visible = false;
-             //ddlMunicipioArrendatario.Visible = false;
-             //dllEstadoArrendatario.Visible = false;
+             dllLocalidadArrendatario.Visible = false;
+             ddlMunicipioArrendatario.Visible = false;
+             dllEstadoArrendatario.Visible = false;
 
-             //dllLocalidadNotificado.Visible = false;
-             //ddlMunicipioNotificado.Visible = false;
-             //dllEstadoNotificado.Visible = false;
-
-            limpiarCE();
-            limpiarEmisor();
-            limpiarReceptor();
-            cbEmisor.Checked = false;
-            cbPropietario.Checked = false;
-            cbReceptor.Checked = false;
-            cbDestinatario.Checked = false;
+             dllLocalidadNotificado.Visible = false;
+             ddlMunicipioNotificado.Visible = false;
+             dllEstadoNotificado.Visible = false;
 
         }
+        //protected void chkIva_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    this.txtIva.Enabled = this.chkIva.Checked;
+        //    this.UpdateTotales();
+        //}
 
 
-        private void limpiarEmisor()
-        {
-             txtCurp.Text = "";
-            //ddlResidenciaFiscalOperador.SelectedValue;
-            txtCalleOperador.Text = "";
-            txtNumeroExteriorOperador.Text = "";
-            txtNumeroInteriorOperador.Text = "";
-            txtColoniaOperador.Text = "";
-            txtLocalidadOperador.Text = "";
-            txtReferenciaOperador.Text = "";
-            txtMunicipioOperador.Text = "";
-            txtEstadoOperador.Text = "";
-            //ddlPaisOperador.SelectedValue;
-            txtCodigoPostalOperador.Text = "";
-        }
-        private void limpiarReceptor()
-        {
-            txtNumRegIdTribReceptor.Text = "";
-            //ddlResidenciaFiscalArrendatario.SelectedValue;
-            txtCalleArrendatario.Text = "";
-            txtNumeroExteriorArrendatario.Text = "";
-            txtNumeroInteriorArrendatario.Text = "";
-            txtColoniaArrendatario.Text = "";
-            txtLocalidadArrendatario.Text = "";
-            txtReferenciaArrendatario.Text = "";
-            txtMunicipioArrendatario.Text = "";
-            txtEstadoArrendatario.Text = "";
-            //ddlPaisArrendatario.SelectedValue;
-            txtCodigoPostalArrendatario.Text = "";
-        }
-        private void limpiarCE()
-        {
-
-              ddlMotivoTraslado.SelectedValue="-1";
-              ddlTipoOperacion.SelectedValue="-1";
-              ddlClaveDePedimento.SelectedValue = "-1";
-              ddlCertificadoOrigen.SelectedValue = "-1";
-              txtNumCertificadoOrigen.Text = "";
-              txtNumeroExportadorConfiable.Text = "";
-              dllIncoterm.SelectedValue = "-1";
-              ddlSubdivision.SelectedValue = "-1";
-              txtTipoCambioUSD.Text = "";
-              txtTotalUSD.Text = "";
-              txtObservacionesCE.Text = "";
-
-        }
         protected void btnGenerarFactura_Click(object sender, EventArgs e)
         {
+          
+
 
             btnGenerarFactura.Enabled = false;
             LblAux.Text = "";
@@ -358,40 +368,41 @@ namespace GafLookPaid
             this.txtIdProducto.Value = null;
             this.Clear();
             this.BindDetallesToGridView();
-            if (ddlTipoDocumento.SelectedValue != "T") //comprobante traslado
+
+              if (ddlTipoDocumento.SelectedValue != "T") //comprobante traslado
             {
-                this.UpdateTotales();
+            this.UpdateTotales();
 
-                //  Impuestos.ClaveConcepto = this.txtCodigo.Text;
-                //  Impuestos.AltaClaveConcepto();
+            //  Impuestos.ClaveConcepto = this.txtCodigo.Text;
+            //  Impuestos.AltaClaveConcepto();
 
-                cbImpuestos.Enabled = true;
-                //---------------------------------------
-                if (cbIVA.Checked == true)
+            cbImpuestos.Enabled = true;
+            //---------------------------------------
+            if (cbIVA.Checked == true)
+            {
+                if (ddlIVA.SelectedValue == "0.160000" || ddlIVA.SelectedValue == "0.000000" || ddlIVA.SelectedValue == "0.080000" )
                 {
-                    if (ddlIVA.SelectedValue == "0.160000" || ddlIVA.SelectedValue == "0.000000" || ddlIVA.SelectedValue == "0.080000")
-                    {
-                        AgregarImpuesto(detalle.Partida.ToString(), "Traslados", "002", "Tasa", ddlIVA.SelectedValue);
-                    }
-
-                    else if (ddlIVA.SelectedValue == "Exento")
-                    {
-                        AgregarImpuesto(detalle.Partida.ToString(), "Traslados", "002", ddlIVA.SelectedValue, "0.000000");
-                    }
+                    AgregarImpuesto(detalle.Partida.ToString(), "Traslados", "002", "Tasa", ddlIVA.SelectedValue);
                 }
-                if (cbRIVA.Checked == true)
+               
+                else if (ddlIVA.SelectedValue == "Exento")
                 {
-                    AgregarImpuesto(detalle.Partida.ToString(), "Retenciones", "002", "Tasa", ddlRIVA.SelectedValue);
+                    AgregarImpuesto(detalle.Partida.ToString(), "Traslados", "002", ddlIVA.SelectedValue, "0.000000");
                 }
-                if (cbRISR.Checked == true)
-                {
-                    AgregarImpuesto(detalle.Partida.ToString(), "Retenciones", "001", "Tasa", "0.100000");
-                }
-                if (cbIVA.Checked == true || cbRISR.Checked == true || cbRIVA.Checked == true)
-                {
-                    cbImpuestos.Checked = true;
-                    #region Impuestos
-                    /*DivComplementos.Visible = true;
+            }
+            if (cbRIVA.Checked == true)
+            {
+                AgregarImpuesto(detalle.Partida.ToString(), "Retenciones", "002", "Tasa", ddlRIVA.SelectedValue);
+            }
+            if (cbRISR.Checked == true)
+            {
+                AgregarImpuesto(detalle.Partida.ToString(), "Retenciones", "001", "Tasa", "0.100000");
+            }
+            if (cbIVA.Checked == true || cbRISR.Checked == true || cbRIVA.Checked == true)
+            {
+                cbImpuestos.Checked = true;
+                #region Impuestos
+                /*DivComplementos.Visible = true;
                 //---------------------------llenado de datos
                 var clienteServicio = NtLinkClientFactory.Cliente();
                 List<CatalogosSAT.c_TasaOCuota> L;
@@ -435,44 +446,41 @@ namespace GafLookPaid
                     }
 
                 }*/
-                    #endregion
-                    cbIVA.Checked = true;
-                    ddlIVA.Enabled = true;
-                    cbRISR.Checked = false;
-                    cbRIVA.Checked = false;
-                    ddlRIVA.Enabled = false;
+                #endregion
+                cbIVA.Checked = true;
+                ddlIVA.Enabled = true;
+                cbRISR.Checked = false;
+                cbRIVA.Checked = false;
+                ddlRIVA.Enabled = false;
+                
+            }
 
-                }
-
-
-                if (cbImpuestos.Checked == true)
-                {
-                    ActImpuestos();
-                }
-
-
-
-                //-------
-                LblAux.Text = "";
+           
+            if (cbImpuestos.Checked == true)
+            {
+                ActImpuestos();
+            }
 
 
-                //-------------DESC------------------------
-                this.txtdsc.Text = "";
+           
+            //-------
+            LblAux.Text = "";
 
-                ddlRIVA.SelectedValue = "0.106666";
-                txtCodigo.Text = "";
-                txtCodigo.Enabled = true;
 
-                if (this.descuento.Checked == true)
-                {
-                    this.descuento.Checked = false;
-                    txtdsc.Enabled = false;
+            //-------------DESC------------------------
+            this.txtdsc.Text = "";
 
-                }
+            ddlRIVA.SelectedValue = "0.106666";
+            txtCodigo.Text = "";
+            txtCodigo.Enabled = true;
+
+            if (this.descuento.Checked == true) {
+                this.descuento.Checked = false;
+                txtdsc.Enabled = false; 
+
+            }
+
             }  //-----------fin comprobante traslado
-
-
-
         }
 
         protected void ddlEmpresa_SelectedIndexChanged(object sender, EventArgs e)
@@ -769,7 +777,7 @@ namespace GafLookPaid
         {
             //this.ClearAll();
 
-            Response.Redirect("wfrFacturaComercioExterior.aspx");
+            Response.Redirect("wfrFacturaCartaPorte.aspx");
 
         }
 
@@ -794,7 +802,17 @@ namespace GafLookPaid
                 this.lblError.Text = "La factura no puede estar vacía";
                 return false;
             }
-            
+            if ((ViewState["ubicaciones"] as List<Ubicacion>).Count == 0)
+            {
+                this.lblError.Text = "La Ubicacion no puede estar vacía";
+                return false;
+           
+            }
+            if ((ViewState["mercancias"] as List<Mercancia>).Count == 0)
+            {
+                this.lblError.Text = "La Mercancia no puede estar vacía";
+                return false;
+            }
          
             if (string.IsNullOrEmpty(this.txtFolio.Text))
             {
@@ -867,8 +885,8 @@ namespace GafLookPaid
                             fact33.Add(f33);
                         }
                         facturaComplementos complementos = new facturaComplementos();
-                        complementos.datosComercioExterior = new DatosComercioExterior();
-                        complementos.datosComercioExterior = GetDatosFacturaCarta();
+                        complementos.datosCartaPorte = new DatosCartaPorte();
+                        complementos.datosCartaPorte = GetDatosFacturaCarta();
 
                         var ss = clienteServicio.GuardarFactura33(fact, detalles, fact33, true, complementos, null);
                         if(!ss.resultado)
@@ -985,10 +1003,8 @@ namespace GafLookPaid
                  fact.MetodoID = this.ddlMetodoPago.SelectedValue;
                  fact.Metodo = this.ddlMetodoPago.SelectedItem.Text;
              }
-             if (!string.IsNullOrEmpty(this.txtTipoCambio.Text))
-                 fact.TipoCambio = Convert.ToDecimal(this.txtTipoCambio.Text);
-             else
-                 fact.TipoCambio = 1;
+             if (!string.IsNullOrEmpty(this.txtTipoCambio.Text) )
+                 fact.TipoCambio =Convert.ToDecimal(this.txtTipoCambio.Text);
              if (!string.IsNullOrEmpty(this.txtConfirmacion.Text))
                  fact.Confirmacion = this.txtConfirmacion.Text;
              if (!string.IsNullOrEmpty(this.txtCondicionesPago.Text))
@@ -1000,7 +1016,9 @@ namespace GafLookPaid
                 fact.NotaCredito = true;
          
             }
-            
+
+
+
 
             if (ddlTipoDocumento.SelectedValue == "Donativo")
             {
@@ -1044,199 +1062,194 @@ namespace GafLookPaid
             else
                 fact.StatusPago = false;
         
+            /*
+            if (ddlStatusFactura.SelectedValue == "1" && !string.IsNullOrEmpty(txtFechaPago.Text))
+            {
+                fact.FechaPago = DateTime.ParseExact(txtFechaPago.Text, "dd/MM/yyyy", new CultureInfo("es-MX"));
+                fact.ReferenciaPago = txtCuenta.Text;
+            }
+             */ 
+            /*
+            fact.Vencimiento = string.IsNullOrEmpty(this.txtDiasRevision.Text)
+                                   ? fact.Fecha
+                                   : fact.Fecha.AddDays(int.Parse(this.txtDiasRevision.Text));
            
-           
+             */
             if (ddlMoneda.SelectedValue == "MXN")
                 fact.NumeroDecimal = ddlDecimales.SelectedValue;
-         
+            //fact.DatosCartaPorte = GetDatosFacturaCarta();
         
             return fact;
         }
 
-        private DatosComercioExterior GetDatosFacturaCarta()
+        private DatosCartaPorte GetDatosFacturaCarta()
         {
-
             //campos txt factura 
-            DatosComercioExterior d = new DatosComercioExterior();
-            if (ddlMotivoTraslado.SelectedValue != "-1")
-            d.MotivoTraslado=  ddlMotivoTraslado.SelectedValue;
-            d.TipoOperacion=ddlTipoOperacion.SelectedValue;
-            if (ddlClaveDePedimento.SelectedValue != "-1")
-            d.ClaveDePedimento = ddlClaveDePedimento.SelectedValue;
-            if (ddlCertificadoOrigen.SelectedValue != "-1")
-            d.CertificadoOrigen = ddlCertificadoOrigen.SelectedValue;
-            if (!string.IsNullOrEmpty(txtNumCertificadoOrigen.Text))
-            d.NumCertificadoOrigen=txtNumCertificadoOrigen.Text;
-            if (!string.IsNullOrEmpty(txtNumeroExportadorConfiable.Text))
-            d.NumeroExportadorConfiable = txtNumeroExportadorConfiable.Text;
-            if (dllIncoterm.SelectedValue != "-1")
-            d.Incoterm = dllIncoterm.SelectedValue;
-            if (ddlSubdivision.SelectedValue != "-1")
-            d.Subdivision = ddlSubdivision.SelectedValue;
-            if (!string.IsNullOrEmpty(txtTipoCambioUSD.Text))
-            d.TipoCambioUSD = txtTipoCambioUSD.Text;
-            if (!string.IsNullOrEmpty(txtTotalUSD.Text))
-            d.TotalUSD = txtTotalUSD.Text;
-            if (!string.IsNullOrEmpty(txtObservacionesCE.Text))
-            d.Observaciones = txtObservacionesCE.Text;
+            DatosCartaPorte d = new DatosCartaPorte();
+            
+            if (ddlEntradaSalidaMerc.SelectedValue!="00")
+              d.entradaSalidaMerc=ddlEntradaSalidaMerc.SelectedValue;
+            if (ddlViaEntradaSalida.SelectedValue != "00")
+                d.viaEntradaSalida = ddlViaEntradaSalida.SelectedValue;
+             if (!string.IsNullOrEmpty(txtTotalDistRec.Text))
+                 d.totalDistRec =Convert.ToDecimal(txtTotalDistRec.Text);
+               d.transpInternac=ddlTranspInternac.SelectedValue;
+                //--
+            
+            if (!string.IsNullOrEmpty(txtPesoBrutoTotal.Text))
+                   d.pesoBrutoTotal = Convert.ToDecimal(txtPesoBrutoTotal.Text);
+               if (ddlClaveUnidadPeso.SelectedValue != "00" && ddlClaveUnidadPeso.SelectedValue != "")
+                   d.unidadPeso = ddlClaveUnidadPeso.SelectedValue;
+              if (!string.IsNullOrEmpty(txtPesoNetoTotal.Text))
+                  d.pesoNetoTotal = Convert.ToDecimal(txtPesoNetoTotal.Text);
+              d.numTotalMercancias=Convert.ToInt32(txtNumTotalMercancias.Text);
+              if (!string.IsNullOrEmpty(txtCargoPorTasacion.Text))
+                  d.cargoPorTasacion = Convert.ToDecimal(txtCargoPorTasacion.Text);
+              
+               //--
+              if (cbAutotransporteFederal.Checked==true)
+              {
 
-            //---------------------------------------------------------------
+               d.configVehicular=ddlConfigVehicular.SelectedValue;
+               d.placaVM=txtPlacaVM.Text;
+               d.anioModeloVM=Convert.ToInt32(txtAnioModeloVM.Text);
+               if (!string.IsNullOrEmpty(txtPlaca.Text))
+               {
+                   d.subTipoRem1 = ddlSubTipoRem.SelectedValue;
+                   d.placa1 = txtPlaca.Text;
+               }
+               if (!string.IsNullOrEmpty(txtPlaca2.Text))
+               {
+                   d.subTipoRem2 = ddlSubTipoRem2.SelectedValue;
+                   d.placa2 = txtPlaca2.Text;
+               }
+               d.permSCTAutotransporteFederal = ddlPermSCT.SelectedValue;
+               d.numPermisoSCTAutotransporteFederal = txtNumPermisoSCT.Text;
+               d.nombreAsegAutotransporteFederal = txtNombreAseg.Text;
+               d.numPolizaSeguroAutotransporteFederal = txtNumPolizaSeguro.Text;
+              }
+              //--
+               if (cbTransporteMaritimo.Checked == true)
+               {
+                   if (ddlPermSCTTransporteMaritimo.SelectedValue != "00")
+                       d.permSCTTransporteMaritimo = ddlPermSCTTransporteMaritimo.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtTransporteMaritimoNumPermisoSCT.Text))
+                       d.numPermisoSCTTransporteMaritimo = txtTransporteMaritimoNumPermisoSCT.Text;
+                   if (!string.IsNullOrEmpty(txtTransporteMaritimoNombreAseg.Text))
+                       d.nombreAsegTransporteMaritimo = txtTransporteMaritimoNombreAseg.Text;
+                   if (!string.IsNullOrEmpty(txtTransporteMaritimNumPolizaSeguro.Text))
+                       d.numPolizaSeguroTransporteMaritimo = txtTransporteMaritimNumPolizaSeguro.Text;
+                   if (ddlTipoEmbarcacion.SelectedValue != "00")
+                       d.tipoEmbarcacion = ddlTipoEmbarcacion.SelectedValue;
+                   d.matricula = txtMatricula.Text;
+                   d.numeroOMI = txtNumeroOMI.Text;
+                   if (!string.IsNullOrEmpty(txtAnioEmbarcacion.Text))
+                       d.anioEmbarcacion = Convert.ToInt32(txtAnioEmbarcacion.Text);
+                   if (!string.IsNullOrEmpty(txtNombreEmbarc.Text))
+                       d.nombreEmbarc = txtNombreEmbarc.Text;
+                   d.nacionalidadEmbarc = ddlNacionalidadEmbarc.SelectedValue;
+                   d.unidadesDeArqBruto = Convert.ToDecimal(txtUnidadesDeArqBruto.Text);
+                   d.tipoCarga = ddlTipoCarga.SelectedValue;
+                   d.numCertITC = txtNumCertITC.Text;
+                   if (!string.IsNullOrEmpty(txtEslora.Text))
+                       d.eslora = Convert.ToDecimal(txtEslora.Text);
+                   if (!string.IsNullOrEmpty(txtManga.Text))
+                       d.manga = Convert.ToDecimal(txtManga.Text);
+                   if (!string.IsNullOrEmpty(txtCalado.Text))
+                       d.calado = Convert.ToDecimal(txtCalado.Text);
+                   if (!string.IsNullOrEmpty(txtLineaNaviera.Text))
+                       d.lineaNaviera = txtLineaNaviera.Text;
 
-            if (cbEmisor.Checked == true)
-            {
+                   d.nombreAgenteNaviero = txtNombreAgenteNaviero.Text;
+                   d.numAutorizacionNaviero = ddlNumAutorizacionNaviero.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtNumViaje.Text))
+                       d.numViaje = txtNumViaje.Text;
+                   if (!string.IsNullOrEmpty(txtNumConocEmbarc.Text))
+                       d.numConocEmbarc = txtNumConocEmbarc.Text;
+               }
+             //--
+               if (cbTransporteAereo.Checked == true)
+               {
+                   d.permSCT = ddlTransporteAereoPermSCT.SelectedValue;
+                   d.numPermisoSCT = txtTransporteAereoNumConocEmbarc.Text;
+                   d.matriculaAeronave = txtMatriculaAeronave.Text;
 
-                if (!string.IsNullOrEmpty(txtCurp.Text))
-                {
-                    d.emisor = new Emisor();
-                    d.emisor.Curp = txtCurp.Text;
-                }
-                if ( ddlPaisOperador.SelectedValue != "" && cbDomicilioEmisor.Checked==true)
-                {
-                    if (d.emisor == null)
-                        d.emisor = new Emisor();
-                        d.emisor.pais = ddlPaisOperador.SelectedValue;
-                        d.emisor.calle = txtCalleOperador.Text;
-                        if (!string.IsNullOrEmpty(txtNumeroExteriorOperador.Text))
-                            d.emisor.numeroExterior = txtNumeroExteriorOperador.Text;
-                        if (!string.IsNullOrEmpty(txtNumeroInteriorOperador.Text))
-                            d.emisor.numeroInterior = txtNumeroInteriorOperador.Text;
-                        if (!string.IsNullOrEmpty(txtColoniaOperador.Text))
-                            d.emisor.colonia = txtColoniaOperador.Text;
-                        if (txtLocalidadOperador.Visible == true)
-                        {
-                            if (!string.IsNullOrEmpty(txtLocalidadOperador.Text))
-                                d.emisor.localidad = txtLocalidadOperador.Text;
-                        }
-                        else
-                        {
-                            if (dllLocalidadOperador.SelectedValue != "Seleccionar")
-                                d.emisor.localidad = dllLocalidadOperador.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtTransporteAereoNombreAseg.Text))
+                       d.nombreAsegTransporteAereo = txtTransporteAereoNombreAseg.Text;
+                   if (!string.IsNullOrEmpty(txtTransporteAereoNumPolizaSeguro.Text))
+                       d.numPolizaSeguroTransporteAereo = txtTransporteAereoNumPolizaSeguro.Text;
 
-                        }
-                        if (!string.IsNullOrEmpty(txtReferenciaOperador.Text))
-                            d.emisor.referencia = txtReferenciaOperador.Text;
-                        if (txtMunicipioOperador.Visible == true)
-                        {
-                            if (!string.IsNullOrEmpty(txtMunicipioOperador.Text))
-                                d.emisor.municipio = txtMunicipioOperador.Text;
-                        }
-                        else
-                        {
-                            if (ddlMunicipioOperador.SelectedValue != "Seleccionar")
-                                d.emisor.municipio = ddlMunicipioOperador.SelectedValue;
+                   d.numeroGuia = txtNumeroGuia.Text;
+                   if (!string.IsNullOrEmpty(txtLugarContrato.Text))
+                       d.lugarContrato = txtLugarContrato.Text;
+                   if (!string.IsNullOrEmpty(txtRFCTransportista.Text))
+                       d.rFCTransportista = txtRFCTransportista.Text;
+                   d.codigoTransportista = ddlCodigoTransportista.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtNumRegIdTribTranspor.Text))
+                       d.numRegIdTribTranspor = txtNumRegIdTribTranspor.Text;
+                   if (ddlResidenciaFiscalTranspor.SelectedValue != "00" && ddlResidenciaFiscalTranspor.SelectedValue != "")
+                       d.residenciaFiscalTranspor = ddlResidenciaFiscalTranspor.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtNombreTransportista.Text))
+                       d.nombreTransportista = txtNombreTransportista.Text;
+                   if (!string.IsNullOrEmpty(txtRFCEmbarcador.Text))
+                       d.rFCEmbarcador = txtRFCEmbarcador.Text;
+                   if (!string.IsNullOrEmpty(txtNumRegIdTribEmbarc.Text))
+                       d.numRegIdTribEmbarc = txtNumRegIdTribEmbarc.Text;
+                   if (ddlResidenciaFiscalEmbarc.SelectedValue != "00" && ddlResidenciaFiscalEmbarc.SelectedValue != "")
+                       d.residenciaFiscalEmbarc = ddlResidenciaFiscalEmbarc.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtNombreEmbarcador.Text))
+                       d.nombreEmbarcador = txtNombreEmbarcador.Text;
+               }
+               //--
+               if (cbTransporteFerroviario.Checked == true)
+               {
+                   d.tipoDeServicio = ddlTipoDeServicio.SelectedValue;
+                   if (!string.IsNullOrEmpty(txtTransporteFerroviarioNombreAseg.Text))
+                       d.nombreAseg = txtTransporteFerroviarioNombreAseg.Text;
+                   if (!string.IsNullOrEmpty(txtTransporteFerroviarioNumPolizaSeguro.Text))
+                       d.numPolizaSeguro = txtTransporteFerroviarioNumPolizaSeguro.Text;
+                   if (!string.IsNullOrEmpty(txtConcesionario.Text))
+                       d.concesionario = txtConcesionario.Text;
+               }
+               //---
+                if (cbFiguraTransporte.Checked==true)
+                d.cveTransporte = ddlCveTransporte.SelectedValue;
+            //-----------------------
+                var ubicaciones= ViewState["ubicaciones"] as List<Ubicacion>;
+                var mercancias = ViewState["mercancias"] as List<Mercancia>;
+                var cantidadTransporta = ViewState["CantidadTransporta"] as List<CantidadTransporta>;
+                var contenedor = ViewState["Contenedor"] as List<Contenedor>;
+                var derechosDePaso = ViewState["DerechosDePaso"] as List<DerechosDePaso>;
+                var carro = ViewState["Carro"] as List<Carro>;
+                var carroContenedor = ViewState["CarroContenedor"] as List<CarroContenedor>;
+                var operador = ViewState["Operador"] as List<Operador>;
+                var propietario = ViewState["Propietario"] as List<Propietario>;
+                var arrendatario = ViewState["Arrendatario"] as List<Arrendatario>;
+                var notificado = ViewState["Notificado"] as List<Notificado>;
 
-                        }
-                        if (txtEstadoOperador.Visible == true)
-                        {
-                            d.emisor.estado = txtEstadoOperador.Text;
-                        }
-                        else
-                            d.emisor.estado = dllEstadoOperador.SelectedValue;
+                if (ubicaciones != null && ubicaciones.Count>0)
+                    d.ubicacion = ubicaciones;
+                if (mercancias != null && mercancias.Count > 0)
+                    d.mercancia = mercancias;
+                if (cantidadTransporta != null && cantidadTransporta.Count > 0)
+                    d.cantidadTransporta = cantidadTransporta;
+                if (contenedor != null && contenedor.Count > 0)
+                    d.contenedor = contenedor;
+                if (derechosDePaso != null && derechosDePaso.Count > 0)
+                    d.derechosDePaso = derechosDePaso;
+                if (carro != null && carro.Count > 0)
+                    d.carro = carro;
+                if (carroContenedor != null && carroContenedor.Count > 0)
+                    d.carroContenedor = carroContenedor;
+                if (operador != null && operador.Count > 0)
+                    d.operador = operador;
+                if (propietario != null && propietario.Count > 0)
+                    d.propietario = propietario;
+                if (arrendatario != null && arrendatario.Count > 0)
+                    d.arrendatario = arrendatario;
+                if (notificado != null && notificado.Count > 0)
+                    d.notificado = notificado;
 
-                        //d.emisor.pais = ddlPaisOperador.SelectedValue;
-                        d.emisor.codigoPostal = txtCodigoPostalOperador.Text;
-
-
-                }
-            }
-            if (cbPropietario.Checked == true)
-            {
-                 var propietario= ViewState["Propietario"] as List<Propietario>;
-
-                 if (propietario != null && propietario.Count() > 0)
-                 {
-                     d.propietario = new List<Propietario>();
-                     d.propietario = propietario;
-                 } 
-            }
-            if (cbReceptor.Checked == true)
-            {
-                if (!string.IsNullOrEmpty(txtNumRegIdTribReceptor.Text))
-                {
-                    d.receptor = new Receptor();
-                    d.receptor.NumRegIdTrib = txtNumRegIdTribReceptor.Text;
-                }
-                if (ddlPaisArrendatario.SelectedValue != "" && cbDomicilioReceptor.Checked==true)
-                {
-                    if (d.receptor == null)
-                        d.receptor = new Receptor();
-
-                    d.receptor.calle = txtCalleArrendatario.Text;
-                    if (!string.IsNullOrEmpty(txtNumeroExteriorArrendatario.Text))
-                        d.receptor.numeroExterior = txtNumeroExteriorArrendatario.Text;
-                    if (!string.IsNullOrEmpty(txtNumeroInteriorArrendatario.Text))
-                        d.receptor.numeroInterior = txtNumeroInteriorArrendatario.Text;
-                    if (!string.IsNullOrEmpty(txtColoniaArrendatario.Text))
-                        d.receptor.colonia = txtColoniaArrendatario.Text;
-                    if (txtLocalidadArrendatario.Visible == true)
-                    {
-                        if (!string.IsNullOrEmpty(txtLocalidadArrendatario.Text))
-                            d.receptor.localidad = txtLocalidadArrendatario.Text;
-                    }
-                    else
-                    {
-                        if (dllLocalidadArrendatario.SelectedValue != "Seleccionar")
-                            d.receptor.localidad = dllLocalidadArrendatario.SelectedValue;
-                    
-                    }
-                    if (!string.IsNullOrEmpty(txtReferenciaArrendatario.Text))
-                        d.receptor.referencia = txtReferenciaArrendatario.Text;
-                    if (txtMunicipioArrendatario.Visible == true)
-                    {
-                        if (!string.IsNullOrEmpty(txtMunicipioArrendatario.Text))
-                            d.receptor.municipio = txtMunicipioArrendatario.Text;
-                    }
-                    else
-                    {
-                        if (ddlMunicipioArrendatario.SelectedValue != "Seleccionar")
-                            d.receptor.municipio = ddlMunicipioArrendatario.SelectedValue;
-                                 
-                    }
-                    if (txtEstadoArrendatario.Visible==true)
-                        d.receptor.estado = txtEstadoArrendatario.Text;
-                    else
-                        d.receptor.estado = dllEstadoArrendatario.SelectedValue;
-
-                    d.receptor.codigoPostal = txtCodigoPostalArrendatario.Text;
-                    d.receptor.pais = ddlPaisArrendatario.SelectedValue;
-
-                }
-            }
-            if (cbDestinatario.Checked == true)
-            {
-                var destinatario = ViewState["destinatario"] as List<Destinatario>;
-                var destinadestinatarioDom = ViewState["destinatarioDom"] as List<Domicilio>;
-
-                if (destinatario != null && destinatario.Count > 0)
-                {
-                   d.destinatario = new List<Destinatario>();
-                   if(destinadestinatarioDom!=null && destinadestinatarioDom.Count>0)
-                    foreach (var des in destinatario)
-                   {
-                     var dom=  destinadestinatarioDom.Where(p => p.idDestinatario == des.id).ToList();
-                    if(dom!=null)
-                     des.domicilio = dom;
-                   }
-                   d.destinatario = destinatario;
-
-                }
-            }
-            //-----------------------------------
-            var mercancias = ViewState["mercancias"] as List<Mercancia>;
-            if (mercancias != null && mercancias.Count > 0)
-            {
-                var descripcionesEspecificas = ViewState["descripcionesEspecificas"] as List<DescripcionesEspecificas>;
-                d.mercancia = new List<Mercancia>() ;
-                if (descripcionesEspecificas != null && descripcionesEspecificas.Count > 0)
-                    foreach (var mer in mercancias)
-                    {
-                        var dom = descripcionesEspecificas.Where(p => p.idMercancia == mer.id).ToList();
-                      if(dom!=null)
-                        mer.descripcionesEspecificas = dom;
-                    }
-                d.mercancia = mercancias;
-             
-            }
 
             return d;
         }
@@ -1268,8 +1281,8 @@ namespace GafLookPaid
                             }
 
                             facturaComplementos complementos = new facturaComplementos();
-                            complementos.datosComercioExterior = new DatosComercioExterior();
-                            complementos.datosComercioExterior = GetDatosFacturaCarta();
+                            complementos.datosCartaPorte = new DatosCartaPorte();
+                            complementos.datosCartaPorte = GetDatosFacturaCarta();
                             var pdf = clienteServicio.FacturaPreview33(fact, detalles, fact33, complementos, null);
                     if (pdf == null)
                     {
@@ -1334,10 +1347,16 @@ namespace GafLookPaid
            // this.lblIva.Text = 0M.ToString("C");
             this.lblTraslados.Text = 0M.ToString("C");
             this.lblRetenciones.Text = 0M.ToString("C");
+
+
             
 
             this.txtdsc.Text =" ";
-            
+
+
+
+
+
             this.lblSubtotal.Text = 0M.ToString("C");
             this.lblTotal.Text = 0M.ToString("C");
            // this.ddlMetodoPago.SelectedIndex = 0;
@@ -1364,8 +1383,6 @@ namespace GafLookPaid
             }
             cbImpuestos.Checked = false;
             cbCfdiRelacionados.Checked = false;
-
-
         }
 
         private void BindDetallesToGridView()
@@ -1384,15 +1401,111 @@ namespace GafLookPaid
             this.gvDetalles.DataSource = conceptos;
             this.gvDetalles.DataBind();
         }
+        private void BindUbicacionesToGridView()
+        {
+            var ubi = ViewState["ubicaciones"] as List<Ubicacion>;
+            if (ubi != null && ubi.Count > 0)
+            {
+                int noColumns = this.gvUbicaciones.Columns.Count;
+                this.gvUbicaciones.Columns[noColumns - 1].Visible = this.gvUbicaciones.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvUbicaciones.Columns.Count;
+                this.gvUbicaciones.Columns[noColumns - 1].Visible = this.gvUbicaciones.Columns[noColumns - 2].Visible = false;
+            }
+            this.gvUbicaciones.DataSource = ubi;
+            this.gvUbicaciones.DataBind();
+        }
 
 
+        private void BindCantidadTransportaToGridView()
+        {
+            var CantidadTransporta = ViewState["CantidadTransporta"] as List<CantidadTransporta>;
+            if (CantidadTransporta != null && CantidadTransporta.Count > 0)
+            {
+                int noColumns = this.gvCantidadTransporta.Columns.Count;
+                this.gvCantidadTransporta.Columns[noColumns - 1].Visible = this.gvCantidadTransporta.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvCantidadTransporta.Columns.Count;
+                this.gvCantidadTransporta.Columns[noColumns - 1].Visible = this.gvCantidadTransporta.Columns[noColumns - 2].Visible = false;
+            }
+            this.gvCantidadTransporta.DataSource = CantidadTransporta;
+            this.gvCantidadTransporta.DataBind();
+        }
+        private void BindContenedorGridView()
+        {
+            var contenedor = ViewState["Contenedor"] as List<Contenedor>;
+            if (contenedor != null && contenedor.Count > 0)
+            {
+                int noColumns = this.gvContenedor.Columns.Count;
+                this.gvContenedor.Columns[noColumns - 1].Visible = this.gvContenedor.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvContenedor.Columns.Count;
+                this.gvContenedor.Columns[noColumns - 1].Visible = this.gvContenedor.Columns[noColumns - 2].Visible = false;
+            }
+            this.gvContenedor.DataSource = contenedor;
+            this.gvContenedor.DataBind();
+        }
 
-
+        private void BindDerechosDePasoGridView()
+        {
+            var derechosDePaso = ViewState["DerechosDePaso"] as List<DerechosDePaso>;
+            if (derechosDePaso != null && derechosDePaso.Count > 0)
+            {
+                int noColumns = this.gvDerechosDePaso.Columns.Count;
+                this.gvDerechosDePaso.Columns[noColumns - 1].Visible = this.gvDerechosDePaso.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvDerechosDePaso.Columns.Count;
+                this.gvDerechosDePaso.Columns[noColumns - 1].Visible = this.gvDerechosDePaso.Columns[noColumns - 2].Visible = false;
+            }
+            this.gvDerechosDePaso.DataSource = derechosDePaso;
+            this.gvDerechosDePaso.DataBind();
+        }
+        private void BindCarroGridView()
+        {
+             var carro = ViewState["Carro"] as List<Carro>;
+             if (carro != null && carro.Count > 0)
+            {
+                int noColumns = this.gvCarro.Columns.Count;
+                this.gvCarro.Columns[noColumns - 1].Visible = this.gvCarro.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvCarro.Columns.Count;
+                this.gvCarro.Columns[noColumns - 1].Visible = this.gvCarro.Columns[noColumns - 2].Visible = false;
+            }
+             this.gvCarro.DataSource = carro;
+             this.gvCarro.DataBind();
+        }
+        private void BindOperadorGridView()
+        {
+            var operador = ViewState["Operador"] as List<Operador>;
+            if (operador != null && operador.Count > 0)
+            {
+                int noColumns = this.gvOperador.Columns.Count;
+                this.gvOperador.Columns[noColumns - 1].Visible = this.gvOperador.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvOperador.Columns.Count;
+                this.gvOperador.Columns[noColumns - 1].Visible = this.gvOperador.Columns[noColumns - 2].Visible = false;
+            }
+            this.gvOperador.DataSource = operador;
+            this.gvOperador.DataBind();
+        }
 
         private void BindPropietarioGridView()
         {
-     
            var propietario = ViewState["Propietario"] as List<Propietario>;
+
+
            if (propietario != null && propietario.Count > 0)
             {
                 int noColumns = this.gvPropietario.Columns.Count;
@@ -1405,46 +1518,59 @@ namespace GafLookPaid
             }
            this.gvPropietario.DataSource = propietario;
            this.gvPropietario.DataBind();
-           
         }
 
-        private void BindDestinatarioGridView()
+        private void BindArrendatarioGridView()
         {
-            var destinatario = ViewState["destinatario"] as List<Destinatario>;
-          
-           if (destinatario != null && destinatario.Count > 0)
+           var arrendatario = ViewState["Arrendatario"] as List<Arrendatario>;
+
+           if (arrendatario != null && arrendatario.Count > 0)
             {
-                int noColumns = this.gvDestinatarioComple.Columns.Count;
-                this.gvDestinatarioComple.Columns[noColumns - 1].Visible = this.gvDestinatarioComple.Columns[noColumns - 2].Visible = true;
+                int noColumns = this.gvArrendatario.Columns.Count;
+                this.gvArrendatario.Columns[noColumns - 1].Visible = this.gvArrendatario.Columns[noColumns - 2].Visible = true;
             }
             else
             {
-                int noColumns = this.gvDestinatarioComple.Columns.Count;
-                this.gvDestinatarioComple.Columns[noColumns - 1].Visible = this.gvDestinatarioComple.Columns[noColumns - 2].Visible = false;
+                int noColumns = this.gvArrendatario.Columns.Count;
+                this.gvArrendatario.Columns[noColumns - 1].Visible = this.gvArrendatario.Columns[noColumns - 2].Visible = false;
             }
-           this.gvDestinatarioComple.DataSource = destinatario;
-           this.gvDestinatarioComple.DataBind();
-              
+           this.gvArrendatario.DataSource = arrendatario;
+           this.gvArrendatario.DataBind();
         }
 
-        private void BindDestinarioDomiGridView()
+        private void BindNotificadoGridView()
         {
-            var destinatarioDom = ViewState["destinatarioDom"] as List<Domicilio>;
-         
+           var notificado = ViewState["Notificado"] as List<Notificado>;
 
-            if (destinatarioDom != null && destinatarioDom.Count > 0)
+           if (notificado != null && notificado.Count > 0)
             {
-                int noColumns = this.gvDestinatario.Columns.Count;
-                this.gvDestinatario.Columns[noColumns - 1].Visible = this.gvDestinatario.Columns[noColumns - 2].Visible = true;
+                int noColumns = this.gvNotificado.Columns.Count;
+                this.gvNotificado.Columns[noColumns - 1].Visible = this.gvNotificado.Columns[noColumns - 2].Visible = true;
             }
             else
             {
-                int noColumns = this.gvDestinatario.Columns.Count;
-                this.gvDestinatario.Columns[noColumns - 1].Visible = this.gvDestinatario.Columns[noColumns - 2].Visible = false;
+                int noColumns = this.gvNotificado.Columns.Count;
+                this.gvNotificado.Columns[noColumns - 1].Visible = this.gvNotificado.Columns[noColumns - 2].Visible = false;
             }
-            this.gvDestinatario.DataSource = destinatarioDom;
-            this.gvDestinatario.DataBind();
+           this.gvNotificado.DataSource = notificado;
+           this.gvNotificado.DataBind();
+        }
 
+         private void BindCarroContenedorGridView()
+        {
+            var carroContenedor = ViewState["CarroContenedor"] as List<CarroContenedor>;
+            if (carroContenedor != null && carroContenedor.Count > 0)
+            {
+                int noColumns = this.gvContenedor2.Columns.Count;
+                this.gvContenedor2.Columns[noColumns - 1].Visible = this.gvContenedor2.Columns[noColumns - 2].Visible = true;
+            }
+            else
+            {
+                int noColumns = this.gvContenedor2.Columns.Count;
+                this.gvContenedor2.Columns[noColumns - 1].Visible = this.gvContenedor2.Columns[noColumns - 2].Visible = false;
+            }
+            this.gvContenedor2.DataSource = carroContenedor;
+            this.gvContenedor2.DataBind();
         }
 
         private void BindMercanciasToGridView()
@@ -1462,28 +1588,7 @@ namespace GafLookPaid
             }
             this.gvMercancia.DataSource = mercancia;
             this.gvMercancia.DataBind();
-            
         }
-        private void BindMercanciasDescripcionesToGridView()
-        {
-            var descrípciones = ViewState["descripcionesEspecificas"] as List<DescripcionesEspecificas>;
-
-            if (descrípciones != null && descrípciones.Count > 0)
-            {
-                int noColumns = this.gvDescripcionesEspecificas.Columns.Count;
-                this.gvDescripcionesEspecificas.Columns[noColumns - 1].Visible = this.gvDescripcionesEspecificas.Columns[noColumns - 2].Visible = true;
-            }
-            else
-            {
-                int noColumns = this.gvDescripcionesEspecificas.Columns.Count;
-                this.gvDescripcionesEspecificas.Columns[noColumns - 1].Visible = this.gvDescripcionesEspecificas.Columns[noColumns - 2].Visible = false;
-            }
-            this.gvDescripcionesEspecificas.DataSource = descrípciones;
-            this.gvDescripcionesEspecificas.DataBind();
-
-        }
-
-
         private void BindDetallesImpuestosToGridView()
         {
             List<facturasdetalleRT> detallesImpuestos2 = ViewState["detallesImpuestos"] as List<facturasdetalleRT>;
@@ -1578,14 +1683,12 @@ namespace GafLookPaid
                // total += detalle.TotalPartida + (detalle.ImporteIva.HasValue ? detalle.ImporteIva.Value : 0);
                 total += detalle.Total + (detalle.ImporteIva.HasValue ? detalle.ImporteIva.Value : 0);
 
-                if(detalle.ConceptoTraslados!=null)
                 foreach (var det in detalle.ConceptoTraslados)
                 {
                     if (det.Importe!=null)
                     trasladototal =(decimal) (trasladototal + det.Importe);
                 }
-                if (detalle.ConceptoRetenciones != null)
-                    foreach (var ret in detalle.ConceptoRetenciones)
+                foreach (var ret in detalle.ConceptoRetenciones)
                 {
                     retenciontotal = (decimal)(retenciontotal + ret.Importe);
                 }
@@ -1672,7 +1775,33 @@ namespace GafLookPaid
 
         }
 
-       
+        /* BTNGuardar Antiguo
+         * protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            var detalles = ViewState["detalles"] as List<facturasdetalle>;
+            var edicion = detalles[Convert.ToInt32(this.hidNumero.Value)];
+           
+           // edicion.idproducto = int.Parse(this.hidDetalle.Value);
+            edicion.Unidad = this.txtUnidadEdita.Text;
+            edicion.Cantidad = decimal.Parse(this.txtCantidadEdita.Text);
+            edicion.Codigo = this.txtCodigoE.Text;
+            edicion.Descripcion = this.txtDescripcionEdita.Text; 
+            edicion.Descripcion2 = this.txtObservacionesEdita.Text;
+            edicion.Precio = decimal.Parse(this.txtPrecioUnitarioEdita.Text);
+            if (!string.IsNullOrEmpty(txtDescuento.Text))
+                edicion.ConceptoDescuento = decimal.Parse(this.txtDescuentoE.Text);
+
+            edicion.ConceptoNoIdentificacion = this.txtNoIdentificacionEdita.Text;
+            edicion.ConceptoClaveUnidad = this.ddlClaveUnidadE.SelectedValue;
+           // edicion.CuentaPredial = this.txtCuentaPredialEdita.Text;
+           edicion.Total = edicion.Precio * edicion.Cantidad;
+           if (edicion.PorcentajeIva != null)
+               edicion.ImporteIva = ((decimal)edicion.PorcentajeIva / 100) * edicion.Total; //edicion.TotalPartida
+          
+            ViewState["detalles"] = detalles;
+            this.BindDetallesToGridView();
+            this.UpdateTotales();
+        }*/
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -1735,50 +1864,50 @@ namespace GafLookPaid
             if (ddlTipoDocumento.SelectedValue != "T")
             {
 
-            var detallesImpuestos = ViewState["detallesImpuestos"] as List<facturasdetalleRT>;
-            string partida = edicion.Partida.ToString();
+                var detallesImpuestos = ViewState["detallesImpuestos"] as List<facturasdetalleRT>;
+                string partida = edicion.Partida.ToString();
 
-            foreach (var x in detallesImpuestos)
-            {
-                string BaseConcepto = "";
-                if (edicion.ConceptoDescuento != null)
-                    BaseConcepto = (edicion.Total - edicion.ConceptoDescuento).ToString();
-                else
-                    BaseConcepto = edicion.Total.ToString();
-                if (x.ConceptoClaveProdServ.ToString() == partida)
+                foreach (var x in detallesImpuestos)
                 {
-                    x.Base = Convert.ToDecimal(BaseConcepto);
-                    if (x.TipoFactor != "Exento" || x.TipoImpuesto != "Traslados") //no se llenan 
+                    string BaseConcepto = "";
+                    if (edicion.ConceptoDescuento != null)
+                        BaseConcepto = (edicion.Total - edicion.ConceptoDescuento).ToString();
+                    else
+                        BaseConcepto = edicion.Total.ToString();
+                    if (x.ConceptoClaveProdServ.ToString() == partida)
                     {
-                        x.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(x.TasaOCuota), mon);
-                    }
-                    foreach (var det in edicion.ConceptoTraslados)
-                    {
-                        det.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
-                        if (det.TipoFactor != "Exento")
+                        x.Base = Convert.ToDecimal(BaseConcepto);
+                        if (x.TipoFactor != "Exento" || x.TipoImpuesto != "Traslados") //no se llenan 
                         {
-                            det.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(det.TasaOCuota), mon);
+                            x.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(x.TasaOCuota), mon);
+                        }
+                        foreach (var det in edicion.ConceptoTraslados)
+                        {
+                            det.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
+                            if (det.TipoFactor != "Exento")
+                            {
+                                det.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(det.TasaOCuota), mon);
+                            }
+                        }
+
+                        foreach (var ret in edicion.ConceptoRetenciones)
+                        {
+                            ret.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
+                            ret.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(ret.TasaOCuota), mon);
                         }
                     }
-
-                    foreach (var ret in edicion.ConceptoRetenciones)
-                    {
-                        ret.Base = Decimal.Round(Convert.ToDecimal(BaseConcepto), 6);
-                        ret.Importe = Decimal.Round(Convert.ToDecimal(BaseConcepto) * Convert.ToDecimal(ret.TasaOCuota), mon);
-                    }
                 }
+                ViewState["descuento"] = descuento1;
+                ViewState["detallesImpuestos"] = detallesImpuestos;
+                BindDetallesImpuestosToGridView();
+                //-----------------------------------------------------------------------
+                this.UpdateTotales();
+                if (cbImpuestos.Checked == true)
+                    ActImpuestos();
             }
-            ViewState["descuento"] = descuento1;
-            ViewState["detallesImpuestos"] = detallesImpuestos;
-            BindDetallesImpuestosToGridView();
-            //-----------------------------------------------------------------------
-            this.UpdateTotales();
-            if (cbImpuestos.Checked == true)
-                ActImpuestos();
-        }
-           ViewState["detalles"] = detalles;
-           this.BindDetallesToGridView();
-           
+            ViewState["detalles"] = detalles;
+            this.BindDetallesToGridView();
+            
         }
 
 
@@ -1811,13 +1940,13 @@ namespace GafLookPaid
                 
 
             }
+
+
             if (ddlTipoDocumento.SelectedValue == "T")
             {
                 iniciarTraslado();
             }
             
-
-           
         }
 
         private void iniciarTraslado()
@@ -1830,7 +1959,7 @@ namespace GafLookPaid
 
             this.lblTotal.Text = cero.ToString("C", cul);
             this.lblSubtotal.Text = cero.ToString("C", cul);
-             //------------------------------------------
+            //------------------------------------------
             txtCondicionesPago.Text = "";
             //-----------------------
             ViewState["detallesImpuestos"] = new List<facturasdetalleRT>();//para impuestos
@@ -1838,7 +1967,7 @@ namespace GafLookPaid
             ViewState["total"] = 0M;
             ViewState["subtotal"] = 0M;
             ViewState["descuento"] = 0M;
-             //---------------------------------------------------
+            //---------------------------------------------------
             DivComplementos.Visible = false;
             ddlFormaPago.SelectedValue = "00";
             ddlMetodoPago.SelectedValue = "00";
@@ -1885,6 +2014,52 @@ namespace GafLookPaid
 
         //------------------------------------------------------------------------------
 
+       
+        /*
+        private void agregarListaMetodoPago(string tipo, bool x)
+        {
+            string coma = ""; string id = "";
+            if (!string.IsNullOrEmpty(txtMetodoPagoMul.Text))
+                coma = ", ";
+            string texto = txtMetodoPagoMul.Text;
+            if (x == true)
+            { texto = texto + coma + tipo; }
+            else
+            { texto = texto.Replace(tipo, ""); }
+
+            texto = texto.Replace(", , ", ", ");
+            texto = texto.TrimEnd(' ');
+            texto = texto.TrimEnd(',');
+            texto = texto.TrimStart(',');
+            texto = texto.TrimStart(' ');
+            txtMetodoPagoMul.Text = texto;
+
+            id = Check01.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check02.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check03.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check04.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check05.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check06.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check08.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check28.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check29.Text.Substring(2);
+            texto = texto.Replace(id, "");
+            id = Check99.Text.Substring(2);
+            texto = texto.Replace(" ", "");
+
+            txtMetodoPagoMulID.Text = texto.Replace(id, "");
+
+
+        }
+        */
        
         protected void ckeckImpuestos_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -2690,7 +2865,13 @@ namespace GafLookPaid
             ddlClaveUnidad.DataBind();
             this.ddlClaveUnidad.Items.Add(l);
             //----------------
-        
+            ddlClaveUnidadMercancia.DataSource = ddlClaveUnidad.DataSource;
+            ddlClaveUnidadMercancia.DataTextField = "Nombre";
+            ddlClaveUnidadMercancia.DataValueField = "c_ClaveUnidad1";
+            ddlClaveUnidadMercancia.DataBind();
+            ddlClaveUnidadMercancia.Items.Add(l);
+            this.ddlClaveUnidadMercancia.Items.Insert(0, "");
+            ddlClaveUnidadMercancia.SelectedValue = "0";
             //---------
             ddlClaveUnidad.SelectedValue = "H87";
         }
@@ -3085,8 +3266,19 @@ namespace GafLookPaid
                   
         }
 
+        protected void gvUbicaciones_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarUbicacion"))
+            {
+                var ubicaciones = ViewState["ubicaciones"] as List<Ubicacion>;
+                ubicaciones.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["ubicaciones"] = ubicaciones;
+                BindUbicacionesToGridView();
 
-        /*
+            }
+
+        }
+
         protected void btnUbicaciones_Click(object sender, EventArgs e)
         {
             if (cbOrigen.Checked == true || cbDestino.Checked == true || cbDomicilio.Checked==true)
@@ -3200,24 +3392,107 @@ namespace GafLookPaid
             limpiarUbicacion();
             }
         }
-        */
-       
-        //--------------------------------------------------------------------------------------------------aqui-----------
+
+        private void  limpiarUbicacion()
+        {
+              ddlTipoEstacion.SelectedValue="00";
+            txtDistanciaRecorrida.Text="";
+            //--
+            txtIDOrigen.Text="";
+            txtRFCRemitente.Text="";
+            txtNombreRemitente.Text="";
+            txtNumRegIdTrib.Text="";
+            //ddlResidenciaFiscal.SelectedValue;
+             txtNumEstacion.Text="";
+             txtNombreEstacion.Text="";
+             ddlNavegacionTrafico.SelectedValue="00";
+             txtFechaHoraSalida.Text="";
+               //--
+              txtIDDestino.Text="";
+              txtRFCDestinatario.Text="";
+              txtNombreDestinatario.Text="";
+               txtNumRegIdTribDestino.Text="";
+               //ddlResidenciaFiscalDestino.SelectedValue;
+               txtNumEstacionDestino.Text="";
+              txtNombreEstacionDestino.Text="";
+               ddlNavegacionTraficoDestino.SelectedValue="00";
+              txtFechaHoraProgLlegada.Text="";
+               //---
+               txtCalle.Text="";
+               txtNumeroExterior.Text="";
+               txtNumeroInterior.Text="";
+               txtColonia.Text="";
+               txtLocalidad.Text="";
+               txtReferencia.Text="";
+               txtMunicipio.Text="";
+               txtEstado.Text="";
+               //ddlPais.SelectedValue;
+               txtCodigoPostal.Text="";
+
+        }
+
         protected void AgregarMercancias_Click(object sender, EventArgs e)
         {
             List<Mercancia> mercancia = ViewState["mercancias"] as List<Mercancia>;
             Mercancia m = new Mercancia();
             m.id = mercancia.Count + 1;
-            if (!string.IsNullOrEmpty(txtCantidadAduana.Text))
-                m.CantidadAduana = txtCantidadAduana.Text;
-            if (!string.IsNullOrEmpty(txtFraccionArancelaria.Text))
-                m.FraccionArancelaria = txtFraccionArancelaria.Text;
-            m.NoIdentificacion = txtNoIdentificacionM.Text;
-            if (ddlUnidadAduana.SelectedValue!="00")
-            m.UnidadAduana = ddlUnidadAduana.SelectedValue;
-            m.ValorDolares = txtValorDolares.Text;
-              if (!string.IsNullOrEmpty(txtValorUnitarioAduana.Text))
-            m.ValorUnitarioAduana=txtValorUnitarioAduana.Text;
+         
+           /*
+            if (!string.IsNullOrEmpty(txtPesoBrutoTotal.Text))
+           m.pesoBrutoTotal=Convert.ToDecimal(txtPesoBrutoTotal.Text);
+            if (ddlClaveUnidadPeso.SelectedValue!="00")
+           m.unidadPeso=ddlClaveUnidadPeso.SelectedValue;
+           if (!string.IsNullOrEmpty(txtPesoNetoTotal.Text))
+           m.pesoNetoTotal=Convert.ToDecimal(txtPesoNetoTotal.Text);
+           if (!string.IsNullOrEmpty(txtNumTotalMercancias.Text))
+               m.numTotalMercancias =Convert.ToInt32(txtNumTotalMercancias.Text);
+           if (!string.IsNullOrEmpty(txtCargoPorTasacion.Text))
+               m.cargoPorTasacion = Convert.ToDecimal(txtCargoPorTasacion.Text);
+           
+            */
+            //--
+                if (!string.IsNullOrEmpty(txtBienesTransp.Text))
+            m.bienesTransp= txtBienesTransp.Text;
+            if (!string.IsNullOrEmpty(txtClaveSTCC.Text))
+                m.claveSTCC = txtClaveSTCC.Text;
+            if (!string.IsNullOrEmpty(txtDescripcionMercancia.Text))
+                m.descripcion = txtDescripcionMercancia.Text;
+            if (!string.IsNullOrEmpty(txtCantidadMercancia.Text))
+               m.cantidad = txtCantidadMercancia.Text;
+            if (ddlClaveUnidadMercancia.SelectedValue != "0" && ddlClaveUnidadMercancia.SelectedValue != "")
+               m.claveUnidad = ddlClaveUnidadMercancia.SelectedValue;
+            if (!string.IsNullOrEmpty(txtUnidadMercancia.Text))
+               m.unidad = txtUnidadMercancia.Text;
+            if (!string.IsNullOrEmpty(txtDimensiones.Text))
+               m.dimensiones = txtDimensiones.Text;
+            if (ddlMaterialPeligroso.SelectedValue != "00")
+                m.materialPeligroso = ddlMaterialPeligroso.SelectedValue;
+            if (!string.IsNullOrEmpty(txtCveMaterialPeligroso.Text))
+               m.cveMaterialPeligroso = txtCveMaterialPeligroso.Text;
+            if (ddlEmbalaje.SelectedValue != "00")
+                m.embalaje = ddlEmbalaje.SelectedValue;
+            if (!string.IsNullOrEmpty(txtDescripEmbalaje.Text))
+               m.descripEmbalaje = txtDescripEmbalaje.Text;
+               m.pesoEnKg = Convert.ToDecimal(txtPesoEnKg.Text);
+               if (!string.IsNullOrEmpty(txtValorMercancia.Text))
+               m.valorMercancia = Convert.ToDecimal(txtValorMercancia.Text);
+               if (ddlMonedaMercancia.SelectedValue != "00")
+                   m.moneda = ddlMonedaMercancia.SelectedValue;
+               if (!string.IsNullOrEmpty(txtFraccionArancelaria.Text))
+               m.fraccionArancelaria = txtFraccionArancelaria.Text;
+               if (!string.IsNullOrEmpty(txtUUIDComercioExt.Text))
+               m.uUIDComercioExt = txtUUIDComercioExt.Text;
+            //--
+               if (cbDetalleMercancia.Checked == true)
+               {
+                   m.unidadPesoDetalle = ddlUnidadPesoDM.SelectedValue;
+                   m.pesoBruto = Convert.ToDecimal(txtPesoBruto.Text);
+                   m.pesoNeto = Convert.ToDecimal(txtPesoNeto.Text);
+                   m.pesoTara = Convert.ToDecimal(txtPesoTara.Text);
+                   if (!string.IsNullOrEmpty(txtNumPiezas.Text))
+                       m.numPiezas = Convert.ToInt32(txtNumPiezas.Text);
+               }
+
               ddlIDMercancia.Items.Add(m.id.ToString());
 
                mercancia.Add(m);
@@ -3226,25 +3501,79 @@ namespace GafLookPaid
                limpiarMercancia();
 
         }
-
-        private void limpiarMercancia()
+        private void  limpiarMercancia()
         {
-            txtCantidadAduana.Text = "";
+            cbDetalleMercancia.Checked = false;
+            DivDetalleMercancia.Visible = false;
+            txtBienesTransp.Text="";
+            txtClaveSTCC.Text = "";
+            txtDescripcionMercancia.Text = "";
+            txtCantidadMercancia.Text = "";
+            ddlClaveUnidadMercancia.SelectedValue="0";
+            txtUnidadMercancia.Text = "";
+            txtDimensiones.Text = "";
+            //ddlMaterialPeligroso.SelectedValue;
+            txtCveMaterialPeligroso.Text = "";
+            //ddlEmbalaje.SelectedValue;
+            txtDescripEmbalaje.Text = "";
+            txtPesoEnKg.Text = "";
+            txtValorMercancia.Text = "";
+            //ddlMonedaMercancia.SelectedValue;
             txtFraccionArancelaria.Text = "";
-            txtNoIdentificacionM.Text="";
-            ddlUnidadAduana.SelectedValue = "00";
-            txtValorDolares.Text = "";
-            txtValorUnitarioAduana.Text = "";
+            txtUUIDComercioExt.Text = "";
+            //--
+            //ddlUnidadPesoDM.SelectedValue;
+            txtPesoBruto.Text = "";
+            txtPesoNeto.Text = "";
+            txtPesoTara.Text = "";
+            txtNumPiezas.Text = "";
         }
-    
+        protected void CantidadTransporta_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ddlIDMercancia.SelectedValue))
+            {
+                List<CantidadTransporta> CantidadTransporta = ViewState["CantidadTransporta"] as List<CantidadTransporta>;
+                CantidadTransporta c = new CantidadTransporta();
+                c.id = Convert.ToInt32(ddlIDMercancia.SelectedValue);
+                c.cantidad = Convert.ToDecimal(txtCantidaCT.Text);
+                c.iDOrigen = txtIDOrigenCT.Text;
+                c.iDDestino = txtIDDestinoCT.Text;
+                if (ddlCvesTransporte.SelectedValue != "00")
+                    c.cvesTransporte = ddlCvesTransporte.SelectedValue;
+                CantidadTransporta.Add(c);
+                ViewState["CantidadTransporta"] = CantidadTransporta;
+                BindCantidadTransportaToGridView();
+                limpiarCantidadTransporta();
+            }
+        }
+        private void limpiarCantidadTransporta()
+        {
+            txtCantidaCT.Text="";
+            txtIDOrigenCT.Text="";
+            txtIDDestinoCT.Text="";
+            ddlCvesTransporte.SelectedValue = "00";
+       
+        }
+
+        protected void gvCantidadTransporta_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarCantidadTransporta"))
+            {
+                var CantidadTransporta = ViewState["CantidadTransporta"] as List<CantidadTransporta>;
+                CantidadTransporta.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["CantidadTransporta"] = CantidadTransporta;
+                BindCantidadTransportaToGridView();
+
+            }
+        }
 
         protected void gvMercancia_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("EliminarMercancia"))
             {
                 var mercancia = ViewState["mercancias"] as List<Mercancia>;
-                var descripcionesEspecificas = ViewState["descripcionesEspecificas"] as List<DescripcionesEspecificas>;
-       
+                var CantidadTransporta = ViewState["CantidadTransporta"] as List<CantidadTransporta>;
+              
                 Mercancia dt = mercancia.ElementAt(Convert.ToInt32(e.CommandArgument));
                 int x = dt.id;
               
@@ -3252,45 +3581,329 @@ namespace GafLookPaid
                 mercancia.RemoveAt(Convert.ToInt32(e.CommandArgument));
 
                 ddlIDMercancia.Items.Remove(x.ToString());
-                descripcionesEspecificas.RemoveAll(p => p.idMercancia == x);
-
-                //Reestructuracion-----------------------------
-                ddlIDMercancia.Items.Clear();
-                foreach (var edit in mercancia)
-                {
-                    if (edit.id > Convert.ToDecimal(x))
-                        edit.id -= 1;
-                    ddlIDMercancia.Items.Add(edit.id.ToString());
-                }
-                foreach (var edit in descripcionesEspecificas)
-                {
-                    if (edit.idMercancia > Convert.ToDecimal(x))
-                        edit.idMercancia -= 1;
-                }
-                
-                //----------------------------------------------------------
+                CantidadTransporta.RemoveAll(p => p.id == x);
                
                 ViewState["mercancias"] = mercancia;
-                ViewState["descripcionesEspecificas"] = descripcionesEspecificas;
+                ViewState["CantidadTransporta"] = CantidadTransporta;
             
                 BindMercanciasToGridView();
-                BindMercanciasDescripcionesToGridView();
+                BindCantidadTransportaToGridView();
             }
         }
 
-    
-     
-
-
-        protected void cbEmisor_CheckedChanged(object sender, EventArgs e)
+        protected void cbOrigen_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbEmisor.Checked == true)
+            if (cbOrigen.Checked == true)
             {
-                DivEmisor.Visible = true;
+                DivOrigen.Visible = true;
             }
             else
             {
-                DivEmisor.Visible = false;
+                DivOrigen.Visible = false;
+
+            }
+        }
+
+        protected void cbDestino_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDestino.Checked == true)
+            {
+                DivDestino.Visible = true;
+            }
+            else
+            {
+                DivDestino.Visible = false;
+
+            }
+        }
+
+        protected void cbDomicilio_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDomicilio.Checked == true)
+            {
+                DivDomicilio.Visible = true;
+            }
+            else
+            {
+                DivDomicilio.Visible = false;
+
+            }
+        }
+
+        protected void cbDetalleMercancia_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDetalleMercancia.Checked == true)
+            {
+                DivDetalleMercancia.Visible = true;
+            }
+            else
+            {
+                DivDetalleMercancia.Visible = false;
+
+            }
+        }
+
+        protected void cbCantidadTransporta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCantidadTransporta.Checked == true)
+            {
+                DivCantidadTransporta.Visible = true;
+            }
+            else
+            {
+                DivCantidadTransporta.Visible = false;
+
+            }
+        }
+
+        protected void cbAutotransporteFederal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbAutotransporteFederal.Checked == true)
+            {
+                DivAutotransporteFederal.Visible = true;
+            }
+            else
+            {
+                DivAutotransporteFederal.Visible = false;
+
+            }
+        }
+
+        protected void cbTransporteMaritimo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTransporteMaritimo.Checked == true)
+            {
+                DivTransporteMaritimo.Visible = true;
+            }
+            else
+            {
+                DivTransporteMaritimo.Visible = false;
+
+            }
+        }
+
+        protected void cbTransporteAereo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTransporteAereo.Checked == true)
+            {
+                DivTransporteAereo.Visible = true;
+            }
+            else
+            {
+                DivTransporteAereo.Visible = false;
+
+            }
+        }
+
+        protected void cbTransporteFerroviario_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTransporteFerroviario.Checked == true)
+            {
+                DivTransporteFerroviario.Visible = true;
+            }
+            else
+            {
+                DivTransporteFerroviario.Visible = false;
+
+            }
+        }
+
+        protected void cbSubTipoRem1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSubTipoRem1.Checked == true)
+            {
+
+                ddlSubTipoRem.Enabled = true;
+                txtPlaca.Enabled = true;
+                RequiredFieldValidator21.Enabled = true;
+            }
+            else
+            {
+                ddlSubTipoRem.Enabled = false;
+                txtPlaca.Enabled = false;
+                RequiredFieldValidator21.Enabled = false;
+            }
+
+        }
+
+        protected void cbSubTipoRem2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSubTipoRem2.Checked == true)
+            {
+
+                ddlSubTipoRem2.Enabled = true;
+                txtPlaca2.Enabled = true;
+                RequiredFieldValidator22.Enabled = true;
+            }
+            else
+            {
+                ddlSubTipoRem2.Enabled = false;
+                txtPlaca2.Enabled = false;
+                RequiredFieldValidator22.Enabled = true;
+            }
+        }
+
+        protected void btnContenedor_Click(object sender, EventArgs e)
+        {
+                List<Contenedor> contenedor = ViewState["Contenedor"] as List<Contenedor>;
+                Contenedor c = new Contenedor();
+                c.id = contenedor.Count + 1;
+                c.matriculaContenedor = txtMatriculaContenedor.Text;
+                c.tipoContenedor = ddlTipoContenedor.SelectedValue;
+                if (!string.IsNullOrEmpty(txtNumPrecinto.Text))
+                c.numPrecinto = txtNumPrecinto.Text;
+               
+                contenedor.Add(c);
+                ViewState["Contenedor"] = contenedor;
+                BindContenedorGridView();
+                limpiarContenedor();
+            
+        }
+
+        private void limpiarContenedor()
+        {
+            txtMatriculaContenedor.Text="";
+            txtNumPrecinto.Text="";
+          
+       
+        }
+
+        protected void gvContenedor_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarContenedor"))
+            {
+               var contenedor = ViewState["Contenedor"] as List<Contenedor>;
+               contenedor.RemoveAt(Convert.ToInt32(e.CommandArgument));
+               ViewState["Contenedor"] = contenedor;
+               BindContenedorGridView();
+
+            }
+        }
+
+        protected void btnDerechosDePaso_Click(object sender, EventArgs e)
+        {
+            List<DerechosDePaso> derechosDePaso = ViewState["DerechosDePaso"] as List<DerechosDePaso>;
+            DerechosDePaso d = new DerechosDePaso();
+            d.id = derechosDePaso.Count + 1;
+             
+            d.kilometrajePagado =Convert.ToDecimal(txtKilometrajePagado.Text);
+            d.tipoDerechoDePaso = ddlTipoDerechoDePaso.SelectedValue;
+            derechosDePaso.Add(d);
+            ViewState["DerechosDePaso"] = derechosDePaso;
+            BindDerechosDePasoGridView();
+            limpiarDerechosDePaso();
+        }
+        private void limpiarDerechosDePaso()
+        {
+            txtKilometrajePagado.Text = "";
+         
+        }
+
+        protected void gvDerechosDePaso_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarDerechosDePaso"))
+            {
+                var derechosDePaso = ViewState["DerechosDePaso"] as List<DerechosDePaso>;
+                derechosDePaso.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["DerechosDePaso"] = derechosDePaso;
+                BindDerechosDePasoGridView();
+
+            }
+        }
+
+        protected void cbDerechosDePaso_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDerechosDePaso.Checked == true)
+            {
+                DivDerechosDePaso.Visible = true;
+            }
+            else
+            {
+                DivDerechosDePaso.Visible = false;
+
+            }
+        }
+
+        protected void btnCarro_Click(object sender, EventArgs e)
+        {
+            List<Carro> carro = ViewState["Carro"] as List<Carro>;
+            Carro c = new Carro();
+            c.id = carro.Count + 1;
+            c.tipoCarro = ddlTipoCarro.SelectedValue;
+            c.matriculaCarro = txtMatriculaCarro.Text;
+            c.guiaCarro = txtGuiaCarro.Text;
+            c.toneladasNetasCarro =Convert.ToDecimal(txtToneladasNetasCarro.Text);
+            ddlIDCarro.Items.Add(c.id.ToString());
+
+            carro.Add(c);
+            ViewState["Carro"] = carro;
+            BindCarroGridView();
+            limpiarCarros();
+        }
+        private void limpiarCarros()
+        {
+            txtMatriculaCarro.Text = "";
+            txtGuiaCarro.Text = "";
+            txtToneladasNetasCarro.Text = "";
+        }
+
+        protected void cbContenedor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbContenedor.Checked == true)
+            {
+                DivContenedor.Visible = true;
+            }
+            else
+            {
+                DivContenedor.Visible = false;
+
+            }
+        }
+
+        protected void gvCarro_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarCarro"))
+            {
+                var carro = ViewState["Carro"] as List<Carro>;
+                var carroContenedor = ViewState["CarroContenedor"] as List<CarroContenedor>;
+
+                Carro dt = carro.ElementAt(Convert.ToInt32(e.CommandArgument));
+                int x = dt.id;
+
+                carro.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ddlIDCarro.Items.Remove(x.ToString());
+                carroContenedor.RemoveAll(p => p.id == x);
+
+                ViewState["CarroContenedor"] = carroContenedor;
+                ViewState["Carro"] = carro;
+                BindCarroGridView();
+                BindCarroContenedorGridView();
+
+            }
+        }
+
+        protected void gvContenedor2_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarCarroContenedor"))
+            {
+                var carroContenedor = ViewState["CarroContenedor"] as List<CarroContenedor>;
+
+                carroContenedor.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["CarroContenedor"] = carroContenedor;
+                BindCarroContenedorGridView();
+
+            }
+        }
+
+        protected void cbOperador_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbOperador.Checked == true)
+            {
+                DivOperador.Visible = true;
+            }
+            else
+            {
+                DivOperador.Visible = false;
 
             }
         }
@@ -3308,56 +3921,451 @@ namespace GafLookPaid
             }
         }
 
-        protected void cbReceptor_CheckedChanged(object sender, EventArgs e)
+        protected void cbArrendatario_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbReceptor.Checked == true)
+            if (cbArrendatario.Checked == true)
             {
-                DivReceptor.Visible = true;
+                DivArrendatario.Visible = true;
             }
             else
             {
-                DivReceptor.Visible = false;
+                DivArrendatario.Visible = false;
 
             }
         }
 
-        protected void cbDestinatario_CheckedChanged(object sender, EventArgs e)
+        protected void cbNotificado_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbDestinatario.Checked == true)
+            if (cbNotificado.Checked == true)
             {
-                DivDestinatario.Visible = true;
+                DivNotificado.Visible = true;
             }
             else
             {
-                DivDestinatario.Visible = false;
+                DivNotificado.Visible = false;
 
             }
         }
 
-        
-
-        protected void cbDomicilioEmisor_CheckedChanged(object sender, EventArgs e)
+        protected void cbcbFiguraTransporte_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbDomicilioEmisor.Checked == true)
+            if (cbFiguraTransporte.Checked == true)
             {
-                DivcbDomicilioEmisor.Visible = true;
+                ddlCveTransporte.Enabled = true;
+                cbOperador.Enabled = true;
+                cbPropietario.Enabled = true;
+                cbArrendatario.Enabled = true;
+                cbNotificado.Enabled = true;
+
             }
             else
             {
-                DivcbDomicilioEmisor.Visible = false;
+                ddlCveTransporte.Enabled = false;
+                cbOperador.Enabled = false;
+                cbPropietario.Enabled = false;
+                cbArrendatario.Enabled = false;
+                cbNotificado.Enabled = false;
+                DivOperador.Visible = false;
+                DivPropietario.Visible = false;
+                DivArrendatario.Visible = false;
+                DivNotificado.Visible = false;
+                cbOperador.Checked = false;
+                cbPropietario.Checked = false;
+                cbArrendatario.Checked = false;
+                cbNotificado.Checked = false;
+                
+            }
+        }
+
+        protected void cbDomicilioOperador_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDomicilioOperador.Checked == true)
+            {
+                DivcbDomicilioOperador.Visible = true;
+            }
+            else
+            {
+                DivcbDomicilioOperador.Visible = false;
 
             }
         }
 
-  
+        protected void cbDomicilioArrendatario_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDomicilioArrendatario.Checked == true)
+            {
+                DivDomicilioArrendatario.Visible = true;
+            }
+            else
+            {
+                DivDomicilioArrendatario.Visible = false;
 
+            }
+        }
+
+        protected void cbDomicilioPropietario_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDomicilioPropietario.Checked == true)
+            {
+                DivdomicilioPropietario.Visible = true;
+            }
+            else
+            {
+                DivdomicilioPropietario.Visible = false;
+
+            }
+        }
+
+        protected void cbDomicilioNotificado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDomicilioNotificado.Checked == true)
+            {
+                DivDomicilioNotificado.Visible = true;
+            }
+            else
+            {
+                DivDomicilioNotificado.Visible = false;
+
+            }
+        }
+
+        protected void btnNotificado_Click(object sender, EventArgs e)
+        {
+            if (txtRFCNotificado.Text != "" || txtNombreNotificado.Text != "" || txtNumRegIdTribNotificado.Text != ""
+             || ddlResidenciaFiscalNotificado.SelectedValue != "")
+            {
+                List<Notificado> notificado = ViewState["Notificado"] as List<Notificado>;
+                Notificado n = new Notificado();
+                n.id = notificado.Count + 1;
+
+                if (!string.IsNullOrEmpty(txtRFCNotificado.Text))
+                    n.rFCNotificado = txtRFCNotificado.Text;
+                if (!string.IsNullOrEmpty(txtNombreNotificado.Text))
+                    n.nombreNotificado = txtNombreNotificado.Text;
+                if (!string.IsNullOrEmpty(txtNumRegIdTribNotificado.Text))
+                    n.numRegIdTribNotificado = txtNumRegIdTribNotificado.Text;
+                if (ddlResidenciaFiscalNotificado.SelectedValue != "00")
+                    n.residenciaFiscalNotificado = ddlResidenciaFiscalNotificado.SelectedValue;
+                //--
+                if (cbDomicilioNotificado.Checked == true)
+                {
+                    n.calle = txtCalleArrendatario.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroExteriorNotificado.Text))
+                        n.numeroExterior = txtNumeroExteriorNotificado.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroInteriorNotificado.Text))
+                        n.numeroInterior = txtNumeroInteriorNotificado.Text;
+                    if (!string.IsNullOrEmpty(txtColoniaNotificado.Text))
+                        n.colonia = txtColoniaNotificado.Text;
+                    if (txtLocalidadNotificado.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadNotificado.Text))
+                            n.localidad = txtLocalidadNotificado.Text;
+                    }
+                    else
+                    {
+                        if (dllLocalidadNotificado.SelectedValue != "Seleccionar")
+                            n.localidad = dllLocalidadNotificado.SelectedValue;
+                     
+                    }
+                    if (!string.IsNullOrEmpty(txtReferenciaNotificado.Text))
+                        n.referencia = txtReferenciaNotificado.Text;
+                    if (txtMunicipioNotificado.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioNotificado.Text))
+                            n.municipio = txtMunicipioNotificado.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioNotificado.SelectedValue != "Seleccionar")
+                            n.municipio = ddlMunicipioNotificado.SelectedValue;
+                    
+                    }
+                    if (txtEstadoNotificado.Visible==true)
+                    n.estado = txtEstadoNotificado.Text;
+                    else
+                        n.estado = dllEstadoNotificado.SelectedValue;
+                   
+                    n.pais = ddlPaisNotificado.SelectedValue;
+                    n.codigoPostal = txtCodigoPostalNotificado.Text;
+                }
+                notificado.Add(n);
+                ViewState["Notificado"] = notificado;
+                BindNotificadoGridView();
+                limpiarNotificado();
+            }
+       
+        }
+        private void limpiarNotificado()
+        {
+            txtRFCNotificado.Text = "";
+            txtNombreNotificado.Text = "";
+            txtNumRegIdTribNotificado.Text = "";
+            //ddlResidenciaFiscalNotificado.SelectedValue;
+            txtCalleNotificado.Text = "";
+            txtNumeroExteriorNotificado.Text = "";
+            txtNumeroInteriorNotificado.Text = "";
+            txtColoniaNotificado.Text = "";
+            txtLocalidadNotificado.Text = "";
+            txtReferenciaNotificado.Text = "";
+            txtMunicipioNotificado.Text = "";
+            txtEstadoNotificado.Text = "";
+            //ddlPaisNotificado.SelectedValue;
+            txtCodigoPostalNotificado.Text = "";
+        }
+        protected void btnArrendatario_Click(object sender, EventArgs e)
+        {
+            if (txtRFCArrendatario.Text != "" || txtNombreArrendatario.Text != "" || txtNumRegIdTribArrendatario.Text != ""
+              || ddlResidenciaFiscalArrendatario.SelectedValue != "")
+            {
+                List<Arrendatario> arrendatario = ViewState["Arrendatario"] as List<Arrendatario>;
+                Arrendatario a = new Arrendatario();
+                a.id = arrendatario.Count + 1;
+
+                if (!string.IsNullOrEmpty(txtRFCArrendatario.Text))
+                    a.rFCArrendatario = txtRFCArrendatario.Text;
+                if (!string.IsNullOrEmpty(txtNombreArrendatario.Text))
+                    a.nombreArrendatario = txtNombreArrendatario.Text;
+                if (!string.IsNullOrEmpty(txtNumRegIdTribArrendatario.Text))
+                    a.numRegIdTribArrendatario = txtNumRegIdTribArrendatario.Text;
+                if (ddlResidenciaFiscalArrendatario.SelectedValue != "00")
+                    a.residenciaFiscalArrendatario = ddlResidenciaFiscalArrendatario.SelectedValue;
+                //--
+                if (cbDomicilioArrendatario.Checked == true)
+                {
+                    a.calle = txtCalleArrendatario.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroExteriorArrendatario.Text))
+                        a.numeroExterior = txtNumeroExteriorArrendatario.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroInteriorArrendatario.Text))
+                        a.numeroInterior = txtNumeroInteriorArrendatario.Text;
+                    if (!string.IsNullOrEmpty(txtColoniaArrendatario.Text))
+                        a.colonia = txtColoniaArrendatario.Text;
+                    if (txtLocalidadArrendatario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadArrendatario.Text))
+                            a.localidad = txtLocalidadArrendatario.Text;
+                    }
+                    else
+                    {
+                        if (dllLocalidadArrendatario.SelectedValue != "Seleccionar")
+                            a.localidad = dllLocalidadArrendatario.SelectedValue;
+                    
+                    }
+                    if (!string.IsNullOrEmpty(txtReferenciaArrendatario.Text))
+                        a.referencia = txtReferenciaArrendatario.Text;
+                    if (txtMunicipioArrendatario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioArrendatario.Text))
+                            a.municipio = txtMunicipioArrendatario.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioArrendatario.SelectedValue != "Seleccionar")
+                            a.municipio = ddlMunicipioArrendatario.SelectedValue;
+                                 
+                    }
+                    if (txtEstadoArrendatario.Visible==true)
+                    a.estado = txtEstadoArrendatario.Text;
+                    else
+                        a.estado = dllEstadoArrendatario.SelectedValue;
+
+                    a.pais = ddlPaisArrendatario.SelectedValue;
+                    a.codigoPostal = txtCodigoPostalArrendatario.Text;
+                }
+                arrendatario.Add(a);
+                ViewState["Arrendatario"] = arrendatario;
+                BindArrendatarioGridView();
+                limpiarArrendatario();
+            }
+       
+        }
+        private void limpiarArrendatario()
+        {
+            txtRFCArrendatario.Text = "";
+            txtNombreArrendatario.Text = "";
+            txtNumRegIdTribArrendatario.Text = "";
+            //ddlResidenciaFiscalArrendatario.SelectedValue;
+            txtCalleArrendatario.Text = "";
+            txtNumeroExteriorArrendatario.Text = "";
+            txtNumeroInteriorArrendatario.Text = "";
+            txtColoniaArrendatario.Text = "";
+            txtLocalidadArrendatario.Text = "";
+            txtReferenciaArrendatario.Text = "";
+            txtMunicipioArrendatario.Text = "";
+            txtEstadoArrendatario.Text = "";
+            //ddlPaisArrendatario.SelectedValue;
+            txtCodigoPostalArrendatario.Text = "";
+        }
+        protected void btnPropietario_Click(object sender, EventArgs e)
+        {
+            if (txtRFCPropietario.Text != "" || txtNombrePropietario.Text != "" || txtNumRegIdTribPropietario.Text != ""
+                || ddlResidenciaFiscalPropietario.SelectedValue != "")
+            {
+                List<Propietario> propietario = ViewState["Propietario"] as List<Propietario>;
+                Propietario p = new Propietario();
+                p.id = propietario.Count + 1;
+
+                if (!string.IsNullOrEmpty(txtRFCPropietario.Text))
+                    p.rFCPropietario = txtRFCPropietario.Text;
+                if (!string.IsNullOrEmpty(txtNombrePropietario.Text))
+                    p.nombrePropietario = txtNombrePropietario.Text;
+                if (!string.IsNullOrEmpty(txtNumRegIdTribPropietario.Text))
+                    p.numRegIdTribPropietario = txtNumRegIdTribPropietario.Text;
+                if (ddlResidenciaFiscalPropietario.SelectedValue != "00")
+                    p.residenciaFiscalPropietario = ddlResidenciaFiscalPropietario.SelectedValue;
+                //--
+                if (cbDomicilioPropietario.Checked == true)
+                {
+                    p.calle = txtCallePropietario.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroExteriorPropietario.Text))
+                        p.numeroExterior = txtNumeroExteriorPropietario.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroInteriorPropietario.Text))
+                        p.numeroInterior = txtNumeroInteriorPropietario.Text;
+                    if (!string.IsNullOrEmpty(txtColoniaPropietario.Text))
+                        p.colonia = txtColoniaPropietario.Text;
+                    if (txtLocalidadPropietario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadPropietario.Text))
+                            p.localidad = txtLocalidadPropietario.Text;
+                    }
+                    else
+                    {
+                        if (dllLocalidadPropietario.SelectedValue != "Seleccionar")
+                            p.localidad = dllLocalidadPropietario.SelectedValue;
+                    
+                    }
+                    if (!string.IsNullOrEmpty(txtReferenciaPropietario.Text))
+                        p.referencia = txtReferenciaPropietario.Text;
+                    if (txtMunicipioPropietario.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioPropietario.Text))
+                            p.municipio = txtMunicipioPropietario.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioPropietario.SelectedValue != "Seleccionar")
+                            p.municipio = ddlMunicipioPropietario.SelectedValue;
+                    
+                    }
+                    if (txtEstadoPropietario.Visible==true)
+                    p.estado = txtEstadoPropietario.Text;
+                    else
+                        p.estado = dllEstadoPropietario.SelectedValue;
+                   
+                    p.pais = ddlPaisPropietario.SelectedValue;
+                    p.codigoPostal = txtCodigoPostalPropietario.Text;
+                }
+                propietario.Add(p);
+                ViewState["Propietario"] = propietario;
+                BindPropietarioGridView();
+                limpiarPropietario();
+            }
+        }
+
+        protected void btnOperador_Click(object sender, EventArgs e)
+        {
+            if (txtRFCOperador.Text != "" || txtNumLicencia.Text != "" || txtNombreOperador.Text != "" ||
+                txtNumRegIdTribOperador.Text != "" || ddlResidenciaFiscalOperador.SelectedValue != "")
+            {
+                List<Operador> operador = ViewState["Operador"] as List<Operador>;
+                Operador o = new Operador();
+                o.id = operador.Count + 1;
+                if (!string.IsNullOrEmpty(txtRFCOperador.Text))
+                    o.rFCOperador = txtRFCOperador.Text;
+                if (!string.IsNullOrEmpty(txtNumLicencia.Text))
+                    o.numLicencia = txtNumLicencia.Text;
+                if (!string.IsNullOrEmpty(txtNombreOperador.Text))
+                    o.nombreOperador = txtNombreOperador.Text;
+                if (!string.IsNullOrEmpty(txtNumRegIdTribOperador.Text))
+                    o.numRegIdTribOperador = txtNumRegIdTribOperador.Text;
+                if (ddlResidenciaFiscalOperador.SelectedValue != "00")
+                    o.residenciaFiscalOperador = ddlResidenciaFiscalOperador.SelectedValue;
+                //--
+                if (cbDomicilioOperador.Checked == true)
+                {
+                    o.calle = txtCalleOperador.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroExteriorOperador.Text))
+                        o.numeroExterior = txtNumeroExteriorOperador.Text;
+                    if (!string.IsNullOrEmpty(txtNumeroInteriorOperador.Text))
+                        o.numeroInterior = txtNumeroInteriorOperador.Text;
+                    if (!string.IsNullOrEmpty(txtColoniaOperador.Text))
+                        o.colonia = txtColoniaOperador.Text;
+                    if (txtLocalidadOperador.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtLocalidadOperador.Text))
+                            o.localidad = txtLocalidadOperador.Text;
+                    }
+                    else
+                    { 
+                       if(dllLocalidadOperador.SelectedValue!="Seleccionar")
+                           o.localidad = dllLocalidadOperador.SelectedValue;
+                                       
+                    }
+                    if (!string.IsNullOrEmpty(txtReferenciaOperador.Text))
+                        o.referencia = txtReferenciaOperador.Text;
+                    if (txtMunicipioOperador.Visible == true)
+                    {
+                        if (!string.IsNullOrEmpty(txtMunicipioOperador.Text))
+                            o.municipio = txtMunicipioOperador.Text;
+                    }
+                    else
+                    {
+                        if (ddlMunicipioOperador.SelectedValue != "Seleccionar")
+                            o.municipio = ddlMunicipioOperador.SelectedValue;
+                    
+                    }
+                    if (txtEstadoOperador.Visible == true)
+                    {
+                        o.estado = txtEstadoOperador.Text;
+                    }
+                    else
+                        o.estado = dllEstadoOperador.SelectedValue;
+              
+                    o.pais = ddlPaisOperador.SelectedValue;
+                    o.codigoPostal = txtCodigoPostalOperador.Text;
+                }
+                operador.Add(o);
+                ViewState["Operador"] = operador;
+                BindOperadorGridView();
+                limpiarOperador();
+            }
+        }
+
+        private void limpiarOperador()
+        {
+                txtRFCOperador.Text="";
+                txtNumLicencia.Text = "";
+                txtNombreOperador.Text = "";
+                txtNumRegIdTribOperador.Text = "";
+                //ddlResidenciaFiscalOperador.SelectedValue;
+                txtCalleOperador.Text="";
+                txtNumeroExteriorOperador.Text = "";
+                txtNumeroInteriorOperador.Text = "";
+                txtColoniaOperador.Text = "";
+                txtLocalidadOperador.Text = "";
+                txtReferenciaOperador.Text = "";
+                txtMunicipioOperador.Text = "";
+                txtEstadoOperador.Text = "";
+                //ddlPaisOperador.SelectedValue;
+                txtCodigoPostalOperador.Text = "";
+        }
+        protected void gvOperador_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarOperador"))
+            {
+                var operador = ViewState["Operador"] as List<Operador>;
+
+                operador.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["Operador"] = operador;
+                            BindOperadorGridView();
+
+            }
+        }
 
         protected void gvPropietario_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
             if (e.CommandName.Equals("EliminarPropietario"))
             {
-
                 var propietario = ViewState["Propietario"] as List<Propietario>;
 
                 propietario.RemoveAt(Convert.ToInt32(e.CommandArgument));
@@ -3368,11 +4376,183 @@ namespace GafLookPaid
         }
         private void limpiarPropietario()
         {
+            txtRFCPropietario.Text = "";
+            txtNombrePropietario.Text = "";
             txtNumRegIdTribPropietario.Text = "";
-           
+            //ddlResidenciaFiscalPropietario.SelectedValue;
+            txtCallePropietario.Text = "";
+            txtNumeroExteriorPropietario.Text = "";
+            txtNumeroInteriorPropietario.Text = "";
+            txtColoniaPropietario.Text = "";
+            txtLocalidadPropietario.Text = "";
+            txtReferenciaPropietario.Text = "";
+            txtMunicipioPropietario.Text = "";
+            txtEstadoPropietario.Text = "";
+            //ddlPaisPropietario.SelectedValue;
+            txtCodigoPostalPropietario.Text = "";
         }
-       
-    
+        protected void gvArrendatario_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarArrendatario"))
+            {
+                var arrendatario = ViewState["Arrendatario"] as List<Arrendatario>;
+
+                arrendatario.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["Arrendatario"] = arrendatario;
+                BindArrendatarioGridView();
+
+            }
+        }
+
+        protected void gvNotificado_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("EliminarNotificado"))
+            {
+                var notificado = ViewState["Notificado"] as List<Notificado>;
+
+                notificado.RemoveAt(Convert.ToInt32(e.CommandArgument));
+                ViewState["Notificado"] = notificado;
+                BindNotificadoGridView();
+
+            }
+        }
+
+        protected void btnContenedorTF_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(ddlIDCarro.SelectedValue))
+            {
+                List<CarroContenedor> carroContenedor = ViewState["CarroContenedor"] as List<CarroContenedor>;
+                CarroContenedor c = new CarroContenedor();
+                c.id = Convert.ToInt32(ddlIDCarro.SelectedValue);
+                c.tipoContenedor = ddlContenedorTipoContenedor.SelectedValue;
+                c.pesoContenedorVacio = Convert.ToDecimal(txtPesoContenedorVacio.Text);
+                c.pesoNetoMercancia = Convert.ToDecimal(txtPesoNetoMercancia.Text);
+
+                carroContenedor.Add(c);
+                ViewState["CarroContenedor"] = carroContenedor;
+                BindCarroContenedorGridView();
+                limpiarCarrosContenedor();
+            }
+        }
+        private void limpiarCarrosContenedor()
+        {
+           // ddlContenedorTipoContenedor.SelectedValue;
+            txtPesoContenedorVacio.Text = "";
+            txtPesoNetoMercancia.Text = "";
+        }
+
+        protected void ddlPais_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+             var cliente = NtLinkClientFactory.Cliente();
+             using (cliente as IDisposable)
+             {
+                 if (ddlPais.SelectedValue != "" && (ddlPais.SelectedValue == "MEX" || ddlPais.SelectedValue == "USA" || ddlPais.SelectedValue == "CAN"))
+                 {
+                     ddlEstado.DataSource = cliente.Consultar_EstadosPais(ddlPais.SelectedValue);
+                     ddlEstado.DataTextField = "NombredelEstado";
+                     ddlEstado.DataValueField = "c_Estado1";
+                     ddlEstado.DataBind();
+                     ddlEstado.Visible = true;
+                     txtEstado.Visible = false;
+                     RequiredFieldValidator11.Enabled = false;
+                     //---------------
+                     if (ddlEstado.SelectedValue != "" && (ddlPais.SelectedValue == "MEX"))
+                     {
+                         ddlMunicipio.DataSource = cliente.Consultar_MunicipioALL(ddlEstado.SelectedValue);
+                         ddlMunicipio.DataTextField = "Descripción";
+                         ddlMunicipio.DataValueField = "c_Municipio1";
+                         ddlMunicipio.DataBind();
+                         ddlMunicipio.Items.Insert(0, "Seleccionar");
+                         ddlMunicipio.Visible = true;
+                         txtMunicipio.Visible = false;
+                     }
+                     else
+                     {
+
+                         ddlMunicipio.Visible = false;
+                         txtMunicipio.Visible = true;
+                     }
+                     if (ddlEstado.SelectedValue != "" && ddlEstado.SelectedValue != "DIF" && (ddlPais.SelectedValue == "MEX"))
+                     {
+                         ddlLocalidad.DataSource = cliente.Consultar_LocalidadALL(ddlEstado.SelectedValue);
+                         ddlLocalidad.DataTextField = "Descripción";
+                         ddlLocalidad.DataValueField = "c_Localidad1";
+                         ddlLocalidad.DataBind();
+                         ddlLocalidad.Items.Insert(0, "Seleccionar");
+                         ddlLocalidad.Visible = true;
+                         txtLocalidad.Visible = false;
+                     }
+                     else
+                     {
+
+                         ddlLocalidad.Visible = false;
+                         txtLocalidad.Visible = true;
+                     }
+
+
+
+                 }
+                 else
+                 {
+                     txtEstado.Visible = true;
+                     ddlEstado.Visible = false;
+                     RequiredFieldValidator11.Enabled = true;
+
+                     ddlMunicipio.Visible = false;
+                     txtMunicipio.Visible = true;
+
+                     ddlLocalidad.Visible = false;
+                     txtLocalidad.Visible = true;
+                 }
+             }
+        }
+
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlEstado.SelectedValue != "" && (ddlPais.SelectedValue == "MEX"))
+                {
+                    ddlMunicipio.DataSource = cliente.Consultar_MunicipioALL(ddlEstado.SelectedValue);
+                    ddlMunicipio.DataTextField = "Descripción";
+                    ddlMunicipio.DataValueField = "c_Municipio1";
+                    ddlMunicipio.DataBind();
+                    ddlMunicipio.Items.Insert(0, "Seleccionar");
+                           
+                    ddlMunicipio.Visible = true;
+                    txtMunicipio.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipio.Visible = false;
+                    txtMunicipio.Visible = true;
+                }
+                if (ddlEstado.SelectedValue != "" && ddlEstado.SelectedValue != "DIF" && (ddlPais.SelectedValue == "MEX"))
+                {
+                    ddlLocalidad.DataSource = cliente.Consultar_LocalidadALL(ddlEstado.SelectedValue);
+                    ddlLocalidad.DataTextField = "Descripción";
+                    ddlLocalidad.DataValueField = "c_Localidad1";
+                    ddlLocalidad.DataBind();
+                    ddlLocalidad.Items.Insert(0, "Seleccionar");
+                    ddlLocalidad.Visible = true;
+                    txtLocalidad.Visible = false;
+                }
+                else
+                {
+
+                    ddlLocalidad.Visible = false;
+                    txtLocalidad.Visible = true;
+                }
+            }
+        }
+
+        protected void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
         protected void ddlLocalidad_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -3482,7 +4662,112 @@ namespace GafLookPaid
                 }
             }
         }
-                       
+
+        protected void ddlPaisPropietario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (ddlPaisPropietario.SelectedValue != "" && (ddlPaisPropietario.SelectedValue == "MEX" || ddlPaisPropietario.SelectedValue == "USA" || ddlPaisPropietario.SelectedValue == "CAN"))
+                {
+                    dllEstadoPropietario.DataSource = cliente.Consultar_EstadosPais(ddlPaisPropietario.SelectedValue);
+                    dllEstadoPropietario.DataTextField = "NombredelEstado";
+                    dllEstadoPropietario.DataValueField = "c_Estado1";
+                    dllEstadoPropietario.DataBind();
+                    dllEstadoPropietario.Visible = true;
+                    txtEstadoPropietario.Visible = false;
+                    RequiredFieldValidator45.Enabled = false;
+                    //---------------
+                    if (dllEstadoPropietario.SelectedValue != "" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                    {
+                        ddlMunicipioPropietario.DataSource = cliente.Consultar_MunicipioALL(dllEstadoPropietario.SelectedValue);
+                        ddlMunicipioPropietario.DataTextField = "Descripción";
+                        ddlMunicipioPropietario.DataValueField = "c_Municipio1";
+                        ddlMunicipioPropietario.DataBind();
+                        ddlMunicipioPropietario.Items.Insert(0, "Seleccionar");
+                        ddlMunicipioPropietario.Visible = true;
+                        txtMunicipioPropietario.Visible = false;
+                    }
+                    else
+                    {
+
+                        ddlMunicipioPropietario.Visible = false;
+                        txtMunicipioPropietario.Visible = true;
+                    }
+                    if (dllEstadoPropietario.SelectedValue != "" && dllEstadoPropietario.SelectedValue != "DIF" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                    {
+                        dllLocalidadPropietario.DataSource = cliente.Consultar_LocalidadALL(dllEstadoPropietario.SelectedValue);
+                        dllLocalidadPropietario.DataTextField = "Descripción";
+                        dllLocalidadPropietario.DataValueField = "c_Localidad1";
+                        dllLocalidadPropietario.DataBind();
+                        dllLocalidadPropietario.Items.Insert(0, "Seleccionar");
+                        dllLocalidadPropietario.Visible = true;
+                        txtLocalidadPropietario.Visible = false;
+                    }
+                    else
+                    {
+
+                        dllLocalidadPropietario.Visible = false;
+                        txtLocalidadPropietario.Visible = true;
+                    }
+
+
+
+                }
+                else
+                {
+                    txtEstadoPropietario.Visible = true;
+                    dllEstadoPropietario.Visible = false;
+                    RequiredFieldValidator45.Enabled = true;
+
+                    ddlMunicipioPropietario.Visible = false;
+                    txtMunicipioPropietario.Visible = true;
+
+                    dllLocalidadPropietario.Visible = false;
+                    txtLocalidadPropietario.Visible = true;
+                }
+            }
+
+        }
+        protected void dllEstadoPropietario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cliente = NtLinkClientFactory.Cliente();
+            using (cliente as IDisposable)
+            {
+                if (dllEstadoPropietario.SelectedValue != "" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                {
+                    ddlMunicipioPropietario.DataSource = cliente.Consultar_MunicipioALL(dllEstadoPropietario.SelectedValue);
+                    ddlMunicipioPropietario.DataTextField = "Descripción";
+                    ddlMunicipioPropietario.DataValueField = "c_Municipio1";
+                    ddlMunicipioPropietario.DataBind();
+                    ddlMunicipioPropietario.Items.Insert(0, "Seleccionar");
+
+                    ddlMunicipioPropietario.Visible = true;
+                    txtMunicipioPropietario.Visible = false;
+                }
+                else
+                {
+                    ddlMunicipioPropietario.Visible = false;
+                    txtMunicipioPropietario.Visible = true;
+                }
+                if (dllEstadoPropietario.SelectedValue != "" && dllEstadoPropietario.SelectedValue != "DIF" && (ddlPaisPropietario.SelectedValue == "MEX"))
+                {
+                    dllLocalidadPropietario.DataSource = cliente.Consultar_LocalidadALL(dllEstadoPropietario.SelectedValue);
+                    dllLocalidadPropietario.DataTextField = "Descripción";
+                    dllLocalidadPropietario.DataValueField = "c_Localidad1";
+                    dllLocalidadPropietario.DataBind();
+                    dllLocalidadPropietario.Items.Insert(0, "Seleccionar");
+                    dllLocalidadPropietario.Visible = true;
+                    txtLocalidadPropietario.Visible = false;
+                }
+                else
+                {
+
+                    dllLocalidadPropietario.Visible = false;
+                    txtLocalidadPropietario.Visible = true;
+                }
+            }
+        }
         protected void ddlPaisArrendatario_SelectedIndexChanged(object sender, EventArgs e)
         {
             var cliente = NtLinkClientFactory.Cliente();
@@ -3691,247 +4976,6 @@ namespace GafLookPaid
                     txtLocalidadNotificado.Visible = true;
                 }
             }
-        }
-
-        protected void btnPropietario_Click(object sender, EventArgs e)
-        {
-            if (txtNumRegIdTribPropietario.Text != "" || ddlResidenciaFiscalPropietario.SelectedValue != "")
-            {
-                List<Propietario> propietario = ViewState["Propietario"] as List<Propietario>;
-                Propietario p = new Propietario();
-                p.id = propietario.Count + 1;
-
-                if (!string.IsNullOrEmpty(txtNumRegIdTribPropietario.Text))
-                    p.NumRegIdTrib = txtNumRegIdTribPropietario.Text;
-                if (ddlResidenciaFiscalPropietario.SelectedValue != "00")
-                    p.ResidenciaFiscal = ddlResidenciaFiscalPropietario.SelectedValue;
-                //--
-
-                propietario.Add(p);
-                ViewState["Propietario"] = propietario;
-                BindPropietarioGridView();
-                limpiarPropietario();
-            }
-        }
-
-        protected void cbDomicilioReceptor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDomicilioReceptor.Checked == true)
-            {
-                DivDomicilioReceptor.Visible = true;
-            }
-            else
-            {
-                DivDomicilioReceptor.Visible = false;
-
-            }
-        }
-
-        protected void cbDomicilioDestinatario_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDomicilioDestinatario.Checked == true)
-            {
-                DivDomicilioDestinatario.Visible = true;
-            }
-            else
-            {
-                DivDomicilioDestinatario.Visible = false;
-
-            }
-        }
-
-        protected void btnDestinatario_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void gvDestinatario_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("EliminarDomicilio"))
-            {
-                var destinatarioDom = ViewState["destinatarioDom"] as List<Domicilio>;
-                destinatarioDom.RemoveAt(Convert.ToInt32(e.CommandArgument));
-                ViewState["destinatarioDom"] = destinatarioDom;
-                BindDestinarioDomiGridView();
-
-            }
-        }
-
-        protected void Descripciones_Click(object sender, EventArgs e)
-        {
-            List<DescripcionesEspecificas> descripcionesEspecificas = ViewState["descripcionesEspecificas"] as List<DescripcionesEspecificas>;
-
-            DescripcionesEspecificas p = new DescripcionesEspecificas();
-            p.idMercancia = Convert.ToInt16(ddlIDMercancia.SelectedValue);
-            p.id = descripcionesEspecificas.Count + 1;
-            
-            p.Marca=txtMarca.Text;
-
-            if (!string.IsNullOrEmpty(txtModelo.Text))
-                p.Modelo = txtModelo.Text;
-            if (txtSubModelo.Text != "")
-                p.SubModelo = txtSubModelo.Text;
-            if (txtNumeroSerie.Text != "")
-                p.NumeroSerie = txtNumeroSerie.Text;
-
-            //--
-
-            descripcionesEspecificas.Add(p);
-            ViewState["descripcionesEspecificas"] = descripcionesEspecificas;
-            BindMercanciasDescripcionesToGridView();
-            limpiarDescripciones();
-        }
-        private void limpiarDescripciones()
-        {
-             txtMarca.Text="";
-             txtModelo.Text = "";
-             txtSubModelo.Text = "";
-             txtNumeroSerie.Text = "";
-        }
-
-        protected void gvDescripcionesEspecificas_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("EliminarDescripcionesEspecificas"))
-            {
-               
-                var descripcionesEspecificas = ViewState["descripcionesEspecificas"] as List<DescripcionesEspecificas>;
-                descripcionesEspecificas.RemoveAt(Convert.ToInt32(e.CommandArgument));
-                ViewState["descripcionesEspecificas"] = descripcionesEspecificas;
-                BindMercanciasDescripcionesToGridView();
-
-            }
-
-        }
-
-        protected void btnDestinatarioComple_Click(object sender, EventArgs e)
-        {
-            if (txtNombre.Text != "" || txtNumRegIdTribDestinatario.Text != "")
-            {
-          
-                List<Destinatario> destinatario = ViewState["destinatario"] as List<Destinatario>;
-                Destinatario p = new Destinatario();
-                p.id = destinatario.Count + 1;
-                
-                if (!string.IsNullOrEmpty(txtNumRegIdTribDestinatario.Text))
-                    p.NumRegIdTrib = txtNumRegIdTribDestinatario.Text;
-                if (!string.IsNullOrEmpty(txtNombre.Text))
-                    p.Nombre = txtNombre.Text;
-                //--
-
-                destinatario.Add(p);
-                ViewState["destinatario"] = destinatario;
-                ddlDestinatarios.Items.Add(p.id.ToString());
-      
-                BindDestinatarioGridView();
-                limpiarDestinatario();
-            }
-        }
-
-        private void limpiarDestinatario()
-        {
-            txtNombre.Text = "";
-            txtNumRegIdTribDestinatario.Text = "";
-        }
-        protected void gvDestinatarioComple_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName.Equals("EliminarDestinatario"))
-            {
-                var destinatario = ViewState["destinatario"] as List<Destinatario>;
-               var destinatarioDom = ViewState["destinatarioDom"] as List<Domicilio>;
-           
-                Destinatario dt = destinatario.ElementAt(Convert.ToInt32(e.CommandArgument));
-                int x = dt.id;
-                                
-                destinatario.RemoveAt(Convert.ToInt32(e.CommandArgument));
-                ddlDestinatarios.Items.Remove(x.ToString());
-                destinatarioDom.RemoveAll(p => p.idDestinatario == x);
-                //Reestructuracion-----------------------------
-                ddlDestinatarios.Items.Clear();
-                foreach (var edit in destinatario)
-                { if (edit.id > Convert.ToDecimal(x))
-                        edit.id -= 1;
-                ddlDestinatarios.Items.Add(edit.id.ToString());
-                }
-                foreach (var edit in destinatarioDom)
-                {
-                    if (edit.idDestinatario > Convert.ToDecimal(x))
-                        edit.idDestinatario -= 1;
-                }
-                //----------------------------------------------------------
-                ViewState["destinatario"] = destinatario;
-                ViewState["destinatarioDom"] = destinatarioDom;
-               
-                BindDestinatarioGridView();
-                BindDestinarioDomiGridView();
-            }
-        }
-
-        protected void btnDomicilio_Click(object sender, EventArgs e)
-        {
-               List<Domicilio> destinatarioDom = ViewState["destinatarioDom"] as List<Domicilio>;
-                Domicilio o = new Domicilio();
-                o.id = destinatarioDom.Count + 1;
-                     o.idDestinatario = Convert.ToInt16(ddlDestinatarios.SelectedValue); 
-                     o.calle = txtCalleNotificado.Text;
-                     if (!string.IsNullOrEmpty(txtNumeroExteriorNotificado.Text))
-                         o.numeroExterior = txtNumeroExteriorNotificado.Text;
-                     if (!string.IsNullOrEmpty(txtNumeroInteriorNotificado.Text))
-                         o.numeroInterior = txtNumeroInteriorNotificado.Text;
-                     if (!string.IsNullOrEmpty(txtColoniaNotificado.Text))
-                         o.colonia = txtColoniaNotificado.Text;
-                     if (txtLocalidadNotificado.Visible == true)
-                    {
-                        if (!string.IsNullOrEmpty(txtLocalidadNotificado.Text))
-                            o.localidad = txtLocalidadNotificado.Text;
-                    }
-                    else
-                    {
-                        if (dllLocalidadNotificado.SelectedValue != "Seleccionar")
-                            o.localidad = dllLocalidadNotificado.SelectedValue;
-                                       
-                    }
-                     if (!string.IsNullOrEmpty(txtReferenciaNotificado.Text))
-                         o.referencia = txtReferenciaNotificado.Text;
-                     if (txtMunicipioNotificado.Visible == true)
-                    {
-                        if (!string.IsNullOrEmpty(txtMunicipioNotificado.Text))
-                            o.municipio = txtMunicipioNotificado.Text;
-                    }
-                    else
-                    {
-                        if (ddlMunicipioNotificado.SelectedValue != "Seleccionar")
-                            o.municipio = ddlMunicipioNotificado.SelectedValue;
-                    
-                    }
-                     if (txtEstadoNotificado.Visible == true)
-                    {
-                        o.estado = txtEstadoNotificado.Text;
-                    }
-                    else
-                         o.estado = dllEstadoNotificado.SelectedValue;
-
-                     o.pais = ddlPaisNotificado.SelectedValue;
-                     o.codigoPostal = txtCodigoPostalNotificado.Text;
-                
-                destinatarioDom.Add(o);
-                ViewState["destinatarioDom"] = destinatarioDom;
-                BindDestinarioDomiGridView();
-                limpiarNotificado();
-        }
-        private void limpiarNotificado()
-        {
-         
-            //ddlResidenciaFiscalNotificado.SelectedValue;
-            txtCalleNotificado.Text = "";
-            txtNumeroExteriorNotificado.Text = "";
-            txtNumeroInteriorNotificado.Text = "";
-            txtColoniaNotificado.Text = "";
-            txtLocalidadNotificado.Text = "";
-            txtReferenciaNotificado.Text = "";
-            txtMunicipioNotificado.Text = "";
-            txtEstadoNotificado.Text = "";
-            //ddlPaisNotificado.SelectedValue;
-            txtCodigoPostalNotificado.Text = "";
         }
         //protected void Button2_Click1(object sender, EventArgs e)
         //{

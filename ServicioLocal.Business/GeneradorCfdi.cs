@@ -1435,7 +1435,7 @@ namespace ServicioLocal.Business
                                                                new XmlWriterSettings() { Indent = false, Encoding = Encoding.UTF8 }))
                     {
                         XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
-                        namespaces.Add("cartaporte", "http://www.sat.gob.mx/CartaPorte");
+                        namespaces.Add("cartaporte20", "http://www.sat.gob.mx/CartaPorte20");
                         ser.Serialize(xmlWriter, impuestos, namespaces);
                         string xml = Encoding.UTF8.GetString(memStream.GetBuffer());
                         xml = xml.Substring(xml.IndexOf(Convert.ToChar(60)));
@@ -1695,8 +1695,10 @@ namespace ServicioLocal.Business
                 }
                 catch (Exception ee)
                 {
+           
                     Logger.Error(ee);
                     throw new FaultException(timbreString);
+                    
                 }
                 if (timbreString == null)
                 {
@@ -2290,7 +2292,7 @@ namespace ServicioLocal.Business
                 }
                 if (comprobante.Complemento != null && comprobante.Complemento.cartaPorte != null)
                 {
-                    comprobante.xsiSchemaLocation = comprobante.xsiSchemaLocation + " http://www.sat.gob.mx/CartaPorte http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte.xsd";
+                    comprobante.xsiSchemaLocation = comprobante.xsiSchemaLocation + " http://www.sat.gob.mx/CartaPorte20  http://www.sat.gob.mx/sitio_internet/cfd/CartaPorte/CartaPorte20.xsd";
                     complemento = GetXmlCartaPorte(comprobante.Complemento.cartaPorte);
                     
                 }
@@ -2371,8 +2373,8 @@ namespace ServicioLocal.Business
                 }
                 if (comprobante.Complemento != null && comprobante.Complemento.cartaPorte != null)
                 {
-                    comp = comp.Replace("xmlns:cartaporte=\"http://www.sat.gob.mx/CartaPorte\"", "");
-                    comp = comp.Replace("xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\"", "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" xmlns:cartaporte=\"http://www.sat.gob.mx/CartaPorte\"");
+                    comp = comp.Replace("xmlns:cartaporte20=\"http://www.sat.gob.mx/CartaPorte20\"", "");
+                    comp = comp.Replace("xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\"", "xmlns:cfdi=\"http://www.sat.gob.mx/cfd/3\" xmlns:cartaporte20=\"http://www.sat.gob.mx/CartaPorte20\"");
                 }
                 if (comprobante.Complemento != null && comprobante.Complemento.Pag != null)
                 {

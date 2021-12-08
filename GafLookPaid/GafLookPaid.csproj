@@ -120,6 +120,7 @@
     <Content Include="controles\SectorFinanciero.ascx" />
     <Content Include="Amazon.aspx" />
     <Content Include="ASONIOSCOC.aspx" />
+    <Content Include="wfrFacturaCartaPorte2.aspx" />
     <Content Include="wfrFacturaAddendaPlaneta.aspx" />
     <Content Include="wfrFacturaAddenda.aspx" />
     <Content Include="wfrFacturaComercioExterior.aspx" />
