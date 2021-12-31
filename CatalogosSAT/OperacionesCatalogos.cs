@@ -348,6 +348,30 @@ namespace CatalogosSAT
             }
 
         }
+        public List<c_Estado> Consultar_EstadosPais(string pais)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(pais))
+                    pais = pais.Replace("Item", "");
+
+              List<c_Estado> Estados = null;
+                using (var db = new CatalogosSAT.CatalogosEntities1())
+                {
+                    Estados = db.c_Estado.Where(p =>p.c_Pais == pais).ToList();
+
+                    return Estados;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+
+        }
+
+
         public c_Estado Consultar_EstadosPais(string E, string pais)
         {
             try
@@ -504,6 +528,28 @@ namespace CatalogosSAT
                                     select p).First();
 
                     return results;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+
+            }
+
+        }
+        public List<c_Localidad> Consultar_LocalidadALL(string E)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(E))
+
+                    E = E.Replace("Item", "");
+             
+               List< c_Localidad> Localidad = null;
+                using (var db = new CatalogosSAT.CatalogosEntities1())
+                {
+                     Localidad = db.c_Localidad.Where(p => p.c_Estado == E).ToList();
+                          return Localidad;
                 }
             }
             catch (Exception ex)

@@ -12,6 +12,8 @@ namespace ServicioLocalContract.Entities.Carta
         public string viaEntradaSalida { get; set; }
         public decimal? totalDistRec { get; set; }
         public string transpInternac { get; set; }
+        public string PaisOrigenDestino { get; set; }
+
         //-------------
         public decimal? pesoBrutoTotal { get; set; }
         public string unidadPeso { get; set; }
@@ -29,8 +31,14 @@ namespace ServicioLocalContract.Entities.Carta
 
         public string permSCTAutotransporteFederal { get; set; }
         public string numPermisoSCTAutotransporteFederal { get; set; }
-        public string nombreAsegAutotransporteFederal { get; set; }
-        public string numPolizaSeguroAutotransporteFederal { get; set; }
+        public string AseguraRespCivil{ get; set; }
+        public string PolizaRespCivil{ get; set; }
+        public string AseguraMedAmbiente{ get; set; }
+        public string PolizaMedAmbiente { get; set; }
+        public string AseguraCarga{ get; set; }
+        public string PolizaCarga { get; set; }
+        public string PrimaSeguro { get; set; }
+       
         //--------
         public string permSCTTransporteMaritimo { get; set; }
         public string numPermisoSCTTransporteMaritimo { get; set; }
@@ -61,11 +69,7 @@ namespace ServicioLocalContract.Entities.Carta
         public string numPolizaSeguroTransporteAereo { get; set; }
         public string numeroGuia { get; set; }
         public string lugarContrato { get; set; }
-        public string rFCTransportista { get; set; }
         public string codigoTransportista { get; set; }
-        public string numRegIdTribTranspor { get; set; }
-        public string residenciaFiscalTranspor { get; set; }
-        public string nombreTransportista { get; set; }
         public string rFCEmbarcador { get; set; }
         public string numRegIdTribEmbarc { get; set; }
         public string residenciaFiscalEmbarc { get; set; }
@@ -74,37 +78,34 @@ namespace ServicioLocalContract.Entities.Carta
         public string tipoDeServicio { get; set; }
         public string nombreAseg { get; set; }
         public string numPolizaSeguro { get; set; }
-        public string concesionario { get; set; }
+        public string tipoDeTrafico { get; set; }
         //-------------------
-        public string cveTransporte { get; set; }
-        //----------------------
         public List<Ubicacion> ubicacion { get; set; }
         public List<Mercancia> mercancia { get; set; }
         public List<CantidadTransporta> cantidadTransporta { get; set; }
+        public List<GuiasIdentificacion> guiasIdentificacion { get; set; }
+        public List<Pedimentos> pedimentos { get; set; }
+
         public List<Contenedor> contenedor { get; set; }
         public List<DerechosDePaso> derechosDePaso { get; set; }
         public List<Carro> carro { get; set; }
         public List<CarroContenedor> carroContenedor { get; set; }
-        public List<Operador> operador { get; set; }
-        public List<Propietario> propietario { get; set; }
-        public List<Arrendatario> arrendatario { get; set; }
-        public List<Notificado> notificado { get; set; }
-
+        public List<TiposFigura> tiposFigura { get; set; }
+        public List<PartesTransporte> partesTransporte { get; set; }
+   
         public DatosCartaPorte()
         {
             ubicacion = new List<Ubicacion>();
             mercancia = new List<Mercancia>();
             cantidadTransporta = new List<CantidadTransporta>();
+            guiasIdentificacion = new List<GuiasIdentificacion>();
+            pedimentos = new List<Pedimentos>();
             contenedor = new List<Contenedor>();
             derechosDePaso = new List<DerechosDePaso>();
             carro = new List<Carro>();
             carroContenedor = new List<CarroContenedor>();
-            operador = new List<Operador>();
-            propietario = new List<Propietario>();
-            arrendatario = new List<Arrendatario>();
-            notificado = new List<Notificado>();
-
-
+            tiposFigura = new List<TiposFigura>();
+            partesTransporte = new List<PartesTransporte>();
         }
 
     }
@@ -114,30 +115,19 @@ namespace ServicioLocalContract.Entities.Carta
        public class Ubicacion
  {
      public int id { get; set; }
-
+     public string tipoUbicacion { get; set; }
+     public string iDUbicacion { get; set; }
+     public string rFCRemitenteDestinatario { get; set; }
+     public string nombreRemitenteDestinatario { get; set; }
+     public string numRegIdTrib { get; set; }
+     public string residenciaFiscal { get; set; }
+     public string numEstacion { get; set; }
+     public string nombreEstacion { get; set; }
+     public string navegacionTrafico { get; set; }
+     public string fechaHoraSalidaLlegada { get; set; }
      public string tipoEstacion { get; set; }
      public string distanciaRecorrida { get; set; }
-     //----
-     public string iDOrigen { get; set; }
-     public string rFCRemitente { get; set; }
-     public string nombreRemitente { get; set; }
-     public string numRegIdTribOrigen { get; set; }
-     public string residenciaFiscalOrigen { get; set; }
-     public string numEstacionOrigen { get; set; }
-     public string nombreEstacionOrigen { get; set; }
-     public string navegacionTraficoOrigen { get; set; }
-     public string fechaHoraSalida { get; set; }
-     //----------------- 
-     public string iDDestino { get; set; }
-     public string rFCDestinatario { get; set; }
-     public string nombreDestinatario { get; set; }
-     public string numRegIdTribDestino { get; set; }
-     public string residenciaFiscalDestino { get; set; }
-     public string numEstacionDestino { get; set; }
-     public string nombreEstacionDestino { get; set; }
-     public string navegacionTraficodestino { get; set; }
-     public string fechaHoraProgLlegada { get; set; }
-     //----------------  
+    //---------------------
      public string calle { get; set; }
      public string numeroExterior { get; set; }
      public string numeroInterior { get; set; }
@@ -184,7 +174,24 @@ namespace ServicioLocalContract.Entities.Carta
 
            
        }
+       [Serializable()]
+       public class GuiasIdentificacion
+       {
+           public int id { get; set; }
+           public string NumeroGuiaIdentificacion { get; set; }
+           public string DescripGuiaIdentificacion { get; set; }
+           public string PesoGuiaIdentificacion { get; set; }
         
+       
+       }
+       [Serializable()]
+       public class Pedimentos
+       {
+           public int id { get; set; }
+           public string Pedimento { get; set; }
+
+
+       }
        [Serializable()]
        public class CantidadTransporta
        {
@@ -233,37 +240,17 @@ namespace ServicioLocalContract.Entities.Carta
            public decimal pesoNetoMercancia { get; set; }
 
        }
-
        [Serializable()]
-       public class Operador
-       {
-        public int id { get; set; }
-        public string rFCOperador{ get; set; }
-        public string numLicencia{ get; set; }
-        public string nombreOperador{ get; set; }
-        public string numRegIdTribOperador{ get; set; }
-        public string residenciaFiscalOperador { get; set; }
-         //--
-        public string calle { get; set; }
-        public string numeroExterior { get; set; }
-        public string numeroInterior { get; set; }
-        public string colonia { get; set; }
-        public string localidad { get; set; }
-        public string referencia { get; set; }
-        public string municipio { get; set; }
-        public string estado { get; set; }
-        public string pais { get; set; }
-        public string codigoPostal { get; set; }
-       }
-       [Serializable()]
-       public class Propietario
+       public class TiposFigura
        {
            public int id { get; set; }
-           public string rFCPropietario { get; set; }
-           public string nombrePropietario { get; set; }
-           public string numRegIdTribPropietario { get; set; }
-           public string residenciaFiscalPropietario { get; set; }
-           //--
+           public string TipoFigura { get; set; }
+           public string RFCFigura { get; set; }
+           public string NumLicencia { get; set; }
+           public string NombreFigura { get; set; }
+           public string NumRegIdTribFigura { get; set; }
+           public string ResidenciaFiscalFigura { get; set; }
+           //---------------------
            public string calle { get; set; }
            public string numeroExterior { get; set; }
            public string numeroInterior { get; set; }
@@ -275,47 +262,12 @@ namespace ServicioLocalContract.Entities.Carta
            public string pais { get; set; }
            public string codigoPostal { get; set; }
 
-
        }
        [Serializable()]
-       public class Arrendatario
+       public class PartesTransporte
        {
            public int id { get; set; }
-           public string rFCArrendatario { get; set; }
-           public string nombreArrendatario { get; set; }
-           public string numRegIdTribArrendatario { get; set; }
-           public string residenciaFiscalArrendatario { get; set; }
-           //--
-           public string calle { get; set; }
-           public string numeroExterior { get; set; }
-           public string numeroInterior { get; set; }
-           public string colonia { get; set; }
-           public string localidad { get; set; }
-           public string referencia { get; set; }
-           public string municipio { get; set; }
-           public string estado { get; set; }
-           public string pais { get; set; }
-           public string codigoPostal { get; set; }
-       }
-       [Serializable()]
-       public class Notificado
-       {
-           public int id { get; set; }
-           public string rFCNotificado { get; set; }
-           public string nombreNotificado { get; set; }
-           public string numRegIdTribNotificado { get; set; }
-           public string residenciaFiscalNotificado { get; set; }
-           //--
-           public string calle { get; set; }
-           public string numeroExterior { get; set; }
-           public string numeroInterior { get; set; }
-           public string colonia { get; set; }
-           public string localidad { get; set; }
-           public string referencia { get; set; }
-           public string municipio { get; set; }
-           public string estado { get; set; }
-           public string pais { get; set; }
-           public string codigoPostal { get; set; }
+           public string ParteTransporte { get; set; }
        }
 
 }

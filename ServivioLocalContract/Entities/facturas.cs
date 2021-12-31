@@ -13,6 +13,7 @@ namespace ServicioLocalContract
         FacturaAduanera,
         Referencia,
         Ingreso,
+        Traslado,
         ReciboHonorarios,
         Constructor,
         Donativo,
@@ -31,7 +32,7 @@ namespace ServicioLocalContract
         CorporativoAduanal,
         FacturaPemex, 
         FacturaLucent, Nomina, Amc71,CartaPorte, Coppel, HomeDepot, Pilgrims,VehiculoUsado,
-        Retenciones, Honda,Amazon,Complementos,ASONIOSCOC,Addenda1888,Innova,AddendaConcep
+        Retenciones, Honda,Amazon,Complementos,ASONIOSCOC,Addenda1888,Innova,AddendaConcep,AddendaPlaneta
     }
 
     public partial class facturas
@@ -133,6 +134,9 @@ namespace ServicioLocalContract
 
         [DataMemberAttribute()]
         public AddendaConcepto addendaConcepto { get; set; }
+
+        [DataMemberAttribute()]
+        public AddendaPlanetaV1 addendaPlaneta { get; set; }
 
 
         public List<facturasdetalle> ConceptosAduanera { get; set; }

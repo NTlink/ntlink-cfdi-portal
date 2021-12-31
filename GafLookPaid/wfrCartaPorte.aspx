@@ -467,7 +467,7 @@
       </div>
       </asp:Panel>
 
-            <asp:TabContainer ID="tabContainerAduana"  runat="server" Width="100%" 
+            <asp:TabContainer ID="tabContainerAduana"  runat="server" Width="100%" AutoPostBack="true" 
                  ActiveTabIndex="1">
 	    <asp:TabPanel ID="tabGeneral" HeaderText="Datos Generales" CssClass="page2" runat="server">
 			<HeaderTemplate>

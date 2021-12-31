@@ -297,7 +297,8 @@ border-style:None;
                             <asp:ListItem Text="Recibo de Donativo" Value="Donativo" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Arrendamiento" Value="Arrendamiento" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Honorarios" Value="Honorarios" ></asp:ListItem>
-                            
+                           <%-- <asp:ListItem Text="Traslado" Value="T" ></asp:ListItem>--%>
+                        
                         </asp:DropDownList>
                           
                     </td>
@@ -829,8 +830,7 @@ border-style:None;
                               CssClass="form-control0" Enabled="false" 
                               onselectedindexchanged="ddlRIVA_SelectedIndexChanged">
                          <asp:ListItem runat="server" Value="0.106666" Text="0.106666" Selected="True">  </asp:ListItem>
-                                   <asp:ListItem runat="server" Value="0.060000" Text="0.060000"></asp:ListItem>
-                                     <asp:ListItem runat="server" Text="0.040000" Value="0.040000"></asp:ListItem>
+                                   <asp:ListItem runat="server" Text="0.040000" Value="0.040000"></asp:ListItem>
                         </asp:DropDownList></td>
                         <td style="text-align: right; font-weight: 700;">CuentaPredial</td>
                             <td>
@@ -1097,7 +1097,7 @@ border-style:None;
    
  
          
-          <asp:TabContainer ID="tabContainerAduana" runat="server" ActiveTabIndex="2" 
+          <asp:TabContainer ID="tabContainerAduana" runat="server" ActiveTabIndex="0" 
                  AutoPostBack = "true" style="margin-right: 0px" Width="105%">
          
          <asp:TabPanel ID="datosComplemento" runat="server"  HeaderText="Carta Porte" CssClass="page1">
@@ -1130,26 +1130,15 @@ border-style:None;
    <asp:ListItem runat="server" Value="Salida" Text="Salida"></asp:ListItem>
    </asp:DropDownList>
                         </td>
-                        <td style="text-align: right;">
-                            ViaEntradaSalida:
-                        </td>
-                        <td> <asp:DropDownList runat="server" ID="ddlViaEntradaSalida"  
-                                    style="margin-left: 0px"  CssClass="form-control2">
-               <asp:ListItem runat="server" Value="00" Text="Seleccionar"></asp:ListItem>                      
-   <asp:ListItem runat="server" Value="01" Text="Autotransporte Federal"></asp:ListItem>
-   <asp:ListItem runat="server" Value="02" Text="Transporte Marítimo"></asp:ListItem>
-      <asp:ListItem runat="server" Value="03" Text="Transporte Aéreo"></asp:ListItem>
-   <asp:ListItem runat="server" Value="04" Text="Transporte Ferroviario"></asp:ListItem>
-      <asp:ListItem runat="server" Value="05" Text="Ducto"></asp:ListItem>
-   </asp:DropDownList>
-                        </td>
-                        <td style="text-align: right;">
-                         TotalDistRec:
-                        </td>
-                        <td>
-                           <asp:TextBox ID="txtTotalDistRec" runat="server" CssClass="form-control2" Width="72px" />
-          
-                        </td>
+                    <td style="text-align: right;"> PaisOrigenDestino:</td>
+                    <td>
+                    <cc1:DropDownListChosen ID="dllPaisOrigenDestino" runat="server"  CausesValidation="false" 
+            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
+            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" 
+                   AppendDataBoundItems="True" >              
+            </cc1:DropDownListChosen>
+                    </td>
+                       
                     </tr>
                     <tr>
                     <td></td>
@@ -1159,13 +1148,42 @@ border-style:None;
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><asp:RegularExpressionValidator id="RegularExpressionValidator3" runat="server" Display="Dynamic" CssClass="alert-danger"
+                    <td></td>
+                    </tr>
+                    <tr>
+                     <td style="text-align: right;">
+                         TotalDistRec:
+                        </td>
+                        <td>
+                           <asp:TextBox ID="txtTotalDistRec" runat="server" CssClass="form-control2" Width="72px" />
+           <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender23" runat="server"
+    TargetControlID="txtTotalDistRec" FilterType="Custom, Numbers" ValidChars="." Enabled="True" />
+       
+                        </td>
+                     <td style="text-align: right;">
+                            ViaEntradaSalida:
+                        </td>
+                        <td> <asp:DropDownList runat="server" ID="ddlViaEntradaSalida"  
+                                    style="margin-left: 0px"  CssClass="form-control2">
+               <asp:ListItem runat="server" Value="00" Text="Seleccionar"></asp:ListItem>                      
+   <asp:ListItem runat="server" Value="01" Text="Autotransporte"></asp:ListItem>
+   <asp:ListItem runat="server" Value="02" Text="Transporte Marítimo"></asp:ListItem>
+      <asp:ListItem runat="server" Value="03" Text="Transporte Aéreo"></asp:ListItem>
+   <asp:ListItem runat="server" Value="04" Text="Transporte Ferroviario"></asp:ListItem>
+    <%--  <asp:ListItem runat="server" Value="05" Text="Ducto"></asp:ListItem>--%>
+   </asp:DropDownList>
+                        </td>
+                       
+                        </tr>
+                        <td></td>
+                        <tr>
+                        <td><asp:RegularExpressionValidator id="RegularExpressionValidator3" runat="server" Display="Dynamic" CssClass="alert-danger"
     ControlToValidate="txtTotalDistRec" ErrorMessage="Dato invalido" 
                          ValidationExpression="[0-9]*\.?[0-9]*" 
                          ValidationGroup="CrearFactura" style="font-size: medium"/></td>
-                    </tr>
+                         </tr>
                </table>
-           
+           <br /><br/><br />
                 </ContentTemplate>
                 </asp:TabPanel>
         
@@ -1183,7 +1201,12 @@ border-style:None;
              
                <table>
           <tr>
-          <td></td>
+          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>TipoUbicacion:</td>
+          <td>  <asp:DropDownList ID="ddlTipoUbicacion" runat="server" CssClass="form-control2" 
+                  style="margin-left: 0px">
+                  <asp:ListItem runat="server" Text="Origen" Value="Origen"></asp:ListItem>
+                  <asp:ListItem runat="server" Text="Destino" Value="Destino"></asp:ListItem>
+                 </asp:DropDownList></td>
               <td style="text-align: right;">
                   TipoEstacion:</td>
           <td>
@@ -1200,7 +1223,9 @@ border-style:None;
               <asp:TextBox ID="txtDistanciaRecorrida" runat="server" CssClass="form-control2" 
                   Width="72px" />
               </td>
+             
               <tr>
+              <td></td>
                   <td>
                   </td>
                   <td>
@@ -1217,165 +1242,83 @@ border-style:None;
                   </td>
               </tr>
                    </tr>
-               </table>
-               <div style="border: solid 2px gray">
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbOrigen" Text="Origen" 
-                    AutoPostBack="True" oncheckedchanged="cbOrigen_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-          <div id="DivOrigen"  style="width:100%" runat="server" visible="false">
-               <h1 style="text-align: center; " class="style156">
-                <strong>Origen</strong></h1>
-           <table>
-           <tr>
-           <td style="text-align: right;">IDOrigen:</td>
-           <td>   <asp:TextBox ID="txtIDOrigen" runat="server" CssClass="form-control2"></asp:TextBox>
-          </td>
-           <td style="text-align: right;">RFCRemitente:</td>
-           <td><asp:TextBox ID="txtRFCRemitente" runat="server" CssClass="form-control2"></asp:TextBox></td>
-           <td style="text-align: right;">NombreRemitente:</td>
-           <td><asp:TextBox ID="txtNombreRemitente" runat="server" CssClass="form-control2"></asp:TextBox></td>
-          
-           </tr>
-           <tr>
-            <td style="text-align: right;">NumRegIdTrib:</td>
-           <td><asp:TextBox ID="txtNumRegIdTrib" runat="server" CssClass="form-control2"></asp:TextBox></td>
-
-            <td style="text-align: right;">ResidenciaFiscal:</td>
-           <td><div> <cc1:DropDownListChosen ID="ddlResidenciaFiscal" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."   width="185px" Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" 
-                            >              
-        </cc1:DropDownListChosen></div> </td>
-           <td style="text-align: right;">NumEstacion:</td>
+                   <tr>
+                    <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>RFCRemitenteDestinatario:</td>
+                   <td>   <asp:TextBox ID="txtRFCRemitenteDestinatario" runat="server" CssClass="form-control2"  /></td>
+                          <td style="text-align: right;">NumRegIdTrib:</td>
+                   <td>   <asp:TextBox ID="txtNumRegIdTrib" runat="server" CssClass="form-control2"  /></td>
+                  <td style="text-align: right;"> ResidenciaFiscal:</td>
+                    <td>
+                    <cc1:DropDownListChosen ID="ddlResidenciaFiscal" runat="server"  CausesValidation="false" 
+            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
+            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" 
+                   AppendDataBoundItems="True" >              
+            </cc1:DropDownListChosen>
+                    </td>
+                     </tr>
+                   <tr>
+                   <td></td>
+                   <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator61" ControlToValidate="txtRFCRemitenteDestinatario"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarUbicaciones" style="font-size: medium" /></td>
+                   </tr>
+                   <tr>
+                           <td style="text-align: right;">NombreRemitenteDestinatario:</td>
+                   <td>   <asp:TextBox ID="txtNombreRemitenteDestinatario" runat="server" CssClass="form-control2"  /></td>
+                   <td style="text-align: right;">IDUbicacion:</td> 
+               <td>
+                <asp:TextBox ID="txtIDUbicacion" runat="server" CssClass="form-control2" 
+                  Width="72px" />
+              </td>
+                <td style="text-align: right;">NumEstacion:</td>
            <td><asp:TextBox ID="txtNumEstacion" runat="server" CssClass="form-control2"></asp:TextBox></td>
-             
-           </tr>
-           <tr>
-   
-             <td style="text-align: right;">NombreEstacion:</td>
-           <td><asp:TextBox ID="txtNombreEstacion" runat="server" CssClass="form-control2"></asp:TextBox></td>
-       
-           <td style="text-align: right;">NavegacionTrafico:</td>
+      
+                   </tr>
+                   <tr>
+                
+             <td style="text-align: right;">NavegacionTrafico:</td>
            <td>    <asp:DropDownList runat="server" ID="ddlNavegacionTrafico"  
                   style="margin-left: 0px"  CssClass="form-control2">
   <asp:ListItem runat="server" Value="00" Text="Seleccionar"></asp:ListItem>             
    <asp:ListItem runat="server" Value="Altura" Text="Altura"></asp:ListItem>
    <asp:ListItem runat="server" Value="Cabotaje" Text="Cabotaje"></asp:ListItem>
    </asp:DropDownList></td>
-  
-           <td style="text-align: right;"> <span class="style160" style="color: #FF0000">*</span>FechaHoraSalida:</td>
-    <td colspan="2"  style="padding:0; margin:0;">
-    <table ><tr style="padding:0; margin:0;">
-  
-           <td style="padding:0; margin:0;">  <asp:TextBox runat="server" ID="txtFechaHoraSalida" CssClass="form-control2"  Width="72px"  
-                           />
-                        
-                     <asp:CompareValidator runat="server" ID="CompareValidator5" ControlToValidate="txtFechaHoraSalida"
+     <td style="text-align: right;">NombreEstacion:</td>
+      <td><asp:TextBox ID="txtNombreEstacion" runat="server" CssClass="form-control2"></asp:TextBox></td>
+         <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>FechaHoraSalidaLlegada:</td>
+                   <td colspan="2"  style="padding:0; margin:0;">
+                 <table ><tr style="padding:0; margin:0;">
+                   <td style="padding:0; margin:0;"> <asp:TextBox runat="server" ID="txtFechaHoraSalidaLlegada" CssClass="form-control2"  Width="72px"    />
+                
+                     <asp:CompareValidator runat="server" ID="CompareValidator6" ControlToValidate="txtFechaHoraSalidaLlegada"
                             Display="Dynamic" ErrorMessage="* Fecha Invalida" Operator="DataTypeCheck" Type="Date" />
-                        <asp:CalendarExtender runat="server" ID="CalendarExtender2" Animated="False" PopupButtonID="txtFechaHoraSalida"
-                            TargetControlID="txtFechaHoraSalida" Format="dd/MM/yyyy" />
+                        <asp:CalendarExtender runat="server" ID="CalendarExtender3" Animated="False" PopupButtonID="txtFechaHoraSalidaLlegada"
+                            TargetControlID="txtFechaHoraSalidaLlegada" Format="dd/MM/yyyy" />
           </td>
           <td style="padding:0; margin:0; text-align:left;">
-           <cc2:TimeSelector ID = "TimeSelector1" runat = "server"  ReadOnly="false"  Font-Size="40px" CssClass="form-control2"
-           DisplaySeconds = "false" style="padding:0; margin:3px;" >  </cc2:TimeSelector>
-          </td>
-          </tr>
-          </table>
-    </td>
-           </tr>
-            <tr>
-          <td></td><td></td>
-          <td></td><td></td>
-          <td> <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator54" ControlToValidate="txtFechaHoraSalida"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarUbicaciones" style="font-size: medium" /></td><td></td>
-          </tr>
-           </table>
-           </div>
-           </div>
-
-           <div style="border: solid 2px gray">
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbDestino" Text="Destino" 
-                    AutoPostBack="True" oncheckedchanged="cbDestino_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-          <div id="DivDestino"  style="width:100%" runat="server" visible="false">
-            <h1 style="text-align: center; " class="style156">
-                <strong>Destino</strong></h1>
-           <table>
-           <tr>
-           <td style="text-align: right;">IDDestino:</td>
-           <td>   <asp:TextBox ID="txtIDDestino" runat="server" CssClass="form-control2"></asp:TextBox>
-          </td>
-           <td style="text-align: right;">RFCDestinatario:</td>
-           <td><asp:TextBox ID="txtRFCDestinatario" runat="server" CssClass="form-control2"></asp:TextBox></td>
-           <td style="text-align: right;">NombreDestinatario:</td>
-           <td><asp:TextBox ID="txtNombreDestinatario" runat="server" CssClass="form-control2"></asp:TextBox></td>
-          
-           </tr>
-           <tr>
-            <td style="text-align: right;">NumRegIdTrib:</td>
-           <td><asp:TextBox ID="txtNumRegIdTribDestino" runat="server" CssClass="form-control2"></asp:TextBox></td>
-
-            <td style="text-align: right;">ResidenciaFiscal:</td>
-           <td><div style=" width:200px"><cc1:DropDownListChosen ID="ddlResidenciaFiscalDestino" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" 
-                            >              
-        </cc1:DropDownListChosen></div> </td>
-           <td style="text-align: right;">NumEstacion:</td>
-           <td><asp:TextBox ID="txtNumEstacionDestino" runat="server" CssClass="form-control2"></asp:TextBox></td>
-             
-           </tr>
-           <tr>
-   
-             <td style="text-align: right;">NombreEstacion:</td>
-           <td><asp:TextBox ID="txtNombreEstacionDestino" runat="server" CssClass="form-control2"></asp:TextBox></td>
-       
-           <td style="text-align: right;">NavegacionTrafico:</td>
-           <td>    <asp:DropDownList runat="server" ID="ddlNavegacionTraficoDestino"  
-                  style="margin-left: 0px"  CssClass="form-control2">
-  <asp:ListItem runat="server" Value="00" Text="Seleccionar"></asp:ListItem>             
-   <asp:ListItem runat="server" Value="Altura" Text="Altura"></asp:ListItem>
-   <asp:ListItem runat="server" Value="Cabotaje" Text="Cabotaje"></asp:ListItem>
-   </asp:DropDownList></td>
-           <td style="text-align: right;"> <span class="style160" style="color: #FF0000">*</span>FechaHoraProgLlegada:</td>
-         <td colspan="2"  style="padding:0; margin:0;">
-             <table ><tr style="padding:0; margin:0;">
-  
-           <td>  <asp:TextBox runat="server" ID="txtFechaHoraProgLlegada" CssClass="form-control2"  Width="72px"  
-                           />
-                        <asp:CompareValidator runat="server" ID="CompareValidator4" ControlToValidate="txtFechaHoraProgLlegada"
-                            Display="Dynamic" ErrorMessage="* Fecha Invalida" Operator="DataTypeCheck" Type="Date" />
-                                              
-                     <asp:CompareValidator runat="server" ID="CompareValidator3" ControlToValidate="txtFechaHoraProgLlegada"
-                            Display="Dynamic" ErrorMessage="* Fecha Invalida" Operator="DataTypeCheck" Type="Date" />
-                        <asp:CalendarExtender runat="server" ID="CalendarExtender1" Animated="False" PopupButtonID="txtFechaHoraProgLlegada"
-                            TargetControlID="txtFechaHoraProgLlegada" Format="dd/MM/yyyy" />
-          </td>
-           <td style="padding:0; margin:0;">
            <cc2:TimeSelector ID = "TimeSelector2" runat = "server"  ReadOnly="false"  Font-Size="40px" CssClass="form-control2"
            DisplaySeconds = "false" style="padding:0; margin:3px;" >  </cc2:TimeSelector>
            </td>
-          </tr>
-          <tr>
-          <td></td><td></td>
-          <td></td><td></td>
-          <td> <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator53" ControlToValidate="txtFechaHoraProgLlegada"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarUbicaciones" style="font-size: medium" /></td><td></td>
-          </tr>
+            </tr>
           </table>
-    </td>
-           </tr>
-           </table>
-           </div>
-           </div>
+          </td>
+                   </tr>
+                   <tr>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td></td>
+                   <td> <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator62" ControlToValidate="txtFechaHoraSalidaLlegada"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarUbicaciones" style="font-size: medium" /></td>
+                   </tr>
+               </table>
+              
+            
+         
            <div style="border: solid 2px gray">
                &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbDomicilio" Text="Domicilio" 
                     AutoPostBack="True" oncheckedchanged="cbDomicilio_CheckedChanged" 
@@ -1442,7 +1385,7 @@ border-style:None;
           
           </tr>
           <tr>
-           <td style="text-align: right;"> <span class="style160" style="color: #FF0000">*</span>Calle:</td>
+           <td style="text-align: right;"> Calle:</td>
            <td>   <asp:TextBox ID="txtCalle" runat="server" CssClass="form-control2" 
                    MaxLength="100"></asp:TextBox>
           </td>
@@ -1464,10 +1407,10 @@ border-style:None;
           </tr>
           <tr>
           <td></td>
-          <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+          <td><%--<asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator12" ControlToValidate="txtCalle"
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarUbicaciones" style="font-size: medium" /></td>
+                           ValidationGroup="AgregarUbicaciones" style="font-size: medium" />--%></td>
           <td></td>
           <td></td>
           <td></td>
@@ -1519,22 +1462,20 @@ border-style:None;
                     ShowHeaderWhenEmpty="True" OnRowCommand="gvUbicaciones_RowCommand">
                     <Columns>
                       <asp:BoundField HeaderText="ID" DataField="id" ItemStyle-HorizontalAlign="Center" Visible="false" />
-                       
+                        <asp:BoundField HeaderText="TipoUbicacion" DataField="tipoUbicacion" ItemStyle-HorizontalAlign="Center" />
                         <asp:BoundField HeaderText="TipoEstacion" DataField="tipoEstacion" ItemStyle-HorizontalAlign="Center" />
                         <asp:BoundField HeaderText="DistanciaRecorrida" DataField="distanciaRecorrida" ItemStyle-HorizontalAlign="Center" />
-                        <asp:BoundField HeaderText="IDOrigen" DataField="iDOrigen" ItemStyle-HorizontalAlign="Center" />
-                        <asp:BoundField HeaderText="RFCRemitente" DataField="rFCRemitente" ItemStyle-HorizontalAlign="Center" />
-                        <asp:BoundField HeaderText="FechaHoraSalida" DataField="fechaHoraSalida" ItemStyle-HorizontalAlign="Center" />
-                        <asp:BoundField HeaderText="IDDestino" DataField="iDDestino" ItemStyle-HorizontalAlign="Center" />
-                        <asp:BoundField HeaderText="RFCDestinatario" DataField="rFCDestinatario" />
-                        <asp:BoundField HeaderText="FechaHoraProgLlegada" DataField="fechaHoraProgLlegada" />
-                       <asp:BoundField HeaderText="Estado" DataField="estado"  ItemStyle-HorizontalAlign="Right" />
+                        <asp:BoundField HeaderText="IDUbicacion" DataField="iDUbicacion" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField HeaderText="RFCRemitenteDestinatario" DataField="rFCRemitenteDestinatario" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField HeaderText="FechaHoraSalidaLlegada" DataField="fechaHoraSalidaLlegada" ItemStyle-HorizontalAlign="Center" />
+                        <asp:BoundField HeaderText="Estado" DataField="estado"  ItemStyle-HorizontalAlign="Right" />
                         <asp:BoundField HeaderText="Pais" DataField="pais" />
                         <asp:BoundField HeaderText="CP" DataField="codigoPostal" />
                         <asp:ButtonField Text="Eliminar" CommandName="EliminarUbicacion" Visible="False" ItemStyle-HorizontalAlign="Center" />
                     </Columns>
                 </asp:GridView>
             </div>
+           
             <br /> <br /> <br /> 
 
              </ContentTemplate>
@@ -1553,7 +1494,7 @@ border-style:None;
                 <strong>Mercancias</strong></h1>
             <table >
             <tr>
-              <td style="text-align: right;">
+              <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
                          PesoBrutoTotal:
                         </td>
                         <td>
@@ -1561,7 +1502,7 @@ border-style:None;
           <asp:FilteredTextBoxExtender ID="ftbe" runat="server"
     TargetControlID="txtPesoBrutoTotal" FilterType="Custom, Numbers" ValidChars="." Enabled="True" />
                         </td>
-                           <td style="text-align: right;">UnidadPeso:</td>
+                           <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>UnidadPeso:</td>
                  <td>
                  <div>
                  <cc1:DropDownListChosen ID="ddlClaveUnidadPeso" runat="server" 
@@ -1597,10 +1538,16 @@ Enabled="True" TargetControlID="txtNumTotalMercancias" FilterType="Numbers">
     ControlToValidate="txtPesoBrutoTotal" ErrorMessage="Dato invalido" 
                          ValidationExpression="[0-9]*\.?[0-9]*" 
                          ValidationGroup="CrearFactura" style="font-size: medium"/>
-                         
+                         <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator53" ControlToValidate="txtPesoBrutoTotal"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="CrearFactura" style="font-size: medium" />
                          </td>
                          <td></td>
-                         <td></td>
+                         <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator54" ControlToValidate="ddlClaveUnidadPeso"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="CrearFactura" style="font-size: medium" /></td>
                         <td></td>
 
                          <td><asp:RegularExpressionValidator id="RegularExpressionValidator6" runat="server" Display="Dynamic" CssClass="alert-danger"
@@ -1644,7 +1591,7 @@ Enabled="True" TargetControlID="txtNumTotalMercancias" FilterType="Numbers">
                     <strong>Mercancia</strong></h1>
            <table >
            <tr>
-             <td style="text-align: right;">BienesTransp:</td>
+             <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>BienesTransp:</td>
            <td>   <asp:TextBox ID="txtBienesTransp" runat="server" CssClass="form-control2"  Width="72px"
                    ></asp:TextBox>
           </td>
@@ -1652,7 +1599,7 @@ Enabled="True" TargetControlID="txtNumTotalMercancias" FilterType="Numbers">
            <td>   <asp:TextBox ID="txtClaveSTCC" runat="server" CssClass="form-control2" Width="72px"
                    ></asp:TextBox>
           </td>
-             <td  style="text-align: right;">Descripcion:</td>
+             <td  style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Descripcion:</td>
            <td colspan="3">   <asp:TextBox ID="txtDescripcionMercancia" runat="server" 
                    CssClass="form-control2" TextMode="MultiLine" Width="242px" 
                    ></asp:TextBox>
@@ -1661,7 +1608,21 @@ Enabled="True" TargetControlID="txtNumTotalMercancias" FilterType="Numbers">
           <td></td>
            </tr>
            <tr>
-            <td style="text-align: right;">
+           <td></td>
+           <td> <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator73" ControlToValidate="txtBienesTransp"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarMercancias" style="font-size: medium" /></td>
+                           <td></td>
+                           <td></td>
+                           <td></td>
+                           <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator63" ControlToValidate="txtDescripcionMercancia"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarMercancias" style="font-size: medium" /></td>
+           </tr>
+           <tr>
+            <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
                          Cantidad:
                         </td>
                         <td>
@@ -1669,7 +1630,7 @@ Enabled="True" TargetControlID="txtNumTotalMercancias" FilterType="Numbers">
           <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender5" runat="server"
     TargetControlID="txtCantidadMercancia" FilterType="Custom, Numbers" ValidChars="." Enabled="True" />
     </td>
-    <td style="text-align: right;">ClaveUnidad:</td>
+    <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>ClaveUnidad:</td>
                     <td style="text-align: left;">
                     <div>    
     
@@ -1697,7 +1658,17 @@ Enabled="True" TargetControlID="txtNumTotalMercancias" FilterType="Numbers">
                  <td><asp:RegularExpressionValidator id="RegularExpressionValidator8" runat="server" Display="Dynamic" CssClass="alert-danger"
     ControlToValidate="txtCantidadMercancia" ErrorMessage="Dato invalido" 
                          ValidationExpression="[0-9]*\.?[0-9]*" 
-                         ValidationGroup="CrearFactura" style="font-size: medium"/></td>
+                         ValidationGroup="CrearFactura" style="font-size: medium"/>
+                          <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator64" ControlToValidate="txtCantidadMercancia"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarMercancias" style="font-size: medium" />
+                         </td>
+                         <td></td>
+                         <td>  <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator65" ControlToValidate="ddlClaveUnidadMercancia"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarMercancias" style="font-size: medium" /></td>
            </tr>
            <tr>
                     
@@ -2064,7 +2035,7 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
 <asp:ListItem Value="02" Text="Transporte Marítimo"></asp:ListItem>
 <asp:ListItem Value="03" Text="Transporte Aéreo"></asp:ListItem>
 <asp:ListItem Value="04" Text="Transporte Ferroviario"></asp:ListItem>
-<asp:ListItem Value="05" Text="Ducto"></asp:ListItem>
+<%--<asp:ListItem Value="05" Text="Ducto"></asp:ListItem>--%>
                 </asp:DropDownList></td>
             </tr>
             <tr>
@@ -2135,8 +2106,214 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
             </div>
             </div>
             </div>
+
+              <div style="border: solid 2px gray">
+               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbGuiasIdentificacion" Text="GuiasIdentificacion" 
+                    AutoPostBack="True" oncheckedchanged="cbGuiasIdentificacion_CheckedChanged" 
+                    style="font-weight: 700; color:Black;"/>
+		
+       
+          <div id="DivGuiasIdentificacion"  style="width:100%" runat="server" visible="False">
+        
+
+           <h1 style="text-align: center; " class="style156">
+                    <strong>GuiasIdentificacion</strong></h1>
+           <table>
+           <tr>
+           <td style="text-align: right;">
+                            <span class="style160" style="color: #FF0000">*</span> 
+    IDMercancia:</td>
+
+<td >
+        <asp:DropDownList ID="ddlIDMercancia2" runat="server" AutoPostBack="True"
+         CssClass="form-control0" Width="90px"> </asp:DropDownList>
+            </td>
+             <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span> PesoGuiaIdentificacion:</td>
+                        <td>
+                           <asp:TextBox ID="txtPesoGuiaIdentificacion" runat="server" CssClass="form-control2" Width="72px" />
+          <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender24" runat="server"
+    TargetControlID="txtPesoGuiaIdentificacion" FilterType="Custom, Numbers" ValidChars="." Enabled="True" />
+    </td>
+       <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
+       NumeroGuiaIdentificacion:</td>
+                  <td>
+                      <asp:TextBox ID="txtNumeroGuiaIdentificacion" runat="server" CssClass="form-control2" Width="72px" />
+          </td>
+                  
+            </tr>
+            <tr>
+            <td></td>
+            <td>                  <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator69" ControlToValidate="ddlIDMercancia2"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarGuiasIdentificacion" style="font-size: medium" /></td>
+            <td></td>
+             <td>    <asp:RegularExpressionValidator id="RegularExpressionValidator24" 
+            runat="server" Display="Dynamic" CssClass="alert-danger"
+    ControlToValidate="txtPesoGuiaIdentificacion" ErrorMessage="Dato invalido" 
+                         ValidationExpression="[0-9]*\.?[0-9]*" 
+                         ValidationGroup="AgregarGuiasIdentificacion" style="font-size: medium"/>
+                         <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator66" ControlToValidate="txtPesoGuiaIdentificacion"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarGuiasIdentificacion" style="font-size: medium" /></td>
+           <td></td>
+           <td>      <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator67" ControlToValidate="txtNumeroGuiaIdentificacion"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarGuiasIdentificacion" style="font-size: medium" /></td>
+                           <td></td>
+                          
+            </tr>
+            <tr>
+             <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
+       DescripGuiaIdentificacion:</td>
+                  <td colspan="4">
+                      <asp:TextBox ID="txtDescripGuiaIdentificacion" runat="server" CssClass="form-control2" TextMode="MultiLine" Width="100%" />
+          </td>  
+            
+            </tr>
+
+            <tr>
+            <td></td>
+             <td> <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator68" ControlToValidate="txtDescripGuiaIdentificacion"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarGuiasIdentificacion" style="font-size: medium" /></td>
+             <td></td>
+            <td></td>
+            <td></td> <td></td>
+              <td><asp:Button runat="server" ID="Button5" Text="Agregar GuiasIdentificacion" 
+        ValidationGroup="AgregarGuiasIdentificacion"  class="btn btn-primary" 
+        onclick="AgregarGuiasIdentificacion_Click" Width="133px"/></td>
+          </tr>
+            </table>
+      
+             <div style="height: 100%; overflow-y: scroll" >
+                <asp:GridView runat="server" ID="gvGuiasIdentificacion" AutoGenerateColumns="False"  CssClass="style124" Width="100%" HorizontalAlign="Center"
+                    ShowHeaderWhenEmpty="True" OnRowCommand="gvGuiasIdentificacion_RowCommand">
+                    <Columns>
+                      <asp:BoundField HeaderText="Mercancia" DataField="id" >
+                       
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                       
+                        <asp:BoundField HeaderText="NumeroGuiaIdentificacion" DataField="NumeroGuiaIdentificacion" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="PesoGuiaIdentificacion" DataField="PesoGuiaIdentificacion" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="DescripGuiaIdentificacion" DataField="DescripGuiaIdentificacion" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:ButtonField Text="Eliminar" CommandName="EliminarGuiasIdentificacion" Visible="False" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:ButtonField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+            </div>
+            </div>
+            
+             <div style="border: solid 2px gray">
+               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbPedimentos" Text="Pedimentos" 
+                    AutoPostBack="True" oncheckedchanged="cbPedimentos_CheckedChanged" 
+                    style="font-weight: 700; color:Black;"/>
+		
+       
+          <div id="DivcbPedimentos"  style="width:100%" runat="server" visible="False">
+        
+
+           <h1 style="text-align: center; " class="style156">
+                    <strong>Pedimentos</strong></h1>
+           <table>
+           <tr>
+           <td style="text-align: right;">
+                            <span class="style160" style="color: #FF0000">*</span> 
+    IDMercancia:</td>
+
+<td >
+        <asp:DropDownList ID="ddlIDMercancia3" runat="server" AutoPostBack="True"
+         CssClass="form-control0" Width="90px"> </asp:DropDownList>
+            </td>
+             <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span> Pedimento:</td>
+                        <td>
+                           <asp:TextBox ID="txtPedimento" runat="server" CssClass="form-control2" />
+         
+    </td>
+            </tr>
+            <tr>
+            <td></td>
+            <td>                  <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator70" ControlToValidate="ddlIDMercancia3"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarPedimento" style="font-size: medium" /></td>
+            <td></td>
+             <td>    
+                         <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           ID="RequiredFieldValidator71" ControlToValidate="txtPedimento"
+                            Display="Dynamic" ErrorMessage="* Requerido" 
+                           ValidationGroup="AgregarPedimento" style="font-size: medium" /></td>
+                                    
+            </tr>
+            
+
+            <tr>
+            <td></td>
+             <td></td><td></td>
+             <td></td><td></td>
+              <td><asp:Button runat="server" ID="Button7" Text="Agregar Pedimento" 
+        ValidationGroup="AgregarPedimento"  class="btn btn-primary" 
+        onclick="AgregarPedimento_Click" Width="133px"/></td>
+          </tr>
+            </table>
+      
+             <div style="height: 100%; overflow-y: scroll" >
+                <asp:GridView runat="server" ID="gvPedimento" AutoGenerateColumns="False"  CssClass="style124" Width="70%" HorizontalAlign="Center"
+                    ShowHeaderWhenEmpty="True" OnRowCommand="gvPedimento_RowCommand">
+                    <Columns>
+                      <asp:BoundField HeaderText="Mercancia" DataField="id" >
+                       
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                       
+                        <asp:BoundField HeaderText="Pedimento" DataField="Pedimento" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                    
+                        <asp:ButtonField Text="Eliminar" CommandName="EliminarPedimento" Visible="False" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:ButtonField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+            </div>
+            </div>
+
+
+
             <br />
 
+
+         
+     
+          </ContentTemplate>
+          </asp:UpdatePanel>
+
+               </ContentTemplate>
+            </asp:TabPanel>
+     
+       <asp:TabPanel ID="TabPanel3" runat="server"  HeaderText="Transporte" CssClass="page1" >
+                <HeaderTemplate>Transporte</HeaderTemplate>
+                <ContentTemplate>
+                
+                   <asp:UpdatePanel ID="UpdatePanel3" runat="server"  UpdateMode="Conditional"  >
+               <ContentTemplate>
+
+                <h1 style="text-align: center; " class="style156">
+                <strong>Transporte</strong></h1>
+            
                  <div style="border: solid 2px gray">
                &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbAutotransporteFederal" Text="AutotransporteFederal" 
                     AutoPostBack="True" oncheckedchanged="cbAutotransporteFederal_CheckedChanged" 
@@ -2364,8 +2541,8 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>NumPermisoSCT:</td>
                       <td>   <asp:TextBox ID="txtNumPermisoSCT" runat="server" CssClass="form-control2"    MaxLength="50"></asp:TextBox>
                       </td>
-                          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>NombreAseg:</td>
-                      <td>   <asp:TextBox ID="txtNombreAseg" runat="server" CssClass="form-control2"    MaxLength="50"></asp:TextBox>
+                          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>AseguraRespCivil:</td>
+                      <td>   <asp:TextBox ID="txtAseguraRespCivil" runat="server" CssClass="form-control2"    MaxLength="50"></asp:TextBox>
                       </td>
                     
                 </tr>
@@ -2379,22 +2556,54 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                            ValidationGroup="CrearFactura" style="font-size: medium" /></td>
                            <td></td>
                            <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator24" ControlToValidate="txtNombreAseg" 
+                           ID="RequiredFieldValidator24" ControlToValidate="txtAseguraRespCivil" 
                             Display="Dynamic" ErrorMessage="* Requerido" 
                            ValidationGroup="CrearFactura" style="font-size: medium" /></td>
                         
                 </tr>
                 <tr>
-                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>NumPolizaSeguro:</td>
-                      <td>   <asp:TextBox ID="txtNumPolizaSeguro" runat="server" CssClass="form-control2"    MaxLength="30"></asp:TextBox>
+                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>PolizaRespCivil:</td>
+                      <td>   <asp:TextBox ID="txtPolizaRespCivil" runat="server" CssClass="form-control2"    MaxLength="30"></asp:TextBox>
                       </td>
+                      <td style="text-align: right;">AseguraMedAmbiente:</td>
+                      <td>   <asp:TextBox ID="txtAseguraMedAmbiente" runat="server" CssClass="form-control2"    MaxLength="50"></asp:TextBox>
+                      </td>
+                      <td style="text-align: right;">PolizaMedAmbiente:</td>
+                      <td>   <asp:TextBox ID="txtPolizaMedAmbiente" runat="server" CssClass="form-control2"    MaxLength="30"></asp:TextBox>
+                      </td>
+
                 </tr>
                 <tr>
                    <td></td>
                            <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator25" ControlToValidate="txtNumPolizaSeguro" 
+                           ID="RequiredFieldValidator25" ControlToValidate="txtPolizaRespCivil" 
                             Display="Dynamic" ErrorMessage="* Requerido" 
                            ValidationGroup="CrearFactura" style="font-size: medium" /></td>
+                </tr>
+                <tr>
+                <td style="text-align: right;">AseguraCarga:</td>
+                      <td>   <asp:TextBox ID="txtAseguraCarga" runat="server" CssClass="form-control2"    MaxLength="50"></asp:TextBox>
+                      </td>
+                      <td style="text-align: right;">PolizaCarga:</td>
+                      <td>   <asp:TextBox ID="txtPolizaCarga" runat="server" CssClass="form-control2"    MaxLength="30"></asp:TextBox>
+                      </td>
+                      <td style="text-align: right;">PrimaSeguro:</td>
+                      <td>   <asp:TextBox ID="txtPrimaSeguro" runat="server" CssClass="form-control2"  ></asp:TextBox>
+                       <asp:FilteredTextBoxExtender ID="FilteredTextBoxExtender25" runat="server"
+            TargetControlID="txtPrimaSeguro" FilterType="Custom, Numbers" 
+        ValidChars="." Enabled="True" />
+                      </td>
+                </tr>
+                <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td> <asp:RegularExpressionValidator id="RegularExpressionValidator25" runat="server" Display="Dynamic" CssClass="alert-danger"
+    ControlToValidate="txtPrimaSeguro" ErrorMessage="Dato invalido" 
+                         ValidationExpression="[0-9]*\.?[0-9]*" 
+                         ValidationGroup="CrearFactura" style="font-size: medium"/></td>
                 </tr>
                 </table>
                 
@@ -2445,7 +2654,7 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                 <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator26" ControlToValidate="txtMatriculaContenedor" 
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarContenedor" style="font-size: medium" /></td>
+                           ValidationGroup="AgregarContenedorM" style="font-size: medium" /></td>
                 </tr>
                            <tr>
                            <td></td>
@@ -2454,7 +2663,7 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       <td></td>
                      <td></td>
             <td style="text-align: right;" >   <asp:Button runat="server" ID="btnContenedor" Text="Agregar Contenedor" 
-        ValidationGroup="AgregarContenedor"  class="btn btn-primary" 
+        ValidationGroup="AgregarContenedorM"  class="btn btn-primary" 
         onclick="btnContenedor_Click" Width="133px"/>
         
         </td>
@@ -2530,12 +2739,11 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       <td>   <asp:TextBox ID="txtTransporteMaritimNumPolizaSeguro" runat="server" CssClass="form-control2"    MaxLength="30"></asp:TextBox>
                       </td>
                         <td style="text-align: right;">
-                           TipoEmbarcacion:
+                           <span class="style160" style="color: #FF0000">*</span>TipoEmbarcacion:
                         </td>
                         <td>
                         <asp:DropDownList runat="server" ID="ddlTipoEmbarcacion" style="margin-left: 0px" CssClass="form-control2"  Width="180px">
-                           <asp:ListItem runat="server" Text="Seleccionar" Value="00"></asp:ListItem>
-                      <asp:ListItem runat="server" Value="B01" Text="Abastecedor" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="B01" Text="Abastecedor" ></asp:ListItem>
                         <asp:ListItem runat="server" Value="B02" Text="Barcaza" ></asp:ListItem>
                         <asp:ListItem runat="server" Value="B03" Text="Granelero" ></asp:ListItem>
                         <asp:ListItem runat="server" Value="B04" Text="Porta Contenedor" ></asp:ListItem>
@@ -2869,9 +3077,12 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>numPermisoSCT:</td>
                       <td>   <asp:TextBox ID="txtTransporteAereoNumConocEmbarc" runat="server" CssClass="form-control2" MaxLength="50"></asp:TextBox>
                       </td>
-                           <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>MatriculaAeronave:</td>
-                      <td>   <asp:TextBox ID="txtMatriculaAeronave" runat="server" CssClass="form-control2" MaxLength="50"></asp:TextBox>
-                      </td>
+                         <td style="text-align: right;">ResidenciaFiscalEmbarc:</td>
+           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalEmbarc" runat="server"  CausesValidation="false" 
+            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
+            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
+        </cc1:DropDownListChosen></td>
+                       
                 </tr>
                 <tr>
                 <td></td>
@@ -2882,10 +3093,10 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                             Display="Dynamic" ErrorMessage="* Requerido" 
                            ValidationGroup="CrearFactura" style="font-size: medium" /></td>
                            <td></td>
-                           <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           <td><%--<asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator33" ControlToValidate="txtMatriculaAeronave"
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="CrearFactura" style="font-size: medium" /></td>
+                           ValidationGroup="CrearFactura" style="font-size: medium" />--%></td>
                 </tr>
                 <tr>
                   <td style="text-align: right;">NombreAseg:</td>
@@ -2912,9 +3123,6 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                 <tr>
                    <td style="text-align: right;">LugarContrato:</td>
                       <td>   <asp:TextBox ID="txtLugarContrato" runat="server" CssClass="form-control2" MaxLength="120"></asp:TextBox>
-                      </td>
-                       <td style="text-align: right;">RFCTransportista:</td>
-                      <td>   <asp:TextBox ID="txtRFCTransportista" runat="server" CssClass="form-control2" MaxLength="13"></asp:TextBox>
                       </td>
                          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
                            CodigoTransportista:
@@ -3079,39 +3287,23 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
  <asp:ListItem runat="server" Value="CA156" Text="Volaris (Concesionaria Vuela Cia De Aviación)" ></asp:ListItem>
                         </asp:DropDownList>
                         </td>
-
-                </tr>
-                <tr>
-                 <td style="text-align: right;">NumRegIdTribTranspor:</td>
-                      <td>   <asp:TextBox ID="txtNumRegIdTribTranspor" runat="server" CssClass="form-control2" MaxLength="40"></asp:TextBox>
-                      </td>
-                     <td style="text-align: right;">ResidenciaFiscalTranspor:</td>
-           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalTranspor" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-          <td style="text-align: right;">NombreTransportista:</td>
-                      <td>   <asp:TextBox ID="txtNombreTransportista" runat="server" CssClass="form-control2" MaxLength="254"></asp:TextBox>
-                      </td>
-                </tr>
-                <tr>
-                   <td style="text-align: right;">RFCEmbarcador:</td>
+                         <td style="text-align: right;">RFCEmbarcador:</td>
                       <td>   <asp:TextBox ID="txtRFCEmbarcador" runat="server" CssClass="form-control2" MaxLength="13"></asp:TextBox>
                       </td>
+                </tr>
+              
+                <tr>
+                  
                        <td style="text-align: right;">NumRegIdTribEmbarc:</td>
                       <td>   <asp:TextBox ID="txtNumRegIdTribEmbarc" runat="server" CssClass="form-control2" MaxLength="40"></asp:TextBox>
                       </td>
-                    <td style="text-align: right;">ResidenciaFiscalEmbarc:</td>
-           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalEmbarc" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-                </tr>
-                <tr>
-                  <td style="text-align: right;">NombreEmbarcador:</td>
+                 
+        <td style="text-align: right;">NombreEmbarcador:</td>
                       <td>   <asp:TextBox ID="txtNombreEmbarcador" runat="server" CssClass="form-control2" MaxLength="254"></asp:TextBox>
                       </td>
-                
+                          <td style="text-align: right;">MatriculaAeronave:</td>
+                      <td>   <asp:TextBox ID="txtMatriculaAeronave" runat="server" CssClass="form-control2" MaxLength="50"></asp:TextBox>
+                      </td>
                 </tr>
                 </table> 
          </div>
@@ -3149,9 +3341,14 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       </td>
                       </tr>
                       <tr>
-                         <td style="text-align: right;">Concesionario:</td>
-                      <td>   <asp:TextBox ID="txtConcesionario" runat="server" CssClass="form-control2" MaxLength="13"></asp:TextBox>
-                      </td>
+                         <td style="text-align: right;">TipoDeTrafico:</td>
+                      <td>   <asp:DropDownList runat="server" ID="ddlTipoDeTrafico" style="margin-left: 0px" CssClass="form-control2"  Width="180px">
+                        <asp:ListItem runat="server" Value="TT01" Text="Tráfico local" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="TT02" Text="Tráfico interlineal remitido" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="TT03" Text="Tráfico interlineal recibido" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="TT04" Text="Tráfico interlineal en tránsito" ></asp:ListItem>
+                         </asp:DropDownList>
+                              </td>
                 </tr>
                 </table> 
 
@@ -3405,7 +3602,8 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
             runat="server" Display="Dynamic" CssClass="alert-danger"
     ControlToValidate="txtToneladasNetasCarro" ErrorMessage="Dato invalido" 
                          ValidationExpression="[0-9]*\.?[0-9]*" 
-                         ValidationGroup="AgregarCarro" style="font-size: medium"/><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                         ValidationGroup="AgregarCarro" style="font-size: medium"/><asp:RequiredFieldValidator runat="server"  
+                         CssClass="alert-error"
                            ID="RequiredFieldValidator38" ControlToValidate="txtToneladasNetasCarro"
                             Display="Dynamic" ErrorMessage="* Requerido" 
                            ValidationGroup="AgregarCarro" style="font-size: medium" /></td>
@@ -3571,14 +3769,15 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
 
 
          </div>
-     </div>
-     
-          </ContentTemplate>
-          </asp:UpdatePanel>
+</div>
+<br />
+</ContentTemplate>
+</asp:UpdatePanel>
 
-               </ContentTemplate>
-            </asp:TabPanel>
-     
+</ContentTemplate>
+</asp:TabPanel>
+
+
        <asp:TabPanel ID="TabPanel2" runat="server"  HeaderText="FiguraTransporte" CssClass="page1" >
                 <HeaderTemplate>FiguraTransporte</HeaderTemplate>
                 <ContentTemplate>
@@ -3588,59 +3787,42 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
               
                   <h1 style="text-align: center; " class="style156">
                 <strong>FiguraTransporte</strong></h1>
-            <table>
-            <tr>
-            <td></td>
-            <td><asp:CheckBox runat="server" ID="cbFiguraTransporte" Text="FiguraTransporte" Checked="false"
-                    AutoPostBack="True" oncheckedchanged="cbcbFiguraTransporte_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/></td>
-            </tr>
-            <tr>
-            <td></td>
-               <td style="text-align: right;">
-                            CveTransporte:
-                        </td>
-                        <td> <asp:DropDownList runat="server" ID="ddlCveTransporte"  Enabled="false" 
-                                    style="margin-left: 0px"  CssClass="form-control2">                  
-   <asp:ListItem runat="server" Value="01" Text="Autotransporte Federal"></asp:ListItem>
-   <asp:ListItem runat="server" Value="02" Text="Transporte Marítimo"></asp:ListItem>
-      <asp:ListItem runat="server" Value="03" Text="Transporte Aéreo"></asp:ListItem>
-   <asp:ListItem runat="server" Value="04" Text="Transporte Ferroviario"></asp:ListItem>
-      <asp:ListItem runat="server" Value="05" Text="Ducto"></asp:ListItem>
-   </asp:DropDownList>
-                        </td>
-            </tr>
-            </table>
-
-
-              <div style="border: solid 2px gray">
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbOperador" Text="Operador"  Enabled="false" 
-                    AutoPostBack="True" oncheckedchanged="cbOperador_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
+            
        
-                <div id="DivOperador"  style="width:100%" runat="server" visible="False">
-                 <h1 style="text-align: center; " class="style156">
-                <strong>Operador</strong></h1>
+                <div id="DivOperador"  style="width:100%" runat="server" >
+          
                 <table>
                 <tr>
-                       <td style="text-align: right;">RFCOperador:</td>
-                      <td>   <asp:TextBox ID="txtRFCOperador" runat="server" CssClass="form-control2"  MaxLength="13"></asp:TextBox>
+                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
+                           TipoFigura:
+                        </td>
+                        <td>
+                        <asp:DropDownList runat="server" ID="ddlTipoFigura" style="margin-left: 0px" CssClass="form-control2"  Width="180px">
+                        <asp:ListItem runat="server" Value="01" Text="Operador" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="02" Text="Propietario" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="03" Text="Arrendador" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="04" Text="Notificado" ></asp:ListItem>
+                              </asp:DropDownList>
+                        </td>
+             <td style="text-align: right;">RFCFigura:</td>
+                      <td>   <asp:TextBox ID="txtRFCFigura" runat="server" CssClass="form-control2"  MaxLength="13"></asp:TextBox>
                       </td>
                         <td style="text-align: right;">NumLicencia:</td>
                       <td>   <asp:TextBox ID="txtNumLicencia" runat="server" CssClass="form-control2"  MaxLength="16"></asp:TextBox>
                       </td>
-                             <td style="text-align: right;">NombreOperador:</td>
-                      <td>   <asp:TextBox ID="txtNombreOperador" runat="server" CssClass="form-control2"  MaxLength="254"></asp:TextBox>
+                <td></td>
+                </tr>
+                <tr>
+                       
+                             <td style="text-align: right;">NombreFigura:</td>
+                      <td>   <asp:TextBox ID="txtNombreFigura" runat="server" CssClass="form-control2"  MaxLength="254"></asp:TextBox>
                       </td>
-                     </tr>
-                     <tr>
-                             <td style="text-align: right;">NumRegIdTribOperador:</td>
-                      <td>   <asp:TextBox ID="txtNumRegIdTribOperador" runat="server" CssClass="form-control2"  MaxLength="40"></asp:TextBox>
+                                <td style="text-align: right;">NumRegIdTribFigura:</td>
+                      <td>   <asp:TextBox ID="txtNumRegIdTribFigura" runat="server" CssClass="form-control2"  MaxLength="40"></asp:TextBox>
                       </td>
                      
-                      <td style="text-align: right;">ResidenciaFiscalOperador:</td>
-           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalOperador" runat="server"  CausesValidation="false" 
+                      <td style="text-align: right;">ResidenciaFiscalFigura:</td>
+           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalFigura" runat="server"  CausesValidation="false" 
             NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
             DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
         </cc1:DropDownListChosen></td>
@@ -3684,12 +3866,12 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator57" ControlToValidate="ddlPaisOperador"
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarOperador" style="font-size: medium" /></td>
+                           ValidationGroup="FiguraTransporte" style="font-size: medium" /></td>
                       <td></td>
                       <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator42" ControlToValidate="txtEstadoOperador"
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarOperador" style="font-size: medium" /></td>
+                           ValidationGroup="FiguraTransporte" style="font-size: medium" /></td>
                            <td></td>
                            <td></td>
                       </tr>
@@ -3717,7 +3899,7 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator43" ControlToValidate="txtCodigoPostalOperador"
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarOperador" style="font-size: medium" /></td>
+                           ValidationGroup="FiguraTransporte" style="font-size: medium" /></td>
 
                       </tr>
                       <tr>
@@ -3732,7 +3914,7 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       </td>
                       </tr>
                       <tr>
-                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Calle:</td>
+                      <td style="text-align: right;">Calle:</td>
                       <td>   <asp:TextBox ID="txtCalleOperador" runat="server" CssClass="form-control2" Width="250px"  MaxLength="100"></asp:TextBox>
                       </td>
                       
@@ -3740,10 +3922,10 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                       <tr>
                      <td></td>
                      <td>
-                           <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
+                           <%--<asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
                            ID="RequiredFieldValidator41" ControlToValidate="txtCalleOperador"
                             Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarOperador" style="font-size: medium" />
+                           ValidationGroup="FiguraTransporte" style="font-size: medium" />--%>
                            </td> </tr>
                 </table>
                 </div>
@@ -3752,9 +3934,9 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
 
                       <table width="90%" >
           <tr>
-            <td style="text-align: right;" ><div style="width=100%; ">  <asp:Button runat="server" ID="btnOperador" Text="Agregar Operador" 
-        ValidationGroup="AgregarOperador"  class="btn btn-primary" 
-        onclick="btnOperador_Click" Width="133px"/>
+            <td style="text-align: right;" ><div style="width=100%; ">  <asp:Button runat="server" ID="btnFiguraTransporte" 
+            Text="Agregar FiguraTransporte"  ValidationGroup="FiguraTransporte"  class="btn btn-primary" 
+        onclick="btnFiguraTransporte_Click" Width="133px"/>
         </div>
         </td>
         <td></td>
@@ -3763,26 +3945,29 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
 
 
                  <div style="height: 100%; overflow-y: scroll" >
-                <asp:GridView runat="server" ID="gvOperador" AutoGenerateColumns="False"  CssClass="style124" Width="100%" 
-                HorizontalAlign="Center"   ShowHeaderWhenEmpty="True" OnRowCommand="gvOperador_RowCommand">
+                <asp:GridView runat="server" ID="gvFiguraTransporte" AutoGenerateColumns="False"  CssClass="style124" Width="100%" 
+                HorizontalAlign="Center"   ShowHeaderWhenEmpty="True" OnRowCommand="gvFiguraTransporte_RowCommand">
                     <Columns>
-                      <asp:BoundField HeaderText="Operador" DataField="id" Visible="false">
+                      <asp:BoundField HeaderText="FiguraTransporte" DataField="id" Visible="false">
                        
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                          <asp:BoundField HeaderText="RFCO" DataField="rFCOperador" >
+                          <asp:BoundField HeaderText="TipoFigura" DataField="TipoFigura" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="Nombre" DataField="nombreOperador" >
+                        <asp:BoundField HeaderText="RFCFigura" DataField="RFCFigura" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="NumRegIdTrib" DataField="numRegIdTribOperador" >
+                        <asp:BoundField HeaderText="NumLicencia" DataField="NumLicencia" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                          <asp:BoundField HeaderText="ResidenciaFiscal" DataField="residenciaFiscalOperador" >
+                          <asp:BoundField HeaderText="NombreFigura" DataField="NombreFigura" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                        <asp:BoundField HeaderText="Estado" DataField="estado" >
+                        <asp:BoundField HeaderText="NumRegIdTrib" DataField="NumRegIdTribFigura" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:BoundField HeaderText="ResidenciaFiscal" DataField="ResidenciaFiscalFigura" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
                         <asp:BoundField HeaderText="Pais" DataField="pais" >
@@ -3791,7 +3976,7 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                           <asp:BoundField HeaderText="CP" DataField="codigoPostal" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:BoundField>
-                          <asp:ButtonField Text="Eliminar" CommandName="EliminarOperador" Visible="False" >
+                          <asp:ButtonField Text="Eliminar" CommandName="EliminarFigura" Visible="False" >
                         <ItemStyle HorizontalAlign="Center" />
                         </asp:ButtonField>
                     </Columns>
@@ -3800,567 +3985,91 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
 
 
                 </div>
-                </div>
-
-                 <div style="border: solid 2px gray">
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbPropietario" Text="Propietario"  Enabled="false" 
-                    AutoPostBack="True" oncheckedchanged="cbPropietario_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-                <div id="DivPropietario"  style="width:100%" runat="server" visible="False">
-                 <h1 style="text-align: center; " class="style156">
-                <strong>Propietario</strong></h1>
-                <table>
-                <tr>
-                       <td style="text-align: right;">RFCPropietario:</td>
-                      <td>   <asp:TextBox ID="txtRFCPropietario" runat="server" CssClass="form-control2"  MaxLength="13"></asp:TextBox>
-                      </td>
-                       <td style="text-align: right;">NombrePropietario:</td>
-                      <td>   <asp:TextBox ID="txtNombrePropietario" runat="server" CssClass="form-control2"  MaxLength="254"></asp:TextBox>
-                      </td>
-                     
-                             <td style="text-align: right;">NumRegIdTribPropietario:</td>
-                      <td>   <asp:TextBox ID="txtNumRegIdTribPropietario" runat="server" CssClass="form-control2"  MaxLength="40"></asp:TextBox>
-                      </td>
-                     </tr>
-                     <tr>
-                      <td style="text-align: right;">ResidenciaFiscalPropietario:</td>
-           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalPropietario" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-                     </tr>
-                </table>
-
-                   <div style="width:100%;align-items: center;display: flex; justify-content: center;">
+              <div style="width:100%;align-items: center;display: flex; justify-content: center;">
                  <div style="border: solid 2px gray; width:90%" >
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbDomicilioPropietario" Text="Domicilio" 
-                    AutoPostBack="True" oncheckedchanged="cbDomicilioPropietario_CheckedChanged" 
+               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbPartesTransporte" Text="PartesTransporte" 
+                    AutoPostBack="True" oncheckedchanged="cbPartesTransporte_CheckedChanged" 
                     style="font-weight: 700; color:Black;"/>
 		
        
-                <div id="DivdomicilioPropietario"  style="width:100%;" runat="server" visible="False">
+          <div id="DivPartesTransporte"  style="width:100%;" runat="server" visible="False">
         
 
                  <h1 style="text-align: center; " class="style156">
-                <strong>Domicilio</strong></h1>
+                <strong>PartesTransporte</strong></h1>
                 <table>
-                 <tr>
-                 <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Pais:</td>
-           <td><cc1:DropDownListChosen ID="ddlPaisPropietario" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true"  onselectedindexchanged="ddlPaisPropietario_SelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-                          <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Estado:</td>
-                      <td>   <asp:TextBox ID="txtEstadoPropietario" runat="server" CssClass="form-control2"  MaxLength="30"></asp:TextBox>
-                       <asp:DropDownList ID="dllEstadoPropietario" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True"  onselectedindexchanged="dllEstadoPropietario_SelectedIndexChanged">
-               </asp:DropDownList>
-                      </td>
-                       
-          <td style="text-align: right;">Municipio:</td>
-                      <td>   <asp:TextBox ID="txtMunicipioPropietario" runat="server" CssClass="form-control2"  MaxLength="120"></asp:TextBox>
-                          <asp:DropDownList ID="ddlMunicipioPropietario" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True" >
-               </asp:DropDownList>
-                      </td>
-                      </tr>
-                      <tr>
-                      <td></td>
-                      <td>   <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator58" ControlToValidate="ddlPaisPropietario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarPropietario" style="font-size: medium" /></td>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator45" ControlToValidate="txtEstadoPropietario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarPropietario" style="font-size: medium" /></td>
-                           <td></td>
-                           <td>
+                <tr>
+                 <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
+                           FiguraTransporte:
                         </td>
-                          
-                      </tr>
-                     
-                <tr>
-                         <td style="text-align: right;">Localidad:</td>
-                      <td>   <asp:TextBox ID="txtLocalidadPropietario" runat="server" CssClass="form-control2"  MaxLength="120"></asp:TextBox>
-                   <asp:DropDownList ID="dllLocalidadPropietario" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True" >
-               </asp:DropDownList>
-                      </td>
-                              <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>CodigoPostal:</td>
-                      <td>   <asp:TextBox ID="txtCodigoPostalPropietario" runat="server" CssClass="form-control2"  MaxLength="12"></asp:TextBox>
-                      </td>
-                
-                                 <td style="text-align: right;">Referencia:</td>
-                      <td>   <asp:TextBox ID="txtReferenciaPropietario" runat="server" CssClass="form-control2"  MaxLength="250"></asp:TextBox>
-                      </td>
-                      </tr>
-                      <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator46" ControlToValidate="txtCodigoPostalPropietario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarPropietario" style="font-size: medium" />
-                           </td>
-
-                      </tr>
-                      <tr>
-                             <td style="text-align: right;">Colonia:</td>
-                      <td>   <asp:TextBox ID="txtColoniaPropietario" runat="server" CssClass="form-control2" Width="250px"  MaxLength="120"></asp:TextBox>
-                      </td>
-                   
-                            <td style="text-align: right;">NumeroExterior:</td>
-                      <td>   <asp:TextBox ID="txtNumeroExteriorPropietario" runat="server" CssClass="form-control2"  MaxLength="55"></asp:TextBox>
-                      </td>
-                                 <td style="text-align: right;">NumeroInterior:</td>
-                      <td>   <asp:TextBox ID="txtNumeroInteriorPropietario" runat="server" CssClass="form-control2"  MaxLength="55"></asp:TextBox>
-                      </td>
-                                  
-                        </tr>
-                      <tr>
-                  
-                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Calle:</td>
-                      <td>   <asp:TextBox ID="txtCallePropietario" runat="server" CssClass="form-control2" Width="250px"  MaxLength="100"></asp:TextBox>
-                      </td>    
-                      </tr>
-                      <tr>
-                     <td></td>
-                     <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator44" ControlToValidate="txtCallePropietario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarPropietario" style="font-size: medium" /></td> </tr>
+                 <td>    <asp:DropDownList ID="ddlFiguraTransporte" runat="server" AutoPostBack="True" Width="90px" CssClass="form-control0" >
+                        </asp:DropDownList></td>
+                  <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>
+                           ParteTransporte:
+                        </td>
+                        <td>
+                        <asp:DropDownList runat="server" ID="ddlParteTransporte" style="margin-left: 0px" CssClass="form-control2"  Width="180px">
+                        <asp:ListItem runat="server" Value="PT01" Text="Camión unitario" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT02" Text="Camión" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT03" Text="Tractocamión" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT04" Text="Remolque" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT05" Text="Semirremolque" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT06" Text="Vehículo ligero de carga" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT07" Text="Grúa" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT08" Text="Aeronave" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT09" Text="Barco o buque" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT10" Text="Carro o vagón" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT11" Text="Contenedor" ></asp:ListItem>
+                        <asp:ListItem runat="server" Value="PT12" Text="Locomotora" ></asp:ListItem>
+                        </asp:DropDownList>
+                        </td>
+                      
+               <tr>
+               <td></td>
+               <td></td>
+               </tr>   
+               <tr>
+                <td></td>
+                   <td></td>
+                   <td></td><td></td>
+                   <td></td>
+                    <td></td>                
+            <td colspan="2" style="text-align: right;"  >   <asp:Button runat="server" ID="Button6" Text="Agregar PartesTransporte" 
+        ValidationGroup="AgregarPartesTransporte"  class="btn btn-primary" 
+        onclick="btnPartesTransporte_Click" Width="133px"/>
+        
+        </td>
+              </tr>
                 </table>
+                   <div style="height: 100%; overflow-y: scroll" >
+                <asp:GridView runat="server" ID="gvPartesTransporte" AutoGenerateColumns="False"  CssClass="style124" Width="100%" 
+                HorizontalAlign="Center"   ShowHeaderWhenEmpty="True" OnRowCommand="gvPartesTransporte_RowCommand">
+                    <Columns>
+                      <asp:BoundField HeaderText="FiguraTransporte" DataField="id" >
+                       
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                        <asp:BoundField HeaderText="ParteTransporte" DataField="ParteTransporte" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:BoundField>
+                         <asp:ButtonField Text="Eliminar" CommandName="EliminarPartesTransporte" Visible="False" >
+                        <ItemStyle HorizontalAlign="Center" />
+                        </asp:ButtonField>
+                    </Columns>
+                </asp:GridView>
+            </div>
+
+
+
                 </div>
                 </div>
-                </div>
-                                  
-                  <table width="90%" >
-          <tr>
-            <td style="text-align: right;" ><div style="width=100%; ">  <asp:Button runat="server" ID="btnPropietario" Text="Agregar Propietario" 
-        ValidationGroup="AgregarPropietario"  class="btn btn-primary" 
-        onclick="btnPropietario_Click" Width="133px"/>
         </div>
-        </td>
-        <td></td>
-          </tr>
-           </table>
-
-
-                  <div style="height: 100%; overflow-y: scroll" >
-                <asp:GridView runat="server" ID="gvPropietario" AutoGenerateColumns="False"  CssClass="style124" Width="100%" 
-                HorizontalAlign="Center"   ShowHeaderWhenEmpty="True" OnRowCommand="gvPropietario_RowCommand">
-                    <Columns>
-                      <asp:BoundField HeaderText="Propietario" DataField="id" Visible="false">
-                       
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="RFC" DataField="RFCPropietario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Nombre" DataField="NombrePropietario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="NumRegIdTrib" DataField="NumRegIdTribPropietario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="ResidenciaFiscal" DataField="ResidenciaFiscalPropietario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="Estado" DataField="estado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Pais" DataField="pais" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="CP" DataField="codigoPostal" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:ButtonField Text="Eliminar" CommandName="EliminarPropietario" Visible="False" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:ButtonField>
-                    </Columns>
-                </asp:GridView>
-            </div>
-
-
-
-                </div>
-                </div>
-
-                   <div style="border: solid 2px gray">
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbArrendatario" Text="Arrendatario"  Enabled="false"  
-                    AutoPostBack="True" oncheckedchanged="cbArrendatario_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-                <div id="DivArrendatario"  style="width:100%" runat="server" visible="False">
-                 <h1 style="text-align: center; " class="style156">
-                <strong>Arrendatario</strong></h1>
-                 <table>
-                <tr>
-                       <td style="text-align: right;">RFCArrendatario:</td>
-                      <td>   <asp:TextBox ID="txtRFCArrendatario" runat="server" CssClass="form-control2"  MaxLength="13"></asp:TextBox>
-                      </td>
-                       <td style="text-align: right;">NombreArrendatario:</td>
-                      <td>   <asp:TextBox ID="txtNombreArrendatario" runat="server" CssClass="form-control2"  MaxLength="254"></asp:TextBox>
-                      </td>
-                     
-                             <td style="text-align: right;">NumRegIdTribArrendatario:</td>
-                      <td>   <asp:TextBox ID="txtNumRegIdTribArrendatario" runat="server" CssClass="form-control2"  MaxLength="40"></asp:TextBox>
-                      </td>
-                     </tr>
-                     <tr>
-                      <td style="text-align: right;">ResidenciaFiscalArrendatario:</td>
-           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalArrendatario" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-                     </tr>
-                </table>
-
-                                   <div style="width:100%;align-items: center;display: flex; justify-content: center;">
-                 <div style="border: solid 2px gray; width:90%" >
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbDomicilioArrendatario" Text="Domicilio" 
-                    AutoPostBack="True" oncheckedchanged="cbDomicilioArrendatario_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-                <div id="DivDomicilioArrendatario"  style="width:100%;" runat="server" visible="False">
-        
-
-                 <h1 style="text-align: center; " class="style156">
-                <strong>Domicilio</strong></h1>
-                <table>
-                 <tr>
-                   <td style="text-align: right;" ><span class="style160" style="color: #FF0000">*</span>Pais:</td>
-                   <td class="style147"><cc1:DropDownListChosen ID="ddlPaisArrendatario" runat="server"  CausesValidation="false" 
-                     NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-                     DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" onselectedindexchanged="ddlPaisArrendatario_SelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" >              
-                    </cc1:DropDownListChosen></td>
-                        <td style="text-align: right;" ><span class="style160" style="color: #FF0000">*</span>Estado:</td>
-                      <td class="style147">   <asp:TextBox ID="txtEstadoArrendatario" runat="server" CssClass="form-control2"  MaxLength="30"></asp:TextBox>
-                          <asp:DropDownList ID="dllEstadoArrendatario" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True"  onselectedindexchanged="dllEstadoArrendatario_SelectedIndexChanged">
-               </asp:DropDownList>
-                      </td>
-                          <td style="text-align: right;" >Municipio:</td>
-                      <td class="style147"> <asp:TextBox ID="txtMunicipioArrendatario" runat="server" CssClass="form-control2"  MaxLength="120"></asp:TextBox>
-                          <asp:DropDownList ID="ddlMunicipioArrendatario" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True" >
-               </asp:DropDownList>
-                      </td>
-                        </tr>
-                      <tr>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator59" ControlToValidate="ddlPaisArrendatario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarArrendatario" style="font-size: medium" /></td>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator48" ControlToValidate="txtEstadoArrendatario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarArrendatario" style="font-size: medium" /></td>
-                           <td></td>
-                            <td></td>
-                     
-                      </tr>
-                    <tr>
-                     <td style="text-align: right;">Localidad:</td>
-                      <td>   <asp:TextBox ID="txtLocalidadArrendatario" runat="server" CssClass="form-control2"  MaxLength="120"></asp:TextBox>
-                       <asp:DropDownList ID="dllLocalidadArrendatario" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True" >
-               </asp:DropDownList>
-                      </td>
-                         <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>CodigoPostal:</td>
-                      <td>   <asp:TextBox ID="txtCodigoPostalArrendatario" runat="server" CssClass="form-control2"  MaxLength="12"></asp:TextBox>
-                      </td>
-                      
-                                 <td style="text-align: right;">Referencia:</td>
-                      <td>   <asp:TextBox ID="txtReferenciaArrendatario" runat="server" CssClass="form-control2"  MaxLength="250"></asp:TextBox>
-                      </td>
-                                                
-                      </tr>
-                      <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td>
-                     <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator49" ControlToValidate="txtCodigoPostalArrendatario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarArrendatario" style="font-size: medium" /></td>
-                      </tr>
-                      <tr>
-                             <td style="text-align: right;">Colonia:</td>
-                      <td>   <asp:TextBox ID="txtColoniaArrendatario" runat="server" CssClass="form-control2" Width="250px"  MaxLength="120"></asp:TextBox>
-                      </td>
-                       <td style="text-align: right;">NumeroExterior:</td>
-                      <td>   <asp:TextBox ID="txtNumeroExteriorArrendatario" runat="server" CssClass="form-control2"  MaxLength="55"></asp:TextBox>
-                      </td>
-                                 <td style="text-align: right;">NumeroInterior:</td>
-                      <td>   <asp:TextBox ID="txtNumeroInteriorArrendatario" runat="server" CssClass="form-control2"  MaxLength="55"></asp:TextBox>
-                      </td>        
-                      </tr>
-                        <tr>
-                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Calle:</td>
-                      <td>   <asp:TextBox ID="txtCalleArrendatario" runat="server" CssClass="form-control2" Width="250px"  MaxLength="100"></asp:TextBox>
-                      </td>
-                           
-                      </tr>
-                      <tr>
-                     <td></td>
-                     <td>
-                     <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator47" ControlToValidate="txtCalleArrendatario"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarArrendatario" style="font-size: medium" /></td> </tr>
-                </table>
-                </div>
-                </div>
-                </div>
-                   
-                  <table width="90%" >
-          <tr>
-            <td style="text-align: right;" ><div style="width=100%; ">  <asp:Button runat="server" ID="btnArrendatario" Text="Agregar Arrendatario" 
-        ValidationGroup="AgregarArrendatario"  class="btn btn-primary" 
-        onclick="btnArrendatario_Click" Width="133px"/>
-        </td>
-        <td></td>
-          </tr>
-           </table>
-
-                    <div style="height: 100%; overflow-y: scroll" >
-                <asp:GridView runat="server" ID="gvArrendatario" AutoGenerateColumns="False"  CssClass="style124" Width="100%" 
-                HorizontalAlign="Center"   ShowHeaderWhenEmpty="True" OnRowCommand="gvArrendatario_RowCommand">
-                    <Columns>
-                      <asp:BoundField HeaderText="Arrendatario" DataField="id" Visible="false">
-                       
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="RFC" DataField="rFCArrendatario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Nombre" DataField="nombreArrendatario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="NumRegIdTrib" DataField="numRegIdTribArrendatario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="ResidenciaFiscal" DataField="residenciaFiscalArrendatario" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                            <asp:BoundField HeaderText="Estado" DataField="estado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Pais" DataField="pais" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="CP" DataField="codigoPostal" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:ButtonField Text="Eliminar" CommandName="EliminarArrendatario" Visible="False" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:ButtonField>
-                    </Columns>
-                </asp:GridView>
-            </div>
-
-               </div>
-                </div>
-
-                  <div style="border: solid 2px gray">
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbNotificado" Text="Notificado"  Enabled="false" 
-                    AutoPostBack="True" oncheckedchanged="cbNotificado_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-                <div id="DivNotificado"  style="width:100%" runat="server" visible="False">
-                 <h1 style="text-align: center; " class="style156">
-                <strong>Notificado</strong></h1>
-              <table>
-                <tr>
-                       <td style="text-align: right;">RFCNotificado:</td>
-                      <td>   <asp:TextBox ID="txtRFCNotificado" runat="server" CssClass="form-control2"  MaxLength="13"></asp:TextBox>
-                      </td>
-                       <td style="text-align: right;">NombreNotificado:</td>
-                      <td>   <asp:TextBox ID="txtNombreNotificado" runat="server" CssClass="form-control2"  MaxLength="254"></asp:TextBox>
-                      </td>
-                     
-                             <td style="text-align: right;">NumRegIdTribNotificado:</td>
-                      <td>   <asp:TextBox ID="txtNumRegIdTribNotificado" runat="server" CssClass="form-control2"  MaxLength="40"></asp:TextBox>
-                      </td>
-                     </tr>
-                     <tr>
-                      <td style="text-align: right;">ResidenciaFiscalNotificado:</td>
-           <td><cc1:DropDownListChosen ID="ddlResidenciaFiscalNotificado" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-                     </tr>
-                </table>
-                
-                                   <div style="width:100%;align-items: center;display: flex; justify-content: center;">
-                 <div style="border: solid 2px gray; width:90%" >
-               &nbsp;&nbsp;&nbsp; <asp:CheckBox runat="server" ID="cbDomicilioNotificado" Text="Domicilio" 
-                    AutoPostBack="True" oncheckedchanged="cbDomicilioNotificado_CheckedChanged" 
-                    style="font-weight: 700; color:Black;"/>
-		
-       
-                <div id="DivDomicilioNotificado"  style="width:100%;" runat="server" visible="False">
-        
-
-                 <h1 style="text-align: center; " class="style156">
-                <strong>Domicilio</strong></h1>
-                <table>
-                <tr>
-                       <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Pais:</td>
-           <td><cc1:DropDownListChosen ID="ddlPaisNotificado" runat="server"  CausesValidation="false" 
-            NoResultsText="No hay resultados coincidentes."  Width="185px"  Height="16px"   SelectMethod=""          
-            DataPlaceHolder="Escriba aquí..." AllowSingleDeselect="true" onselectedindexchanged="ddlPaisNotificado_SelectedIndexChanged" AutoPostBack="True" AppendDataBoundItems="True" >              
-        </cc1:DropDownListChosen></td>
-                              <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Estado:</td>
-                      <td>   <asp:TextBox ID="txtEstadoNotificado" runat="server" CssClass="form-control2"  MaxLength="30"></asp:TextBox>
-                      <asp:DropDownList ID="dllEstadoNotificado" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True"  onselectedindexchanged="dllEstadoNotificado_SelectedIndexChanged">
-               </asp:DropDownList>
-                      </td>
-                            <td style="text-align: right;">Municipio:</td>
-                      <td>   <asp:TextBox ID="txtMunicipioNotificado" runat="server" CssClass="form-control2"  MaxLength="120"></asp:TextBox>
-                           <asp:DropDownList ID="ddlMunicipioNotificado" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True" >
-               </asp:DropDownList>   </td>
-                     
-                      </tr>
-                      <tr>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator60" ControlToValidate="ddlPaisNotificado"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarNotificado" style="font-size: medium" /></td>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator51" ControlToValidate="txtEstadoNotificado"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarNotificado" style="font-size: medium" /></td>
-                           <td></td>
-                           <td></td>
-                      </tr>
-                      
-                <tr>
-                <td style="text-align: right;">Localidad:</td>
-                      <td>   <asp:TextBox ID="txtLocalidadNotificado" runat="server" CssClass="form-control2"  MaxLength="120"></asp:TextBox>
-                     <asp:DropDownList ID="dllLocalidadNotificado" runat="server" CssClass="form-control2" Width="180px" 
-                  style="margin-left: 0px" AutoPostBack="True" >
-               </asp:DropDownList> 
-                      </td>
-                     <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>CodigoPostal:</td>
-                      <td>   <asp:TextBox ID="txtCodigoPostalNotificado" runat="server" CssClass="form-control2"  MaxLength="12"></asp:TextBox>
-                      </td>
-                                          <td style="text-align: right;">Referencia:</td>
-                      <td>   <asp:TextBox ID="txtReferenciaNotificado" runat="server" CssClass="form-control2"  MaxLength="250"></asp:TextBox>
-                      </td>
-                           
-                      </tr>
-                      <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td><asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator52" ControlToValidate="txtCodigoPostalNotificado"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarNotificado" style="font-size: medium" /></td>
-
-                      </tr>
-                      <tr>
-                             <td style="text-align: right;">Colonia:</td>
-                      <td>   <asp:TextBox ID="txtColoniaNotificado" runat="server" CssClass="form-control2" Width="250px"  MaxLength="120"></asp:TextBox>
-                      </td>
-                            <td style="text-align: right;">NumeroExterior:</td>
-                      <td>   <asp:TextBox ID="txtNumeroExteriorNotificado" runat="server" CssClass="form-control2"  MaxLength="55"></asp:TextBox>
-                      </td>
-                                 <td style="text-align: right;">NumeroInterior:</td>
-                      <td>   <asp:TextBox ID="txtNumeroInteriorNotificado" runat="server" CssClass="form-control2"  MaxLength="55"></asp:TextBox>
-                      </td>    
-                      </tr>
-                      <tr>
-                           
-                      <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>Calle:</td>
-                      <td>   <asp:TextBox ID="txtCalleNotificado" runat="server" CssClass="form-control2" Width="250px"  MaxLength="100"></asp:TextBox>
-                      </td>    
-                      </tr>
-                      <tr>
-                     <td></td>
-                     <td>
-                           <asp:RequiredFieldValidator runat="server"  CssClass="alert-error"
-                           ID="RequiredFieldValidator50" ControlToValidate="txtCalleNotificado"
-                            Display="Dynamic" ErrorMessage="* Requerido" 
-                           ValidationGroup="AgregarNotificado" style="font-size: medium" />
-                           </td> </tr>
-                </table>
-                </div>
-                </div>
-                </div>
-
-                 
-                  <table width="90%" >
-          <tr>
-            <td style="text-align: right;" ><div style="width=100%; ">  <asp:Button runat="server" ID="Button6" Text="Agregar Notificado" 
-        ValidationGroup="AgregarNotificado"  class="btn btn-primary" 
-        onclick="btnNotificado_Click" Width="133px"/>
-        <td></td>
-          </tr>
-           </table>
-
-                        <div style="height: 100%; overflow-y: scroll" >
-                <asp:GridView runat="server" ID="gvNotificado" AutoGenerateColumns="False"  CssClass="style124" Width="100%" 
-                HorizontalAlign="Center"   ShowHeaderWhenEmpty="True" OnRowCommand="gvNotificado_RowCommand">
-                    <Columns>
-                      <asp:BoundField HeaderText="Notificado" DataField="id"  Visible="false">
-                       
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="RFC" DataField="rFCNotificado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Nombre" DataField="nombreNotificado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="NumRegIdTrib" DataField="numRegIdTribNotificado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="ResidenciaFiscal" DataField="residenciaFiscalNotificado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                                  <asp:BoundField HeaderText="Estado" DataField="estado" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                        <asp:BoundField HeaderText="Pais" DataField="pais" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:BoundField HeaderText="CP" DataField="codigoPostal" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:BoundField>
-                          <asp:ButtonField Text="Eliminar" CommandName="EliminarNotificado" Visible="False" >
-                        <ItemStyle HorizontalAlign="Center" />
-                        </asp:ButtonField>
-                    </Columns>
-                </asp:GridView>
-            </div>
-
-
-
-                </div>
-                </div>
+    
 
 
                  </ContentTemplate>
                  </asp:UpdatePanel>
+                 <br />
                  </ContentTemplate>
                  
                 </asp:TabPanel>

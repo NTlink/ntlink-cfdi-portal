@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ServicioLocalContract.Entities.Carta;
+using ServicioLocalContract.Entities.ComercioExte;
 
 namespace ServicioLocalContract.Entities
 {
@@ -14,6 +15,7 @@ namespace ServicioLocalContract.Entities
         public INE ine;
         public VehiculoUsado vehiculoUsado;
         public DatosCartaPorte datosCartaPorte;
+        public DatosComercioExterior datosComercioExterior;
     }
 
 }

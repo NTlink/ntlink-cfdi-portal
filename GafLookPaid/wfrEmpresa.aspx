@@ -69,11 +69,13 @@ color: #333333;
  <asp:ListItem Value="622" Text="Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras"	 runat="server" />
  <asp:ListItem Value="623" Text="Opcional para Grupos de Sociedades"	 runat="server" />
  <asp:ListItem Value="624" Text="Coordinados"	 runat="server" />
+ <asp:ListItem Value="625" Text="Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas"	 runat="server" />
  <asp:ListItem Value="628" Text="Hidrocarburos"	 runat="server" />
  <asp:ListItem Value="607" Text="Régimen de Enajenación o Adquisición de Bienes"	 runat="server" />
  <asp:ListItem Value="629" Text="De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales"	 runat="server" />
  <asp:ListItem Value="630" Text="Enajenación de acciones en bolsa de valores"	 runat="server" />
  <asp:ListItem Value="615" Text="Régimen de los ingresos por obtención de premios"	 runat="server" />
+          
                 </asp:DropDownList></td>
                   
         <td>CURP:</td>
