@@ -31323,12 +31323,12 @@ namespace ServicioLocal.Business.Carta
     public partial class CartaPorteTiposFigura
     {
 
+       
+        private CartaPorteTiposFiguraPartesTransporte[] partesTransporteField;
+     
         private CartaPorteTiposFiguraDomicilio domicilioField;
 
-        /// <remarks/>
-      
-        private CartaPorteTiposFiguraPartesTransporte[] partesTransporteField;
-
+     
         private string tipoFiguraField;
 
         private string rFCFiguraField;
@@ -31343,17 +31343,7 @@ namespace ServicioLocal.Business.Carta
 
         private bool residenciaFiscalFiguraFieldSpecified;
 
-        public CartaPorteTiposFiguraDomicilio Domicilio
-        {
-            get
-            {
-                return this.domicilioField;
-            }
-            set
-            {
-                this.domicilioField = value;
-            }
-        }
+     
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("PartesTransporte")]
         public CartaPorteTiposFiguraPartesTransporte[] PartesTransporte
@@ -31367,7 +31357,17 @@ namespace ServicioLocal.Business.Carta
                 this.partesTransporteField = value;
             }
         }
-
+        public CartaPorteTiposFiguraDomicilio Domicilio
+        {
+            get
+            {
+                return this.domicilioField;
+            }
+            set
+            {
+                this.domicilioField = value;
+            }
+        }
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string TipoFigura

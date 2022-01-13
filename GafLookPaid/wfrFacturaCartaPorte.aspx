@@ -297,7 +297,7 @@ border-style:None;
                             <asp:ListItem Text="Recibo de Donativo" Value="Donativo" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Arrendamiento" Value="Arrendamiento" ></asp:ListItem>
                             <asp:ListItem Text="Recibo de Honorarios" Value="Honorarios" ></asp:ListItem>
-                           <%-- <asp:ListItem Text="Traslado" Value="T" ></asp:ListItem>--%>
+                           <asp:ListItem Text="Traslado" Value="T" ></asp:ListItem>
                         
                         </asp:DropDownList>
                           
@@ -1097,7 +1097,7 @@ border-style:None;
    
  
          
-          <asp:TabContainer ID="tabContainerAduana" runat="server" ActiveTabIndex="0" 
+          <asp:TabContainer ID="tabContainerAduana" runat="server" ActiveTabIndex="3" 
                  AutoPostBack = "true" style="margin-right: 0px" Width="105%">
          
          <asp:TabPanel ID="datosComplemento" runat="server"  HeaderText="Carta Porte" CssClass="page1">
@@ -2332,33 +2332,40 @@ Enabled="True" TargetControlID="txtNumPiezas" FilterType="Numbers">
                         </td>
                         <td>
                         <asp:DropDownList runat="server" ID="ddlConfigVehicular" style="margin-left: 0px"  CssClass="form-control2"  Width="250px">
-                        <asp:ListItem runat="server" Value="C2" Text="Camión Unitario (2 llantas en el eje delantero y 4 llantas en el eje trasero)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="C3" Text="Camión Unitario (2 llantas en el eje delantero y 6 o 8 llantas en los dos ejes traseros)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="C2R2" Text="Camión-Remolque (6 llantas en el camión y 8 llantas en remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="C3R2" Text="Camión-Remolque (10 llantas en el camión y 8 llantas en remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="C2R3" Text="Camión-Remolque (6 llantas en el camión y 12 llantas en remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="C3R3" Text="Camión-Remolque (10 llantas en el camión y 12 llantas en remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S1" Text="Tractocamión Articulado (6 llantas en el tractocamión, 4 llantas en el semirremolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S2" Text="Tractocamión Articulado (6 llantas en el tractocamión, 8 llantas en el semirremolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S3" Text="Tractocamión Articulado (6 llantas en el tractocamión, 12 llantas en el semirremolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S1" Text="Tractocamión Articulado (10 llantas en el tractocamión, 4 llantas en el semirremolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S2" Text="Tractocamión Articulado (10 llantas en el tractocamión, 8 llantas en el semirremolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S3" Text="Tractocamión Articulado (10 llantas en el tractocamión, 12 llantas en el semirremolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S1R2" Text="Tractocamión Semirremolque-Remolque (6 llantas en el tractocamión, 4 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S2R2" Text="Tractocamión Semirremolque-Remolque (6 llantas en el tractocamión, 8 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S1R3" Text="Tractocamión Semirremolque-Remolque (6 llantas en el tractocamión, 4 llantas en el semirremolque y 12 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S1R2" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 4 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S1R3" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 4 llantas en el semirremolque y 12 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S2R2" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 8 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S2R3" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 8 llantas en el semirremolque y 12 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S2R4" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 8 llantas en el semirremolque y 16 llantas en el remolque)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T2S2S2" Text="Tractocamión Semirremolque-Semirremolque (6 llantas en el tractocamión, 8 llantas en el semirremolque delantero y 8 llantas en el semirremolque trasero)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S2S2" Text="Tractocamión Semirremolque-Semirremolque (10 llantas en el tractocamión, 8 llantas en el semirremolque delantero y 8 llantas en el semirremolque trasero)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="T3S3S2" Text="Tractocamión Semirremolque-Semirremolque (10 llantas en el tractocamión, 12 llantas en el semirremolque delantero y 8 llantas en el semirremolque trasero)" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="OTROEV" Text="Especializado de Voluminoso" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="OTROEGP" Text="Especializado de Gran Peso" ></asp:ListItem>
-                        <asp:ListItem runat="server" Value="OTROSG" Text="Servicio de Grúas" ></asp:ListItem>
-
+                         <asp:ListItem runat="server" Value="VL" Text="Vehículo ligero de carga (2 llantas en el eje delantero y 2 llantas en el eje trasero)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="C2" Text="Camión Unitario (2 llantas en el eje delantero y 4 llantas en el eje trasero)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="C3" Text="Camión Unitario (2 llantas en el eje delantero y 6 o 8 llantas en los dos ejes traseros)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="C2R2" Text="Camión-Remolque (6 llantas en el camión y 8 llantas en remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="C3R2" Text="Camión-Remolque (10 llantas en el camión y 8 llantas en remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="C2R3" Text="Camión-Remolque (6 llantas en el camión y 12 llantas en remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="C3R3" Text="Camión-Remolque (10 llantas en el camión y 12 llantas en remolque)" ></asp:ListItem> 
+                         <asp:ListItem runat="server" Value="T2S1" Text="Tractocamión Articulado (6 llantas en el tractocamión, 4 llantas en el semirremolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T2S2" Text="Tractocamión Articulado (6 llantas en el tractocamión, 8 llantas en el semirremolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T2S3" Text="Tractocamión Articulado (6 llantas en el tractocamión, 12 llantas en el semirremolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S1" Text="Tractocamión Articulado (10 llantas en el tractocamión, 4 llantas en el semirremolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S2" Text="Tractocamión Articulado (10 llantas en el tractocamión, 8 llantas en el semirremolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S3" Text="Tractocamión Articulado (10 llantas en el tractocamión, 12 llantas en el semirremolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T2S1R2" Text="Tractocamión Semirremolque-Remolque (6 llantas en el tractocamión, 4 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T2S2R2" Text="Tractocamión Semirremolque-Remolque (6 llantas en el tractocamión, 8 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T2S1R3" Text="Tractocamión Semirremolque-Remolque (6 llantas en el tractocamión, 4 llantas en el semirremolque y 12 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S1R2" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 4 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S1R3" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 4 llantas en el semirremolque y 12 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S2R2" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 8 llantas en el semirremolque y 8 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S2R3" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 8 llantas en el semirremolque y 12 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S2R4" Text="Tractocamión Semirremolque-Remolque (10 llantas en el tractocamión, 8 llantas en el semirremolque y 16 llantas en el remolque)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T2S2S2" Text="Tractocamión Semirremolque-Semirremolque (6 llantas en el tractocamión, 8 llantas en el semirremolque delantero y 8 llantas en el semirremolque trasero)" ></asp:ListItem>
+                          <asp:ListItem runat="server" Value="T3S2S2" Text="Tractocamión Semirremolque-Semirremolque (10 llantas en el tractocamión, 8 llantas en el semirremolque delantero y 8 llantas en el semirremolque trasero)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="T3S3S2" Text="Tractocamión Semirremolque-Semirremolque (10 llantas en el tractocamión, 12 llantas en el semirremolque delantero y 8 llantas en el semirremolque trasero)" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="OTROEVGP" Text="Especializado de carga Voluminosa y/o Gran Peso" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="OTROSG" Text="Servicio de Grúas" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLUTA" Text="Grúa de Pluma Tipo A" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLUTB" Text="Grúa de Pluma Tipo B" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLUTC" Text="Grúa de Pluma Tipo C" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLUTD" Text="Grúa de Pluma Tipo D" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLATA" Text="Grúa de Plataforma Tipo A" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLATB" Text="Grúa de Plataforma Tipo B" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLATC" Text="Grúa de Plataforma Tipo C" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="GPLATD" Text="Grúa de Plataforma Tipo D" ></asp:ListItem>
                         </asp:DropDownList>
                         </td>
                         <td style="text-align: right;"><span class="style160" style="color: #FF0000">*</span>PlacaVM:</td>

@@ -95,6 +95,8 @@ namespace GafLookPaid
                         ddlMoneda.DataBind();
                         ddlMoneda.SelectedValue = "MXN";
                         //-------------
+                      
+
                         Filtro_Moneda();
 
                         ddlPaisOperador.DataSource = cliente.Consultar_PaisAll().OrderBy(p => p.Descripción);

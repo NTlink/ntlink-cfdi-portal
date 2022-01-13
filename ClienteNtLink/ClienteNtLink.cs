@@ -29,12 +29,12 @@ namespace ClienteNtLink
         /// </summary>
         /// <param name="comprobante">el string en UTF-8 del cfdi</param>
         /// <returns>el string en UTF-8 con el comprobante timbrado</returns>
-        public string TimbraCfdi(string comprobante)
+        public string TimbraCfdi(string comprobante,string usuario,string password,string llave)
         {
             CertificadorClient cliente = new CertificadorClient();
             try
             {
-                return cliente.TimbraCfdi(comprobante);
+                return cliente.TimbraCfdi( comprobante,usuario,password,llave,"WEB");
             }
             catch (Exception ee)
             {
@@ -50,13 +50,13 @@ namespace ClienteNtLink
         /// <param name="uuid">UUID del comprobante que se va a cancelar</param>
         /// <param name="rfc">RFC del emisor</param>
         /// <returns>Regresa el acuse de cancelación</returns>
-        public string CancelaCfdi(string uuid, string rfcEmisor,string expresion,string rfcReceptor)
+        public string CancelaCfdi(string uuid,string motivo,string folioSustituto, string rfcEmisor,string expresion,string rfcReceptor)
         {
             CertificadorClient cliente = new CertificadorClient();
             try
             {
 
-                return cliente.CancelaCfdi(uuid, rfcEmisor, expresion, rfcReceptor);
+                return cliente.CancelaCfdi(uuid,motivo, folioSustituto, rfcEmisor, expresion, rfcReceptor);
                
             }
 

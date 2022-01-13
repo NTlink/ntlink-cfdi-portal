@@ -41,6 +41,52 @@ namespace NtLinkAdministracion
             }
         }
 
+        protected void btnCancelarSAT_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                int id = (int)ViewState["IDCancelar"];
+                var cliente = NtLinkClientFactory.Cliente();
+                using (cliente as IDisposable)
+                {
+                    var venta = cliente.GetFactura(id);
+
+
+                    var factu = cliente.GetSelloEmisor(venta.Guid);
+                    if (factu == null)
+                    {
+                        this.lblError.Text = "SelloCFDI no encontrado";
+                        return;
+                    }
+                    int tam_var = factu.SelloCFD.Length;
+                    string Var_Sub = factu.SelloCFD.Substring((tam_var - 8), 8);
+
+                    string URL = @"https://verificacfdi.facturaelectronica.sat.gob.mx/default.aspx";
+
+                    string cadena = URL + "?&id=" + (venta.Guid).ToString().ToUpper() + "&re=" + venta.RfcEmisor + "&rr=" + venta.RFC + "&tt=" + venta.Total + "&fe=" + Var_Sub;
+
+
+                    var cancelacion = cliente.CancelarFactura(venta.RfcEmisor, ddlMotivo.SelectedValue, txtFolioSustituto.Text, venta.Guid, cadena, venta.RFC);
+                    lblError.Text = cancelacion;
+                    this.FillView();
+                }
+            }
+            catch (FaultException fe)
+            {
+                lblError.Text = fe.Message;
+            }
+            catch (Exception fe)
+            {
+                ;
+            }
+
+
+           
+
+        }
+       
+
         protected void gvFacturas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
            
@@ -111,26 +157,10 @@ namespace NtLinkAdministracion
             }
             else if (e.CommandName.Equals("Cancelar"))
             {
-                try
-                {
-                    int id = Convert.ToInt32(e.CommandArgument);
-                    var cliente = NtLinkClientFactory.Cliente();
-                    using (cliente as IDisposable)
-                    {
-                        var venta = cliente.GetFactura(id);
-                        var cancelacion = cliente.CancelarFactura(venta.RfcEmisor, venta.Guid,"","");
-                        lblError.Text = cancelacion;
-                        this.FillView();
-                    }
-                }
-                catch (FaultException fe)
-                {
-                    lblError.Text = fe.Message;
-                }
-                catch (Exception fe)
-                {
-                    ;
-                }
+                int id = Convert.ToInt32(e.CommandArgument);
+                ViewState["IDCancelar"] = id;
+                this.mpeCancelar.Show();
+              
 
             }
 

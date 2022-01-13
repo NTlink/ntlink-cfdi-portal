@@ -131,7 +131,8 @@ namespace GafLookPaid
                         ddlResidenciaFiscal.DataValueField = "c_Pais1";
                         ddlResidenciaFiscal.DataBind();
                         ddlResidenciaFiscal.SelectedValue = "MEX";
-
+                        this.ddlResidenciaFiscal.Items.Insert(0, "");
+                        ddlResidenciaFiscal.SelectedValue = "";
                         
                         ddlNacionalidadEmbarc.DataSource = ddlPais.DataSource;
                         ddlNacionalidadEmbarc.DataTextField = "Descripción";
@@ -467,6 +468,7 @@ namespace GafLookPaid
             }
 
             }  //-----------fin comprobante traslado
+
         }
 
         protected void ddlEmpresa_SelectedIndexChanged(object sender, EventArgs e)
@@ -1973,6 +1975,7 @@ namespace GafLookPaid
             DivComplementos.Visible = false;
             ddlFormaPago.SelectedValue = "00";
             ddlMetodoPago.SelectedValue = "00";
+            ddlMoneda.SelectedValue = "XXX";
             cbImpuestos.Enabled = false;
             cbImpuestos.Checked = false;
             var detalles = ViewState["detalles"] as List<facturasdetalle>;
@@ -3325,7 +3328,8 @@ namespace GafLookPaid
             //--
              if (cbDomicilio.Checked == true)
              {
-                 u.calle = txtCalle.Text;
+                 if (!string.IsNullOrEmpty(txtCalle.Text))
+                           u.calle = txtCalle.Text;
                  if (!string.IsNullOrEmpty(txtNumeroExterior.Text))
                      u.numeroExterior = txtNumeroExterior.Text;
                  if (!string.IsNullOrEmpty(txtNumeroInterior.Text))
@@ -4012,7 +4016,8 @@ namespace GafLookPaid
             //--
             if (cbDomicilioOperador.Checked == true)
             {
-                c.calle = txtCalleOperador.Text;
+                if (!string.IsNullOrEmpty(txtCalleOperador.Text))
+                       c.calle = txtCalleOperador.Text;
                 if (!string.IsNullOrEmpty(txtNumeroExteriorOperador.Text))
                     c.numeroExterior = txtNumeroExteriorOperador.Text;
                 if (!string.IsNullOrEmpty(txtNumeroInteriorOperador.Text))

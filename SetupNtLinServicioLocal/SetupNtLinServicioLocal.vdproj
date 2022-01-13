@@ -1170,7 +1170,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:SetupNtLinServicioLocal"
         "ProductCode" = "8:{3D0FCB29-BA5F-43CD-8447-6D9F67545C80}"
-        "PackageCode" = "8:{44DBDCD5-2D23-4469-ADE1-25231C88DF16}"
+        "PackageCode" = "8:{306F0898-8A8E-4AF9-AEDA-B221E9701DF9}"
         "UpgradeCode" = "8:{988F8BCA-7483-4602-A984-6D861021410F}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

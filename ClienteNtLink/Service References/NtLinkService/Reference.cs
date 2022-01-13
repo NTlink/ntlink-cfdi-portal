@@ -16,10 +16,10 @@ namespace ClienteNtLink.NtLinkService {
     public interface ICertificador {
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/TimbraCfdi", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/TimbraCfdiResponse")]
-        string TimbraCfdi(string comprobante);
+        string TimbraCfdi(string comprobante, string userName, string password, string LLave, string aplicacion);
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/CancelaCfdi", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/CancelaCfdiResponse")]
-        string CancelaCfdi(string uuid, string rfcEmisor, string expresion, string rfcReceptor);
+        string CancelaCfdi(string uuid, string motivo, string folioSustituto, string rfcEmisor, string expresion, string rfcReceptor);
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/CancelaRetencion", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/CancelaRetencionResponse")]
         string CancelaRetencion(string uuid, string rfc);
@@ -32,6 +32,12 @@ namespace ClienteNtLink.NtLinkService {
         
         [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/ConsultaEstatusCFDI", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/ConsultaEstatusCFDIResponse")]
         string ConsultaEstatusCFDI(string expresion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/TimbraRetencion", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/TimbraRetencionResponse")]
+        string TimbraRetencion(string comprobante, string userName, string password, string LLave, string aplicacion);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="https://ntlink.com.mx/ICertificador/ICertificador/Activar", ReplyAction="https://ntlink.com.mx/ICertificador/ICertificador/ActivarResponse")]
+        string Activar(string Llave, string RFC);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -61,12 +67,12 @@ namespace ClienteNtLink.NtLinkService {
                 base(binding, remoteAddress) {
         }
         
-        public string TimbraCfdi(string comprobante) {
-            return base.Channel.TimbraCfdi(comprobante);
+        public string TimbraCfdi(string comprobante, string userName, string password, string LLave, string aplicacion) {
+            return base.Channel.TimbraCfdi(comprobante, userName, password, LLave, aplicacion);
         }
         
-        public string CancelaCfdi(string uuid, string rfcEmisor, string expresion, string rfcReceptor) {
-            return base.Channel.CancelaCfdi(uuid, rfcEmisor, expresion, rfcReceptor);
+        public string CancelaCfdi(string uuid, string motivo, string folioSustituto, string rfcEmisor, string expresion, string rfcReceptor) {
+            return base.Channel.CancelaCfdi(uuid, motivo, folioSustituto, rfcEmisor, expresion, rfcReceptor);
         }
         
         public string CancelaRetencion(string uuid, string rfc) {
@@ -83,6 +89,14 @@ namespace ClienteNtLink.NtLinkService {
         
         public string ConsultaEstatusCFDI(string expresion) {
             return base.Channel.ConsultaEstatusCFDI(expresion);
+        }
+        
+        public string TimbraRetencion(string comprobante, string userName, string password, string LLave, string aplicacion) {
+            return base.Channel.TimbraRetencion(comprobante, userName, password, LLave, aplicacion);
+        }
+        
+        public string Activar(string Llave, string RFC) {
+            return base.Channel.Activar(Llave, RFC);
         }
     }
 }

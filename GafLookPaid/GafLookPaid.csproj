@@ -52,17 +52,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=3.5.7.607, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NtLinkSitiosWeb_3.3Cancela\GafLookPaid\bin\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="AjaxControlToolkit">
+      <HintPath>..\..\NtLinkSitiosWeb_3.3_2decimal - copia\GafLookPaid\bin\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NtLinkSitiosWeb_3.3\GafLookPaid\bin\Ionic.Zip.dll</HintPath>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\NtLinkSitiosWeb_3.3_2decimal - copia\GafLookPaid\bin\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="jose-jwt, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\NtLinkSitiosWeb_3.3\GafLookPaid\bin\jose-jwt.dll</HintPath>
+    <Reference Include="jose-jwt">
+      <HintPath>..\..\NtLinkSitiosWeb_3.3_2decimal - copia\GafLookPaid\bin\jose-jwt.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">

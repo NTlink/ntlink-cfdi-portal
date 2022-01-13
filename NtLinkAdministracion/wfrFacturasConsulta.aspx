@@ -164,6 +164,40 @@
 		<br /><br />
 	</asp:Panel>
 
+    <asp:ModalPopupExtender runat="server" ID="mpeCancelar" TargetControlID="btnCancelarDummy" BackgroundCssClass="mpeBack"
+	 CancelControlID="btnCerrarCancelar" PopupControlID="pnlCancelar" />
+	<asp:Panel runat="server" ID="pnlCancelar" style="text-align: center;" CssClass="page3"  BackColor="White">
+		<h1>Cancelar CFDI</h1>
+		
+        <table class="table" align="center">
+         <tr>
+		<td>
+        	Motivo: <asp:Label runat="server" ID="txtMotivo" />
+             <asp:DropDownList runat="server" ID="ddlMotivo" style="margin-left: 0px"  CssClass="form-control2"  Width="250px">
+                         <asp:ListItem runat="server" Value="01" Text="Comprobante emitido con errores con relación" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="02" Text="Comprobante emitido con errores sin relación" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="03" Text="No se llevó a cabo la operación" ></asp:ListItem>
+                         <asp:ListItem runat="server" Value="04" Text="Operación nominativa relacionada en la factura global" ></asp:ListItem>
+                    </asp:DropDownList>   
+		</td>
+        </tr>
+		
+			<tr>
+        <td>
+			FolioSustituto:
+			<asp:TextBox runat="server" ID="txtFolioSustituto" CssClass="form-control0" 
+                 />
+		</td>
+		</tr>
+		<tr>
+        <td><asp:Button runat="server" ID="btnCancelarSAT" Text="Cancelar" onclick="btnCancelarSAT_Click"  class="btn btn-primary"/>&nbsp;&nbsp;
+		<asp:Button runat="server" ID="btnCerrarCancelar" Text="Salir" class="btn btn-primary"/>
+        </td>
+        </tr>
+        </table>
+	</asp:Panel>
+
+
 	<asp:ModalPopupExtender runat="server" ID="mpeEmail" TargetControlID="btnEmailDummy" BackgroundCssClass="mpeBack"
 	 CancelControlID="btnCerrarEmail" PopupControlID="pnlEmail" />
 	<asp:Panel runat="server" ID="pnlEmail" style="text-align: center;" Width="800px" BackColor="White">
@@ -183,4 +217,6 @@
 	</asp:Panel>
 	<asp:Button runat="server" ID="btnEmailDummy" style="display: none;"/>
 	<asp:Button runat="server" ID="btnPagarDummy" style="display: none;"/>
+    <asp:Button runat="server" ID="btnCancelarDummy" style="display: none;" class="btn btn-primary"/>
+ 
 </asp:Content>

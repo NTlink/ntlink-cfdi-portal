@@ -18,14 +18,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost/CertificadorWs33Cancelar/CertificadorService.svc" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://rds.dyndns.org:90/CertificadorWs/CertificadorService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CertificadorService.xsd" MetadataType="Schema" ID="3fae0519-060d-4e47-9fb9-03fc350ce567" SourceId="1" SourceUrl="http://localhost/CertificadorWs33Cancelar/CertificadorService.svc?xsd=xsd1" />
-    <MetadataFile FileName="CertificadorService1.xsd" MetadataType="Schema" ID="192f0a04-d278-438e-ac08-61f52b9c95e9" SourceId="1" SourceUrl="http://localhost/CertificadorWs33Cancelar/CertificadorService.svc?xsd=xsd0" />
-    <MetadataFile FileName="CertificadorService.wsdl" MetadataType="Wsdl" ID="ddf97325-0ca0-4c89-b02a-bcec542654a5" SourceId="1" SourceUrl="http://localhost/CertificadorWs33Cancelar/CertificadorService.svc?wsdl=wsdl0" />
-    <MetadataFile FileName="CertificadorService1.wsdl" MetadataType="Wsdl" ID="34a643be-4002-4616-8228-7cc14a09247d" SourceId="1" SourceUrl="http://localhost/CertificadorWs33Cancelar/CertificadorService.svc?wsdl" />
-    <MetadataFile FileName="CertificadorService.disco" MetadataType="Disco" ID="2c250413-0461-4477-a69c-e81834c25844" SourceId="1" SourceUrl="http://localhost/CertificadorWs33Cancelar/CertificadorService.svc?disco" />
+    <MetadataFile FileName="CertificadorService1.disco" MetadataType="Disco" ID="9e70ffa6-7274-4fb4-8198-228444d41a8f" SourceId="1" SourceUrl="http://rds.dyndns.org:90/CertificadorWs/CertificadorService.svc?disco" />
+    <MetadataFile FileName="CertificadorService2.wsdl" MetadataType="Wsdl" ID="c16c993c-5615-4aad-b619-040e128820a2" SourceId="1" SourceUrl="http://rds.dyndns.org:90/CertificadorWs/CertificadorService.svc?wsdl" />
+    <MetadataFile FileName="CertificadorService21.wsdl" MetadataType="Wsdl" ID="f32d4d8a-8f44-43e7-a589-11beb420f4eb" SourceId="1" SourceUrl="http://rds.dyndns.org:90/CertificadorWs/CertificadorService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="CertificadorService2.xsd" MetadataType="Schema" ID="507f3b49-9388-4358-a4b1-ce64a875a6d1" SourceId="1" SourceUrl="http://rds.dyndns.org:90/CertificadorWs/CertificadorService.svc?xsd=xsd0" />
+    <MetadataFile FileName="CertificadorService21.xsd" MetadataType="Schema" ID="c8c434b7-39c0-48d5-b079-27340d453861" SourceId="1" SourceUrl="http://rds.dyndns.org:90/CertificadorWs/CertificadorService.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

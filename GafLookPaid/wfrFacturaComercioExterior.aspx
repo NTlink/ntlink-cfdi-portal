@@ -7,7 +7,8 @@
  <%@ Register Src="~/controles/Impuestos.ascx" TagPrefix="uc" TagName="UCImpuestos" %>
 
 <%@ Register TagPrefix="asp" Namespace="AjaxControlToolkit" Assembly="AjaxControlToolkit" %>
-     
+ 
+    
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
  <%--<link href="Styles/chosen.css" rel="stylesheet" />
   <link href="Styles/chosen.min.css" rel="stylesheet" />--%>
